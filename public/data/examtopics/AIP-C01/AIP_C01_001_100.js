@@ -13,7 +13,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Đo bias/fairness giữa các nhóm nhân khẩu học cho 2 prompt approach, theo dõi real time, cảnh báo khi lệch &gt;15%, báo cáo hàng tuần.</li><li>Ưu tiên: <strong>LEAST custom development effort</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon SageMaker Clarify</strong> là công cụ managed có sẵn các bias metric; publish sang <strong>CloudWatch</strong> thì có thể đặt alarm theo ngưỡng 15% và dựng dashboard so sánh mà gần như không phải tự viết logic tính fairness.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — phải tự viết Lambda post-processing và custom metric, tốn nhiều development nhất.</li><li><strong>B</strong>: ❌ Sai — Guardrails content filter và InvocationsIntervened không đo fairness giữa các nhóm nhân khẩu học.</li><li><strong>C</strong>: ✅ Đúng — Clarify cung cấp bias metric sẵn, đẩy sang CloudWatch để alarm và dashboard.</li><li><strong>D</strong>: ❌ Sai — model evaluation job không phải giám sát real time và InvocationsIntervened không phản ánh fairness theo nhóm.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>SageMaker Clarify</li><li>bias / fairness metrics</li><li>CloudWatch alarm</li><li>LEAST custom development</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"bias / fairness metrics\" → nghĩ ngay đến <strong>SageMaker Clarify</strong>, không phải Guardrails.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -194,7 +194,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, D, F</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Dùng <strong>Amazon Bedrock Guardrails</strong> để chặn tư vấn tài chính rủi ro, chặn nội dung về đối thủ, và chặn claim không có căn cứ.</li><li>Cần chọn đúng 3 cấu hình tương ứng 3 yêu cầu.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Denied topics</strong> chặn các chủ đề cụ thể (khuyến nghị cổ phiếu, lợi nhuận đảm bảo). <strong>Word filters</strong> chặn chính xác tên đối thủ ở cả input và output. <strong>Contextual grounding check</strong> với threshold cao buộc câu trả lời phải bám sát nguồn đã được duyệt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — denied topics phù hợp để chặn các conversation pattern rủi ro.</li><li><strong>B</strong>: ❌ Sai — content filter dành cho nhóm hate, insults, violence..., không dùng để chặn chủ đề tùy biến.</li><li><strong>C</strong>: ❌ Sai — content filter không lọc theo tên đối thủ.</li><li><strong>D</strong>: ✅ Đúng — custom word filter cho tên đối thủ, block cả input và output.</li><li><strong>E</strong>: ❌ Sai — threshold thấp cho phép nhiều nội dung kém grounded lọt qua.</li><li><strong>F</strong>: ✅ Đúng — threshold cao chỉ cho phép câu trả lời bám sát nguồn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>denied topics</li><li>word filters</li><li>contextual grounding check</li><li>grounding threshold cao = nghiêm ngặt</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"chủ đề cấm\" → denied topics; \"tên cụ thể\" → word filter; \"hallucination/grounded\" → grounding threshold cao.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -305,7 +305,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>App React + Amplify + AppSync gọi RetrieveAndGenerate qua Lambda resolver kiểu RequestResponse nên bị timeout và chậm với câu hỏi phức tạp.</li><li>Cần cải thiện hiệu năng và trải nghiệm người dùng.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amplify AI Kit</strong> hỗ trợ streaming response qua AppSync GraphQL, người dùng thấy token ngay khi được sinh ra nên không còn chờ toàn bộ response, đồng thời tránh timeout của chế độ đồng bộ.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — streaming qua GraphQL bằng AI Kit, thay đổi tối thiểu và cải thiện UX.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — tăng timeout và retry không giảm độ trễ cảm nhận được, còn làm chờ lâu hơn.</li><li><strong>C</strong>: ❌ Sai — SQS thêm độ phức tạp, không có streaming, AppSync không poll queue.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — bỏ RetrieveAndGenerate (mất knowledge base RAG) và phải thêm WebSocket API, phức tạp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Amplify AI Kit</li><li>streaming response</li><li>AppSync GraphQL</li><li>RetrieveAndGenerate</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"timeout/chậm với câu trả lời dài\" trong Amplify + AppSync → nghĩ ngay đến <strong>streaming</strong> bằng Amplify AI Kit.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -406,7 +406,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Chuyển đổi FM linh hoạt không cần deploy code, routing theo logic phức tạp (user tier, vùng pháp lý, cost thay đổi hàng giờ), propagate tức thì cho hàng nghìn request đồng thời.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS AppConfig</strong> (Agent) cho phép cập nhật cấu hình động, cache cục bộ và propagate nhanh mà không cần deploy. Logic nghiệp vụ phức tạp chạy trong <strong>Lambda</strong>, chọn FM cho từng request qua một endpoint duy nhất.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — sửa environment variable cần cập nhật function, không phù hợp cho thay đổi hàng giờ và rule phức tạp.</li><li><strong>B</strong>: ❌ Sai — mapping template và stage variable không thể hiện logic phức tạp, đổi stage variable phải redeploy stage.</li><li><strong>C</strong>: ✅ Đúng — AppConfig Agent + Lambda logic tùy biến, không cần deploy code.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Lambda authorizer không phải nơi đúng để routing, thêm nhiều Lambda theo model gây phức tạp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS AppConfig</li><li>dynamic configuration</li><li>feature flags / A/B testing</li><li>no code deploy</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"đổi config runtime không deploy code\" → nghĩ ngay đến <strong>AppConfig</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -475,7 +475,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Quản lý tập trung prompt variant theo business unit, tone khác nhau, chặn hate speech và PHI, điều chỉnh moderation theo thời gian.</li><li>Ưu tiên: <strong>LEAST maintenance overhead</strong>, ít orchestration và post-processing.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Bedrock Prompt Management</strong> cung cấp template và variant tái sử dụng, còn <strong>Bedrock Guardrails</strong> (category filters + sensitive information/term lists) chặn nội dung ngay trong luồng, không cần code hậu xử lý.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — hoàn toàn managed, tập trung, chỉnh guardrail dễ dàng.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — \"audience-based threshold tuning\" và internal administration API là phần phải tự xây và bảo trì.</li><li><strong>C</strong>: ❌ Sai — DynamoDB, Step Functions, Comprehend là nhiều thành phần tự quản lý.</li><li><strong>D</strong>: ❌ Sai — template trong DynamoDB, hai Lambda và Comprehend làm tăng overhead.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Prompt Management</li><li>prompt variants</li><li>Guardrails</li><li>LEAST maintenance overhead</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"quản lý prompt tập trung + moderation\" → <strong>Prompt Management + Guardrails</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -552,7 +552,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Semantic search đa ngôn ngữ cho khoảng 10 triệu embedding, filter theo metadata, tích hợp Bedrock, độ trễ thấp.</li><li>Ưu tiên: minimal operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>OpenSearch Serverless</strong> tự scale, hỗ trợ vector search và metadata filtering, độ trễ thấp, và là vector store được <strong>Bedrock Knowledge Bases</strong> hỗ trợ trực tiếp để làm RAG.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — serverless, managed, filter và low latency, tích hợp KB.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — Aurora pgvector phải quản lý instance, index, tự viết pipeline RAG.</li><li><strong>C</strong>: ❌ Sai — dùng non-filterable metadata nên không lọc được theo metadata như yêu cầu; S3 Vectors cũng thiên về chi phí hơn là độ trễ thấp.</li><li><strong>D</strong>: ❌ Sai — Neptune Analytics cho graph, không phù hợp use case này.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>OpenSearch Serverless</li><li>vector search + metadata filtering</li><li>Bedrock Knowledge Bases</li><li>low latency</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"vector search + filter + ít vận hành + low latency\" → <strong>OpenSearch Serverless + Knowledge Bases</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -629,7 +629,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Vector search bỏ sót exact term và acronym y khoa, trả về quá nhiều kết quả tương tự về ngữ nghĩa nhưng không liên quan.</li><li>Ưu tiên: cải thiện chất lượng, low latency khi scale, <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Hybrid search</strong> kết hợp vector similarity (ngữ nghĩa) và keyword/BM25 (khớp chính xác thuật ngữ, acronym) ngay trong <strong>OpenSearch Service</strong>, chỉ cần cấu hình, không thêm thành phần mới.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — giải quyết cả hai vấn đề, thay đổi tối thiểu.</li><li><strong>B</strong>: ❌ Sai — tăng dimension tăng chi phí và độ trễ, Lambda filter thêm latency, không giải quyết exact match.</li><li><strong>C</strong>: ❌ Sai — thay toàn bộ hệ thống tốn công, query expansion là xử lý thủ công.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — re-ranking cải thiện độ liên quan nhưng không bắt được term bị bỏ sót, thêm endpoint SageMaker phải vận hành và tăng latency.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>hybrid search</li><li>keyword + vector</li><li>exact term / acronym</li><li>OpenSearch Service</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"miss exact terms/acronyms\" → nghĩ ngay đến <strong>hybrid search</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -690,7 +690,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lambda trong private subnet gọi Bedrock chỉ qua private connectivity; data lake cross-account cần quyền fine-grained cấp column.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Interface VPC endpoint</strong> (AWS PrivateLink) cho <strong>bedrock-runtime</strong> giữ traffic trong mạng AWS. <strong>AWS Lake Formation</strong> LF-tag-based access control cho phép cấp quyền table và column cross-account.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — PrivateLink cho Bedrock và Lake Formation LF-tags cấp quyền column cross-account.</li><li><strong>B</strong>: ❌ Sai — NAT gateway đi qua internet, S3 bucket policy và ACL không cấp quyền column.</li><li><strong>C</strong>: ❌ Sai — gọi Bedrock qua public endpoint và chỉ cấp quyền cấp database.</li><li><strong>D</strong>: ❌ Sai — IAM path-based không cấp quyền column, cho phép public fallback vi phạm private connectivity.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>interface VPC endpoint (PrivateLink)</li><li>Lake Formation LF-tag</li><li>column-level cross-account</li><li>private connectivity</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"private connectivity tới Bedrock\" → VPC endpoint; \"column-level\" → <strong>Lake Formation</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -767,7 +767,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Governance cho hàng trăm prompt template, nhiều team và Region: version control, approval workflow, audit trail, tham số hóa nhất quán.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Bedrock Prompt Management</strong> hỗ trợ versioning và template có variable; <strong>CloudTrail</strong> ghi audit; <strong>IAM policies</strong> kiểm soát ai được duyệt/publish. Đây là phương án managed phù hợp nhất.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Bedrock Studio không phải giải pháp governance, phải tự viết Lambda cho approval.</li><li><strong>B</strong>: ✅ Đúng — Prompt Management + CloudTrail + IAM + variables đủ các yêu cầu.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — tự dựng bằng S3 tags và Step Functions, version control thô sơ, nhiều việc vận hành.</li><li><strong>D</strong>: ❌ Sai — SageMaker Canvas, CloudFormation, AWS Config không phải công cụ quản lý prompt/approval.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Prompt Management</li><li>prompt versioning</li><li>CloudTrail audit</li><li>prompt variables</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"quản lý prompt template + version + audit\" → <strong>Prompt Management + CloudTrail</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -860,7 +860,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Hiển thị phản hồi từng ký tự khi đang sinh, hàng nghìn user đồng thời, độ trễ thấp, phản hồi kéo dài 15-45 giây.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>InvokeModelWithResponseStream</strong> trả token theo luồng; <strong>API Gateway WebSocket API</strong> đẩy các phần này tới client qua kết nối hai chiều, bền vững và scale tốt cho thời gian xử lý dài.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — streaming + WebSocket đúng yêu cầu real-time.</li><li><strong>B</strong>: ❌ Sai — InvokeModel chờ trọn response, polling 100 ms gây tải và độ trễ.</li><li><strong>C</strong>: ❌ Sai — IAM user credentials nhúng ở frontend là rủi ro bảo mật nghiêm trọng.</li><li><strong>D</strong>: ❌ Sai — cache và phân trang GET không phải streaming.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>InvokeModelWithResponseStream</li><li>API Gateway WebSocket API</li><li>streaming</li><li>real-time</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"hiển thị từng ký tự/token real time\" → <strong>streaming API + WebSocket</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -929,7 +929,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Flow Bedrock dùng Nova Pro cần: 4 input bắt buộc, format đầu ra nhất quán, và được thông báo khi có ngôn từ bắt nạt nhưng <strong>không block</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Prompt Management</strong> định nghĩa variable đầu vào và output format, thêm vào prompts node. <strong>Guardrail</strong> với content filter <strong>insults</strong> ở chế độ <strong>detect</strong> chỉ phát hiện và báo (không block).</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — variables và output format qua Prompt Management.</li><li><strong>B</strong>: ❌ Sai — action block sẽ chặn phản hồi, trái yêu cầu không block.</li><li><strong>C</strong>: ❌ Sai — prompt router dùng để chọn model theo prompt, không để định nghĩa input và format.</li><li><strong>D</strong>: ✅ Đúng — insults filter chế độ detect, chỉ thông báo.</li><li><strong>E</strong>: ❌ Sai — inference profile dùng để theo dõi chi phí/routing, không định nghĩa input hay format.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Prompt Management variables</li><li>guardrail detect mode</li><li>insults content filter</li><li>prompts node</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"thông báo nhưng không block\" → guardrail action <strong>detect</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -995,7 +995,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>RAG y tế cần độ chính xác retrieval cao, phát hiện hallucination, giảm chi phí human review.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Kết hợp <strong>LLM-as-a-judge</strong> để sàng lọc tự động với human review chỉ cho edge case, cùng <strong>Bedrock built-in evaluation</strong> đo retrieval precision và hallucination rate, nên vừa chính xác vừa giảm chi phí con người.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Comprehend trích entity y tế, không phát hiện hallucination.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — tự fine-tune và chạy judge cho mọi response tốn kém, không có human review cho edge case.</li><li><strong>C</strong>: ❌ Sai — Synthetics chỉ kiểm tra câu hỏi biết trước đáp án, không đánh giá hallucination thực tế.</li><li><strong>D</strong>: ✅ Đúng — hybrid automated + human và Bedrock evaluation.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>LLM-as-a-judge</li><li>Bedrock evaluation (RAG)</li><li>hybrid human review</li><li>hallucination rate</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giảm chi phí human review + phát hiện hallucination\" → <strong>LLM-as-a-judge + human cho edge case</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1064,7 +1064,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cross-Region inference (CRI) với Nova Pro cho EU, SCP đang chặn vì request được route sang eu-west-3 (Region khác eu-central-1).</li><li>Cần giữ governance, kiểm soát chính xác, tuân thủ data residency.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Mở rộng SCP <strong>chỉ</strong> cho inference profile <strong>eu.amazon.nova-pro-v1:0</strong> (chính xác, giữ residency trong EU), và đảm bảo IAM role của developer có quyền gọi profile đó tại mọi Region EU có thể phục vụ.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — AdministratorAccess không vượt được SCP deny và quá rộng.</li><li><strong>B</strong>: ✅ Đúng — SCP cho phép riêng inference profile EU của Nova Pro.</li><li><strong>C</strong>: ❌ Sai — bật model access ở eu-west-3 đi ngược yêu cầu chỉ dùng eu-central-1 và không gỡ SCP deny.</li><li><strong>D</strong>: ✅ Đúng — IAM cần quyền với profile và foundation model ở các Region EU đích.</li><li><strong>E</strong>: ⚠️ Có thể nhưng không tối ưu — mở cho mọi eu.* profile quá rộng, thiếu precise access control.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>cross-Region inference profile</li><li>SCP explicit deny</li><li>eu.amazon.nova-pro-v1:0</li><li>least privilege</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"SCP explicit deny với CRI\" → cho phép <strong>đúng inference profile</strong>, không mở rộng quá mức.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1138,7 +1138,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Một guardrail hiệu quả: chặn investment advice, chặn harmful content, mask PII, audit trail, áp dụng cả input và output, ít false positive, nhiều chiến lược xử lý.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Một guardrail duy nhất với content filter mức <strong>medium</strong> (giảm false positive), <strong>denied topics</strong> có định nghĩa và sample phrase, sensitive information filter <strong>mask</strong> PII ở response và <strong>block</strong> ở input, đánh giá cả input và output.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — filter high cho mọi category dễ false positive, block mọi PII không có chiến lược mask.</li><li><strong>B</strong>: ❌ Sai — nhiều guardrail phân tầng, phức tạp và không cần thiết.</li><li><strong>C</strong>: ✅ Đúng — cấu hình cân bằng, nhiều hành động xử lý, input + output.</li><li><strong>D</strong>: ❌ Sai — chain bằng Step Functions là over-engineering, một guardrail đã gom được các policy.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>denied topics</li><li>sensitive information filter (mask/block)</li><li>content filter strength medium</li><li>input + output evaluation</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"ít false positive + nhiều chiến lược\" → <strong>một guardrail</strong>, mức medium, kết hợp mask và block.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1199,7 +1199,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Model gợi ý sản phẩm không có trong catalog hoặc không liên quan (thiếu grounding), phản hồi chậm; tương tác đa phần là duy nhất (cache không hiệu quả).</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Knowledge base + RAG</strong> ground câu trả lời vào catalog thật, và <strong>PerformanceConfigLatency = optimized</strong> dùng latency-optimized inference giảm độ trễ.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Automated Reasoning checks không phù hợp, provisioned throughput không đảm bảo giảm độ trễ và tốn kém.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — prompt engineering không đảm bảo chỉ gợi ý sản phẩm có thật, streaming chỉ giảm độ trễ cảm nhận.</li><li><strong>C</strong>: ✅ Đúng — RAG giải quyết hallucination, latency optimized giải quyết chậm.</li><li><strong>D</strong>: ❌ Sai — validate sau và caching vô ích vì tương tác duy nhất.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Knowledge Bases + RAG</li><li>grounding</li><li>PerformanceConfigLatency optimized</li><li>unique interactions (không cache)</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"gợi ý ngoài catalog\" → <strong>RAG</strong>; \"interactions duy nhất\" → loại phương án caching.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1260,7 +1260,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Reasoning agent cần giữ memory, chia sẻ state, hỗ trợ event-driven và synchronous, kiểm soát truy cập và quyền theo session.</li><li>Ưu tiên: <strong>MOST scalable</strong>, managed.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Bedrock AgentCore</strong> cung cấp memory, session, identity, observability sẵn có, và có thể gọi Lambda/REST API làm tool qua API Gateway/EventBridge mà không cần code orchestration tùy biến.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — AgentCore quản lý memory, session, identity, event handling.</li><li><strong>B</strong>: ✅ Đúng — tích hợp Lambda/REST API làm tool, hỗ trợ cả sync và event-driven.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Step Functions, SQS, DynamoDB tự quản lý state, nhiều orchestration.</li><li><strong>D</strong>: ❌ Sai — container ECS và Aurora tự vận hành, kém scalable và managed.</li><li><strong>E</strong>: ❌ Sai — RAG pipeline tùy biến, state lưu trong S3 không phù hợp session/identity.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Bedrock AgentCore</li><li>memory + session</li><li>identity</li><li>tool integration</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"agent cần memory, identity, session managed\" → <strong>AgentCore</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1342,7 +1342,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>RAG trên dữ liệu có quan hệ multi-hop giữa nhiều thực thể, cần nhìn tổng thể quan hệ gián tiếp, phản hồi dưới 3 giây.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Bedrock Knowledge Bases với GraphRAG</strong> dùng <strong>Amazon Neptune Analytics</strong> tự động xây graph và truy vấn quan hệ multi-hop, managed hoàn toàn.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — GraphRAG managed, xử lý multi-hop quan hệ.</li><li><strong>B</strong>: ❌ Sai — truy vấn vector tuần tự bằng Lambda tự viết, chậm và khó bảo trì.</li><li><strong>C</strong>: ❌ Sai — manual relationship mapping trên EC2 tốn vận hành.</li><li><strong>D</strong>: ❌ Sai — index tùy chỉnh trên DynamoDB không phù hợp quan hệ graph.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>GraphRAG</li><li>Neptune Analytics</li><li>multi-hop relationships</li><li>Knowledge Bases</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"multi-hop relationships giữa các thực thể\" → <strong>GraphRAG + Neptune Analytics</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1411,7 +1411,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Giám sát near real-time: phát hiện hallucination, token bất thường, cảnh báo sớm chi phí.</li><li>Ưu tiên: ít custom development và bảo trì.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Guardrails contextual grounding check</strong> phát hiện hallucination ngay lúc chạy, <strong>model invocation logging</strong> ghi nhận chi tiết, <strong>CloudWatch anomaly detection alarms</strong> trên token metrics cảnh báo bất thường mà không cần code.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — phát hiện hallucination bằng Glue + Athena là offline, phải tự phân tích.</li><li><strong>B</strong>: ❌ Sai — evaluation job là batch, không near real-time, thêm Lambda tùy biến.</li><li><strong>C</strong>: ✅ Đúng — grounding check + logging + anomaly detection, managed.</li><li><strong>D</strong>: ❌ Sai — CloudTrail không chứa token usage, QuickSight và Model Monitor không phù hợp để phát hiện hallucination.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>contextual grounding check</li><li>CloudWatch anomaly detection</li><li>model invocation logging</li><li>token usage metrics</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"hallucination near real-time\" → <strong>contextual grounding check</strong>; \"chi phí bất thường\" → <strong>CloudWatch anomaly detection</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1496,7 +1496,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Truy vết nguồn của nội dung sinh ra: đăng ký data source, gắn metadata để attribute nguồn, audit log truy cập và sử dụng xuyên suốt pipeline.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Glue Data Catalog</strong> đăng ký toàn bộ data source và gắn metadata/tag attribution; <strong>CloudTrail</strong> ghi audit log hoạt động trên nhiều service, đáp ứng cả ba yêu cầu.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Lake Formation tập trung vào kiểm soát truy cập, tag gắn trực tiếp trên S3 giới hạn ở S3.</li><li><strong>B</strong>: ❌ Sai — CloudWatch Logs không phải audit trail truy cập dữ liệu.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — chỉ bao phủ S3, không đăng ký các nguồn khác.</li><li><strong>D</strong>: ✅ Đúng — Glue Data Catalog + metadata tags + CloudTrail xuyên service.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Glue Data Catalog</li><li>metadata tagging</li><li>data source registration</li><li>CloudTrail audit</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"data lineage/traceability + audit\" → <strong>Glue Data Catalog + CloudTrail</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1573,7 +1573,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Mỗi batch gồm 5 report, mỗi report cần nhiều FM call; phải xong trong 10 giây, trong khi xử lý tuần tự mất 45 giây.</li><li>Yêu cầu quyết định: <strong>song song hóa</strong> các analysis.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Step Functions Parallel state</strong> gọi đồng thời nhiều Lambda cho từng loại phân tích, rút ngắn tổng thời gian xuống gần thời gian của nhánh chậm nhất, đồng thời dễ theo dõi bằng CloudWatch.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — vẫn tuần tự, provisioned concurrency chỉ giảm cold start.</li><li><strong>B</strong>: ✅ Đúng — Parallel state chạy đồng thời, giảm đáng kể thời gian.</li><li><strong>C</strong>: ❌ Sai — mỗi Lambda vẫn xử lý tuần tự các khía cạnh, SQS thêm độ trễ.</li><li><strong>D</strong>: ❌ Sai — container xử lý tuần tự từng report, scale theo CPU không giải quyết latency.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Step Functions Parallel state</li><li>parallel processing</li><li>latency reduction</li><li>Lambda</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"tuần tự quá chậm, cần giảm thời gian\" → <strong>Parallel state</strong> (song song).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1666,7 +1666,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Chặn prompt injection nhiều lớp (defense-in-depth), có audit log cho mọi safety intervention, và failover cross-Region.</li><li>Ưu tiên: dùng tính năng native của Amazon Bedrock Guardrails.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Guardrails content filter (Prompt Attack) mức high chặn injection, guardrail profile cho cross-Region guardrail inference (failover), và CloudWatch Logs + custom metrics ghi chi tiết từng intervention.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — đủ 3 yêu cầu: filter, cross-Region profile, log intervention chi tiết.</li><li><strong>B</strong>: ❌ Sai — AWS WAF không hiểu prompt injection, CloudTrail chỉ log API call, không có cross-Region.</li><li><strong>C</strong>: ❌ Sai — Comprehend custom classification tự dựng, tốn công, không có cross-Region failover.</li><li><strong>D</strong>: ❌ Sai — \"cross-Region guardrail replication\" không tồn tại; word filter chỉ chặn pattern đã biết; CloudTrail không ghi intervention.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Guardrails content filter - prompt attack</li><li>Guardrail profile - cross-Region inference</li><li>CloudWatch Logs - intervention events</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Prompt injection + failover cross-Region + audit intervention → Guardrails (high) + guardrail profile + CloudWatch Logs.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1791,7 +1791,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Canary deployment tự động giữa các model Bedrock: tăng traffic khi healthy, giảm/rollback khi tệ đi.</li><li>Phải giám sát latency và error rate, rollback không cần can thiệp thủ công.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>AWS Step Functions điều phối từng stage (shift, wait, check metrics bằng Lambda từ CloudWatch, tăng hoặc rollback) hoàn toàn tự động, EventBridge kích hoạt khi có version mới.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — workflow tự động, có vòng kiểm tra metric và rollback.</li><li><strong>B</strong>: ❌ Sai — API Gateway stage variables không hỗ trợ weighted routing kiểu canary theo model; cần \"external logic\" thủ công.</li><li><strong>C</strong>: ❌ Sai — SageMaker endpoint variants không đại diện cho Bedrock model.</li><li><strong>D</strong>: ❌ Sai — OpenSearch không điều khiển traffic; Bedrock không có \"model endpoint\" để SSM cập nhật.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Step Functions - staged traffic shift</li><li>CloudWatch metrics + Lambda check</li><li>Automated rollback</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Canary/gradual shift + tự rollback theo metric → Step Functions + CloudWatch + Lambda.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1876,7 +1876,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Provisioned throughput đã mua nhưng không được dùng, request on-demand vẫn bị throttle.</li><li>Nguyên nhân nằm ở code: đang gọi bằng base model ID.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Để dùng provisioned throughput phải truyền ARN của provisioned model (do CreateProvisionedModelThroughput trả về) vào modelId; nếu dùng model ID thường thì request đi qua on-demand.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tăng MU khi capacity hiện tại còn chưa được dùng là vô nghĩa.</li><li><strong>B</strong>: ✅ Đúng — dùng ARN của provisioned model để route request vào capacity đã mua.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — retry giảm lỗi nhưng vẫn không dùng provisioned capacity.</li><li><strong>D</strong>: ❌ Sai — InvokeModelWithResponseStream không đổi việc dùng provisioned hay on-demand.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Provisioned model ARN</li><li>modelId</li><li>Provisioned unused + on-demand throttled</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Provisioned throughput không được dùng → modelId phải là provisioned model ARN.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1937,7 +1937,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Ứng dụng tư vấn cần retrieve từ data công ty, trích dẫn nguồn, thể hiện reasoning, latency dưới 3 giây.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon Bedrock Knowledge Bases là RAG managed, có sẵn source attribution (citations), kết hợp Claude Messages API; lưu reasoning và citations vào Amazon S3 để audit là đơn giản.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — managed RAG, citation sẵn, ít vận hành.</li><li><strong>B</strong>: ❌ Sai — extended thinking không retrieve data công ty, không có citation nguồn; thinking budget 4,000 token dễ vượt 3 giây.</li><li><strong>C</strong>: ❌ Sai — SageMaker AI + RDS + Lambda là overhead lớn nhất.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — phải tự làm custom retrieval tracking.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Knowledge Bases - source attribution</li><li>RAG - citations</li><li>LEAST operational overhead</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cần trích dẫn nguồn từ data công ty, ít vận hành → Bedrock Knowledge Bases.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2038,7 +2038,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Quản lý token cho nhiều FM: cảnh báo chủ động khi gần giới hạn, xử lý trên 5,000 request/phút, lưu metric để phân bổ chi phí theo business unit.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Ước lượng token trước khi gọi bằng tokenizer riêng từng model (proactive), publish metric lên Amazon CloudWatch kèm alarm, và lưu chi tiết usage vào Amazon DynamoDB để chargeback.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — proactive, theo model-specific, có metric và dữ liệu cost allocation.</li><li><strong>B</strong>: ❌ Sai — Guardrails không có \"token quota policy\"; chỉ xem request bị từ chối là reactive.</li><li><strong>C</strong>: ❌ Sai — dựa vào DLQ và lỗi là reactive, không cảnh báo trước.</li><li><strong>D</strong>: ❌ Sai — API Gateway usage plan tính theo request, không đếm token nên không chặn theo token limit.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Proactive token estimation</li><li>Model-specific tokenizer</li><li>CloudWatch metrics + DynamoDB</li><li>Cost allocation</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cảnh báo trước khi chạm token limit + phân bổ chi phí → đếm token trước, metric CloudWatch, lưu DynamoDB.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2107,7 +2107,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Chatbot chăm sóc khách hàng: trả lời từ 50,000 tài liệu cập nhật hằng ngày, gọi order API, giữ context multi-turn, có audit trail.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon Bedrock Agents là managed: action groups gọi order API, knowledge base làm RAG (dữ liệu cập nhật bằng sync), agent tự giữ session context, và trace events cho audit.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — fine-tune từng category rất tốn công và không cập nhật hằng ngày được.</li><li><strong>B</strong>: ❌ Sai — continued pre-training không phù hợp dữ liệu đổi mỗi ngày, tốn kém.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — SageMaker containers, Kendra, Step Functions: tự quản lý nhiều thành phần.</li><li><strong>D</strong>: ✅ Đúng — agent + action group + knowledge base + trace, đủ mọi yêu cầu.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Bedrock Agents - action groups</li><li>Knowledge base - RAG</li><li>Trace events - audit</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gọi API + tra cứu tài liệu + multi-turn → Bedrock Agent + action group + knowledge base.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2176,7 +2176,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Output giữa các state của Step Functions vượt quota 256 KB.</li><li>Cần xử lý hiệu quả, giữ observability, giữ pattern ReAct, ít vận hành nhất.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Dùng S3 URI làm input cho Bedrock integration và dùng ResultPath/ResultSelector để chỉ truyền reference S3 giữa các state; giữ nguyên workflow tuần tự, tận dụng bucket đã có.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — thêm DynamoDB và Map state không cần thiết (Map dùng cho lặp, không phải bước tuần tự).</li><li><strong>B</strong>: ✅ Đúng — pass-by-reference qua S3, ít thay đổi nhất.</li><li><strong>C</strong>: ❌ Sai — nén/giải nén bằng Lambda phức tạp, không đảm bảo luôn dưới 256 KB.</li><li><strong>D</strong>: ❌ Sai — tách nhiều state machine + EventBridge làm tăng overhead và giảm observability.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>256 KB quota</li><li>S3 reference (pass by reference)</li><li>ResultPath / ResultSelector</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Step Functions payload quá 256 KB → lưu S3, truyền reference.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2253,7 +2253,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Semantic search cho 20 triệu nhà hàng và 200 triệu review, query ngôn ngữ tự nhiên, 95% trong 500 ms, dữ liệu cập nhật hằng giờ, scale tiết kiệm.</li><li>Ưu tiên: LEAST development effort.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon OpenSearch Service có k-NN vector search quy mô lớn, độ trễ thấp, scale tốt; dùng embedding từ Bedrock FM cho semantic search và cập nhật index theo giờ.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — keyword search, không phải semantic.</li><li><strong>B</strong>: ✅ Đúng — vector embeddings + k-NN trên OpenSearch, đáp ứng scale và latency.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — pgvector trên PostgreSQL khó đạt 500 ms ở 200 triệu vector với 50 triệu user.</li><li><strong>D</strong>: ❌ Sai — Knowledge Base thiên về RAG, cần custom ingestion pipeline, không tối ưu cho tìm kiếm scale này.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>OpenSearch k-NN</li><li>Bedrock embeddings</li><li>Semantic search - low latency</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Semantic search quy mô lớn, latency thấp → OpenSearch vector (k-NN) + embeddings.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2330,7 +2330,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tóm tắt không ổn định với tài liệu lâm sàng phức tạp.</li><li>Cần chẩn đoán nguyên nhân, so sánh prompt theo metric chuẩn, lưu lịch sử version prompt.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Version control cho prompt + bộ test chứa tài liệu phức tạp + metric định lượng + framework test tự động cho phép so sánh version và ghi lại pattern hiệu năng, đúng 3 yêu cầu.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — test thủ công và chỉ trên tài liệu đơn giản, không chẩn đoán được ca phức tạp.</li><li><strong>B</strong>: ✅ Đúng — test suite có ca phức tạp, metric định lượng, lịch sử version.</li><li><strong>C</strong>: ❌ Sai — chia traffic production cho bản prompt chưa kiểm chứng, rủi ro với dữ liệu y tế.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Comprehend Medical không đo chất lượng tóm tắt, không có version history.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Prompt version control</li><li>Test suite - complex documents</li><li>Quantifiable evaluation metrics</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"So sánh prompt theo metric + lưu lịch sử → version control + automated test suite.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2423,7 +2423,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Giảm hallucination khi tóm tắt tài liệu dài, tăng độ chính xác.</li><li>Throughput trên 1,000 doc mỗi giờ, 3 giây mỗi doc.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>RAG với Knowledge Base (semantic chunking, tuned embeddings) neo câu trả lời vào nội dung nguồn; zero-shot CoT với bước kiểm tra fact giúp model tự xác minh trước khi tóm tắt, không tăng nhiều latency.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — CoT + fact verification giảm bịa chi tiết.</li><li><strong>B</strong>: ✅ Đúng — RAG neo vào nguồn, giảm hallucination.</li><li><strong>C</strong>: ❌ Sai — Guardrails không phát hiện hallucination bằng pattern.</li><li><strong>D</strong>: ❌ Sai — tăng temperature làm hallucination tệ hơn.</li><li><strong>E</strong>: ❌ Sai — một lần cho cả tài liệu dài chính là nguyên nhân hiện tại.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>RAG - grounding</li><li>Semantic chunking</li><li>Chain-of-thought (CoT)</li><li>Temperature thấp giảm hallucination</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Giảm hallucination → grounding (RAG) + prompt xác minh; không tăng temperature.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2537,7 +2537,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Observability cho app EC2 gọi Bedrock: phát hiện suy giảm so với baseline và cảnh báo kèm correlation trong 10 phút khi hành vi FM lệch.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>CloudWatch anomaly detection tự học baseline trên custom metrics (chất lượng recommendation, token, latency qua EMF), Application Insights tương quan vấn đề, Logs Insights phân tích log pattern.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Container Insights không phù hợp EC2, alarm theo ngưỡng cố định, không có baseline.</li><li><strong>B</strong>: ❌ Sai — X-Ray, CloudTrail, QuickSight không phát hiện anomaly theo baseline.</li><li><strong>C</strong>: ✅ Đúng — anomaly detection + Application Insights + EMF + Logs Insights.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — tự dựng pipeline Kinesis + OpenSearch, nhiều vận hành.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CloudWatch anomaly detection</li><li>Application Insights</li><li>Embedded metric format (EMF)</li><li>Baseline</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Phát hiện lệch so với baseline → CloudWatch anomaly detection trên custom metrics.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2606,7 +2606,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tài liệu 50-200 trang vượt context window gây output cắt cụt và không nhất quán.</li><li>Cần giải pháp chọn đoạn liên quan thay vì nhồi toàn bộ.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Semantic chunking giữ nguyên ngữ nghĩa, và RetrieveAndGenerate chọn động các chunk liên quan nhất theo embedding similarity, nên input luôn nằm trong context window.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — nối chunk cho tới đầy 200,000 token vẫn gây vượt giới hạn và cắt cụt.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — hierarchical chunking có thể dùng, nhưng parent chunk lớn 8,000 token và bài hỏi về semantic retrieval; không tối ưu bằng C.</li><li><strong>C</strong>: ✅ Đúng — semantic chunking + chọn chunk liên quan theo similarity.</li><li><strong>D</strong>: ❌ Sai — xử lý từng đoạn độc lập mất ngữ cảnh, kết quả không nhất quán.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Semantic chunking</li><li>RetrieveAndGenerate</li><li>Context window</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Tài liệu vượt context window → chunk + retrieve đoạn liên quan (RetrieveAndGenerate).\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2707,7 +2707,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Gợi ý phản hồi real-time cho 500,000 call đồng thời, dưới 200 ms, trong ngân sách cố định, có auto scaling.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Model nhẹ tối ưu low-latency trên Amazon Bedrock cho phản hồi nhanh; provisioned throughput cho hiệu năng ổn định và chi phí dự đoán được; automatic scaling policies đáp ứng peak.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — reasoning model lớn và batch processing, không đạt 200 ms.</li><li><strong>B</strong>: ✅ Đúng — low-latency model + provisioned throughput + auto scaling.</li><li><strong>C</strong>: ❌ Sai — LLM lớn trên GPU dedicated vừa chậm vừa vượt ngân sách.</li><li><strong>D</strong>: ❌ Sai — serverless endpoint tối ưu batch, có cold start, không hợp real-time.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Low-latency model</li><li>Provisioned throughput</li><li>Auto scaling</li><li>Fixed budget</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Real-time dưới 200 ms + ngân sách cố định → model nhỏ low-latency + provisioned throughput.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2784,7 +2784,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Nền tảng đánh giá FM theo dataset ecommerce riêng, hiển thị accuracy cho text generation và summarization trên dashboard.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Dataset đưa vào S3 kèm IAM + CORS cho Bedrock model evaluation job truy cập; Lambda tạo evaluation job Bedrock native (RWK, BERT Score) theo lịch rồi đẩy log/dashboard lên CloudWatch.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — S3 + IAM + CORS là cách cấp quyền cho Bedrock evaluation job đọc dataset.</li><li><strong>B</strong>: ❌ Sai — VPC endpoint không phải cấu hình cần thiết cho evaluation job.</li><li><strong>C</strong>: ✅ Đúng — dùng Bedrock model evaluation managed với metric phù hợp.</li><li><strong>D</strong>: ❌ Sai — SageMaker Clarify và word error rate (dùng cho speech) không phù hợp, toxicity không đo accuracy.</li><li><strong>E</strong>: ❌ Sai — notebook tự gọi InvokeModel và tự viết đánh giá, nhiều vận hành; toxicity không phải accuracy.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Bedrock model evaluation jobs</li><li>RWK, BERT Score</li><li>S3 + CORS</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Đánh giá FM với dataset riêng, ít vận hành → Bedrock model evaluation job (managed).\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2890,7 +2890,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Human-in-the-loop: kỹ thuật viên phải duyệt mọi khuyến nghị AI, lưu quyết định để audit.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>AWS Step Functions với waitForTaskToken (callback pattern) tạm dừng workflow đến khi người duyệt, Lambda gọi SendTaskSuccess với quyết định, kết quả lưu Amazon DynamoDB để audit.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — tự dựng workflow với Lambda và SQS, nhiều code, khó theo dõi trạng thái.</li><li><strong>B</strong>: ✅ Đúng — pattern chuẩn cho human approval.</li><li><strong>C</strong>: ❌ Sai — AWS Glue workflow là ETL, không có SendTaskSuccess hay human approval.</li><li><strong>D</strong>: ❌ Sai — Glue jobs và ElastiCache (cache, không bền vững) không phù hợp audit.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>waitForTaskToken</li><li>SendTaskSuccess</li><li>Human approval</li><li>DynamoDB audit</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cần người duyệt trong workflow → Step Functions waitForTaskToken.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2967,7 +2967,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, B, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Đánh giá hồ sơ vay từ tài liệu scan: extract dữ liệu, redact PII trước inference, FM đưa quyết định, low-confidence chuyển human reviewer cùng Region.</li><li>Yêu cầu data residency, auditability, 25,000 đơn mỗi ngày, availability 99.9%.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon Textract + Amazon A2I cùng Region xử lý extract và human review; Lambda redact PII, Guardrails và IAM Region-specific; Step Functions điều phối review và prompt cho Bedrock.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Textract trích xuất, A2I chuyển low-confidence cho người duyệt cùng Region.</li><li><strong>B</strong>: ✅ Đúng — redact PII, Guardrails và IAM giữ residency.</li><li><strong>C</strong>: ❌ Sai — Kendra và OpenSearch không phải công cụ extract field từ scan.</li><li><strong>D</strong>: ❌ Sai — IAM policy không \"lưu\" dữ liệu theo Region; tagging chỉ phục vụ audit, không đủ.</li><li><strong>E</strong>: ✅ Đúng — Glue Data Quality validate, Step Functions orchestrate, chuẩn bị prompt cho Bedrock.</li><li><strong>F</strong>: ❌ Sai — Clarify bias report không nằm trong yêu cầu.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Textract + A2I</li><li>PII redaction</li><li>Region-specific IAM</li><li>Step Functions orchestration</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Scan document + low-confidence cho người duyệt → Textract + A2I.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3070,7 +3070,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Amazon Q Business với S3 data source phải tôn trọng quyền truy cập theo nhóm IAM Identity Center.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Một file acl.json duy nhất ở top-level bucket ánh xạ mỗi prefix phòng ban với group IAM Identity Center, khai báo vị trí trong mục Access Control của data source; không cần file riêng cho từng thư mục.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — nhiều acl.json cho từng thư mục, nhiều file phải bảo trì.</li><li><strong>B</strong>: ✅ Đúng — một file ACL duy nhất, ánh xạ prefix với group.</li><li><strong>C</strong>: ❌ Sai — permission set của IAM Identity Center không điều khiển ACL của Amazon Q Business.</li><li><strong>D</strong>: ❌ Sai — metadata.json dùng cho metadata của tài liệu, không phải cấu hình ACL ở mức data source.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>acl.json</li><li>Access Control (data source settings)</li><li>IAM Identity Center group</li><li>Amazon Q Business</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Q Business S3 theo group quyền → một acl.json top-level.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3139,7 +3139,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Hệ thống hỗ trợ lâm sàng: chỉ dùng tài liệu y khoa đã duyệt, phải trích dẫn nguồn, không hallucinate.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Bedrock Knowledge Base kết nối tài liệu đã duyệt, RetrieveAndGenerate trả về câu trả lời kèm citations sẵn có, nên không cần viết logic bổ sung.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Kendra và post-processing tự viết, tốn công.</li><li><strong>B</strong>: ✅ Đúng — managed RAG, citation tích hợp.</li><li><strong>C</strong>: ❌ Sai — Comprehend Medical trích entity, không grounding hay trích dẫn nguồn.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Retrieve + InvokeModel + tự viết verification, nhiều code.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Knowledge base</li><li>RetrieveAndGenerate</li><li>Citations</li><li>Grounding</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Chỉ dùng tài liệu đã duyệt + cite nguồn → Knowledge Base + RetrieveAndGenerate.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3208,7 +3208,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Trợ lý real-time cho call center: transcribe live, gợi ý tăng dần khi khách còn nói, latency dưới 1 giây, chỉ dùng managed service, streaming hai chiều.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Transcribe streaming với partial results cho text ngay khi đang nói, InvokeModelWithResponseStream trả token dần, API Gateway WebSocket đẩy kết quả real-time đến agent.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — thêm Comprehend, DynamoDB và InvokeModel không streaming, tăng latency.</li><li><strong>B</strong>: ✅ Đúng — partial results, response streaming, WebSocket.</li><li><strong>C</strong>: ❌ Sai — batch transcription không real-time; Lex không phải kênh phù hợp.</li><li><strong>D</strong>: ❌ Sai — Titan Embeddings không sinh gợi ý; SNS không streaming hai chiều.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Transcribe partial results</li><li>InvokeModelWithResponseStream</li><li>API Gateway WebSocket</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Real-time streaming dưới 1 giây → Transcribe streaming + response streaming + WebSocket.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3277,7 +3277,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Nền tảng nhận ảnh và text từ người dùng: chặn nội dung không phù hợp, không lộ PII, tích hợp luồng S3.</li><li>Ưu tiên: LEAST infrastructure management overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Step Functions điều phối các dịch vụ managed: Bedrock Guardrails lọc nội dung, Comprehend PII detection xử lý PII, Rekognition image moderation kiểm duyệt ảnh; không cần quản lý hạ tầng hay train model.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — \"Enhanced Monitoring\" và CloudWatch alarm không lọc traffic hay nội dung.</li><li><strong>B</strong>: ❌ Sai — API Gateway validation không kiểm duyệt nội dung; xây model riêng trên SageMaker AI tốn vận hành.</li><li><strong>C</strong>: ❌ Sai — Cognito pre-authentication không phù hợp kiểm duyệt upload; Textract để OCR, không phải moderation.</li><li><strong>D</strong>: ✅ Đúng — toàn bộ dịch vụ managed, đáp ứng đủ yêu cầu.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Bedrock Guardrails</li><li>Comprehend PII detection</li><li>Rekognition image moderation</li><li>Step Functions</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Moderation text + ảnh + PII, ít vận hành → Guardrails + Comprehend PII + Rekognition.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3346,7 +3346,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: ép Amazon Q Developer gợi ý code dựa trên internal libraries, thuật toán độc quyền, sample code của công ty.</li><li>Requirement quan trọng nhất: áp dụng cho cả team mà <strong>không sửa project-level</strong>.</li><li>Ưu tiên: tính nhất quán toàn tổ chức, ít thay đổi trên từng project.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon Q Developer <strong>customization</strong> (Pro tier) kết nối data sources nội bộ (repo code) để Q gợi ý theo code chuẩn của công ty. Cấu hình ở cấp tổ chức, developer chỉ cần chọn customization, không phải thêm file vào project.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — phải thêm repo vào workspace (thay đổi project) và phụ thuộc developer tự dùng @workspace.</li><li><strong>B</strong>: ❌ Sai — `.amazonq/rules` nằm trong project root, là project-level; chủ yếu để định hướng coding rules, không phải nguồn code nội bộ để học.</li><li><strong>C</strong>: ❌ Sai — folder `rules` tự đặt tên không được Amazon Q nhận diện, vẫn là project-level.</li><li><strong>D</strong>: ✅ Đúng — customization dùng approved data sources, áp dụng không đụng project.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Amazon Q Developer <strong>customization</strong></li><li>Pro tier</li><li>Không project-level modification</li><li>Internal libraries / proprietary code</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Muốn Q Developer gợi ý theo code nội bộ của cả tổ chức mà không sửa project → nghĩ ngay đến <strong>customization</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3407,7 +3407,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: AI assistant trên Amazon Bedrock cần low latency, hiệu năng ổn định khi traffic tăng gấp 3 lần.</li><li>Có 40% request dùng chung context lặp lại.</li><li>Ưu tiên: <strong>MOST cost-effective</strong>, ít thay đổi kiến trúc.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Latency-optimized inference</strong> giảm latency ngay trên Bedrock, kết hợp <strong>prompt caching</strong> cho phần context lặp lại giúp giảm cost và latency, không cần mua capacity cố định hay dựng thêm hạ tầng.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — latency-optimized + prompt caching, on-demand nên trả theo dùng, tận dụng 40% context trùng lặp.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — Provisioned Throughput cho peak 150K tốn chi phí cố định lớn lúc bình thường, thêm ElastiCache phải vận hành.</li><li><strong>C</strong>: ❌ Sai — Agents/knowledge bases thêm độ trễ; cross-Region inference không giải quyết caching ngữ cảnh lặp lại.</li><li><strong>D</strong>: ❌ Sai — Lambda + DynamoDB caching tự xây, thêm overhead, không tối ưu latency của model.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>latency-optimized inference</strong></li><li><strong>prompt caching</strong></li><li>Traffic spikes</li><li>MOST cost-effective</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Context lặp lại + cần giảm latency/cost trên Bedrock → nghĩ ngay đến <strong>prompt caching</strong>, tránh Provisioned Throughput nếu đề nhấn cost.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3484,7 +3484,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: RAG pháp lý bị mất ngữ cảnh vì chunk cố định 500 tokens cắt ngang lập luận.</li><li>Cần cải thiện <strong>retrieval relevance</strong> và hiệu năng khi dữ liệu tăng 90 GB lên 360 GB.</li><li>Nguyên nhân gốc: chiến lược chunking.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Chunking theo <strong>semantic boundaries</strong> (lập luận, điều khoản, section) giữ trọn ngữ cảnh pháp lý nên retrieval chính xác hơn, ít chunk thừa/nhiễu hơn, từ đó cải thiện cả chất lượng lẫn hiệu năng. Cần regenerate embeddings cho khớp chunk mới.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tăng dimension lên 4,096 làm tăng storage và latency, không sửa vấn đề chunking.</li><li><strong>B</strong>: ❌ Sai — summary tĩnh bỏ dynamic retrieval, dễ lỗi thời, mất độ chính xác pháp lý.</li><li><strong>C</strong>: ✅ Đúng — xử lý đúng gốc rễ: chunk mất ngữ cảnh.</li><li><strong>D</strong>: ❌ Sai — DynamoDB keyword index không có semantic/vector search, giảm relevance.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>semantic chunking</strong></li><li>Fixed-length chunk splits context</li><li>Regenerate embeddings</li><li>Retrieval relevance</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"RAG trả lời thiếu ngữ cảnh do cắt chunk → nghĩ ngay đến sửa <strong>chunking strategy</strong> (semantic/hierarchical), không phải tăng dimension.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3545,7 +3545,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chatbot hỗ trợ khách hàng giữ ngữ cảnh hội thoại, chạy clarification workflow, lưu lịch sử mã hóa.</li><li>Phải xử lý hàng nghìn user đồng thời, phản hồi nhanh.</li><li>Ưu tiên: workflow có trạng thái, lưu trữ scalable và encrypted.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Step Functions Standard</strong> hỗ trợ workflow chạy lâu và pattern <strong>Wait for a Callback</strong> (chờ user làm rõ). <strong>DynamoDB</strong> on-demand scale theo số user đồng thời, truy vấn nhanh theo session, hỗ trợ server-side encryption.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Express workflow tối đa 5 phút, không hỗ trợ callback pattern; RDS khó scale cho hàng nghìn session đồng thời.</li><li><strong>B</strong>: ✅ Đúng — Standard + callback cho clarification, DynamoDB on-demand + encryption.</li><li><strong>C</strong>: ❌ Sai — mỗi interaction một file JSON trên S3 cho truy xuất ngữ cảnh chậm, không có orchestration clarification.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — SQS không quản lý state workflow; ElastiCache không phải nơi lưu bền vững cho personalization.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Step Functions <strong>Standard</strong></li><li><strong>Wait for a Callback</strong></li><li>DynamoDB on-demand</li><li>Server-side encryption</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Workflow cần chờ phản hồi người dùng → nghĩ ngay đến Step Functions <strong>Standard + callback</strong>; lưu session scale lớn → <strong>DynamoDB</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3630,7 +3630,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: tiền xử lý dữ liệu phi cấu trúc trên S3 cho ứng dụng Bedrock.</li><li>Cần validate data quality, tạo metadata có thể audit, monitor metrics, tùy chỉnh chunking.</li><li>Ưu tiên: <strong>LEAST development effort</strong>, dùng managed service.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Glue</strong> gom đủ: crawler/Data Catalog tạo metadata audit được, ETL job chạy script chunking tùy chỉnh, <strong>Glue Data Quality</strong> validate và monitor chất lượng, đều là managed service tích hợp sẵn.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Data Wrangler phù hợp dữ liệu có cấu trúc/ML prep, phải viết thêm Lambda và cấu hình CloudWatch.</li><li><strong>B</strong>: ✅ Đúng — Glue crawler + ETL + Data Quality, ít code nhất.</li><li><strong>C</strong>: ❌ Sai — Comprehend chỉ trích entity, Athena không phải công cụ validate chất lượng chuyên dụng, nhiều thành phần tự ghép.</li><li><strong>D</strong>: ❌ Sai — EC2 + code tùy chỉnh tốn effort; Model Monitor dành cho model, không phải data quality của tài liệu.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>AWS Glue Data Quality</strong></li><li>Glue crawler / Data Catalog</li><li>Auditable metadata</li><li>LEAST development effort</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cần validate data quality + metadata catalog + ETL tùy chỉnh với ít effort → nghĩ ngay đến <strong>AWS Glue</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3691,7 +3691,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: vector search quét quá nhiều document, nhiều loại nội dung, nhiều thời kỳ nên chậm và kém liên quan.</li><li>Embedding và model đã tốt, không fine-tune thêm.</li><li>Ưu tiên: thu hẹp phạm vi tìm kiếm với <strong>minimal changes</strong> kiến trúc.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Bedrock Knowledge Bases hỗ trợ <strong>metadata filtering</strong> từ S3 object metadata (loại nội dung, ngày tháng...), giúp giới hạn phạm vi tìm kiếm ngay trong knowledge base hiện có mà không đổi kiến trúc.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — đề đã nói model/embedding không cần cải thiện; vấn đề là phạm vi tìm kiếm.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — migrate sang OpenSearch là thay đổi kiến trúc lớn, trái yêu cầu minimal changes.</li><li><strong>C</strong>: ✅ Đúng — bật metadata filtering ngay trong knowledge base, thay đổi tối thiểu.</li><li><strong>D</strong>: ❌ Sai — chuyển sang Amazon Q Business là đổi hẳn kiến trúc.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>Metadata filtering</strong></li><li>Knowledge Bases</li><li>S3 object metadata</li><li>Minimal changes</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Search quét quá rộng, cần thu hẹp phạm vi mà không đổi kiến trúc → nghĩ ngay đến <strong>metadata filtering</strong> của Knowledge Bases.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3776,7 +3776,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chọn vector database cho RAG với dataset nhỏ, số index thấp.</li><li>Cần similarity search <strong>chính xác tối đa</strong> và hiệu năng cao.</li><li>Ưu tiên: độ chính xác (exact search) trên dataset nhỏ.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon MemoryDB</strong> (in-memory) có vector search độ trễ thấp. Thuật toán <strong>Flat</strong> là brute-force, cho kết quả exact 100%, phù hợp dataset nhỏ nơi chi phí quét toàn bộ chấp nhận được.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — MemoryDB + Flat cho exact nearest neighbor, độ chính xác tối đa, scale ngang theo metrics.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — HNSW là approximate, hy sinh một phần accuracy và chỉ có ích cho dataset lớn.</li><li><strong>C</strong>: ❌ Sai — IVFFlat là approximate, Aurora latency cao hơn in-memory.</li><li><strong>D</strong>: ❌ Sai — IVFFlat approximate; DocumentDB không tối ưu cho yêu cầu accuracy tối đa ở scale nhỏ.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>MemoryDB</strong> vector search</li><li><strong>Flat</strong> = exact search</li><li>HNSW / IVFFlat = approximate</li><li>Small dataset, low index count</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Dataset nhỏ + cần accuracy tối đa → nghĩ ngay đến <strong>Flat</strong> (exact); dataset lớn cần tốc độ → <strong>HNSW</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3853,7 +3853,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: xử lý 50 GB JSON trên S3: trích xuất dữ liệu, loại bỏ PII, tạo embeddings, lưu vector.</li><li>Phải cost-effective, hoàn tất trong 4 giờ.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong>, ưu tiên serverless/managed.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Step Functions</strong> orchestrate pipeline serverless, <strong>Comprehend</strong> phát hiện PII, <strong>Bedrock</strong> tạo embeddings, và <strong>OpenSearch Serverless</strong> lưu vector với similarity search, không phải quản lý cluster hay capacity.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Lambda tự quản lý concurrency, timeout 15 phút, không có orchestration/retry tập trung, chưa có nơi lưu vector.</li><li><strong>B</strong>: ❌ Sai — Glue + SageMaker Processing + OpenSearch provisioned, nhiều thành phần phải vận hành.</li><li><strong>C</strong>: ❌ Sai — EMR cluster và Aurora pgvector tốn vận hành nhất.</li><li><strong>D</strong>: ✅ Đúng — toàn bộ serverless/managed, tích hợp trực tiếp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Step Functions orchestration</li><li><strong>Comprehend</strong> PII detection</li><li><strong>OpenSearch Serverless</strong></li><li>LEAST operational overhead</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Pipeline xử lý dữ liệu + PII + embeddings với ít vận hành → nghĩ ngay đến <strong>Step Functions + Comprehend + Bedrock + OpenSearch Serverless</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3946,7 +3946,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: đổi model theo tier khách hàng, A/B test tính năng mới mà không redeploy.</li><li>Phải validate tham số (temperature, max tokens) trước khi áp dụng.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS AppConfig</strong> hỗ trợ sẵn <strong>feature flags</strong> cho A/B testing, <strong>JSON schema validation</strong> cho tham số, deploy dần và rollback. <strong>AppConfig Agent</strong> cache cấu hình cho Lambda, không cần code custom.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Parameter Store phải poll và trigger redeploy, không có feature flag hay schema validation.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — DynamoDB lưu config được nhưng validation và A/B phải tự code, query mỗi request.</li><li><strong>C</strong>: ✅ Đúng — feature flags + schema validation + Agent, đúng cả 3 yêu cầu.</li><li><strong>D</strong>: ❌ Sai — ElastiCache phải tự quản lý cluster, validation tự viết.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>AWS AppConfig</strong></li><li><strong>Feature flags</strong></li><li>JSON schema validation</li><li>AppConfig Agent (Lambda extension)</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Đổi config runtime + feature flag + validate + rollback → nghĩ ngay đến <strong>AWS AppConfig</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4007,7 +4007,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Claude 3 Haiku bị nghẽn throughput khi tải tăng gấp 3 (10K lên 30K requests/giờ), gây timeout.</li><li>Phải phản hồi dưới 2 giây, chạy multi-Region.</li><li>Ưu tiên: tăng throughput, giữ latency thấp.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Cross-Region inference profiles</strong> tự động phân phối traffic sang nhiều Region có capacity, tăng throughput và tránh throttling. Token batching giảm overhead mỗi request.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — chỉ một Region, retry không tăng capacity; không tận dụng multi-Region.</li><li><strong>B</strong>: ✅ Đúng — cross-Region inference phân phối tải tự động, quản lý bởi Bedrock.</li><li><strong>C</strong>: ❌ Sai — round-robin client-side tự quản lý, 1 MU làm backup không đủ.</li><li><strong>D</strong>: ❌ Sai — batch inference là bất đồng bộ, không đáp ứng yêu cầu 2 giây.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>Cross-Region inference profiles</strong></li><li>Throughput bottleneck</li><li>Multi-Region</li><li>Latency under 2 seconds</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Throttling/throughput bottleneck khi traffic spike trên Bedrock → nghĩ ngay đến <strong>cross-Region inference</strong>; batch inference chỉ cho tác vụ không real-time.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4076,7 +4076,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C (theo file; xem lưu ý)</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: 40% câu hỏi cùng ý nghĩa nhưng diễn đạt khác nhau, cần giảm model call dư thừa.</li><li>Cần trả lời nhất quán cho câu hỏi tương đương ngữ nghĩa, latency thấp.</li><li>Ưu tiên: <strong>semantic cache</strong> bằng vector similarity.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Semantic caching cần embeddings và <strong>k-NN similarity search</strong> thay vì khớp chính xác chuỗi. OpenSearch Service với k-NN và approximate k-NN tìm query tương tự và trả response đã lưu.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — DAX chỉ cache key-value chính xác, không có toán tử LIKE hay tìm kiếm ngữ nghĩa.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — MemoryDB vector search là hướng hợp lý về latency, nhưng đáp án dùng \"RANGE query\" kém rõ ràng so với k-NN.</li><li><strong>C</strong>: ✅ Đúng — vector k-NN tìm câu hỏi tương đương ngữ nghĩa.</li><li><strong>D</strong>: ❌ Sai — stemming chỉ xử lý biến thể từ, không bắt được paraphrase.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>Semantic cache</strong></li><li>Embeddings + <strong>k-NN</strong></li><li>Semantically equivalent</li><li>Giảm redundant model calls</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cùng ý nghĩa nhưng khác cách diễn đạt → nghĩ ngay đến <strong>vector embeddings + k-NN</strong>, không phải key-value cache.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4137,7 +4137,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: dựng MCP server truy cập thông tin user trên Lambda, AI agent kết nối tới đó.</li><li>Requirement quyết định: <strong>chỉ user được ủy quyền</strong> mới truy cập MCP server.</li><li>Cần transport phù hợp cho remote server.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Remote MCP server dùng <strong>Streamable HTTP transport</strong> qua API Gateway HTTP API, và xác thực/ủy quyền bằng <strong>OAuth 2.1</strong> với Amazon Cognito, đúng chuẩn MCP authorization.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — chỉ dùng IAM invoke, không có xác thực người dùng; gọi bất đồng bộ không phù hợp MCP.</li><li><strong>B</strong>: ❌ Sai — STDIO transport dành cho process local, không dùng được với Lambda từ xa; không có authorization người dùng.</li><li><strong>C</strong>: ✅ Đúng — Streamable HTTP + API Gateway + Cognito OAuth 2.1.</li><li><strong>D</strong>: ❌ Sai — Lambda layer không phải process để chạy làm server; truyền credentials qua environment variables là kém an toàn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>MCP <strong>Streamable HTTP</strong> transport</li><li><strong>OAuth 2.1</strong> + Amazon Cognito</li><li>API Gateway HTTP API</li><li>STDIO = local only</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"MCP server remote cần bảo mật → nghĩ ngay đến <strong>Streamable HTTP + OAuth 2.1</strong>; STDIO chỉ cho local.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4198,7 +4198,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: 3 Bedrock agents (search, recommendation, order) chạy tuần tự, cộng Lambda tính rewards.</li><li>Cần <strong>graceful degradation</strong> khi dịch vụ gián đoạn.</li><li>Ưu tiên: <strong>MOST operational efficiency</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Step Functions</strong> tích hợp trực tiếp với Bedrock agents và Lambda, orchestrate tuần tự bằng state machine, có <strong>Retry/Catch</strong> sẵn cho từng bước để fallback, không cần code orchestration.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — thêm API Gateway cho từng agent và Lambda orchestrator tự viết, nhiều thành phần dư thừa.</li><li><strong>B</strong>: ✅ Đúng — 4 task trực tiếp, retry/catch cho mỗi bước.</li><li><strong>C</strong>: ❌ Sai — retry/fallback cấu hình riêng từng agent và orchestration bằng code, phức tạp.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Step Functions chỉ bọc một Lambda nên retry/catch không chi tiết theo từng bước.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Step Functions <strong>Retry / Catch</strong></li><li>Sequential orchestration</li><li>Graceful degradation</li><li>MOST operational efficiency</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Chạy tuần tự nhiều agent/Lambda + cần retry/fallback → nghĩ ngay đến <strong>Step Functions</strong> với từng task riêng.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4267,7 +4267,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: workflow đọc communication từ S3, trích xuất một phần theo template, gửi vào Bedrock model, lưu kết quả về S3.</li><li>Đây là pipeline xác định (deterministic) các bước cố định.</li><li>Ưu tiên: dùng integration trực tiếp, đơn giản.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Step Functions</strong> có service integration trực tiếp với S3 (GetObject/PutObject) và Bedrock (InvokeModel), cùng intrinsic functions để parse dữ liệu, nên dựng được toàn bộ workflow không cần agent hay Lambda.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Bedrock Flows không có \"S3 action node\" và \"agent step\" như mô tả theo cách này; cấu hình không chính xác.</li><li><strong>B</strong>: ✅ Đúng — S3 GetObject, intrinsic function parse, Bedrock InvokeModel, S3 PutObject.</li><li><strong>C</strong>: ❌ Sai — agent là non-deterministic, action group không tự truy cập S3 và invoke model nếu không có Lambda.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — dùng agent cho tác vụ cố định là thừa, tốn 3 Lambda.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Step Functions <strong>optimized integrations</strong></li><li>Bedrock <strong>InvokeModel</strong> task</li><li>S3 GetObject / PutObject</li><li>Intrinsic functions</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Pipeline cố định S3 → Bedrock → S3 → nghĩ ngay đến <strong>Step Functions</strong> với SDK integrations, không cần agent.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4368,7 +4368,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: đánh giá AI assistant tài chính về độ chính xác, tuân thủ quy định, giao tiếp phù hợp.</li><li>Cần kết hợp đánh giá tự động quy mô lớn với human review có chọn lọc cho các tương tác quan trọng.</li><li>Ưu tiên: scale + human-in-the-loop có mục tiêu.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Bedrock evaluations</strong> với <strong>LLM-as-a-judge</strong> chấm tự động ở quy mô lớn, <strong>Guardrails</strong> kiểm tra tuân thủ chính sách tài chính, và <strong>Amazon A2I</strong> đưa các tương tác bị flag cho con người duyệt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — chấm thủ công toàn bộ không scale.</li><li><strong>B</strong>: ✅ Đúng — tự động + guardrails + A2I human review có chọn lọc.</li><li><strong>C</strong>: ❌ Sai — Lex và compliance database tĩnh không đánh giá được chất lượng hội thoại, không phải giải pháp evaluation.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — CloudWatch chỉ giám sát pattern, không đánh giá accuracy hay chất lượng nội dung.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Bedrock <strong>model evaluation</strong> (LLM-as-a-judge)</li><li><strong>Guardrails</strong></li><li><strong>Amazon A2I</strong></li><li>Human-in-the-loop</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Đánh giá tự động quy mô lớn + người duyệt ca quan trọng → nghĩ ngay đến <strong>Bedrock evaluations + Guardrails + A2I</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4429,7 +4429,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: multi-agent cho bệnh viện với các phòng ban clinical, insurance verification, scheduling, claims.</li><li>Cần scalable, dễ thêm tính năng, xử lý hàng nghìn tương tác song song, trả lời đúng domain.</li><li>Ưu tiên: kiến trúc <strong>supervisor + collaborator</strong> rõ ràng.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Một <strong>supervisor agent</strong> phân loại intent và route tới các <strong>collaborator agents</strong> chuyên biệt, mỗi agent dùng RAG với knowledge base riêng của phòng ban. Thêm phòng ban mới chỉ cần thêm collaborator.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — supervisor routing + collaborator có KB riêng, dễ mở rộng.</li><li><strong>B</strong>: ❌ Sai — nhiều supervisor và handoff thủ công, không phù hợp real-time, khó scale.</li><li><strong>C</strong>: ❌ Sai — một agent chung với rule-based routing, khó mở rộng và kém chuyên biệt domain.</li><li><strong>D</strong>: ❌ Sai — nhiều supervisor độc lập, KB dùng chung làm mất cô lập domain, cần routing ngoài tự viết.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>Supervisor agent</strong> + collaborator agents</li><li>Multi-agent collaboration</li><li>Domain-specific knowledge base</li><li>Intent classification</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Nhiều domain chuyên biệt, cần mở rộng → nghĩ ngay đến <strong>một supervisor + nhiều collaborator agents</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4490,7 +4490,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: triển khai app lên dev và production, tích hợp Bedrock FM, thử nhiều FM ở mỗi môi trường.</li><li>Product owner phải dễ dàng đổi FM để test.</li><li>Ưu tiên: một codebase, cấu hình theo môi trường, tự động hóa.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Một <strong>CDK app</strong> dùng `FoundationModel.fromFoundationModelId()` (on-demand, đổi model chỉ cần đổi ID), một <strong>CodePipeline</strong> có deployment stage cho từng môi trường, đảm bảo nhất quán và dễ chuyển FM.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — `ProvisionedModel` gắn với provisioned throughput, khó đổi FM để test, nhiều pipeline.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — mỗi môi trường một CDK app và pipeline riêng gây trùng lặp, dễ lệch cấu hình.</li><li><strong>C</strong>: ✅ Đúng — một app, một pipeline, nhiều stage, FM theo ID.</li><li><strong>D</strong>: ❌ Sai — dev tạo thủ công, không nhất quán, không tự động.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>`FoundationModel.fromFoundationModelId()`</li><li>Một CDK app, nhiều stage</li><li>CodePipeline</li><li>Dễ đổi FM</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cần đổi FM dễ dàng giữa các môi trường → nghĩ ngay đến <strong>fromFoundationModelId()</strong> và một pipeline nhiều stage; ProvisionedModel thì bị khóa vào capacity.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4551,7 +4551,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: thêm AI vào PMS cho nhiều khách sạn bằng Bedrock Knowledge Bases.</li><li>Cần tách biệt access control từng khách sạn, room availability gần real-time, hiệu năng ổn định lúc cao điểm.</li><li>Ưu tiên: <strong>isolation</strong> + dữ liệu mới nhanh.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Mỗi khách sạn có <strong>một knowledge base riêng</strong> trong cấu trúc multi-account, cô lập quyền truy cập tự nhiên. <strong>Direct data ingestion</strong> cập nhật room availability gần real-time, dữ liệu ít quan trọng thì sync theo lịch.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — một KB chung trộn dữ liệu, chỉ audit bằng CloudTrail chứ không kiểm soát truy cập từng khách sạn.</li><li><strong>B</strong>: ❌ Sai — KB tập trung, resource policy khó tách quyền theo khách sạn, EventBridge không trực tiếp ingest vào KB.</li><li><strong>C</strong>: ✅ Đúng — KB riêng từng khách sạn, direct ingestion cho dữ liệu near real-time.</li><li><strong>D</strong>: ❌ Sai — agent tập trung với IAM Identity Center permission sets không cô lập dữ liệu theo KB, không đảm bảo real-time.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Knowledge base <strong>per tenant</strong></li><li><strong>Direct data ingestion</strong></li><li>Multi-account isolation</li><li>Near real-time</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cần tách biệt access từng tenant + dữ liệu near real-time → nghĩ ngay đến <strong>KB riêng từng tenant + direct ingestion</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4612,7 +4612,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Lambda gọi nhiều model Bedrock, đổi provider mà không sửa hay redeploy code, theo thời gian thực.</li><li>Cần rollout an toàn, validation, rollback.</li><li>Ưu tiên: quản lý cấu hình có kiểm soát.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS AppConfig</strong> cung cấp deployment strategy (gradual rollout), validators, và tự động rollback theo CloudWatch alarm. Lambda đọc cấu hình lúc runtime nên không cần redeploy.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Parameter Store lưu giá trị nhưng không có rollout dần, validation, hay rollback.</li><li><strong>B</strong>: ✅ Đúng — AppConfig có safe rollout, validation, rollback.</li><li><strong>C</strong>: ❌ Sai — hardcode model và đổi integration thủ công, không real-time, không rollback tự động.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — lưu file JSON trên S3 rồi tham chiếu qua AppConfig thêm bước thừa, AppConfig tự lưu hosted configuration.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>AWS AppConfig</strong></li><li>Gradual rollout / rollback</li><li>Validators</li><li>Không redeploy code</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Đổi config runtime an toàn + validate + rollback → nghĩ ngay đến <strong>AWS AppConfig</strong>, không phải Parameter Store.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4689,7 +4689,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Bedrock API timeout lúc cao điểm, response stream bị đứt, prompt vượt token limit, FM invocation lỗi.</li><li>Cần retry tự động cho lỗi tạm thời, không làm quá tải Bedrock, thích ứng theo tình trạng dịch vụ, hỗ trợ streaming và token-aware.</li><li>Ưu tiên: resilience toàn diện.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Kết hợp <strong>adaptive retry với exponential backoff + jitter</strong>, <strong>circuit breaker</strong> để tránh dồn tải khi lỗi nhiều, và streaming handler có buffer cho phép <strong>resume từ chunk cuối</strong> khi kết nối lại.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — fixed delay 1 giây gây retry đồng loạt, restart stream làm mất dữ liệu, cap token cứng.</li><li><strong>B</strong>: ✅ Đúng — adaptive retry + circuit breaker + streaming resume, thích ứng tình trạng dịch vụ.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — standard mode không adaptive, không có circuit breaker, token limit toàn cục thô.</li><li><strong>D</strong>: ❌ Sai — timeout 30 giây cố định, token cap tĩnh, load shedding không thích ứng.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>Exponential backoff with jitter</strong></li><li><strong>Circuit breaker</strong></li><li>Adaptive retry</li><li>Resume streaming từ chunk cuối</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Lỗi tạm thời + tránh quá tải khi peak → nghĩ ngay đến <strong>backoff + jitter + circuit breaker</strong>.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4766,7 +4766,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chặn PII trước khi gửi vào model, chặn chủ đề investment advice, và audit log mọi tương tác (gồm cả image/document).</li><li>Ưu tiên: <strong>LEAST operational effort</strong> → dùng tính năng managed có sẵn của Amazon Bedrock.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Bedrock guardrails có <strong>sensitive information policy</strong> (PII) và <strong>denied topic policy</strong> áp dụng cho cả input lẫn output. Model invocation logging với delivery và image logging tới Amazon S3 đáp ứng yêu cầu audit mà không cần code tự xây.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Amazon Macie quét dữ liệu tĩnh trong S3, không xử lý PII trong prompt realtime; AWS CloudTrail chỉ ghi API call, không ghi nội dung hội thoại.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — Lambda + Comprehend phải tự xây; topic modeling không dùng để chặn chủ đề; CloudWatch custom metrics không lưu nội dung hội thoại/ảnh.</li><li><strong>C</strong>: ✅ Đúng — Guardrails (PII + topic policy) + invocation logging/image logging vào S3, ít vận hành nhất.</li><li><strong>D</strong>: ❌ Sai — regex dễ sót PII, prompt engineering không đảm bảo chặn investment advice, vận hành nhiều hơn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Bedrock Guardrails, sensitive information policy, denied topic, model invocation logging, image logging</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"lọc PII + chặn chủ đề + least effort\" → nghĩ ngay đến <strong>Bedrock Guardrails</strong> + <strong>invocation logging to S3</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4827,7 +4827,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: trợ lý RAG minh bạch (lý do + trích dẫn nguồn), audit trail đầy đủ, 10.000 concurrent users, phản hồi dưới 2 giây.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong> → managed services.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Agent tracing ghi lại reasoning, Bedrock knowledge bases cung cấp RAG managed kèm citation, còn Multi-AZ + API Gateway + Lambda + CloudFront đáp ứng scale và latency.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — tracing + managed knowledge bases + kiến trúc serverless scale được, ít vận hành nhất.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — custom RAG pipeline trên Amazon OpenSearch Service phải tự xây/quản lý, tăng overhead.</li><li><strong>C</strong>: ❌ Sai — chỉ có monitoring, không có RAG citation thật sự; prompt nhúng cứng, không có reasoning trace; RDS khó scale cho 10.000 users.</li><li><strong>D</strong>: ❌ Sai — chỉ là báo cáo compliance định kỳ, không phục vụ trả lời realtime trong 2 giây.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Agent tracing, Knowledge Bases, citation, Multi-AZ, API Gateway + Lambda</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"RAG + cite sources + reasoning + least overhead\" → nghĩ ngay đến <strong>Bedrock Knowledge Bases + Agent tracing</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4896,7 +4896,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: xây metadata framework nhất quán (timestamp, author, domain) cho tài liệu trong Amazon S3 để FM hiểu ngữ cảnh mà không đọc toàn bộ nội dung.</li><li>Ưu tiên: dùng đúng loại metadata của S3 cho đúng mục đích.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>S3 system metadata tự động giữ timestamp (Last-Modified), S3 object tags phù hợp cho phân loại domain (có thể sửa và query), còn user-defined metadata lưu author theo cặp key-value tùy chỉnh.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — mỗi loại metadata dùng đúng chỗ: system metadata, object tags, user-defined metadata.</li><li><strong>B</strong>: ❌ Sai — S3 Object Lock/legal hold dùng cho bảo vệ dữ liệu, không để theo dõi timestamp; S3 access points là cơ chế truy cập, không phải phân loại domain.</li><li><strong>C</strong>: ❌ Sai — S3 Inventory là báo cáo, S3 Storage Lens là dashboard phân tích dung lượng, không lưu author.</li><li><strong>D</strong>: ❌ Sai — Object Lock retention không phải timestamp; S3 Event Notifications chỉ kích hoạt sự kiện, không phân loại.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>S3 system metadata, user-defined metadata, object tags, metadata per object</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"metadata gắn theo object trong S3\" → nghĩ ngay đến <strong>system metadata + user-defined metadata + object tags</strong>; Object Lock/access points/Inventory là bẫy.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4957,7 +4957,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: làm giàu prompt bằng dữ liệu riêng của từng customer, nhưng customer giữ quyền sở hữu và kiểm soát dữ liệu.</li><li>Ưu tiên: data governance, semantic accuracy cao, latency thấp, ít phức tạp, không phải deploy/quản lý service trong môi trường customer. Không cần realtime.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon Q Business index do customer sở hữu, customer chỉ định Example Corp là <strong>data accessor</strong> để truy xuất qua secure API. Dữ liệu vẫn nằm ở customer, retrieval có semantic search, không cần deploy gì.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — data accessor + index của customer, quản trị chặt, ít phức tạp.</li><li><strong>B</strong>: ❌ Sai — deploy MCP server realtime cho từng customer là đúng thứ đề muốn tránh, và đề không cần realtime.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — cross-account query knowledge base làm tăng độ phức tạp quản lý quyền, không có cơ chế accessor chuẩn.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Amazon Kendra không có cơ chế chia sẻ index chéo account đơn giản; phải crawl và quản lý crawler, ownership kém rõ.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Amazon Q Business, data accessor, customer-owned index, enrich prompts</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"bên thứ ba truy xuất dữ liệu của customer, customer giữ quyền kiểm soát\" → nghĩ ngay đến <strong>Q Business data accessor</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5074,7 +5074,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: retrieval case law cần cả ngữ nghĩa (semantic) lẫn khớp chính xác thuật ngữ pháp lý và citation, nhanh và chính xác.</li><li>Ưu tiên: precision + semantic + keyword.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Hybrid search</strong> trên Amazon OpenSearch Service kết hợp vector search (hiểu quan hệ khái niệm) với keyword search (khớp thuật ngữ, citation), rồi dùng <strong>reranker model</strong> của Bedrock để tinh chỉnh độ liên quan.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — default vector search yếu với citation/thuật ngữ chính xác; query expansion không thay thế được keyword matching.</li><li><strong>B</strong>: ✅ Đúng — hybrid (vector + keyword) + reranker cho kết quả chính xác và nhanh.</li><li><strong>C</strong>: ❌ Sai — query suggestion chỉ gợi ý truy vấn cho người dùng; post-processing bằng LLM chậm và không cải thiện retrieval.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Lambda tự merge với RDS filter là phức tạp, chậm, khó bảo trì.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Hybrid search, vector + keyword, reranker, OpenSearch, Titan embeddings</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"thuật ngữ/citation chính xác + semantic\" → nghĩ ngay đến <strong>hybrid search + reranker</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5143,7 +5143,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: observability cho token usage của nhiều ứng dụng/model, dashboard tùy chỉnh cho nhiều nhóm, alerting.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong> → dùng dịch vụ native của CloudWatch, chọn đủ 2 đáp án.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>C dùng metric native của Bedrock trong CloudWatch dashboards + alarms để có real-time visibility và alert. B bổ sung Logs Insights trên invocation logs để phân tích usage theo application.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Amazon QuickSight thêm dịch vụ phải quản lý, không phải real-time và không có alerting.</li><li><strong>B</strong>: ✅ Đúng — Logs Insights cho attribution theo application, log widgets trên dashboard.</li><li><strong>C</strong>: ✅ Đúng — native metrics + CloudWatch alarms cho ngưỡng token.</li><li><strong>D</strong>: ❌ Sai — không có zero-ETL integration kiểu này giữa Bedrock và Amazon Managed Grafana; thêm dịch vụ cần vận hành.</li><li><strong>E</strong>: ❌ Sai — pipeline EventBridge, Firehose, OpenSearch Serverless quá nhiều thành phần, overhead cao.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CloudWatch metrics, CloudWatch alarms, Logs Insights, invocation logs, token usage</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"token usage + dashboard + alarm + least overhead\" → nghĩ ngay đến <strong>CloudWatch native metrics + Logs Insights</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5249,7 +5249,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: workload on-demand realtime + batch cần throughput ổn định, và phải chạy hybrid (cloud + on-premises) vì data residency.</li><li>Ưu tiên: throughput nhất quán và hybrid deployment. Chọn 2 đáp án.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>B (<strong>provisioned throughput</strong>) đảm bảo throughput nhất quán cho batch lớn. C triển khai FM bằng SageMaker AI với edge deployment (SageMaker Neo) để chạy ở on-premises, đáp ứng hybrid.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — asynchronous endpoint không phải low-latency realtime, và không giải quyết on-premises.</li><li><strong>B</strong>: ✅ Đúng — provisioned throughput cho hiệu năng ổn định, high-volume.</li><li><strong>C</strong>: ✅ Đúng — edge/hybrid deployment đáp ứng data residency.</li><li><strong>D</strong>: ❌ Sai — auto-scaling xử lý traffic đột biến, không giải quyết hybrid/on-premises hay throughput nhất quán.</li><li><strong>E</strong>: ❌ Sai — SageMaker JumpStart chỉ host trên AWS, không đáp ứng hybrid on-premises.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Provisioned throughput, hybrid deployment, SageMaker Neo, edge, data residency</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"throughput ổn định\" → <strong>provisioned throughput</strong>; gặp \"on-premises/data residency\" → <strong>edge/hybrid deployment</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5331,7 +5331,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chuẩn hóa security, observability, deployment pattern cho nhiều business unit; component phải reusable, versioned, governed nhất quán.</li><li>Ưu tiên: IaC + version control + enforcement tự động.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>CloudFormation templates theo Well-Architected Generative AI Lens, lưu trong repository có version control, và CI/CD pipeline tích hợp <strong>CloudFormation Guard</strong> để enforce policy trước khi deploy, đảm bảo nhất quán và lặp lại được.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Guard chạy sau deployment (phát hiện muộn), không có versioning/repository chuẩn.</li><li><strong>B</strong>: ✅ Đúng — template + version control + CI/CD + Guard enforce trước khi deploy.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Service Catalog có versioned product nhưng bắt dùng console, thiếu automation/CI/CD và không linh hoạt cho nhiều Region.</li><li><strong>D</strong>: ❌ Sai — tài liệu và Amazon Macie không enforce deployment; giao hết cho từng BU thì không nhất quán.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CloudFormation templates, CloudFormation Guard, version control, CI/CD, Well-Architected Generative AI Lens</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"reusable + versioned + governed\" → nghĩ ngay đến <strong>IaC templates + repo + CI/CD với policy-as-code (Guard)</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5408,7 +5408,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: phát hiện hành vi không nhất quán giữa các ngôn ngữ sau khi nâng cấp FM.</li><li>Requirement: xong trong 45 phút, 15.000 test conversation song song, tự động hóa trong CI/CD, chặn deploy nếu không đạt ngưỡng chất lượng.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Bộ test đa ngôn ngữ cùng ý nghĩa chạy song song bằng <strong>Amazon Bedrock model evaluation jobs</strong>, áp ngưỡng similarity và hallucination, tích hợp CI/CD để chặn release khi không đạt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — load testing đo latency/throughput, không đo chất lượng/nhất quán ngôn ngữ.</li><li><strong>B</strong>: ❌ Sai — multi-Region và audit hàng tuần là hậu kiểm, không tự động, không chặn deploy.</li><li><strong>C</strong>: ❌ Sai — chuẩn hóa input che mất lỗi đa ngôn ngữ, rule-based khó phát hiện hallucination và không có quality gate.</li><li><strong>D</strong>: ✅ Đúng — đánh giá tự động, song song, có threshold và chặn release trong CI/CD.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Bedrock model evaluation jobs, quality threshold, CI/CD gate, multilingual test set</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"đánh giá chất lượng FM + block deployment\" → nghĩ ngay đến <strong>model evaluation jobs + CI/CD quality gate</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5469,7 +5469,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: phát hiện token consumption bất thường và truy ra tool integration nào gây ra, từ invocation logs.</li><li>Requirement quyết định: <strong>tự động điều chỉnh ngưỡng</strong> theo traffic thay đổi.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Metric filters trích xuất metric theo từng tool từ logs trong CloudWatch Logs, rồi <strong>CloudWatch anomaly detection alarms</strong> tự học baseline và điều chỉnh ngưỡng động.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — static alarm với ngưỡng cố định không tự thích nghi.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — Athena báo cáo theo lịch, không gần realtime, không có alarm tự điều chỉnh.</li><li><strong>C</strong>: ✅ Đúng — metric filter theo tool + anomaly detection tự động điều chỉnh baseline.</li><li><strong>D</strong>: ❌ Sai — cập nhật threshold thủ công, tốn vận hành, không tự động.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CloudWatch anomaly detection, metric filters, invocation logging, InputTokenCount/OutputTokenCount</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"ngưỡng tự điều chỉnh theo traffic\" → nghĩ ngay đến <strong>CloudWatch anomaly detection alarm</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5554,7 +5554,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: ứng dụng phục vụ Europe và North America, dữ liệu EU phải ở trong Europe, chịu được traffic spike chạm quota.</li><li>Ưu tiên: resilience và <strong>minimize operational complexity</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Cross-Region inference profiles</strong> theo geography (ví dụ prefix EU / US) tự động phân phối traffic giữa các Region trong cùng địa lý, tăng throughput và giữ data residency. Chỉ cần route người dùng tới đúng profile.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — custom routing và cảnh báo email không tự xử lý quota, tốn vận hành.</li><li><strong>B</strong>: ✅ Đúng — geographic inference profile, ít phức tạp, giữ dữ liệu trong khu vực.</li><li><strong>C</strong>: ❌ Sai — failover sang Region phụ \"gần nhất\" có thể vi phạm data residency, tự code retry/routing phức tạp.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — provisioned throughput nhiều Region tốn kém, failover tự code phức tạp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Cross-Region inference profile, geographic code, data residency, quota</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"chạm quota + data residency theo vùng\" → nghĩ ngay đến <strong>geographic cross-Region inference profile</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5615,7 +5615,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: RAG assistant đa vùng địa lý, low-latency, dữ liệu proprietary không rời khỏi khu vực địa lý của công ty.</li><li>Ưu tiên: data residency + latency.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Triển khai Bedrock model, Knowledge Bases (vector DB) và S3 ngay trong từng Region, kèm cross-Region inference profile giới hạn trong địa lý, vừa giữ dữ liệu cục bộ vừa low latency, dùng toàn managed service.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — cross-Region profile không giới hạn địa lý có thể đưa prompt/dữ liệu ra khỏi khu vực; thêm Kendra + Lambda tự ghép.</li><li><strong>B</strong>: ✅ Đúng — mọi thành phần nằm trong từng khu vực, managed, đáp ứng residency.</li><li><strong>C</strong>: ❌ Sai — model ở Region trung tâm làm dữ liệu rời khỏi vùng; Outposts phức tạp và không cần thiết.</li><li><strong>D</strong>: ❌ Sai — tự host LLM trên EC2 ở Local Zones rất phức tạp, tốn kém, không dùng Bedrock.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Data residency, Bedrock Knowledge Bases, regional deployment, inference profile</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"dữ liệu không rời khỏi khu vực + RAG\" → nghĩ ngay đến <strong>Knowledge Bases + S3 theo từng Region</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5692,7 +5692,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: cùng FM dùng trong Lambda (Python SDK) và EKS (JavaScript SDK), cần giữ ngữ cảnh hội thoại multi-turn và authentication nhất quán.</li><li>Ưu tiên: API thống nhất, đơn giản.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Converse API</strong> có giao diện thống nhất cho mọi model, hỗ trợ multi-turn qua messages array. IAM roles cho authentication nhất quán ở cả Lambda và EKS, mỗi môi trường dùng SDK riêng.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — InvokeModel buộc format riêng từng model, mỗi môi trường auth khác nhau, trái yêu cầu nhất quán.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — Converse + IAM đúng, nhưng thêm ElastiCache và wrapper riêng theo ngôn ngữ là thừa.</li><li><strong>C</strong>: ❌ Sai — lưu lịch sử trong process memory sẽ mất ngữ cảnh; API Gateway + InvokeModel thêm phức tạp.</li><li><strong>D</strong>: ✅ Đúng — Converse API + IAM roles + truyền lịch sử trong messages array.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Converse API, IAM roles, messages array, multi-turn, unified interface</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"multi-turn + nhiều môi trường/ngôn ngữ + cùng model\" → nghĩ ngay đến <strong>Converse API</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5769,7 +5769,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: throttling vào giờ cao điểm theo múi giờ, cần hoạt động liên tục, giữ chất lượng.</li><li>Ràng buộc quyết định: <strong>không có chi phí cố định theo giờ</strong> khi traffic thấp.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Cross-Region inference</strong> phân phối request qua nhiều Region, tận dụng quota lớn hơn, tính phí on-demand nên không có chi phí cố định. Monitor Invocation Throttles để theo dõi.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — provisioned throughput tính phí cố định theo giờ, trái yêu cầu.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — failover tự xây phản ứng sau khi lỗi, tăng phức tạp.</li><li><strong>C</strong>: ✅ Đúng — cross-Region inference giảm throttling, không tốn phí cố định.</li><li><strong>D</strong>: ❌ Sai — phiên bản khác của cùng model không tăng quota; metric theo dõi không giải quyết throttling.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Cross-Region inference, Invocation Throttles, on-demand, no fixed hourly cost</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"throttling + không muốn phí cố định\" → nghĩ ngay đến <strong>cross-Region inference</strong> (không phải provisioned throughput).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5830,7 +5830,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chuyển MCP server (stateless) lên AWS Lambda, cho internal app và third-party partners truy cập với authentication/authorization chặt.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong>, vẫn giữ giao thức MCP.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Lambda function URLs</strong> với Streamable HTTP transport và <strong>SigV4/IAM auth</strong> (quyền InvokeFunctionUrl) cho truy cập bảo mật mà không cần thêm dịch vụ nào, phù hợp MCP stateless.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — custom transport qua Invoke API không theo chuẩn MCP HTTP, khó cho partner bên ngoài.</li><li><strong>B</strong>: ❌ Sai — API keys không phải authentication chặt, bỏ giao thức MCP.</li><li><strong>C</strong>: ✅ Đúng — function URL + Streamable HTTP + SigV4, ít thành phần nhất.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — API Gateway HTTP API + Cognito OAuth hoạt động nhưng thêm nhiều dịch vụ cần cấu hình/vận hành.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Lambda function URLs, Streamable HTTP, SigV4, InvokeFunctionUrl, MCP</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"MCP server trên Lambda + IAM auth + least overhead\" → nghĩ ngay đến <strong>function URL + SigV4</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -5923,7 +5923,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: xử lý lỗi tạm thời khi gọi FM lúc cao điểm, tránh cascading failure khi throttling, cần distributed tracing và liên hệ hiệu năng với đặc tính FM.</li><li>Ưu tiên: retry thông minh + tracing.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>SDK <strong>standard retry mode</strong> với <strong>exponential backoff + jitter</strong> tránh retry dồn dập gây cascading failure. <strong>AWS X-Ray</strong> tracing với annotations cho distributed tracing và lọc theo đặc tính FM (model ID, v.v.).</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — fixed delay 1 giây gây retry đồng loạt (thundering herd); CloudWatch không có distributed tracing.</li><li><strong>B</strong>: ✅ Đúng — backoff + jitter và X-Ray annotations.</li><li><strong>C</strong>: ❌ Sai — cache toàn bộ response không xử lý lỗi tạm thời; logging tự viết không phải distributed tracing.</li><li><strong>D</strong>: ❌ Sai — AWS CloudTrail ghi audit API call, không có distributed tracing.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Exponential backoff with jitter, AWS X-Ray, annotations, distributed tracing</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"transient errors + tracing xuyên service\" → nghĩ ngay đến <strong>backoff + jitter</strong> và <strong>X-Ray</strong> (CloudTrail không phải tracing).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6016,7 +6016,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: nền tảng phân tích video bằng Amazon Rekognition và Bedrock, cần tuân thủ privacy, secure model I/O, kiểm soát truy cập FM và audit \"ai truy cập gì, khi nào\".</li><li>Ưu tiên: access control + audit toàn diện.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>IAM ABAC với condition keys ép GuardrailIdentifier và ModelId kiểm soát truy cập FM, VPC endpoints bảo mật I/O, còn CloudTrail (management + data events cho S3 và KMS) gửi vào CloudTrail Lake kèm S3 server access logging cho audit đầy đủ, CloudWatch alarms cho cảnh báo.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — có guardrails/mã hóa nhưng thiếu kiểm soát truy cập theo IAM và audit ai-truy-cập-gì từ CloudTrail.</li><li><strong>B</strong>: ✅ Đúng — kiểm soát truy cập chi tiết + audit đầy đủ.</li><li><strong>C</strong>: ❌ Sai — VPC endpoint policy và AWS Config chưa cho audit người dùng/hành vi truy cập FM.</li><li><strong>D</strong>: ❌ Sai — Insights và Amazon Macie phát hiện bất thường/phân loại, không kiểm soát truy cập FM.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>IAM condition keys, GuardrailIdentifier, CloudTrail Lake, VPC endpoints, audit</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"ai truy cập gì, khi nào\" → nghĩ ngay đến <strong>CloudTrail (data events) + IAM condition keys</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6077,7 +6077,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: tự động re-train và re-deploy model SageMaker AI mỗi khi có file dữ liệu mới được upload lên S3.</li><li>Ưu tiên: workflow tự động, đáng tin cậy, orchestrate được pipeline.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Step Functions <strong>Standard</strong> workflow điều phối: Lambda phản ứng với sự kiện upload, rồi chạy <strong>SageMaker Pipelines</strong> để re-train và re-deploy. Standard phù hợp quy trình chạy lâu như training.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — AWS Glue ETL không re-train model; gọi endpoint inference không re-deploy.</li><li><strong>B</strong>: ❌ Sai — webhook handlers và event bus lấy Lambda làm nguồn/ pipeline làm đích lộn xộn, không phải cách trigger chuẩn từ S3.</li><li><strong>C</strong>: ❌ Sai — Express workflow giới hạn 5 phút, không phù hợp quy trình training dài; Autopilot không phải cách re-deploy hạ tầng sẵn có.</li><li><strong>D</strong>: ✅ Đúng — Standard workflow (chạy lâu) + SageMaker Pipelines để retrain/redeploy.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>SageMaker Pipelines, Step Functions Standard, S3 upload trigger, re-train và re-deploy</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"retrain model khi có data mới\" → nghĩ ngay đến <strong>SageMaker Pipelines</strong> điều phối bằng <strong>Step Functions Standard</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6170,7 +6170,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: đánh giá hệ thống RAG của Bedrock: so sánh nhiều chunking strategy, đánh giá chất lượng generation của 2 FM, áp ngưỡng chất lượng cho deployment.</li><li>Ưu tiên: một cấu hình đánh giá toàn bộ pipeline (retrieval + generation).</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Retrieve-and-generate evaluation job</strong> đánh giá cả retrieval lẫn generation. Custom metric precision at k cho retrieval, LLM-as-a-judge thang 1-5 cho chất lượng, đưa từng chunking strategy vào dataset và dùng Claude Sonnet làm evaluator cho cả hai FM.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — retrieve-only không đánh giá generation của FM; ngưỡng deployment tách rời.</li><li><strong>B</strong>: ✅ Đúng — retrieve-and-generate, có metric định lượng, so sánh chunking và 2 FM.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — nhiều job riêng lẻ, review thủ công, không enforce ngưỡng tự động.</li><li><strong>D</strong>: ❌ Sai — retrieve-only không đo generation, chia job rời rạc, phức tạp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Retrieve-and-generate evaluation, LLM-as-a-judge, precision at k, chunking strategy, quality threshold</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"đánh giá RAG cả retrieval lẫn generation\" → nghĩ ngay đến <strong>retrieve-and-generate evaluation job</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6231,7 +6231,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: GenAI assistant xử lý dữ liệu đa phương thức (sensor, video, audio), hỗ trợ truy vấn ngôn ngữ tự nhiên, tránh diễn giải suy đoán, có audit logs cho kiểm toán đạo đức.</li><li>Ưu tiên: pre-processing đa phương thức, chặn speculation, audit.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>SageMaker Processing và Amazon Transcribe tiền xử lý dữ liệu đa phương thức, nạp vào Bedrock RAG knowledge base, <strong>Bedrock guardrails</strong> hạn chế đầu ra mang tính suy đoán, AppConfig quản lý prompt, CloudTrail ghi audit.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — prompt template cơ bản, không có cơ chế chặn speculation.</li><li><strong>B</strong>: ✅ Đúng — pipeline đa phương thức + guardrails + AppConfig + CloudTrail.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Comprehend chỉ xử lý text, thiếu cơ chế kiểm soát speculation.</li><li><strong>D</strong>: ❌ Sai — Amazon Q Business không federate trực tiếp các nguồn đó; lọc output bằng Lambda tự viết thay vì guardrails.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Bedrock Guardrails, multimodal pre-processing, RAG knowledge base, AWS AppConfig, CloudTrail audit</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"tránh suy đoán/ngăn output không mong muốn\" → nghĩ ngay đến <strong>Bedrock Guardrails</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6292,7 +6292,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Quản trị tập trung nhiều account: chỉ cho dùng model được duyệt và chặn topic/thông tin độc quyền trong prompt.</li><li>Requirement chính: guardrail bắt buộc + giới hạn model ở cấp Organization.</li><li>Ưu tiên: central governance, enforcement không thể bị bypass.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>SCP vừa giới hạn model được duyệt, vừa bắt buộc có guardrail identifier (condition key `bedrock:GuardrailIdentifier`) khi gọi model. Guardrail dùng <strong>block</strong> filtering policy triển khai bằng CloudFormation StackSets để mọi account có cùng guardrail.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — permissions boundary phải gắn cho từng role, khó quản lý tập trung và dễ sót.</li><li><strong>B</strong>: ✅ Đúng — một SCP vừa giới hạn model vừa ép guardrail identifier.</li><li><strong>C</strong>: ❌ Sai — vẫn phải tạo permissions boundary trên từng role, tốn công và không tập trung.</li><li><strong>D</strong>: ✅ Đúng — guardrail <strong>block</strong> chặn topic/thông tin cấm, StackSets deploy đồng nhất.</li><li><strong>E</strong>: ❌ Sai — <strong>mask</strong> chỉ che nội dung, không chặn hẳn topic bị cấm.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>SCP, `bedrock:GuardrailIdentifier`, Guardrails block, StackSets, Organizations.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Ép guardrail + giới hạn model đa account\" → nghĩ ngay đến SCP + StackSets guardrail.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6390,7 +6390,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>API cho GenAI cần streaming, giới hạn token và retry khi timeout.</li><li>Requirement chính: streaming thật sự, ít phải tự vận hành.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>API Gateway <strong>REST API</strong> hỗ trợ tích hợp <strong>Lambda response streaming</strong>, Lambda gọi Bedrock streaming API, kiểm soát token (`maxTokens`) và retry ngay trong code. Toàn bộ serverless, không phải quản lý hạ tầng.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — HTTP API không hỗ trợ response streaming từ Lambda theo cách này, nên không đáp ứng streaming.</li><li><strong>B</strong>: ❌ Sai — polling chỉ giả lập streaming, token limit ở frontend dễ bị bypass, API Gateway không retry kiểu đó.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — WebSocket + ECS chạy được nhưng phải quản lý container, overhead rất cao.</li><li><strong>D</strong>: ✅ Đúng — serverless, streaming thật, token limit và retry trong Lambda.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Lambda response streaming, REST API, InvokeModelWithResponseStream, maxTokens.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Stream response + ít vận hành\" → nghĩ ngay đến API Gateway REST API + Lambda response streaming.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6515,7 +6515,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tự động route câu hỏi đơn giản sang model nhỏ, câu phức tạp sang model lớn.</li><li>Requirement chính: tiết kiệm chi phí, giữ chất lượng, latency thấp.</li><li>Ưu tiên: LEAST implementation effort.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon Bedrock <strong>intelligent prompt routing</strong> là tính năng managed, tự dự đoán độ phức tạp của prompt và chọn model phù hợp trong cùng một family, không cần code routing.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — làm được nhưng phải tự xây classifier + Lambda, thêm một lần gọi model nên tăng latency và effort.</li><li><strong>B</strong>: ✅ Đúng — managed, cấu hình tối thiểu, cân bằng cost và quality.</li><li><strong>C</strong>: ❌ Sai — một model cho tất cả không tối ưu chi phí và chất lượng.</li><li><strong>D</strong>: ❌ Sai — rule dựa keyword kém chính xác, provisioned throughput tốn kém, phải tự duy trì.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Intelligent prompt routing, model routing, cost-effective, least effort.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Route theo độ phức tạp, ít effort nhất\" → nghĩ ngay đến Bedrock intelligent prompt routing.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6576,7 +6576,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Prompt chain cho kết quả không nhất quán, retrieval chậm, có output không an toàn.</li><li>Requirement chính: ổn định output, latency dưới 1 giây, chặn nội dung unsafe/hallucinated bằng safety control đã được kiểm chứng.</li><li>Ưu tiên: consistency, latency, safety.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Provisioned throughput</strong> cho latency ổn định, <strong>Guardrails</strong> (denied topics, contextual grounding) chặn unsafe/hallucinated output, <strong>Prompt Management</strong> có version và approval workflow giúp prompt nhất quán giữa các Region.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — giải quyết đủ cả ba nhóm: latency, safety, quản lý prompt nhất quán.</li><li><strong>B</strong>: ❌ Sai — logging và A/B testing chỉ quan sát, không chặn output unsafe.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — cache và X-Ray cải thiện hiệu năng nhưng không có safety control.</li><li><strong>D</strong>: ❌ Sai — Kendra, DynamoDB, Step Functions không xử lý safety/hallucination.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Provisioned throughput, Guardrails, Prompt Management, approval workflow.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Chặn unsafe + latency ổn định + prompt nhất quán\" → nghĩ ngay đến Guardrails + Provisioned throughput + Prompt Management.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6653,7 +6653,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Xử lý dữ liệu đa Region, bắt buộc data residency và processing trong cùng châu lục.</li><li>Requirement chính: audit trail cho quyết định AI và phân loại dữ liệu.</li><li>Ưu tiên: compliance, data residency, auditability.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Pre-process theo vùng địa lý trước khi gửi vào Bedrock giữ dữ liệu trong đúng châu lục, <strong>S3 Object Lock</strong> bảo vệ lưu trữ, <strong>Macie</strong> phân loại dữ liệu, <strong>CloudTrail</strong> immutable logs cho audit.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — cross-Region inference có thể đẩy dữ liệu ra ngoài châu lục, CloudWatch không phải audit trail bất biến, theo dõi compliance thủ công.</li><li><strong>B</strong>: ❌ Sai — không có data classification, import custom model từng Region nặng vận hành.</li><li><strong>C</strong>: ✅ Đúng — đủ residency, classification (Macie), audit (CloudTrail).</li><li><strong>D</strong>: ❌ Sai — báo cáo thủ công, không có data classification tự động.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Data residency, Amazon Macie, S3 Object Lock, CloudTrail, cross-Region inference.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Phân loại dữ liệu nhạy cảm\" → nghĩ ngay đến Macie; \"audit bất biến\" → CloudTrail.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6714,7 +6714,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Governance cho GenAI tư vấn đầu tư: chống hallucination, safety control, theo dõi drift, lưu audit prompt-response.</li><li>Requirement chính: triển khai trong 60 ngày, tích hợp compliance dashboard, phản hồi dưới 200 ms.</li><li>Ưu tiên: LEAST operational overhead bằng dịch vụ managed.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Guardrails</strong> cho content filter, <strong>Model Evaluation</strong> đánh giá hallucination, <strong>DynamoDB</strong> lưu prompt-response với độ trễ thấp, <strong>CloudWatch</strong> custom metrics tích hợp dashboard hiện có. Toàn bộ managed, nhẹ vận hành.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — dùng chủ yếu dịch vụ managed, đáp ứng độ trễ và tích hợp dashboard.</li><li><strong>B</strong>: ❌ Sai — Lambda validation tự viết, không có cơ chế phát hiện hallucination/drift.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — nhiều thành phần (Agents, KB, OpenSearch, QuickSight), overhead cao và khó kịp 60 ngày.</li><li><strong>D</strong>: ❌ Sai — SageMaker Model Monitor không dành cho Bedrock FM, WAF không lọc content AI.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Guardrails, Model Evaluation, CloudWatch custom metrics, audit trail, least overhead.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Safety + audit + ít vận hành\" → nghĩ ngay đến Guardrails + dịch vụ managed (DynamoDB, CloudWatch).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6799,7 +6799,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>FM đọc dữ liệu tài chính từ Lake Formation đa business unit và Region, có PII.</li><li>Requirement chính: chỉ truy cập tập con được phép, che cột PII, có audit trail.</li><li>Ưu tiên: fine-grained access control tập trung, auditability.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Lake Formation</strong> với <strong>LF-Tag</strong> (tag-based access control) phân quyền theo business unit/Region trên database, table, cột, quản lý tập trung và mở rộng tốt. Truy cập qua IAM role, <strong>CloudTrail</strong> ghi audit.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tách bucket cho từng tổ hợp khó scale, không kiểm soát mức cột, S3 access logs yếu.</li><li><strong>B</strong>: ✅ Đúng — LF-Tag kiểm soát chi tiết ở mức column, CloudTrail audit.</li><li><strong>C</strong>: ❌ Sai — grant trực tiếp khó mở rộng, phải tự viết lớp ứng dụng lọc dữ liệu.</li><li><strong>D</strong>: ❌ Sai — presigned URL bypass Lake Formation, không có kiểm soát cột.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Lake Formation, LF-Tag (LF-TBAC), column-level security, CloudTrail.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Data lake + quyền theo cột/nhiều BU\" → nghĩ ngay đến Lake Formation LF-Tags.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6860,7 +6860,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>RAG trên Bedrock Knowledge Bases trả về tài liệu giống về ngữ nghĩa nhưng sai ngữ cảnh.</li><li>Requirement chính: cải thiện độ liên quan của tài liệu truy xuất.</li><li>Ưu tiên: LEAST operational overhead, giữ nguyên `RetrieveAndGenerateStream`.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Knowledge Bases hỗ trợ cấu hình <strong>reranking</strong> trực tiếp (reranker model của Amazon/Cohere) ngay trong request, nên không cần thay đổi kiến trúc hay tự vận hành.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — phải tự host, huấn luyện và vận hành SageMaker endpoint + API Gateway.</li><li><strong>B</strong>: ❌ Sai — Comprehend, Textract, Neptune không phù hợp để rerank, rất phức tạp.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — làm được nhưng phải tách pipeline Retrieve + Rerank + InvokeModel, tăng effort.</li><li><strong>D</strong>: ✅ Đúng — bật reranking configuration, giữ nguyên API đang dùng.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Reranking configuration, Knowledge Bases, RetrieveAndGenerateStream, reranker model.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Retrieval đúng nghĩa nhưng sai ngữ cảnh\" → nghĩ ngay đến reranker trong Knowledge Bases.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6913,7 +6913,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lọc nhiều lớp bằng Amazon Comprehend: nội dung xúc phạm, quyền riêng tư, yêu cầu tư vấn không phù hợp.</li><li>Requirement chính: mọi pre-processing phải xong trước khi tới FM, nhưng vẫn giữ response time chấp nhận được.</li><li>Ưu tiên: đủ ba lớp bảo vệ, latency thấp (song song).</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Toxicity detection</strong> cho nội dung xúc phạm, <strong>prompt safety classification</strong> cho yêu cầu không phù hợp, <strong>PII detection with redaction</strong> bảo vệ privacy. Chạy song song để giảm latency.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — PII detection không redact thì không bảo vệ được quyền riêng tư.</li><li><strong>B</strong>: ❌ Sai — custom classification phải huấn luyện, PII chỉ chạy khi qua classifier (tuần tự).</li><li><strong>C</strong>: ❌ Sai — tuần tự nhiều bước làm tăng latency, PII streaming mode không phù hợp, thêm human review EventBridge không được yêu cầu.</li><li><strong>D</strong>: ✅ Đúng — đủ ba lớp, chạy song song, có redaction.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Toxicity detection, prompt safety classification, PII redaction, parallel processing.</p><p><strong>🧠MẸO THI</strong></p><p>\"Lọc nhiều lớp mà vẫn nhanh\" → nghĩ ngay đến chạy song song các Comprehend filter + redaction.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -6990,7 +6990,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Model khuyến nghị nâng hạng cabin dựa trên lịch sử du lịch lưu trong Amazon RDS.</li><li>Requirement chính: kết quả nhất quán, liên quan, chính xác cho nhiều hãng bay và nhóm khách.</li><li>Ưu tiên: độ chính xác dữ liệu có cấu trúc, giảm hallucination.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Dữ liệu nằm trong RDS (có cấu trúc), nên <strong>text-to-SQL</strong> kèm SQL validation lấy chính xác lịch sử, ưu tiên, loyalty. <strong>Guardrails</strong> lọc nội dung, <strong>Step Functions + Lambda</strong> điều phối validation workflow giảm hallucination một cách xác định.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — RAG với Knowledge Bases cho tìm kiếm ngữ nghĩa, không chính xác bằng truy vấn trực tiếp dữ liệu có cấu trúc.</li><li><strong>B</strong>: ✅ Đúng — truy vấn chính xác + validation workflow xác định.</li><li><strong>C</strong>: ❌ Sai — vector search chỉ gần đúng, cần dựng embedding, confidence scoring không bảo đảm tính nhất quán.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — text-to-SQL đúng nhưng confidence scoring và semantic similarity kém tin cậy hơn validation workflow.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Text-to-SQL, SQL validation, structured data, Step Functions validation, Guardrails.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Dữ liệu có cấu trúc trong RDS cần chính xác\" → nghĩ ngay đến text-to-SQL, không phải vector search.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -7067,7 +7067,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Trợ lý hỗ trợ khách hàng không được lộ thông tin cá nhân, xử lý phải nằm trong cùng Region của khách hàng.</li><li>Requirement chính: đánh giá hiệu quả chống lộ PII trước khi phát hành, và tuân thủ data residency.</li><li>Ưu tiên: PII protection, không dùng cross-Region.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Dùng <strong>sensitive information filters</strong> của Guardrails. Chế độ <strong>mask</strong> khi dev/test giúp quan sát việc phát hiện PII, rồi chuyển sang <strong>block</strong> cho production. Guardrail triển khai riêng ở từng Region để dữ liệu không rời Region.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — cross-Region guardrail có thể xử lý ngoài Region, vi phạm data residency.</li><li><strong>B</strong>: ✅ Đúng — filter PII đúng loại, mask rồi block, guardrail trong từng Region.</li><li><strong>C</strong>: ❌ Sai — content/topic filter không phải PII, tắt invocation logging làm mất khả năng đánh giá.</li><li><strong>D</strong>: ❌ Sai — cross-Region, content và word filter không bảo vệ PII.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Sensitive information filters, mask vs block, data residency, regional guardrail.</p><p><strong>🧠 MẸO THI</strong></p><p>\"PII + residency\" → nghĩ ngay đến sensitive information filter và guardrail theo từng Region (không cross-Region).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -7128,7 +7128,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tìm kiếm ngữ nghĩa abstract tài liệu học thuật và lọc theo metadata.</li><li>Requirement chính: tương đồng ngữ nghĩa, dưới 1 triệu file, metadata không có keyword.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Titan Embeddings</strong> (managed) tạo vector, lưu trong <strong>Aurora PostgreSQL Serverless với pgvector</strong> vừa tìm vector vừa lọc metadata bằng SQL. Quy mô dưới 1 triệu file phù hợp, Serverless tự scale.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — OpenSearch chạy được nhưng quản lý cluster nặng hơn cho quy mô nhỏ.</li><li><strong>B</strong>: ❌ Sai — extract topic/keyword không cho tìm kiếm tương đồng ngữ nghĩa.</li><li><strong>C</strong>: ❌ Sai — tự deploy và vận hành model trên SageMaker AI, overhead cao.</li><li><strong>D</strong>: ✅ Đúng — embedding managed, pgvector + SQL cho metadata, Serverless ít vận hành.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Titan Embeddings, pgvector, Aurora Serverless, semantic search, metadata.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Semantic search quy mô vừa, ít vận hành\" → nghĩ ngay đến Titan Embeddings + Aurora pgvector.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -7197,7 +7197,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C, D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Phân tích file ghi âm MP3 trong S3: tóm tắt và sentiment ở định dạng có cấu trúc ngay khi file mới xuất hiện.</li><li>Requirement chính: trigger tự động theo sự kiện và pipeline transcribe rồi phân tích.</li><li>Ưu tiên: event-driven, đúng tích hợp được hỗ trợ.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>S3 gửi event qua <strong>EventBridge</strong> để khởi chạy <strong>Step Functions</strong> (S3 không thể gửi notification trực tiếp tới Step Functions). Workflow dùng <strong>Transcribe</strong> rồi Lambda tạo prompt gọi <strong>Bedrock</strong> để sinh output có cấu trúc.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — gần giống C nhưng mô tả Lambda chỉ xử lý text, không nhấn mạnh việc tạo prompt có cấu trúc nên kém chính xác hơn C.</li><li><strong>B</strong>: ❌ Sai — gọi trực tiếp Bedrock không đảm bảo định dạng JSON có cấu trúc nếu không có bước dựng prompt.</li><li><strong>C</strong>: ✅ Đúng — Lambda dựng prompt chuẩn để Bedrock trả kết quả có cấu trúc.</li><li><strong>D</strong>: ✅ Đúng — S3 → EventBridge → Step Functions là mô hình trigger đúng.</li><li><strong>E</strong>: ❌ Sai — S3 notification không hỗ trợ đích Step Functions.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>S3 to EventBridge, Step Functions, Transcribe, prompt construction, structured output.</p><p><strong>🧠 MẸO THI</strong></p><p>\"S3 object created kích hoạt Step Functions\" → nghĩ ngay đến EventBridge rule.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -7287,7 +7287,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Trợ lý AI chỉ lộ PII cho surgeon, redact PII cho engineer, chỉ tham chiếu report dưới 3 năm.</li><li>Requirement chính: kiểm soát PII theo nhóm Cognito và giữ dữ liệu cũ ngoài knowledge base.</li><li>Ưu tiên: đơn giản, dùng dịch vụ managed.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>S3 Lifecycle</strong> xóa report quá 3 năm, Lambda sync định kỳ cập nhật knowledge base. Khi runtime, chọn <strong>ApplyGuardrail</strong> theo Cognito group để redact PII đúng người dùng.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — redact PII ngay trong S3 làm surgeon cũng không thấy PII, Lambda tự xóa tài liệu là thừa.</li><li><strong>B</strong>: ❌ Sai — Comprehend redact trong luồng riêng phức tạp, không tích hợp trực tiếp vào phản hồi của assistant.</li><li><strong>C</strong>: ✅ Đúng — Lifecycle + sync + guardrail theo nhóm người dùng.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — hai knowledge base nhân đôi dữ liệu, tốn chi phí và vận hành.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>ApplyGuardrail, Cognito user group, S3 Lifecycle, knowledge base sync, PII redaction.</p><p><strong>🧠 MẸO THI</strong></p><p>\"PII hiển thị khác nhau theo vai trò\" → nghĩ ngay đến Guardrail theo Cognito group, không nhân đôi dữ liệu.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -7364,7 +7364,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Quan sát hợp nhất giữa technical metrics (CloudWatch) và business metrics (hệ thống marketing).</li><li>Requirement chính: tương quan hai loại metric, cảnh báo tự động khi chất lượng suy giảm.</li><li>Ưu tiên: visibility toàn diện, phát hiện bất thường.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>CloudWatch dashboards kèm business metrics đã import, <strong>composite alarms</strong> kết hợp nhiều tín hiệu và <strong>anomaly detection</strong> phát hiện bất thường mà không cần ngưỡng cố định, rồi <strong>SNS</strong> thông báo stakeholder.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — dùng composite alarm nhưng thiếu anomaly detection nên khó nhận diện suy giảm.</li><li><strong>B</strong>: ❌ Sai — tập trung remediate tự động bằng Lambda, không có thông báo stakeholder theo yêu cầu.</li><li><strong>C</strong>: ❌ Sai — metric streams, S3, QuickSight là pipeline phân tích, không phải cảnh báo thời gian thực.</li><li><strong>D</strong>: ✅ Đúng — dashboard hợp nhất, composite alarm với anomaly detection, SNS thông báo.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>CloudWatch composite alarms, anomaly detection, custom metrics, SNS.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Tương quan nhiều metric và cảnh báo\" → nghĩ ngay đến composite alarms + anomaly detection.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -7449,7 +7449,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: </p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cho nhân viên dùng FM trong eu-central-1 và eu-west-3 trong khi SCP chỉ cho eu-north-1, eu-west-1.</li><li>Requirement chính: request private, nằm trong châu Âu.</li><li>Ưu tiên: private network, data residency theo châu lục.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Cross-Region inference profile</strong> với prefix `eu.` giữ request trong các Region châu Âu. <strong>Bedrock VPC endpoint</strong> (PrivateLink) giữ traffic private, SCP được mở rộng cho inference profile ở các Region châu Âu liên quan.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — không thể tạo VPC endpoint riêng cho từng FM, thiết kế lệch với cách Bedrock hoạt động.</li><li><strong>B</strong>: ❌ Sai — FM Bedrock không deploy lên EC2, cấu hình sai bản chất dịch vụ.</li><li><strong>C</strong>: ✅ Đúng — `eu.` inference profile + VPC endpoint + SCP mở rộng.</li><li><strong>D</strong>: ❌ Sai — đổi sang SageMaker AI, không phải FM đã chọn trong Bedrock và nằm ngoài Region của FM.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Cross-Region inference, `eu.` inference profile, Bedrock VPC endpoint, SCP, data residency.</p><p><strong>🧠 MẸO THI</strong></p><p>\"Giữ trong châu lục + private\" → nghĩ ngay đến geographic inference profile + VPC endpoint.</p>",
       "is_active": true,
       "answer_list": [
         {
