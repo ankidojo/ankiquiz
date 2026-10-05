@@ -235,6 +235,8 @@ body.white-mode .starMarkToReview.true {
     width: 85%;
     display: flex;
     align-items: center;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .que-content p {
