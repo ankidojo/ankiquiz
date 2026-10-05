@@ -13,7 +13,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Auto Scaling group khởi chạy instance mất vài phút vì user data cài package, làm tăng latency khi scale out.</li><li>Requirement chính: giảm thời gian instance mới sẵn sàng phục vụ.</li><li>Ưu tiên: latency khi scale.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Warm pool</strong> giữ sẵn các instance đã được pre-initialize (đã chạy user data), nên khi scale out chỉ cần chuyển sang In-service. <strong>Lifecycle hooks</strong> cho phép hoàn tất việc chạy user data trước khi instance vào warm pool. <strong>Dynamic scaling</strong> phản ứng với CPU thực tế.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — instance maintenance policy dùng để thay thế instance, không chạy user data; warmup 0 không giảm thời gian khởi chạy.</li><li><strong>B</strong>: ❌ Sai — không có warm pool nên vẫn phải khởi tạo từ đầu; warmup 0 giây chỉ khiến metric bị tính sớm.</li><li><strong>C</strong>: ❌ Sai — instance maintenance policy không dùng để chạy user data.</li><li><strong>D</strong>: ✅ Đúng — warm pool + lifecycle hooks + dynamic scaling giảm thời gian launch.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Warm pools</li><li>Lifecycle hooks</li><li>Pre-initialized instances</li><li>Dynamic scaling</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Instance khởi động lâu khi scale out → nghĩ ngay đến Warm Pool + lifecycle hook.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -57,7 +57,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C, D</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: C, D</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Migrate nhiều loại database (SQL Server, MySQL, Oracle) sang Amazon RDS, có custom schema và stored procedure.</li><li>Cần bước phân tích/convert schema và bước di chuyển dữ liệu.</li><li>Chọn đúng 2 bước.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS SCT</strong> phân tích source DB, đánh giá và convert schema, stored procedure. <strong>AWS DMS</strong> thực hiện migrate dữ liệu sang RDS (hỗ trợ cả heterogeneous và homogeneous).</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Migration Evaluator Quick Insights dùng để ước tính TCO, không phân tích stored procedure.</li><li><strong>B</strong>: ❌ Sai — AWS Application Migration Service là lift-and-shift server, không dành cho phân tích database.</li><li><strong>C</strong>: ✅ Đúng — SCT phân tích schema và code cần thay đổi.</li><li><strong>D</strong>: ✅ Đúng — DMS di chuyển dữ liệu sang RDS.</li><li><strong>E</strong>: ❌ Sai — AWS DataSync dùng cho file/object, không migrate database.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS SCT</li><li>AWS DMS</li><li>Stored procedures</li><li>Heterogeneous migration</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Migrate DB có schema/stored procedure → nghĩ ngay đến SCT (convert) + DMS (migrate data).\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -106,7 +106,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C, D</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: C, D</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Blog được cập nhật nhiều lần mỗi ngày từ NAS, cần chia sẻ nội dung cho nhiều EC2 qua nhiều AZ mà không trì hoãn cập nhật.</li><li>Đồng thời chuyển 200 TB dữ liệu archive lên S3 càng nhanh càng tốt.</li><li>Ưu tiên: không delay cập nhật, tốc độ chuyển dữ liệu lớn.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon EFS</strong> là shared file system đa AZ, mount được từ on-premises qua VPN, nên content update xuất hiện ngay cho các EC2. 200 TB qua VPN rất chậm, nên dùng <strong>Snowball Edge Storage Optimized</strong> (80 TB mỗi thiết bị, dùng nhiều thiết bị).</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — cron hàng tuần gây trễ cập nhật.</li><li><strong>B</strong>: ❌ Sai — EBS Multi-Attach chỉ trong một AZ và đồng bộ hàng tuần gây trễ.</li><li><strong>C</strong>: ✅ Đúng — EFS chia sẻ realtime cho mọi EC2 ở nhiều AZ.</li><li><strong>D</strong>: ✅ Đúng — Snowball Edge phù hợp cho hàng trăm TB.</li><li><strong>E</strong>: ❌ Sai — Snowcone SSD chỉ có khoảng 14 TB, không đủ cho 200 TB.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Amazon EFS shared storage</li><li>Snowball Edge Storage Optimized</li><li>200 TB</li><li>Multi-AZ</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Hàng trăm TB, băng thông hạn chế → nghĩ ngay đến Snowball Edge; shared file multi-AZ → EFS.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -155,7 +155,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Migrate ứng dụng Java/Tomcat legacy, không có source code, chỉ deploy được JAR.</li><li>Có traffic tăng cuối tháng, cần scale.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Elastic Beanstalk</strong> hỗ trợ Tomcat với auto scaling đa AZ, tự quản lý provisioning, load balancer. Database dùng <strong>Amazon RDS for PostgreSQL</strong> (managed), không cần sửa code.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tự cài Tomcat/PostgreSQL trên EC2, dùng Step Functions để scale là nặng vận hành.</li><li><strong>B</strong>: ❌ Sai — EKS multi-Region phức tạp, chạy DB trong container.</li><li><strong>C</strong>: ❌ Sai — refactor sang Python/Lambda nhưng không có source code.</li><li><strong>D</strong>: ✅ Đúng — Beanstalk + RDS + ALB/CloudFront, ít vận hành nhất.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Elastic Beanstalk Tomcat</li><li>No source code</li><li>RDS for PostgreSQL</li><li>Least operational overhead</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Deploy app Java/Tomcat có sẵn, ít vận hành → nghĩ ngay đến Elastic Beanstalk + RDS.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -199,7 +199,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, D, E</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, D, E</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Migrate nền tảng IoT: MongoDB, ứng dụng MQTT, job báo cáo 120-600 giây, web app báo cáo công khai.</li><li>Chọn 3 bước.</li><li>Ưu tiên: LEAST operational overhead, giữ performance.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS IoT Core</strong> hỗ trợ MQTT managed, rule gọi <strong>Lambda</strong> để lưu dữ liệu. <strong>Amazon DocumentDB</strong> tương thích MongoDB và là managed. Báo cáo chạy bằng <strong>Step Functions + Lambda</strong> (dưới 15 phút), lưu <strong>S3</strong> và phân phối qua <strong>CloudFront</strong>.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Serverless, phù hợp báo cáo tĩnh công khai.</li><li><strong>B</strong>: ❌ Sai — Lambda tự kết nối thiết bị MQTT và Lambda layer không lưu tạm message.</li><li><strong>C</strong>: ❌ Sai — EKS trên EC2 nặng vận hành.</li><li><strong>D</strong>: ✅ Đúng — IoT Core + IoT rule + Lambda.</li><li><strong>E</strong>: ✅ Đúng — DocumentDB managed, tương thích MongoDB.</li><li><strong>F</strong>: ❌ Sai — MongoDB tự quản lý trên EC2 tốn vận hành.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS IoT Core</li><li>IoT rule</li><li>DocumentDB (MongoDB compatibility)</li><li>S3 + CloudFront</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"MQTT/IoT devices → IoT Core; MongoDB managed → DocumentDB.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -253,7 +253,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>API Gateway chỉ có một consumer bên ngoài, usage tăng đột biến gây lo ngại chi phí.</li><li>Cần giới hạn cost và usage mà không sửa Lambda.</li><li>Ưu tiên: MOST cost-effective.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Usage plan</strong> với <strong>API key</strong> cho phép đặt throttling limits (rate/burst) và quota theo consumer, gắn vào stage Production, không tốn thêm chi phí và không sửa code.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — phải sửa Lambda để đọc từ SQS, thêm chi phí.</li><li><strong>B</strong>: ❌ Sai — provisioned concurrency tăng chi phí, không giới hạn usage.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — WAF rate-based rule tốn phí thêm và không có quota.</li><li><strong>D</strong>: ✅ Đúng — Usage plan + API key, rẻ và đúng mục đích.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Usage plan</li><li>API key</li><li>Throttling và quota</li><li>Single consumer</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Giới hạn usage/cost theo client của API Gateway → nghĩ ngay đến Usage Plan + API Key.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -297,7 +297,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Pricing file trên S3 cập nhật mỗi 1-15 phút, nhưng EC2 chỉ tải khi launch nên dùng giá cũ.</li><li>Cần các EC2 luôn đọc bản mới nhất.</li><li>Ưu tiên: MOST cost-effective.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Mountpoint for Amazon S3</strong> mount bucket như file system, đọc trực tiếp object trên S3 nên luôn là bản mới, không cần Lambda hay storage bổ sung, rất rẻ.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — thêm Lambda và DynamoDB, phải sửa ứng dụng, tốn chi phí hơn.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — EFS tốn chi phí cao hơn và cần Lambda đồng bộ.</li><li><strong>C</strong>: ✅ Đúng — đọc trực tiếp từ S3, đơn giản và rẻ nhất.</li><li><strong>D</strong>: ❌ Sai — EBS Multi-Attach bị giới hạn (một AZ, tối đa 16 instance), phức tạp.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Mountpoint for Amazon S3</li><li>Always latest data</li><li>Most cost-effective</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"EC2 cần đọc file S3 như file system, dữ liệu luôn mới → nghĩ ngay đến Mountpoint for Amazon S3.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -341,7 +341,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cho tester tự launch môi trường từ CloudFormation template mà không cấp quyền rộng.</li><li>Requirement: self-service với least privilege.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Service Catalog</strong> với <strong>launch constraint</strong> dùng role đã có để provision, user chỉ cần quyền Service Catalog, không cần quyền CloudFormation/EC2/Auto Scaling.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — cho assume role của manager là cấp quyền quá rộng.</li><li><strong>B</strong>: ✅ Đúng — Service Catalog + launch constraint.</li><li><strong>C</strong>: ❌ Sai — user cần quyền tạo resource trực tiếp, khó giới hạn.</li><li><strong>D</strong>: ❌ Sai — Beanstalk không phải công cụ phù hợp cho template CloudFormation và vẫn truyền role.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS Service Catalog</li><li>Launch constraint</li><li>Self-service</li><li>Least privilege</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"User tự provision từ template mà không cần quyền rộng → nghĩ ngay đến Service Catalog launch constraint.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -385,7 +385,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, D, E</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, D, E</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Nhân bản stack sang Region thứ hai để DR, growth và giảm latency cho user.</li><li>Chọn 3 bước.</li><li>Ưu tiên: giảm administrative overhead.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>CloudFormation</strong> với parameter giúp lặp lại hạ tầng nhất quán. <strong>Latency-based routing</strong> của Route 53 đưa user đến Region gần nhất. <strong>DynamoDB global table</strong> nâng cấp trực tiếp từ bảng hiện có bằng cách bật Streams và thêm Region.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — IaC, tái sử dụng.</li><li><strong>B</strong>: ❌ Sai — làm thủ công qua Console dễ sai sót, tốn công.</li><li><strong>C</strong>: ❌ Sai — weighted 50/50 không cải thiện access time.</li><li><strong>D</strong>: ✅ Đúng — latency-based routing.</li><li><strong>E</strong>: ✅ Đúng — thêm Region vào bảng hiện có để tạo global table.</li><li><strong>F</strong>: ⚠️ Có thể nhưng không tối ưu — tạo bảng mới và copy dữ liệu thủ công, tốn công.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CloudFormation parameters</li><li>Latency-based routing</li><li>DynamoDB global tables</li><li>DR</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Multi-Region giảm latency → Route 53 latency routing + DynamoDB global tables + IaC.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -439,7 +439,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, C</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, C</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Một S3 bucket chung, mỗi data scientist chỉ truy cập dữ liệu của mình, dùng IAM Identity Center.</li><li>Cần báo cáo hàng tháng về tài liệu mà mỗi user truy cập.</li><li>Cần phân quyền theo user và audit truy cập object.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Permission set</strong> dùng condition `${aws:PrincipalTag/userName}/*` để giới hạn theo prefix của từng user. <strong>CloudTrail S3 data events</strong> ghi lại truy cập object, truy vấn bằng <strong>Athena</strong> để tạo báo cáo.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — giới hạn theo prefix bằng principal tag.</li><li><strong>B</strong>: ❌ Sai — cấp read/write cho cả group, không tách theo user.</li><li><strong>C</strong>: ✅ Đúng — data events + Athena.</li><li><strong>D</strong>: ❌ Sai — management events không ghi truy cập object.</li><li><strong>E</strong>: ❌ Sai — EMRFS không liên quan, S3 Select không dùng để query log theo cách này.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>PrincipalTag</li><li>Permission set</li><li>CloudTrail data events</li><li>Athena</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Audit ai truy cập object S3 → CloudTrail data events + Athena.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -488,7 +488,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Refactor ứng dụng để bỏ EC2 chạy container; xử lý tối đa 2 giờ, file trên EFS.</li><li>Cần trigger khi có file mới và chạy container dài.</li><li>Requirement: serverless/không còn EC2.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>EFS không có event notification, nên chuyển file sang <strong>S3</strong> để dùng <strong>S3 event notification</strong> gọi <strong>Lambda</strong> chọn container, rồi chạy bằng <strong>Fargate task</strong> (không giới hạn 15 phút).</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — EventBridge không bắt được sự kiện file mới trên EFS.</li><li><strong>B</strong>: ❌ Sai — EFS không có event notification.</li><li><strong>C</strong>: ✅ Đúng — S3 event + Lambda + Fargate task.</li><li><strong>D</strong>: ❌ Sai — Lambda tối đa 15 phút, không đủ cho 2 giờ.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>S3 event notification</li><li>Fargate tasks</li><li>Lambda 15 phút</li><li>EFS không có event</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Xử lý dài hơn 15 phút, không muốn EC2 → nghĩ ngay đến Fargate; trigger file → S3 event.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -532,7 +532,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Migrate 30 TB video từ tape lên AWS qua Direct Connect, làm giàu metadata (đối tượng, cảnh, khuôn mặt).</li><li>MAM đọc từ file system hiện tại.</li><li>Ưu tiên: ít vận hành, ít ảnh hưởng hệ thống cũ.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>S3 File Gateway</strong> cho MAM đẩy file như file share, video nằm trên S3. <strong>Amazon Rekognition</strong> (collection khuôn mặt) phân tích video trên S3 và Lambda trả metadata về MAM.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — File Gateway + Rekognition + Lambda.</li><li><strong>B</strong>: ❌ Sai — Tape gateway lưu vào archive, Rekognition không xử lý video trực tiếp trong đó.</li><li><strong>C</strong>: ❌ Sai — Kinesis Video Streams dành cho video streaming, thay đổi nhiều hệ thống.</li><li><strong>D</strong>: ❌ Sai — OpenCV trên EC2 tự quản lý, tốn vận hành.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>S3 File Gateway</li><li>Amazon Rekognition collection</li><li>Face search</li><li>Minimal disruption</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Nhận diện khuôn mặt/đối tượng trong video lưu S3 → Rekognition; đưa file on-prem lên S3 → File Gateway.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -576,7 +576,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Reserved Instances hết hạn, cần EC2 thêm 3 năm, có thêm workload serverless.</li><li>Ưu tiên: MOST cost savings.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>RI 3 năm All Upfront cho mức giảm giá cao nhất cho EC2 ổn định, kết hợp <strong>Compute Savings Plan</strong> 3 năm All Upfront ở management account cover phần compute bổ sung (bao gồm Lambda/Fargate) trên toàn organization.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — 3 năm All Upfront cho mức tiết kiệm lớn nhất, phủ cả serverless.</li><li><strong>B</strong>: ❌ Sai — 1 năm No Upfront tiết kiệm ít nhất.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — No Upfront tiết kiệm ít hơn All Upfront.</li><li><strong>D</strong>: ❌ Sai — EC2 Instance Savings Plan không phủ serverless và mua theo từng member account kém linh hoạt.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>3-year All Upfront</li><li>Compute Savings Plan</li><li>Management account</li><li>Serverless coverage</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Tiết kiệm nhiều nhất → 3 năm + All Upfront; có Lambda/Fargate → Compute Savings Plan.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -620,7 +620,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, E</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, E</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Phân phối nội dung tĩnh toàn cầu từ Region gần khách hàng nhất; dữ liệu on-premises vào S3 độ trễ thấp, không qua internet công cộng.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>S3 Multi-Region Access Points</strong> tự route request đến Region gần nhất với một endpoint global. Kết nối riêng, độ trễ ổn định qua <strong>Direct Connect + PrivateLink</strong> đến Multi-Region Access Point.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Multi-Region Access Point tự route.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — CRR là cơ chế sao chép, không tự route và cần cấu hình thêm.</li><li><strong>C</strong>: ❌ Sai — Lambda tự theo dõi routing tốn vận hành.</li><li><strong>D</strong>: ❌ Sai — VPN đi qua internet công cộng, độ trễ biến động.</li><li><strong>E</strong>: ✅ Đúng — Direct Connect + PrivateLink, riêng tư, độ trễ thấp.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>S3 Multi-Region Access Points</li><li>Direct Connect</li><li>PrivateLink</li><li>No public internet</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"S3 đa Region + route theo gần nhất → Multi-Region Access Point; không qua internet → Direct Connect + PrivateLink.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -669,7 +669,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Migrate hàng trăm VMware VM nhanh nhất; compliance yêu cầu change request cho mỗi lần cài đặt/sửa VM.</li><li>Có Direct Connect 10 Gbps, file share Windows hơn 100 GB.</li><li>Ưu tiên: ít thời gian nhất, không cài gì lên từng VM.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Application Migration Service agentless</strong> (vCenter) replicate VM mà không cài agent lên từng VM, tránh change request. <strong>Amazon FSx for Windows File Server</strong> thay thế Windows file share (SMB).</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — dùng VM Import/Export từng VM chậm, EFS không phù hợp SMB Windows.</li><li><strong>B</strong>: ❌ Sai — Discovery chỉ khám phá, không migrate.</li><li><strong>C</strong>: ✅ Đúng — agentless, FSx for Windows.</li><li><strong>D</strong>: ❌ Sai — agent trên hypervisor không phải mô hình hỗ trợ.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Application Migration Service agentless</li><li>vCenter</li><li>FSx for Windows File Server</li><li>Change request</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Migrate VMware không được cài agent lên VM → nghĩ ngay đến agentless MGN; Windows file share → FSx for Windows.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -713,7 +713,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lưu activity của nhiều account trong Organization và query tập trung bằng SQL.</li><li>Requirement: tập trung, SQL.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>CloudTrail Lake</strong> là data store hỗ trợ query SQL, có thể tạo từ delegated administrator và bật cho toàn bộ organization.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — CloudWatch Logs Insights không phải SQL và phải cấu hình từng account.</li><li><strong>B</strong>: ✅ Đúng — CloudTrail Lake cho organization, query SQL.</li><li><strong>C</strong>: ❌ Sai — Event history không query SQL tập trung.</li><li><strong>D</strong>: ❌ Sai — data store riêng từng account, không tập trung.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CloudTrail Lake</li><li>Delegated administrator</li><li>Organization</li><li>SQL query</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Query SQL trực tiếp trên CloudTrail events cho cả organization → CloudTrail Lake.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -757,7 +757,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>HTTP API trên API Gateway gọi Lambda, cần user authorization tích hợp với identity provider bên thứ ba dùng OAuth token.</li><li>Requirement: validate token từ IdP hiện có.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Lambda authorizer</strong> của API Gateway validate token từ IdP bên ngoài; web app lấy token từ IdP rồi gửi trong header Authorization.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Lambda authorizer cho token của IdP.</li><li><strong>B</strong>: ❌ Sai — Directory Service không phải API Gateway authorizer.</li><li><strong>C</strong>: ❌ Sai — API Gateway không có zero-configuration với IAM Identity Center, STS token không đúng cơ chế này.</li><li><strong>D</strong>: ❌ Sai — IAM users không phù hợp cho end-user của web app.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Lambda authorizer</li><li>OAuth token</li><li>Third-party IdP</li><li>Authorization header</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Validate token từ IdP bên thứ ba cho API Gateway → Lambda authorizer (hoặc JWT authorizer).\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -801,7 +801,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Hàng nghìn EC2 có EBS volume chưa mã hóa; cần tự động mã hóa và ngăn tạo volume mới không mã hóa.</li><li>Requirement: remediation tự động + prevention.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Config</strong> rule phát hiện volume chưa mã hóa và auto-remediation bằng <strong>Systems Manager Automation</strong> runbook. Bật <strong>EBS encryption by default</strong> ở account setting để mọi volume mới đều được mã hóa.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — key policy không thể chặn tạo volume không mã hóa.</li><li><strong>B</strong>: ❌ Sai — Fleet Manager không tạo danh sách volume; SCP thuộc về organization và không tự mã hóa.</li><li><strong>C</strong>: ❌ Sai — Fleet Manager không liệt kê EBS volume chưa mã hóa.</li><li><strong>D</strong>: ✅ Đúng — Config rule + remediation + encryption by default.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS Config managed rule</li><li>Auto remediation</li><li>Systems Manager Automation</li><li>EBS encryption by default</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Ép mọi EBS volume mới mã hóa → bật EBS encryption by default; sửa volume cũ → Config + SSM Automation.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -845,7 +845,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cần cảnh báo khi số Fargate task đạt 80% quota.</li><li>Requirement: monitor service quota và notify.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>CloudWatch publish usage metrics trong namespace <strong>AWS/Usage</strong>. Dùng math expression `metric/SERVICE_QUOTA(metric)*100`, đặt alarm trên 80 và gửi qua <strong>SNS</strong>.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Sample Count của service không phản ánh quota Fargate.</li><li><strong>B</strong>: ✅ Đúng — AWS/Usage + SERVICE_QUOTA + SNS.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Lambda tự polling, tốn vận hành.</li><li><strong>D</strong>: ❌ Sai — AWS Config rule không đánh giá quota theo cách này.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS/Usage namespace</li><li>SERVICE_QUOTA()</li><li>CloudWatch alarm</li><li>SNS</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Cảnh báo gần chạm service quota → CloudWatch AWS/Usage + SERVICE_QUOTA math.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -889,7 +889,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, B, E</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, B, E</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Scan CVE cho Lambda function và layer, đồng thời code scan chỉ cho một số function chọn lọc.</li><li>Chọn 3 bước.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon Inspector</strong> kích hoạt, bật Lambda standard scanning (CVE) và Lambda code scanning. Để loại function không cần code scan, dùng tag `InspectorCodeExclusion` với value `LambdaCodeScanning`.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — kích hoạt Inspector.</li><li><strong>B</strong>: ✅ Đúng — standard scan và code scan.</li><li><strong>C</strong>: ❌ Sai — GuardDuty Lambda Protection dò mối đe dọa runtime, không scan CVE/code.</li><li><strong>D</strong>: ❌ Sai — không có thiết lập như vậy trong Monitor settings của Lambda.</li><li><strong>E</strong>: ✅ Đúng — tag loại trừ code scan.</li><li><strong>F</strong>: ❌ Sai — Inspector không scan S3 bucket chứa zip.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Amazon Inspector</li><li>Lambda standard scanning</li><li>Lambda code scanning</li><li>InspectorCodeExclusion tag</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Scan CVE và code Lambda → Amazon Inspector; loại trừ code scan → tag InspectorCodeExclusion.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -943,7 +943,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>EC2 trong application account không được ra internet nhưng cần S3, Systems Manager và patch repository ở VPC private của core account.</li><li>Requirement: kết nối private.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>VPC endpoints</strong> cho Systems Manager và S3, xóa <strong>NAT gateway</strong>, và dùng <strong>VPC peering</strong> để truy cập patch source repository trong core account, cập nhật route table hai phía.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tự quản lý VPN server, phức tạp, NACL không phải giải pháp.</li><li><strong>B</strong>: ❌ Sai — private VIF dùng cho Direct Connect, không dùng cho Systems Manager/S3.</li><li><strong>C</strong>: ✅ Đúng — VPC endpoints + VPC peering.</li><li><strong>D</strong>: ❌ Sai — chỉ có NACL và TGW, không có endpoint cho Systems Manager/S3.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>VPC endpoints</li><li>VPC peering</li><li>Remove NAT gateway</li><li>Patch Manager</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Không ra internet nhưng dùng AWS service → VPC endpoints; nối 2 VPC private → peering.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -987,7 +987,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>5 VPC ở us-east-2 cần truy cập 1 VPC ở eu-west-1, nhưng không được truy cập VPC khác.</li><li>Ưu tiên: MOST cost-effective.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Inter-Region VPC peering</strong> từng VPC us-east-2 với VPC eu-west-1 chỉ cho phép đúng các kết nối cần thiết, không tốn phí hourly như Transit Gateway, và peering không transitive nên cô lập tốt.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — transit gateway không thể attach VPC của Region khác trực tiếp.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — 2 transit gateway và peering tốn kém hơn.</li><li><strong>C</strong>: ❌ Sai — full mesh cho phép truy cập các VPC khác, vi phạm requirement.</li><li><strong>D</strong>: ✅ Đúng — peering từng VPC, rẻ và đúng phạm vi.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Inter-Region VPC peering</li><li>Non-transitive</li><li>Most cost-effective</li><li>Isolation</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Chỉ vài VPC cần kết nối, cần cô lập và rẻ → VPC peering, không dùng Transit Gateway.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1031,7 +1031,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, C</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, C</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cần logging cho Amazon SES để troubleshoot delivery và tìm kiếm theo recipient, subject, thời gian gửi.</li><li>Chọn 2 bước.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>SES configuration set</strong> với event destination <strong>Amazon Data Firehose</strong> đẩy log email event vào <strong>S3</strong>, sau đó dùng <strong>Athena</strong> query theo recipient, subject, time.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — configuration set + Firehose + S3.</li><li><strong>B</strong>: ❌ Sai — CloudTrail chỉ ghi API call, không có thông tin delivery của email.</li><li><strong>C</strong>: ✅ Đúng — Athena query log trên S3.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — SES không gửi log trực tiếp vào log group theo cách này (dùng event destination CloudWatch chỉ cho metric).</li><li><strong>E</strong>: ❌ Sai — Athena không query trực tiếp log trong CloudWatch Logs cho mục đích này.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>SES configuration set</li><li>Event destination</li><li>Data Firehose</li><li>Athena</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Log chi tiết email SES để search → configuration set + Firehose → S3 + Athena.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1080,7 +1080,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Phát hiện và dừng EC2 development dùng thấp (CPU 10% hoặc thấp hơn, network 5 MB hoặc thấp hơn, 4 trên 14 ngày).</li><li>Có AWS Business Support.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Trusted Advisor</strong> (Business Support) có check <strong>Low Utilization Amazon EC2 Instances</strong> đúng tiêu chí này. EventBridge bắt kết quả và Lambda lọc theo tag rồi stop instance.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — dashboard không tự phát hiện theo tiêu chí.</li><li><strong>B</strong>: ❌ Sai — Systems Manager không theo dõi utilization theo cách này.</li><li><strong>C</strong>: ✅ Đúng — Trusted Advisor + EventBridge + Lambda.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — tự xây pipeline, nhiều vận hành.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Trusted Advisor</li><li>Low Utilization EC2 Instances</li><li>EventBridge</li><li>Business Support</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"EC2 dùng thấp theo tiêu chí 10% CPU, 14 ngày → Trusted Advisor Low Utilization check.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1124,7 +1124,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>20 EC2 On-Demand chạy 24/7, CPU 10% bình thường nhưng 100% khi cao điểm vài giờ, gây chậm.</li><li>Ưu tiên: MOST cost-effective.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Auto Scaling group</strong> với min 4, max 28 co giãn theo tải; mua <strong>Reserved Instances</strong> cho phần baseline 4 instance chạy liên tục, phần còn lại On-Demand khi cần.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — min 20 và desired 28 vẫn tốn chi phí cao khi tải thấp.</li><li><strong>B</strong>: ❌ Sai — Spot Fleet type request không scale, không gắn trực tiếp NLB.</li><li><strong>C</strong>: ❌ Sai — Spot không phù hợp tính ổn định, bỏ NLB.</li><li><strong>D</strong>: ✅ Đúng — scale theo nhu cầu, RI cho baseline.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Auto Scaling group</li><li>Reserved Instances baseline</li><li>Minimum 4</li><li>Cost-effective</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Tải ổn định thấp, thỉnh thoảng cao → ASG min nhỏ, RI cho baseline, On-Demand cho burst.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1168,7 +1168,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Dữ liệu IoT mỗi 5 giây từ hàng trăm thiết bị, cần enrich rồi vào S3 trong vòng dưới 30 phút.</li><li>Ưu tiên: MOST cost-effective.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>IoT Basic Ingest</strong> không tính phí messaging. <strong>Kinesis Data Firehose</strong> buffer 900 giây (15 phút), gom nhiều record, gọi Lambda enrich theo batch và ghi S3, giảm số lần gọi Lambda và PutObject.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Lambda gọi cho từng message và ghi S3 từng object, tốn chi phí.</li><li><strong>B</strong>: ✅ Đúng — Basic Ingest + Firehose buffer + Lambda.</li><li><strong>C</strong>: ❌ Sai — thêm Timestream và Lambda đọc, tốn kém.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Kinesis Data Streams tốn chi phí shard và không cần realtime.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>IoT Basic Ingest</li><li>Firehose buffering</li><li>Batch</li><li>Under 30 minutes</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"IoT đến S3 chấp nhận độ trễ phút, rẻ nhất → Basic Ingest + Firehose buffering.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1212,7 +1212,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B, E</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, E</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>EC2 ở account khác cần truy cập S3 data lake, chỉ network được ủy quyền mới được truy cập.</li><li>Requirement: kiểm soát truy cập theo network/access point.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Tạo <strong>S3 access point</strong> cho data lake, và <strong>bucket policy</strong> chỉ cho phép `s3:GetObject` khi `s3:DataAccessPointArn` hợp lệ. Cách này ép mọi truy cập đi qua access point có kiểm soát.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — gateway endpoint hữu ích nhưng không đủ để giới hạn truy cập.</li><li><strong>B</strong>: ✅ Đúng — access point.</li><li><strong>C</strong>: ❌ Sai — policy trên role không kiểm soát phía bucket.</li><li><strong>D</strong>: ❌ Sai — route table không thể route đến access point.</li><li><strong>E</strong>: ✅ Đúng — bucket policy ủy quyền qua access point.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>S3 access point</li><li>s3:DataAccessPointArn</li><li>Bucket policy</li><li>Authorized networks</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Kiểm soát truy cập S3 theo network/ứng dụng → access point + bucket policy với DataAccessPointArn.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1261,7 +1261,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Ước tính TCO cho workload trước khi migrate Kubernetes và PostgreSQL sang EKS và RDS.</li><li>Requirement: công cụ cho ra thông tin TCO.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Migration Evaluator</strong> thu thập dữ liệu on-premises (Collector), tạo scenario và xuất <strong>Quick Insights</strong> report có TCO.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Migration Evaluator cho TCO.</li><li><strong>B</strong>: ❌ Sai — DMS assessment đánh giá tương thích, không phải TCO.</li><li><strong>C</strong>: ❌ Sai — Application Migration Service không xuất TCO report.</li><li><strong>D</strong>: ❌ Sai — Cloud Economics Center chỉ là tài liệu, không tạo Cost and Usage Report từ đó.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Migration Evaluator</li><li>TCO</li><li>Collector</li><li>Quick Insights</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"Ước tính TCO/business case trước migration → Migration Evaluator.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1305,7 +1305,7 @@ var SAP_C02_Part6 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, E</p>",
+      "general_feedback": "<p>1. <strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, E</p><p>2. <strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tối ưu chi phí nền tảng ticketing mà không giảm availability; biết trước thời gian các sự kiện; traffic S3 đi qua NAT gateway.</li><li>Ưu tiên: cost optimization.</li></ul><p>3. <strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Gateway VPC endpoint</strong> cho S3 miễn phí, loại bỏ phí NAT gateway data processing. <strong>Scheduled scaling</strong> dựa trên lịch sự kiện đã biết hiệu quả hơn predictive scaling, tránh over-provision.</p><p>4. <strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — gateway endpoint cắt chi phí NAT.</li><li><strong>B</strong>: ❌ Sai — Spot có thể bị thu hồi, ảnh hưởng availability.</li><li><strong>C</strong>: ❌ Sai — Capacity Reservations tăng chi phí.</li><li><strong>D</strong>: ❌ Sai — Transfer Acceleration tăng chi phí, không cần cho cùng Region.</li><li><strong>E</strong>: ✅ Đúng — scheduled scaling khớp lịch sự kiện đã biết.</li></ul><p>5. <strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Gateway VPC endpoint S3</li><li>NAT gateway cost</li><li>Scheduled scaling</li><li>Known event times</li></ul><p>6. <strong>🧠 MẸO THI</strong></p><p>\"EC2 trong VPC tải nhiều từ S3 qua NAT → gateway endpoint; thời điểm tải đã biết → scheduled scaling.\"</p>",
       "is_active": true,
       "answer_list": [
         {

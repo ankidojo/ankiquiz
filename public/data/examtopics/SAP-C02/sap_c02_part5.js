@@ -13,7 +13,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: backup bản copy của SMB file share lên AWS cho DR, truy cập được bằng SMB từ on-premises hoặc AWS.</li><li>Requirement quyết định: dữ liệu hiếm khi truy cập nhưng phải sẵn sàng trong vòng 5 phút.</li><li>Ưu tiên: chi phí thấp nhưng vẫn đáp ứng thời gian truy xuất.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon S3 File Gateway</strong> cung cấp giao thức SMB và lưu file dưới dạng object trong Amazon S3. <strong>S3 Standard-IA</strong> rẻ cho dữ liệu ít truy cập và truy xuất tức thì (milliseconds), nên đáp ứng yêu cầu 5 phút.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — AWS Outposts và EC2 file server tốn kém, phức tạp, không cần thiết cho bản copy DR.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — FSx for Windows Multi-AZ SSD hỗ trợ SMB nhưng rất đắt cho dữ liệu hiếm truy cập.</li><li><strong>C</strong>: ❌ Sai — S3 Glacier Deep Archive mất khoảng 12 giờ để restore, không đạt 5 phút.</li><li><strong>D</strong>: ✅ Đúng — S3 File Gateway (SMB) + S3 Standard-IA: rẻ và truy xuất tức thì.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>SMB + S3 → S3 File Gateway</li><li>Rarely accessed → Standard-IA</li><li>Within 5 minutes → không dùng Glacier Deep Archive</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp SMB/NFS on-premises cần lưu vào S3 → nghĩ ngay đến S3 File Gateway; cần truy xuất nhanh → tránh Deep Archive.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -57,7 +57,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: cung cấp desktop từ xa cho 400 nhân viên khi có thảm họa, gồm cả Windows và Linux.</li><li>Requirement quan trọng: tích hợp on-premises Active Directory, có MFA, tái tạo trải nghiệm desktop đầy đủ.</li><li>Ưu tiên: full desktop experience, dùng lại identity hiện có.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon WorkSpaces</strong> cung cấp desktop đầy đủ (Windows/Linux). <strong>AD Connector</strong> proxy xác thực về on-premises AD qua VPN, và MFA được thực hiện qua <strong>RADIUS server</strong> (AD Connector hỗ trợ RADIUS MFA).</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — MFA của WorkSpaces không bật trực tiếp bằng console mà phải dùng RADIUS (AD Connector) trong directory settings.</li><li><strong>B</strong>: ❌ Sai — AppStream 2.0 stream ứng dụng, không thay thế đầy đủ desktop; cấu hình AD FS không phải cách đáp ứng MFA yêu cầu.</li><li><strong>C</strong>: ✅ Đúng — WorkSpaces + AD Connector + RADIUS MFA.</li><li><strong>D</strong>: ❌ Sai — AppStream 2.0 chỉ stream app, không replicate đầy đủ desktop.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>WorkSpaces + AD Connector</li><li>RADIUS MFA</li><li>Replicate desktop experience</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp virtual desktop + on-premises AD + MFA → nghĩ ngay đến WorkSpaces + AD Connector + RADIUS.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -101,7 +101,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: agent đánh dấu cuộc gọi là spam và tự động chặn số đó về sau.</li><li>Requirement quan trọng: agent chủ động flag; hệ thống tự block.</li><li>Ưu tiên: MOST operationally efficient, ít thay đổi.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Thêm nút flag vào <strong>Contact Control Panel (CCP)</strong> gọi <strong>AWS Lambda</strong> với <strong>UpdateContactAttributes</strong>; số spam lưu trong <strong>Amazon DynamoDB</strong>, contact flow kiểm tra attribute và tra DynamoDB để chặn lần sau.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — agent flag trực tiếp trong CCP, DynamoDB lưu số, contact flow chặn tự động.</li><li><strong>B</strong>: ❌ Sai — Contact Lens rule phân tích nội dung, không phải cơ chế agent tự flag cuộc gọi spam.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — transfer qua quick connect là workaround, tốn thao tác và tạo cuộc transfer không cần thiết.</li><li><strong>D</strong>: ❌ Sai — bắt caller nhập input gây phiền cho khách thật và agent không flag được.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Amazon Connect CCP customization</li><li>UpdateContactAttributes</li><li>DynamoDB blocklist</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp agent flag cuộc gọi trong Amazon Connect → nghĩ ngay đến CCP tùy chỉnh + Lambda + contact attributes.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -145,7 +145,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: stream dữ liệu sensor, phân tích real time và thông báo ngay khi vượt ngưỡng.</li><li>Requirement quan trọng: real time + notification tức thì.</li><li>Ưu tiên: dùng service managed, đơn giản.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon Kinesis Data Streams</strong> nhận dữ liệu real time, <strong>AWS Lambda</strong> consume và kiểm tra ngưỡng, rồi <strong>Amazon SNS</strong> gửi thông báo ngay cho operations team.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Firehose có buffer (độ trễ) và là dịch vụ delivery, Step Functions không consume trực tiếp từ Firehose.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — Amazon MSK + Fargate phức tạp, MSK không có trigger trực tiếp kiểu này; SES là email, không phù hợp alert.</li><li><strong>C</strong>: ✅ Đúng — Kinesis Data Streams + Lambda + SNS, real time và đơn giản.</li><li><strong>D</strong>: ❌ Sai — Kinesis Data Analytics không chuyển dữ liệu cho ECS như mô tả, kiến trúc rườm rà; SES không phải kênh alert.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Real time streaming → Kinesis Data Streams</li><li>Lambda consumer</li><li>SNS notification</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp stream real time + alert ngay → nghĩ ngay đến Kinesis Data Streams + Lambda + SNS.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -189,7 +189,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: EKS cluster chạy nhiều stateless pods, scale đột biến.</li><li>Requirement quan trọng: MAXIMIZE node resilience.</li><li>Ưu tiên: high availability, chịu được lỗi node/AZ.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Topology spread constraints</strong> theo Availability Zone phân bố pods đều qua nhiều AZ, nên lỗi một node hoặc một AZ chỉ ảnh hưởng một phần replicas.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — control plane do EKS quản lý, không deploy bằng launch template riêng.</li><li><strong>B</strong>: ❌ Sai — ít node group và instance lớn làm tăng blast radius, giảm resilience.</li><li><strong>C</strong>: ❌ Sai — để capacity underprovisioned làm pod pending khi scale, giảm resilience.</li><li><strong>D</strong>: ✅ Đúng — spread pods qua AZ tăng khả năng chịu lỗi.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>topologySpreadConstraints</li><li>Availability Zone spread</li><li>Blast radius nhỏ</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp resilience cho pods trên EKS → nghĩ ngay đến topology spread constraints theo AZ và nhiều instance nhỏ.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -233,7 +233,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: DR sang Region khác cho ứng dụng ECS Fargate + RDS for MySQL.</li><li>Requirement quan trọng: MINIMIZE thời gian recovery (RTO thấp).</li><li>Ưu tiên: standby sẵn sàng, tự động failover.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Chạy sẵn ECS cluster ở Region thứ hai và dùng <strong>cross-Region read replica</strong> của RDS. Khi lỗi, Lambda promote replica và cập nhật <strong>Amazon Route 53</strong>, nên recovery nhanh (warm standby).</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — snapshot, copy và restore lúc failover rất chậm, và không thể snapshot khi primary đã lỗi.</li><li><strong>B</strong>: ❌ Sai — tạo cả ECS cluster lúc failover cộng thêm restore snapshot, RTO cao nhất.</li><li><strong>C</strong>: ✅ Đúng — read replica cross-Region, promote nhanh.</li><li><strong>D</strong>: ❌ Sai — không thể chuyển RDS snapshot thành DynamoDB global table.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Cross-Region read replica</li><li>Warm standby</li><li>Promote replica + Route 53</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp DR RDS cross-Region RTO thấp → nghĩ ngay đến cross-Region read replica rồi promote.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -277,7 +277,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: cảnh báo hằng ngày khi usage EC2 cao hơn 10% so với trung bình 30 ngày.</li><li>Requirement quan trọng: ngưỡng usage cụ thể, kỳ daily, ở cấp organization.</li><li>Ưu tiên: dùng đúng công cụ theo dõi usage với ngưỡng cố định.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Budgets</strong> (usage budget) ở management account với usage type EC2 running hours, period daily, ngưỡng bằng trung bình + 10% lấy từ <strong>Cost Explorer</strong>, kèm alert notification.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — usage budget daily với ngưỡng đặt sẵn và alert.</li><li><strong>B</strong>: ❌ Sai — Cost Anomaly Detection dùng ML và theo dõi cost, không đặt được ngưỡng 10% so với trung bình 30 ngày.</li><li><strong>C</strong>: ❌ Sai — Trusted Advisor không có alert tuỳ biến theo usage kiểu này.</li><li><strong>D</strong>: ❌ Sai — Amazon Detective phục vụ điều tra security, không theo dõi EC2 usage.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS Budgets usage budget</li><li>EC2 running hours</li><li>Daily period</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp alert theo ngưỡng usage/cost cố định → nghĩ ngay đến AWS Budgets.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -321,7 +321,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: xử lý đơn hàng, lưu vào Amazon DynamoDB, traffic bất thường.</li><li>Requirement quan trọng: simple, highly available, loosely coupled, scale nhanh.</li><li>Ưu tiên: MOST reliable, ít vận hành.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon SQS</strong> tách rời (decouple) nhận và xử lý đơn, lưu message bền vững; <strong>AWS Lambda</strong> tự scale theo queue, phù hợp traffic sporadic.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — database trên EC2 và EC2 xử lý là tightly coupled, khó scale, vận hành nhiều.</li><li><strong>B</strong>: ✅ Đúng — SQS + Lambda, serverless, loosely coupled, scale tự động.</li><li><strong>C</strong>: ❌ Sai — Step Functions không phải điểm nhận đơn hàng; thêm ECS phức tạp.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Kinesis Data Streams cần quản lý shard và EC2 xử lý, không đơn giản và không serverless.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Loosely coupled → SQS</li><li>Sporadic traffic → Lambda</li><li>Serverless, highly available</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp loosely coupled + order processing + scale đột biến → nghĩ ngay đến SQS + Lambda.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -365,7 +365,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Lambda truy cập RDS PostgreSQL ở QA và production, không để lộ credentials.</li><li>Requirement quan trọng: không hard-code credentials và tự động rotate password.</li><li>Ưu tiên: security, automation.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Secrets Manager</strong> lưu credentials riêng cho từng môi trường và hỗ trợ <strong>automatic rotation</strong> native cho RDS; Lambda tham chiếu secret qua environment variable.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Parameter Store lưu được nhưng không có rotation tự động tích hợp cho RDS.</li><li><strong>B</strong>: ✅ Đúng — Secrets Manager có rotation, tách theo môi trường.</li><li><strong>C</strong>: ❌ Sai — AWS KMS quản lý encryption key, không lưu credentials.</li><li><strong>D</strong>: ❌ Sai — lưu credentials trong Amazon S3 không an toàn và không có rotation.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Secrets Manager</li><li>Automatic rotation</li><li>Không hard-code credentials</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp credentials DB + rotate tự động → nghĩ ngay đến AWS Secrets Manager.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -409,7 +409,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: ngăn EC2 mới và hiện có trong OU nhận public IP.</li><li>Requirement quan trọng: preventive guardrail áp dụng cho cả instance mới lẫn hiện có.</li><li>Ưu tiên: enforce ở cấp OU, không thể bị bypass.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>SCP</strong> gắn vào OU là preventive control cứng: chặn launch instance có public IP và chặn thao tác gán public IP (ví dụ associate Elastic IP, modify network interface) cho instance hiện có.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Systems Manager Automation chỉ phản ứng sau, cần cấu hình trên từng instance.</li><li><strong>B</strong>: ❌ Sai — proactive control kiểm tra CloudFormation template, không áp dụng cho instance hiện có hoặc launch ngoài CloudFormation.</li><li><strong>C</strong>: ✅ Đúng — SCP trên OU chặn cả hai trường hợp.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — AWS Config + remediation là detective, chỉ xử lý sau khi đã có public IP.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>SCP trên OU</li><li>Preventive vs detective</li><li>Proactive control chỉ cho CloudFormation</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp ngăn chặn hành động ở cấp OU/organization → nghĩ ngay đến SCP.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -453,7 +453,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: giới hạn danh sách user truy cập app qua ALB, bắt buộc MFA.</li><li>Requirement quan trọng: không sửa app, không tích hợp IdP bên ngoài.</li><li>Ưu tiên: authentication ở tầng load balancer.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>ALB</strong> hỗ trợ listener rule authenticate với <strong>Amazon Cognito user pool</strong>; user pool chứa danh sách user và bật MFA, nên không cần sửa ứng dụng.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Cognito user pool có MFA + ALB authenticate action.</li><li><strong>B</strong>: ❌ Sai — IAM user không dùng để xác thực end user web qua ALB, và Fargate không có resource policy kiểu này.</li><li><strong>C</strong>: ❌ Sai — IAM Identity Center không có \"resource protection rule\" cho ALB.</li><li><strong>D</strong>: ❌ Sai — Amplify không có user pool riêng và ALB không tích hợp Amplify hosted UI (Amplify dùng Cognito phía sau).</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>ALB authenticate-cognito</li><li>Cognito user pool + MFA</li><li>Không đổi code ứng dụng</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp xác thực user cho app không sửa được sau ALB → nghĩ ngay đến ALB + Cognito user pool.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -497,7 +497,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: stack set triển khai vào Region chưa dùng, template có IAM role tên tùy chỉnh, nhưng không tạo được stack instance nào.</li><li>Requirement quan trọng: nguyên nhân thất bại ở Region mới và custom IAM name.</li><li>Ưu tiên: khắc phục đúng nguyên nhân gốc.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Region mới (opt-in Regions) phải được <strong>enable</strong> trong các account liên quan, và IAM role có custom name bắt buộc capability <strong>CAPABILITY_NAMED_IAM</strong>.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — enable Region + CAPABILITY_NAMED_IAM xử lý cả hai vấn đề.</li><li><strong>B</strong>: ❌ Sai — quota stack không phải nguyên nhân, và CAPABILITY_IAM không đủ cho named role.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — có capability đúng nhưng không enable Region, và SELF_MANAGED không giải quyết lỗi.</li><li><strong>D</strong>: ❌ Sai — CAPABILITY_IAM không đủ cho IAM role có custom name; administration role không giải quyết vấn đề Region.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CAPABILITY_NAMED_IAM</li><li>Opt-in Regions</li><li>CloudFormation StackSets</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp IAM resource có tên tùy chỉnh trong CloudFormation → nghĩ ngay đến CAPABILITY_NAMED_IAM.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -541,7 +541,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Lambda tạo nhiều short-lived connections tới Aurora PostgreSQL replicas gây quá tải connection.</li><li>Requirement quan trọng: cải thiện reliability khi traffic không dự đoán được.</li><li>Ưu tiên: connection pooling, ít vận hành.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon RDS Proxy</strong> gom và tái sử dụng connections, phù hợp Lambda; tạo <strong>read-only endpoint</strong> của proxy để các truy vấn đọc đi vào replicas.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — RDS Proxy + read-only endpoint, giải quyết connection exhaustion.</li><li><strong>B</strong>: ❌ Sai — tăng max_connections chỉ là giải pháp tạm; replica nhỏ hơn bị áp lực, và cluster endpoint trỏ về writer nhỏ.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — scale theo metric phản ứng chậm, không xử lý gốc rễ là số lượng connection.</li><li><strong>D</strong>: ❌ Sai — \"read-only endpoint cho Aurora Data API trên proxy\" không tồn tại.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>RDS Proxy</li><li>Lambda many short-lived connections</li><li>Read-only endpoint</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp Lambda + too many connections tới RDS/Aurora → nghĩ ngay đến RDS Proxy.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -585,7 +585,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: sensor có certificate X.509 từ private CA, chỉ được gửi dữ liệu sau khi lắp đặt.</li><li>Requirement quan trọng: validate serial number, tự động provision khi sensor kết nối lần đầu.</li><li>Ưu tiên: không cần thao tác thủ công khi cài đặt.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Dùng <strong>just-in-time provisioning (JITP)</strong>: đăng ký CA với <strong>AWS IoT Core</strong>, bật auto-registration và gắn provisioning template với <strong>pre-provisioning hook</strong> (Lambda) kiểm tra SerialNumber. Thiết bị chỉ được provision khi lần đầu kết nối sau lắp đặt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — gọi RegisterThing lúc manufacturing nghĩa là đã được phép trước khi lắp đặt.</li><li><strong>B</strong>: ❌ Sai — Step Functions không phải hook hợp lệ cho provisioning template, và StartThingRegistrationTask là bulk registration.</li><li><strong>C</strong>: ✅ Đúng — JITP với CA, auto-registration và Lambda hook.</li><li><strong>D</strong>: ❌ Sai — claim certificate là mô hình fleet provisioning, không dùng certificate đã cấp bởi CA riêng cho từng thiết bị; không có validation bằng Lambda.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Just-in-time provisioning</li><li>Pre-provisioning hook</li><li>Register CA + auto-registration</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp device có cert từ private CA, provision khi kết nối lần đầu → nghĩ ngay đến JITP trong AWS IoT Core.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -629,7 +629,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: CI/CD với GitHub, Jenkins, CodePipeline.</li><li>Requirement quan trọng: thông báo build lỗi, zero downtime, rollback dễ.</li><li>Ưu tiên: deployment an toàn, không gián đoạn.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>GitHub <strong>webhooks</strong> kích hoạt pipeline, plugin Jenkins cho <strong>AWS CodeBuild</strong> chạy unit test, <strong>Amazon SNS</strong> báo build lỗi, và <strong>blue/green deployment</strong> với <strong>AWS CodeDeploy</strong> cho zero downtime và rollback.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — \"GitHub websockets\" không phải cơ chế trigger, và in-place all-at-once gây downtime.</li><li><strong>B</strong>: ✅ Đúng — webhooks + CodeBuild + SNS + blue/green.</li><li><strong>C</strong>: ❌ Sai — websockets sai và AWS X-Ray là tracing, không dùng để unit test.</li><li><strong>D</strong>: ❌ Sai — X-Ray không dùng để unit test; in-place all-at-once gây downtime.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>GitHub webhooks</li><li>Blue/green CodeDeploy</li><li>Zero downtime + rollback</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp zero downtime và rollback dễ → nghĩ ngay đến blue/green deployment.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -673,7 +673,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chia chi phí DynamoDB dùng chung bảng cho từng tenant.</li><li>Requirement quan trọng: granular theo mức tiêu thụ thực của tenant.</li><li>Ưu tiên: LEAST operational effort.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Lambda ghi lại tenant ID cùng số RCU/WCU tiêu thụ cho mỗi transaction vào <strong>CloudWatch Logs</strong>, rồi một Lambda theo lịch tính chi phí từng tenant theo tỷ lệ capacity với tổng chi phí từ <strong>Cost Explorer API</strong>.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tag gắn trên bảng dùng chung không phân tách được chi phí theo tenant.</li><li><strong>B</strong>: ✅ Đúng — đo mức tiêu thụ thực theo tenant và phân bổ chi phí.</li><li><strong>C</strong>: ❌ Sai — đếm số item không phản ánh mức tiêu thụ capacity, và đổi partition key rất tốn công.</li><li><strong>D</strong>: ❌ Sai — response size và duration không phản ánh RCU/WCU; Pricing Calculator không cho chi phí thực.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Shared DynamoDB table</li><li>RCU/WCU per tenant</li><li>Cost Explorer API</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp phân bổ chi phí theo tenant trên tài nguyên dùng chung → nghĩ ngay đến đo mức tiêu thụ theo tenant, không phải tag.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -717,7 +717,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: bảo vệ object trong S3 khỏi kẻ tấn công có long-term credentials bị lộ.</li><li>Requirement quan trọng: giữ dữ liệu 1 năm, bảo vệ cả object hiện có và tương lai.</li><li>Ưu tiên: bảo vệ không thể bị xóa dù account bị xâm nhập.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Tạo account mới chỉ truy cập qua assumed role, bật <strong>S3 Versioning + S3 Object Lock</strong> với default retention 1 năm, replicate dữ liệu mới và dùng <strong>S3 Batch Replication</strong> cho dữ liệu cũ. Kẻ tấn công vào account gốc không xóa được bản sao.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — tách account + Object Lock retention, bảo vệ cả dữ liệu cũ và mới.</li><li><strong>B</strong>: ❌ Sai — MFA Delete cần root credentials và không bật được bằng Lambda; Lifecycle xóa sau 1 năm không bảo vệ.</li><li><strong>C</strong>: ❌ Sai — chỉ kiểm soát việc tạo bucket, không bảo vệ object hiện có.</li><li><strong>D</strong>: ❌ Sai — GuardDuty chỉ phát hiện, không ngăn xóa.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>S3 Object Lock</li><li>Separate account</li><li>S3 Batch Replication</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp dữ liệu phải giữ nguyên và chống xóa dù credentials bị lộ → nghĩ ngay đến S3 Object Lock trong account tách biệt.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -761,7 +761,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: ALB phía sau CloudFront đang nhận request từ user chưa xác thực.</li><li>Requirement quan trọng: mọi backend chỉ phản hồi user đã authenticated.</li><li>Ưu tiên: dùng IdP OIDC sẵn có, ít công sức.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>ALB</strong> hỗ trợ authenticate action tích hợp trực tiếp với OIDC IdP, nên chỉ request đã xác thực mới đến backend, tương tự JWT authorizer ở API Gateway.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — ALB authenticate-oidc với IdP.</li><li><strong>B</strong>: ❌ Sai — signed URLs với policy permissive cho phép mọi request, không xác thực user.</li><li><strong>C</strong>: ❌ Sai — AWS WAF không biết request đã authenticated hay chưa theo OIDC.</li><li><strong>D</strong>: ❌ Sai — CloudTrail và Lambda chỉ phát hiện sau, không chặn theo thời gian thực.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>ALB authenticate-oidc</li><li>JWT authorizer</li><li>Authenticated users only</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp ALB cần xác thực user bằng OIDC/Cognito → nghĩ ngay đến ALB listener authentication action.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -805,7 +805,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Control Tower landing zone cần cái nhìn tập trung về trạng thái security của các account.</li><li>Requirement quan trọng: centralized view cho preventive và detective controls.</li><li>Ưu tiên: dùng dịch vụ tổng hợp findings đa account.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Security Hub</strong> tổng hợp findings và kết quả compliance (kể cả từ AWS Config) từ mọi account, bật cho organization với một <strong>delegated administrator</strong> để có dashboard tập trung.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — conformance pack triển khai rules nhưng không cho central view tổng hợp security posture.</li><li><strong>B</strong>: ❌ Sai — Amazon Detective dùng để điều tra, không phải dashboard posture.</li><li><strong>C</strong>: ❌ Sai — vẫn là Detective, không đáp ứng central security state.</li><li><strong>D</strong>: ✅ Đúng — Security Hub với delegated administrator.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Security Hub</li><li>Delegated administrator</li><li>Centralized security view</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp centralized view security state nhiều account → nghĩ ngay đến AWS Security Hub.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -849,7 +849,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chuyển 60 TB image từ on-premises ở Europe sang S3 ở ap-northeast-1, và đồng bộ ảnh mới hằng ngày.</li><li>Requirement quan trọng: mã hóa in transit, không custom development, tự động.</li><li>Ưu tiên: managed, minimal effort.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS DataSync</strong> agent chuyển dữ liệu tự động theo lịch, mã hóa in transit (TLS), phù hợp cả migration ban đầu lẫn incremental hằng ngày mà không cần code.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — DataSync agent và task theo lịch.</li><li><strong>B</strong>: ❌ Sai — Kinesis Data Firehose không dùng để chuyển file on-premises, và không dùng được kiểu này với S3 Transfer Acceleration.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Snowball chỉ chuyển một lần, không tự động đồng bộ ảnh mới hằng ngày.</li><li><strong>D</strong>: ❌ Sai — cần custom script multipart upload qua VPN, không đạt yêu cầu no custom development.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS DataSync</li><li>Scheduled task</li><li>Encrypted in transit</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp chuyển dữ liệu on-premises sang S3 liên tục và không code → nghĩ ngay đến DataSync.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -893,7 +893,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: response chậm và lỗi tăng sau campaign; lỗi xảy ra khi gọi DynamoDB.</li><li>Requirement quan trọng: cải thiện response time khi app phổ biến hơn.</li><li>Ưu tiên: scalability của tầng dữ liệu.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Throttle Lambda chỉ 1% nhưng Errors 10% với call DynamoDB, nên bottleneck là throughput của bảng. <strong>DynamoDB auto scaling</strong> tăng RCU/WCU theo tải.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Lambda throttle chỉ 1%, không phải nút thắt chính.</li><li><strong>B</strong>: ✅ Đúng — auto scaling xử lý throttling do thiếu capacity trên DynamoDB.</li><li><strong>C</strong>: ❌ Sai — API Gateway không phải nguyên nhân lỗi.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — tái tạo bảng tốn công và không có bằng chứng về hot partition.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>DynamoDB auto scaling</li><li>Throttling RCU/WCU</li><li>Errors khi gọi DynamoDB</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp lỗi và chậm khi gọi DynamoDB lúc traffic tăng → nghĩ ngay đến DynamoDB auto scaling (hoặc on-demand).\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -937,7 +937,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: migrate app có 3 Linux VMs, file storage dùng chung và load balancer HTTP routing sang AWS.</li><li>Requirement quan trọng: nhanh nhất, highly available, FEWEST changes.</li><li>Ưu tiên: lift-and-shift tương đương kiến trúc cũ.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Giữ nguyên mô hình VM với <strong>Amazon EC2</strong> ở 3 AZ, dùng <strong>Amazon EFS</strong> làm shared file storage (POSIX/Linux) và <strong>Application Load Balancer</strong> cho HTTP request-based routing.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — chuyển sang container là thay đổi lớn, S3 không phải file system, NLB không routing HTTP.</li><li><strong>B</strong>: ✅ Đúng — EC2 + EFS + ALB, thay đổi ít nhất.</li><li><strong>C</strong>: ❌ Sai — EKS là thay đổi lớn, FSx for Lustre không phù hợp, NLB không routing HTTP.</li><li><strong>D</strong>: ❌ Sai — 3 Regions không cần thiết, EBS không chia sẻ giữa instances và không có CRR cho EBS.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Fewest changes → lift-and-shift</li><li>EFS shared file system</li><li>ALB HTTP routing</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp migrate nhanh, ít thay đổi, cần shared file Linux → nghĩ ngay đến EC2 + EFS + ALB.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -981,7 +981,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: thu thập network dependencies giữa các VMware VM Linux để lập diagram.</li><li>Requirement quan trọng: diagram gồm host IP, hostname và network connection.</li><li>Ưu tiên: dùng công cụ discovery đúng loại.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Network diagram trong <strong>AWS Migration Hub</strong> cần dữ liệu connection từ <strong>AWS Application Discovery Agent</strong> cài trên server; đồng thời cấp quyền cho Application Discovery Service dùng Migration Hub network diagrams.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Discovery Agent thu thập network connection, hiển thị diagram trong Migration Hub.</li><li><strong>B</strong>: ❌ Sai — Agentless Collector không thu thập network dependencies/connection, và không export diagram .png theo cách này.</li><li><strong>C</strong>: ❌ Sai — Application Migration Service agent dùng để replicate, không dùng để discovery.</li><li><strong>D</strong>: ❌ Sai — cùng lý do, và CloudWatch dashboard không tạo network diagram.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Application Discovery Agent</li><li>Migration Hub network diagram</li><li>Network dependencies</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp network dependency diagram trước migration → nghĩ ngay đến Application Discovery Agent + Migration Hub.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1025,7 +1025,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: SaaS dùng Lambda và RDS MySQL chậm lúc peak vì nhiều database connections.</li><li>Requirement quan trọng: cải thiện scalable performance và availability của database.</li><li>Ưu tiên: scale đọc và quản lý connection.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon Aurora</strong> với <strong>Aurora Replica</strong> scale đọc và tăng availability (failover nhanh), còn <strong>Amazon RDS Proxy</strong> pool và chia sẻ connections từ Lambda, giải quyết gốc rễ vấn đề connection.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — thêm read replica theo alarm phản ứng chậm và không xử lý connections.</li><li><strong>B</strong>: ❌ Sai — connection pool ngoài handler chỉ tái sử dụng trong một execution environment, không gom chung giữa nhiều Lambda.</li><li><strong>C</strong>: ❌ Sai — Route 53 weighted records không cân bằng connection hiệu quả và không quản lý pool.</li><li><strong>D</strong>: ✅ Đúng — Aurora Replica + RDS Proxy.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>RDS Proxy</li><li>Lambda many connections</li><li>Aurora Replica</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp Lambda + nhiều connection DB → nghĩ ngay đến RDS Proxy; cần scale đọc → thêm Aurora Replica.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1069,7 +1069,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: di chuyển dữ liệu shared file (SMB) lên S3 mà app on-premises vẫn truy cập qua SMB.</li><li>Requirement quan trọng: dùng S3 bucket, giữ SMB access cho đến khi app được viết lại.</li><li>Ưu tiên: hybrid access trong giai đoạn chuyển tiếp.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Storage Gateway (S3 File Gateway)</strong> triển khai trên VM on-premises, cung cấp SMB file share lưu data vào <strong>Amazon S3</strong>; copy dữ liệu vào gateway vừa migrate vừa giữ truy cập SMB cho app.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — FSx for Windows File Server không dùng S3 bucket làm shared storage như yêu cầu.</li><li><strong>B</strong>: ❌ Sai — copy thẳng vào S3 làm app mất SMB access.</li><li><strong>C</strong>: ❌ Sai — AWS SMS di chuyển server sang EC2, không dùng S3 và không giữ SMB on-premises.</li><li><strong>D</strong>: ✅ Đúng — S3 File Gateway với SMB share.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>S3 File Gateway</li><li>SMB + S3</li><li>Hybrid migration</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp app on-premises cần SMB/NFS nhưng data ở S3 → nghĩ ngay đến S3 File Gateway.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1113,7 +1113,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Validate barcode toàn cầu, mỗi lần scan phải đọc và ghi vào database ở 3 Region.</li><li>Requirement chính: <strong>LOWEST latency</strong>.</li><li>Ưu tiên: chạy logic càng gần user càng tốt, database multi-Region có thể ghi ở mọi Region.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>DynamoDB global tables</strong> cho phép ghi (multi-active) tại Region gần nhất, kết hợp <strong>Lambda@Edge</strong> chạy logic backend ngay tại edge location của <strong>CloudFront</strong> nên độ trễ thấp nhất.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>Aurora global database</strong> chỉ có 1 writer Region, thao tác ghi từ Region khác phải đi xa nên latency cao.</li><li><strong>B</strong>: ❌ Sai — cùng vấn đề single-writer của Aurora; CloudFront trước EKS cũng không giảm latency ghi.</li><li><strong>C</strong>: ❌ Sai — <strong>CloudFront Functions</strong> không gọi được network/DynamoDB và không có backend logic phức tạp.</li><li><strong>D</strong>: ✅ Đúng — Lambda@Edge gọi được DynamoDB global tables, ghi multi-Region gần user.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>DynamoDB global tables, Lambda@Edge, CloudFront, multi-active write, lowest latency</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp ghi dữ liệu toàn cầu + lowest latency → nghĩ ngay đến DynamoDB global tables + Lambda@Edge\" (CloudFront Functions không truy cập network).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1157,7 +1157,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bảo vệ origin (ALB) để chỉ traffic đi qua CloudFront mới vào được.</li><li>Requirement chính: enhance origin security, ngăn người dùng truy cập trực tiếp ALB.</li><li>Ưu tiên: security, ít vận hành.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Dùng <strong>custom HTTP header bí mật</strong> do CloudFront chèn vào origin request, <strong>AWS WAF</strong> trên ALB chỉ cho phép request có header đúng; secret lưu và tự động rotate bằng <strong>AWS Secrets Manager</strong> + Lambda.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — header secret + WAF string match + Secrets Manager rotation là pattern chuẩn.</li><li><strong>B</strong>: ❌ Sai — ALB chuyển vào private subnet thì CloudFront không truy cập được (ALB internet-facing cần public subnet); IP range thay đổi.</li><li><strong>C</strong>: ❌ Sai — <strong>Parameter Store</strong> không có automatic rotation; ALB không tự kiểm tra header để block (cần WAF).</li><li><strong>D</strong>: ❌ Sai — <strong>Shield Advanced</strong> không dùng \"security group policy\" kiểu này; không phải cách giới hạn origin.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Custom header, origin security, WAF string match, Secrets Manager rotation, CloudFront-only access</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp khóa ALB chỉ cho CloudFront truy cập → nghĩ ngay đến secret custom header + WAF rule\" (hoặc managed prefix list của CloudFront).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1201,7 +1201,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Truy cập dữ liệu ở nhiều Region từ WAN công ty mà không qua public internet.</li><li>Requirement chính: private connectivity, <strong>highly available</strong>, <strong>cost-effective</strong>.</li><li>Ưu tiên: HA + chi phí thấp.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Hai kết nối <strong>Direct Connect</strong> (HA) tới một Region, rồi dùng <strong>Direct Connect Gateway</strong> để tiếp cận VPC ở các Region khác trên backbone AWS, không cần DX riêng cho từng Region.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — DX riêng cho mọi Region tốn kém, và chỉ một đường mỗi Region nên không HA.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — inter-region VPC peering có thể hoạt động nhưng không scale/quản lý tốt bằng DX Gateway; không phải đáp án chuẩn.</li><li><strong>C</strong>: ❌ Sai — <strong>transit VPC</strong> tự quản lý, tốn chi phí và vận hành, thường dùng VPN.</li><li><strong>D</strong>: ✅ Đúng — DX Gateway kết nối nhiều VPC ở nhiều Region qua một DX, rẻ và HA.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Direct Connect Gateway, no public internet, multi-Region, HA (2 DX), cost-effective</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp một DX cần đến nhiều Region → nghĩ ngay đến Direct Connect Gateway.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1245,7 +1245,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>DR cho VM Windows trên VMware on-premises sang AWS, rồi failback.</li><li>Requirement chính: RPO 5 phút, dữ liệu định dạng proprietary, <strong>LEAST operational overhead</strong>.</li><li>Ưu tiên: dịch vụ DR managed hỗ trợ failback.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Elastic Disaster Recovery</strong> replicate liên tục ở mức block (RPO tính bằng giây/phút), tự launch EC2 khi sự cố và hỗ trợ failback về on-premises.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>DataSync</strong> là transfer file theo lịch, không replicate liên tục để đạt RPO 5 phút, phải tự dựng bằng CloudFormation.</li><li><strong>B</strong>: ✅ Đúng — Elastic Disaster Recovery, continuous replication, ít vận hành.</li><li><strong>C</strong>: ❌ Sai — <strong>Storage Gateway file gateway</strong> + <strong>AWS Backup</strong> là file-level, restore thủ công, không đạt RPO 5 phút.</li><li><strong>D</strong>: ❌ Sai — <strong>FSx for Windows</strong> chỉ cho file share; app server/provisioning vẫn thủ công.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Elastic Disaster Recovery, VMware, RPO 5 phút, failback, least operational overhead</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp DR cho server on-premises + RPO thấp + failback → nghĩ ngay đến AWS Elastic Disaster Recovery.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1289,7 +1289,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lambda ở sa-east-1 và ap-northeast-1 ghi vào S3 ở eu-north-1 bị trễ.</li><li>Requirement chính: giảm lag <strong>MOST</strong>, vẫn giữ phân tích tập trung ở eu-north-1.</li><li>Ưu tiên: latency khi ghi dữ liệu cross-Region.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Ghi vào S3 bucket <strong>local</strong> mỗi Region (nhanh), sau đó <strong>S3 Cross-Region Replication</strong> đẩy bất đồng bộ về eu-north-1 trên backbone AWS, nên ứng dụng không phải chờ truyền xa.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>S3 gateway endpoint</strong> chỉ hoạt động cho S3 cùng Region, không giảm lag cross-Region.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — <strong>S3 Transfer Acceleration</strong> có cải thiện nhưng vẫn là ghi đồng bộ xa; local write + CRR hiệu quả hơn.</li><li><strong>C</strong>: ✅ Đúng — ghi local rồi CRR.</li><li><strong>D</strong>: ❌ Sai — tăng memory/multipart không giải quyết độ trễ mạng giữa các Region.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>S3 Cross-Region Replication, local bucket, centralize, cross-Region latency</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp ghi S3 cross-Region bị lag + cần tập trung dữ liệu → nghĩ ngay đến bucket local + CRR.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1333,7 +1333,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cho tối đa 10 VPC của business unit truy cập ứng dụng sau NLB ở shared VPC.</li><li>Requirement chính: <strong>CIDR chồng lấn</strong>, chỉ VPC được ủy quyền mới kết nối.</li><li>Ưu tiên: kết nối one-way tới service, kiểm soát truy cập.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS PrivateLink</strong> (VPC endpoint service trên NLB) không yêu cầu CIDR khác nhau, và bật <strong>endpoint acceptance</strong> để chỉ chấp nhận VPC được ủy quyền.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>Transit Gateway</strong> không hỗ trợ CIDR chồng lấn.</li><li><strong>B</strong>: ✅ Đúng — PrivateLink + require acceptance, chịu được overlapping CIDR.</li><li><strong>C</strong>: ❌ Sai — <strong>VPC peering</strong> không dùng được với CIDR chồng lấn.</li><li><strong>D</strong>: ❌ Sai — <strong>Site-to-Site VPN</strong> giữa VPC không giải quyết CIDR trùng, và phức tạp (customer gateway cho VPC không hợp lý).</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>PrivateLink, endpoint service, NLB, overlapping CIDR, acceptance required</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp CIDR chồng lấn + expose service cho nhiều VPC → nghĩ ngay đến PrivateLink (NLB + endpoint service).\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1377,7 +1377,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Migrate website microservices đang chạy trên Kubernetes tự quản lý sang AWS.</li><li>Requirement chính: <strong>LEAST effort to migrate</strong>; manifest đã nằm trong source control.</li><li>Ưu tiên: tái dùng manifest Kubernetes, giảm vận hành.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon EKS</strong> chạy Kubernetes chuẩn nên deploy lại manifest nguyên trạng; copy image sang <strong>Amazon ECR</strong>; PostgreSQL chuyển sang <strong>Aurora PostgreSQL</strong>.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>App Runner</strong> không chạy Kubernetes manifest.</li><li><strong>B</strong>: ✅ Đúng — EKS + ECR + Aurora PostgreSQL, ít thay đổi nhất.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — <strong>ECS</strong> phải viết lại task definition/service cho mỗi deployment, tốn effort.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — tự quản lý Kubernetes/registry/DB trên EC2, nhiều vận hành, không tận dụng managed service.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Amazon EKS, Kubernetes manifests, ECR, Aurora PostgreSQL, least effort</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp migrate Kubernetes tự quản lý sang AWS → nghĩ ngay đến Amazon EKS.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1421,7 +1421,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Ứng dụng contest có thời gian chạy biến đổi, không cần giữ dữ liệu sau contest.</li><li>Requirement chính: <strong>MOST cost-effectively</strong>.</li><li>Ưu tiên: trả theo mức dùng, tự dọn dữ liệu.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>DynamoDB</strong> (on-demand) + <strong>Lambda</strong> là serverless, chỉ trả khi dùng; <strong>DynamoDB TTL</strong> tự xóa entry hết hạn, không tốn công và không tốn phí xóa.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — <strong>DAX</strong> cluster và <strong>Fargate</strong> chạy liên tục tốn thêm chi phí.</li><li><strong>B</strong>: ❌ Sai — <strong>Amazon Redshift</strong> không phù hợp workload này và đắt.</li><li><strong>C</strong>: ❌ Sai — vẫn giữ RDS và thêm <strong>ElastiCache</strong>, tăng chi phí; không giảm cost.</li><li><strong>D</strong>: ✅ Đúng — DynamoDB + Lambda + TTL, rẻ nhất.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>DynamoDB TTL, Lambda, serverless, cost-effective, variable workload</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp dữ liệu tạm thời + workload thất thường + rẻ nhất → nghĩ ngay đến DynamoDB + Lambda + TTL.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1465,7 +1465,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>EC2 làm transparent proxy, route table trỏ default route về proxy nhưng traffic không ra internet.</li><li>Requirement chính: tìm nguyên nhân cấu hình thiếu.</li><li>Ưu tiên: kỹ thuật chuyển tiếp traffic của EC2.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Mặc định EC2 chỉ nhận traffic có đích là chính nó (<strong>source/destination check</strong>). Proxy/NAT instance phải <strong>tắt source/destination check</strong> để forward traffic.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — disable source/destination check trên các proxy instance.</li><li><strong>B</strong>: ❌ Sai — security group nội bộ không giải quyết việc forward traffic.</li><li><strong>C</strong>: ❌ Sai — DHCP option set chỉ liên quan DNS, không phải route traffic.</li><li><strong>D</strong>: ❌ Sai — thêm ENI không cần thiết; vấn đề là source/destination check.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Source/destination check, transparent proxy, NAT instance, route table default route</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp EC2 làm proxy/NAT/firewall appliance không forward được traffic → nghĩ ngay đến tắt source/destination check.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1509,7 +1509,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>VPC tạo thủ công cần được quản lý bằng IaC.</li><li>Requirement chính: <strong>LEAST effort</strong>, đã dùng <strong>AWS CloudFormation</strong>.</li><li>Ưu tiên: ít thay đổi, không tạo lại VPC.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>CloudFormation resource import</strong> cho phép đưa tài nguyên có sẵn vào stack bằng template mô tả đúng cấu hình hiện tại, không tạo lại và không thêm công cụ mới.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — <strong>AWS CDK</strong> import được nhưng phải chuyển sang công cụ mới, nhiều effort hơn.</li><li><strong>B</strong>: ❌ Sai — <strong>StackSets</strong> dùng để triển khai multi-account/Region, không phải để import.</li><li><strong>C</strong>: ✅ Đúng — template + \"Import existing resources\" trong CloudFormation.</li><li><strong>D</strong>: ❌ Sai — <strong>AWS SAM</strong> không dùng để import VPC.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>CloudFormation import, existing resources, least effort, IaC</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp tài nguyên tạo thủ công cần đưa vào IaC → nghĩ ngay đến CloudFormation resource import.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1553,7 +1553,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Phân phối file game 5 GB cho người dùng toàn cầu.</li><li>Requirement chính: tốc độ download tốt và <strong>chi phí truyền thấp</strong> ở mọi nơi.</li><li>Ưu tiên: performance + cost.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon S3</strong> lưu file, <strong>Amazon CloudFront</strong> cache tại edge location giúp tải nhanh và giảm chi phí data transfer; <strong>Route 53</strong> cho domain.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — EC2 + EBS + FTP tốn chi phí, không có edge caching, vận hành nhiều.</li><li><strong>B</strong>: ❌ Sai — <strong>EFS</strong> + EC2 đắt hơn và cũng không có CDN.</li><li><strong>C</strong>: ✅ Đúng — S3 + CloudFront.</li><li><strong>D</strong>: ❌ Sai — <strong>Requester Pays</strong> chuyển phí cho người tải, không cải thiện hiệu năng và không phù hợp public download.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>CloudFront, S3, edge caching, global download, low transfer cost</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp phân phối file lớn toàn cầu + giảm chi phí → nghĩ ngay đến S3 + CloudFront.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1597,7 +1597,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, C, F</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, C, F</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Website chạy trên một EC2 Tomcat, một public subnet, DB MySQL trên EC2 tự quản lý, bị outage khi traffic cao.</li><li>Requirement chính: tăng <strong>reliability</strong>, chọn 3 hành động.</li><li>Ưu tiên: loại bỏ single point of failure ở web tier, DB tier và network.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Web tier dùng <strong>Auto Scaling + ALB</strong>; DB chuyển sang <strong>Aurora</strong> có replica (HA, failover); thêm public subnet ở AZ khác để ALB và ASG trải đa AZ.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Auto Scaling group + ALB loại bỏ single web server.</li><li><strong>B</strong>: ❌ Sai — thêm peering connection không tăng reliability (peering là redundant sẵn bởi AWS).</li><li><strong>C</strong>: ✅ Đúng — Aurora với replica cho HA và failover.</li><li><strong>D</strong>: ❌ Sai — NAT gateway trong DB VPC không liên quan outage.</li><li><strong>E</strong>: ❌ Sai — di chuyển Tomcat vào DB VPC không tăng reliability (VPC chỉ có private subnet).</li><li><strong>F</strong>: ✅ Đúng — subnet ở AZ khác cho ALB/ASG đa AZ.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Auto Scaling, ALB, Aurora Replica, Multi-AZ, single point of failure</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp outage do traffic cao + single instance → nghĩ ngay đến ASG + ALB + Multi-AZ + Aurora.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1651,7 +1651,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, E</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>ALB thỉnh thoảng trả 502, cần hiển thị trang lỗi tùy chỉnh thay trang mặc định của ALB.</li><li>Requirement chính: <strong>LEAST operational overhead</strong>.</li><li>Ưu tiên: dùng tính năng có sẵn của CloudFront, không viết automation.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Lưu trang lỗi trên <strong>Amazon S3</strong> (static website) và cấu hình <strong>CloudFront custom error response</strong> để trả trang đó khi origin trả 502.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — S3 chứa trang lỗi tĩnh.</li><li><strong>B</strong>: ❌ Sai — dùng CloudWatch + Lambda sửa listener rule phức tạp, và 502 tạm thời không do health check.</li><li><strong>C</strong>: ❌ Sai — Route 53 health check/DNS failover không phù hợp lỗi 502 thoáng qua và tốn công.</li><li><strong>D</strong>: ❌ Sai — cùng vấn đề phức tạp như B.</li><li><strong>E</strong>: ✅ Đúng — CloudFront custom error page.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>CloudFront custom error response, S3 static website, 502 Bad Gateway, least operational overhead</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp muốn trang lỗi tùy chỉnh với CloudFront trước origin → nghĩ ngay đến CloudFront custom error response + S3.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1700,7 +1700,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Migrate Aurora MySQL sang account khác cùng Region, cùng organization.</li><li>Requirement chính: <strong>minimize downtime</strong> trước khi DNS cutover.</li><li>Ưu tiên: chọn 2 cách di chuyển hợp lệ.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Chia sẻ <strong>snapshot</strong> sang account mới rồi restore tạo cluster; hoặc dùng <strong>AWS DMS</strong> để replicate (CDC) giữa hai Aurora cluster.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — share snapshot với account mới và restore.</li><li><strong>B</strong>: ✅ Đúng — DMS đồng bộ liên tục giữa hai cluster.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — AWS Backup cross-account được nhưng đề chọn A và B làm hai cách chuẩn.</li><li><strong>D</strong>: ❌ Sai — <strong>AWS Application Migration Service</strong> dành cho server (lift-and-shift), không migrate DB Aurora.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Aurora snapshot share, AWS DMS, cross-account, minimal downtime</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp migrate Aurora cross-account → nghĩ ngay đến share snapshot hoặc DMS.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1744,7 +1744,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>50 VPC phải nối với nhau, và VPC khách hàng truy cập một chiều vào management VPC.</li><li>Requirement chính: <strong>LEAST operational overhead</strong>, số VPC sẽ tăng.</li><li>Ưu tiên: dễ mở rộng.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Transit Gateway</strong> kết nối hub-and-spoke cho mọi VPC của công ty, còn <strong>PrivateLink</strong> (NLB + endpoint service) cho khách hàng truy cập một chiều vào service license.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Transit Gateway scale tốt cho nhiều VPC.</li><li><strong>B</strong>: ❌ Sai — full-mesh peering giữa 50 VPC phức tạp, không scale.</li><li><strong>C</strong>: ✅ Đúng — PrivateLink cho truy cập một chiều.</li><li><strong>D</strong>: ❌ Sai — VPN appliance ở mỗi khách hàng tốn vận hành.</li><li><strong>E</strong>: ❌ Sai — peering với từng khách hàng cho truy cập hai chiều, không scale, CIDR có thể trùng.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Transit Gateway, PrivateLink, one-way access, hub-and-spoke, scalable</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp nhiều VPC nối với nhau + service one-way cho bên ngoài → nghĩ ngay đến Transit Gateway + PrivateLink.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1793,7 +1793,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B, D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Nhiều LOB account cần một hóa đơn gộp, tách chi phí từng account, hạn chế service theo policy.</li><li>Requirement chính: governance bằng guardrail nhưng account vẫn có quyền admin.</li><li>Ưu tiên: quản lý tập trung.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Một <strong>AWS Organization</strong> duy nhất (consolidated billing có sẵn, hóa đơn tách theo account) và <strong>SCP</strong> giới hạn service/feature mà không ảnh hưởng quyền admin trong account.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — mỗi LOB một organization sẽ không có hóa đơn gộp duy nhất.</li><li><strong>B</strong>: ✅ Đúng — một organization, mời các account vào.</li><li><strong>C</strong>: ❌ Sai — <strong>service quotas</strong> giới hạn số lượng, không phải quyền sử dụng service.</li><li><strong>D</strong>: ✅ Đúng — <strong>SCP</strong> allow-list service được duyệt.</li><li><strong>E</strong>: ❌ Sai — consolidated billing đã tự bật khi tạo Organization, không phải bước riêng.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>AWS Organizations, SCP, consolidated billing, single invoice, governance</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp hạn chế service ở nhiều account → nghĩ ngay đến Organizations + SCP.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1842,7 +1842,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D, E</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Route 53 latency-based + weighted record, tắt hết web server ở một Region nhưng không failover.</li><li>Requirement chính: tìm nguyên nhân khiến failover không xảy ra.</li><li>Ưu tiên: health check và target health.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Failover cần <strong>Evaluate Target Health</strong> trên latency alias record và <strong>health check</strong> gắn cho các weighted record; thiếu một trong hai thì Route 53 không biết server đã chết.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — weight chỉ phân chia traffic giữa các record trong cùng Region, không chặn failover.</li><li><strong>B</strong>: ❌ Sai — server lỗi ở Region *thứ cấp* không giải thích việc Region đã tắt không failover.</li><li><strong>C</strong>: ❌ Sai — latency và weighted có thể kết hợp (nested records).</li><li><strong>D</strong>: ✅ Đúng — thiếu Evaluate Target Health trên latency alias.</li><li><strong>E</strong>: ✅ Đúng — thiếu health check cho weighted records.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Route 53 health check, Evaluate Target Health, latency-based routing, weighted records</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp Route 53 không failover → nghĩ ngay đến thiếu health check hoặc Evaluate Target Health.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1891,7 +1891,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Thu thập dữ liệu sensor qua IoT Core, chuyển đổi và cho analyst query SQL.</li><li>Requirement chính: tăng availability, giảm maintenance, tối ưu <strong>operational overhead và cost</strong>.</li><li>Ưu tiên: serverless, managed.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Kinesis Data Firehose</strong> + <strong>Lambda</strong> chuyển sang <strong>Parquet</strong> lưu <strong>S3</strong>, analyst query bằng <strong>Athena</strong> (SQL serverless) nên không còn server để patch.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>Aurora MySQL</strong> DB instance vẫn phải quản lý và tốn chi phí hơn.</li><li><strong>B</strong>: ✅ Đúng — Firehose + Lambda + Parquet + S3 + Athena, serverless.</li><li><strong>C</strong>: ❌ Sai — Managed Service for Apache Flink + Aurora tốn chi phí và vận hành.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Flink chạy liên tục tốn kém hơn Firehose + Lambda cho bài toán đơn giản.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>IoT Core, Kinesis Data Firehose, Parquet, Athena, serverless</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp dữ liệu stream + query SQL + ít vận hành → nghĩ ngay đến Firehose + S3 + Athena.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1935,7 +1935,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B, E</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Health check ALB trỏ vào trang catalog phụ thuộc DB, DB quá tải khiến Auto Scaling thay instance liên tục.</li><li>Requirement chính: khắc phục và cải thiện monitoring toàn stack.</li><li>Ưu tiên: tách health check web tier khỏi DB, giảm tải DB.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Target group health check dùng <strong>trang HTML đơn giản</strong>, còn <strong>Route 53 health check</strong> kiểm tra trang product để đánh giá toàn bộ chức năng; thêm <strong>ElastiCache</strong> giảm tải database.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>RDS MySQL</strong> không có \"single reader endpoint\" cho read replica (khác Aurora).</li><li><strong>B</strong>: ✅ Đúng — health check đơn giản + Route 53 health check + CloudWatch alarm.</li><li><strong>C</strong>: ❌ Sai — chỉ check TCP không đủ xác nhận web server hoạt động tốt.</li><li><strong>D</strong>: ❌ Sai — recover là hành động cho lỗi hardware instance, không giải quyết load cao.</li><li><strong>E</strong>: ✅ Đúng — ElastiCache giảm tải DB.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Health check, Route 53 health check, ElastiCache, shallow vs deep health check, CloudWatch alarm</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp ASG thay instance liên tục vì DB chậm → nghĩ ngay đến shallow health check cho ALB + deep check ở Route 53 + cache.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -1984,7 +1984,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Control plane và data plane production EKS phải nằm on-premises, cần giải pháp Kubernetes do AWS quản lý.</li><li>Requirement chính: <strong>LEAST operational overhead</strong>.</li><li>Ưu tiên: managed, local control plane.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Outposts</strong> với <strong>EKS local cluster</strong> chạy cả control plane và worker nodes on-premises, do AWS quản lý.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — EKS local cluster trên Outposts, control plane on-premises.</li><li><strong>B</strong>: ❌ Sai — <strong>EKS Anywhere</strong> là bản tự vận hành trên phần cứng của công ty, không phải managed bởi AWS.</li><li><strong>C</strong>: ❌ Sai — <strong>extended cluster</strong> đặt control plane ở AWS Region, không thỏa yêu cầu control plane on-premises.</li><li><strong>D</strong>: ❌ Sai — EKS Anywhere trên Outposts không được hỗ trợ cách này và tự quản lý.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>AWS Outposts, EKS local cluster, control plane on-premises, extended cluster</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp EKS control plane phải ở on-premises + AWS managed → nghĩ ngay đến Outposts local cluster.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2028,7 +2028,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Nhiều account dev (VPC, CIDR không chồng lấn) cần kết nối private tới Aurora ở shared services account.</li><li>Requirement chính: <strong>LEAST operational overhead</strong>.</li><li>Ưu tiên: kết nối mạng đa account, dễ mở rộng.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Chia sẻ <strong>Transit Gateway</strong> bằng <strong>AWS RAM</strong> để mọi VPC dev gắn vào và truy cập Aurora; CIDR không chồng lấn nên phù hợp.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — RAM không chia sẻ trực tiếp được DB cluster để kết nối mạng như vậy.</li><li><strong>B</strong>: ✅ Đúng — Transit Gateway + RAM, scale tốt.</li><li><strong>C</strong>: ❌ Sai — ALB không trỏ trực tiếp được vào IP của DB và cần NLB cho PrivateLink; phức tạp.</li><li><strong>D</strong>: ❌ Sai — VPN + phần mềm Marketplace tốn vận hành.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Transit Gateway, AWS RAM, multi-account, shared services, non-overlapping CIDR</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp nhiều account cần truy cập tài nguyên chung + CIDR không trùng → nghĩ ngay đến Transit Gateway + RAM.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2072,7 +2072,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tự động phát hiện chi phí tăng do tài nguyên test bị bỏ quên và thông báo cho operations.</li><li>Requirement chính: xác định tài nguyên gây tăng chi phí, tự động notify.</li><li>Ưu tiên: ít vận hành, chi tiết đến service/tài nguyên.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Cost Anomaly Detection</strong> với monitor loại <strong>AWS services</strong> phát hiện bất thường theo từng service và chỉ ra nguyên nhân gốc, kèm subscription để thông báo.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — alarm tổng ngưỡng cố định không chỉ ra tài nguyên gây tăng.</li><li><strong>B</strong>: ❌ Sai — cũng chỉ là tổng ước tính, không xác định tài nguyên.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — monitor <strong>Linked account</strong> theo dõi theo account, ít chi tiết hơn theo service.</li><li><strong>D</strong>: ✅ Đúng — monitor AWS services, xác định service/tài nguyên tăng chi phí.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Cost Anomaly Detection, cost monitor, AWS services, root cause, subscription</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp phát hiện chi phí bất thường + tìm tài nguyên gây ra → nghĩ ngay đến Cost Anomaly Detection.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2116,7 +2116,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Storage dùng chung cho Linux server, 100 GB, peak 225 MiBps đọc, Multi-AZ, DR Region RPO dưới 1 giờ.</li><li>Requirement chính: shared file system đáp ứng throughput và DR.</li><li>Ưu tiên: Multi-AZ, replication cross-Region.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon EFS</strong> là file system dùng chung Multi-AZ, throughput cấu hình được (bursting/provisioned) và có <strong>EFS Replication</strong> sang Region khác (RPO tính theo phút).</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — EFS Multi-AZ + replication sang DR Region.</li><li><strong>B</strong>: ❌ Sai — <strong>FSx for Lustre</strong> dùng cho HPC; backup cross-Region không đảm bảo RPO dưới 1 giờ.</li><li><strong>C</strong>: ❌ Sai — <strong>EBS Multi-Attach</strong> không phải shared file system cho nhiều instance Multi-AZ; EBS chỉ trong một AZ.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — <strong>FSx for OpenZFS</strong> + DataSync tự dựng, nhiều vận hành hơn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Amazon EFS, Multi-AZ, EFS Replication, shared file system, RPO</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp shared file system cho Linux + Multi-AZ + DR cross-Region → nghĩ ngay đến EFS + replication.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2160,7 +2160,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Vùng không có internet, sensor chỉ upload qua FTP, 6 TB dữ liệu trong 1 tuần, cần chuyển lên object storage ASAP sau thí nghiệm.</li><li>Requirement chính: có FTP server tại chỗ, dữ liệu cuối cùng nằm trong <strong>Amazon S3</strong>.</li><li>Ưu tiên: offline transfer.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Snowcone</strong> chạy được EC2 instance để cài <strong>FTP server</strong>, sensor upload vào đó; trả thiết bị cho AWS để nạp dữ liệu vào S3.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — sensor chỉ hỗ trợ FTP, không phải NFS; DataSync không phù hợp việc này.</li><li><strong>B</strong>: ❌ Sai — sensor không thể bị script kéo dữ liệu, và dữ liệu lên dạng EBS volume chứ không phải object storage.</li><li><strong>C</strong>: ✅ Đúng — FTP server trên EC2 trong Snowcone, dữ liệu vào S3.</li><li><strong>D</strong>: ❌ Sai — Snowcone không hỗ trợ FSx và kết quả là EBS, không phải S3.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Snowcone, EC2 on device, FTP server, offline, S3</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp site không có internet + sensor chỉ FTP → nghĩ ngay đến Snow device chạy EC2 làm FTP server.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2204,7 +2204,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Mỗi business unit chỉ xem được chi phí của account mình bằng Athena từ một CUR tập trung.</li><li>Requirement chính: phân quyền theo account, <strong>LEAST operational complexity</strong>.</li><li>Ưu tiên: cô lập dữ liệu CUR theo từng member account.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Lambda kích hoạt bởi S3 event tách dữ liệu của từng member account vào <strong>prefix</strong> riêng trong <strong>Amazon S3</strong>, bucket policy cho từng account truy cập prefix của mình, rồi dùng Athena.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>AWS RAM</strong> không chia sẻ được dữ liệu CUR trong S3.</li><li><strong>B</strong>: ✅ Đúng — tách dữ liệu theo account vào prefix + bucket policy.</li><li><strong>C</strong>: ❌ Sai — <strong>Cost Explorer</strong> saved report không cho query bằng Athena.</li><li><strong>D</strong>: ❌ Sai — tạo CUR riêng ở mỗi member account làm mỗi account thấy dữ liệu không đủ chi tiết/cần cấu hình lặp, phức tạp hơn và không dùng CUR trung tâm.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Cost and Usage Report, Athena, S3 prefix, bucket policy, per-account access</p><p><strong>🧠 MẸO THI</strong></p><p>\"Gặp CUR tập trung cần chia dữ liệu theo account → nghĩ ngay đến tách prefix S3 + bucket policy.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2248,7 +2248,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Direct Connect 1 Gbps đang là single point of failure, cần HA, fault tolerant và secure.</li><li>Requirement chính: có đường dự phòng và mã hóa, <strong>MOST cost-effectively</strong>.</li><li>Ưu tiên: cost thấp nhất mà vẫn đạt resilience + security.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Site-to-Site VPN (IPsec) qua internet làm backup cho Direct Connect rẻ hơn nhiều so với connection thứ hai, đồng thời mã hóa dữ liệu khi truyền. Static VPN đơn giản và không có yêu cầu đặc biệt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — MACsec chỉ hỗ trợ dedicated connection 10/100 Gbps, không dùng được với 1 Gbps; private IP VPN còn cần transit VIF.</li><li><strong>B</strong>: ❌ Sai — Connection thứ hai đắt, MACsec không hỗ trợ 1 Gbps.</li><li><strong>C</strong>: ❌ Sai — Nhiều VIF vẫn chạy trên cùng một connection vật lý, không tăng resilience và không mã hóa.</li><li><strong>D</strong>: ✅ Đúng — VPN backup rẻ, mã hóa IPsec, tạo đường dự phòng.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Direct Connect backup bằng Site-to-Site VPN</li><li>MACsec chỉ 10/100 Gbps</li><li>MOST cost-effectively</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Direct Connect HA + cost-effective\" → nghĩ ngay đến <strong>Site-to-Site VPN làm backup</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2292,7 +2292,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: lưu video tới 4 GB và dữ liệu profile dạng text sau khi modernize.</li><li>Requirement chính: storage scale nhanh, không ảnh hưởng performance ứng dụng.</li><li>Ưu tiên: scalability, dùng đúng loại storage cho đúng loại dữ liệu.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Video là object lớn nên để ở Amazon S3 (scale gần như không giới hạn, hỗ trợ object tới 5 TB), metadata/profile để ở Amazon DynamoDB cùng S3 key. DMS + SCT hỗ trợ chuyển MySQL sang DynamoDB.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Lưu video base64 trong cột TEXT làm phình DB, giảm performance.</li><li><strong>B</strong>: ✅ Đúng — Video lên S3, DynamoDB giữ profile và S3 key.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Keyspaces dùng được nhưng không phải đích chuẩn cho migrate bảng MySQL đơn giản, kém phổ biến hơn DynamoDB.</li><li><strong>D</strong>: ❌ Sai — DynamoDB giới hạn item 400 KB, không chứa nổi video 4 GB.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Large objects → Amazon S3</li><li>DynamoDB item limit 400 KB</li><li>Lưu S3 key trong database</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"file lớn (video/ảnh) cần lưu\" → nghĩ ngay đến <strong>S3 + lưu pointer/key trong DB</strong>, không bao giờ nhét blob vào DB.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2336,7 +2336,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: khôi phục tài liệu bị xóa trên EFS với RPO 100 phút.</li><li>Requirement chính: tần suất backup đủ dày (&lt; 100 phút) và backup phải dùng được KMS key mã hóa file system.</li><li>Ưu tiên: đáp ứng RPO, quyền KMS đúng.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Default backup plan chỉ chạy hằng ngày nên không đạt RPO. Tạo backup plan mới với lịch hourly (60 phút &lt; 100 phút), role dùng để backup phải được cấp quyền trên KMS key.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Backup plan mới hourly đạt RPO, role được cấp quyền KMS key.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — Mỗi 30 phút cũng đạt RPO nhưng thường tốn chi phí hơn mức cần thiết; đề chọn A làm đáp án.</li><li><strong>C</strong>: ❌ Sai — Continuous backup (PITR) không hỗ trợ cho EFS.</li><li><strong>D</strong>: ❌ Sai — EFS Replication không phục hồi file bị xóa vì xóa cũng được replicate; backup plan mặc định vẫn daily.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS Backup plan schedule</li><li>RPO 100 phút → hourly</li><li>KMS key policy cho backup role</li><li>Replication ≠ backup</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"recover deleted files + RPO\" → nghĩ ngay đến <strong>AWS Backup với tần suất ngắn hơn RPO</strong>, không dùng replication.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2380,7 +2380,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: bắt buộc MFA khi dùng AWS CLI để thao tác S3.</li><li>Requirement chính: IAM policy deny nếu không có MFA, và CLI phải có credentials mang MFA context.</li><li>Ưu tiên: security.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Long-term access keys không mang MFA, nên phải gọi `sts get-session-token` với MFA code để lấy temporary credentials, rồi dùng trong profile. Group policy deny khi `aws:MultiFactorAuthPresent` không true.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Bucket policy không \"prompt\" MFA được; access key thường không có MFA.</li><li><strong>B</strong>: ❌ Sai — Group không có trust policy và không thể \"assume group\".</li><li><strong>C</strong>: ❌ Sai — Access key thông thường luôn bị deny vì không có MFA context, CLI không dùng được.</li><li><strong>D</strong>: ✅ Đúng — Deny without MFA + STS temporary credentials có MFA.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>aws:MultiFactorAuthPresent</li><li>sts get-session-token</li><li>Temporary credentials</li><li>CLI + MFA</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"CLI phải dùng MFA\" → nghĩ ngay đến <strong>STS GetSessionToken + deny policy điều kiện MFA</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2424,7 +2424,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: migrate 60 ứng dụng .NET Framework trên Windows.</li><li>Requirement chính: nhanh, không đổi code, không quản lý infrastructure.</li><li>Ưu tiên: minimum migration time, managed.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Windows Web Application Migration Assistant đưa ứng dụng IIS lên AWS Elastic Beanstalk (managed) mà không đổi code, giảm tối đa việc vận hành.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Refactor/containerize tốn thời gian; .NET Framework không chạy trên Linux container Fargate dễ dàng.</li><li><strong>B</strong>: ✅ Đúng — Migration Assistant + Elastic Beanstalk, managed, không đổi code.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Chạy được nhưng phải tự quản lý EC2.</li><li><strong>D</strong>: ❌ Sai — Refactor tốn thời gian và EKS phức tạp hơn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Windows Web Application Migration Assistant</li><li>Elastic Beanstalk</li><li>No code change</li><li>Managed infrastructure</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"migrate IIS/.NET web app, no code change, no infra management\" → nghĩ ngay đến <strong>Migration Assistant + Elastic Beanstalk</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2468,7 +2468,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: batch simulation đọc 15-20 GB từ S3.</li><li>Requirement chính: không gấp, chịu được gián đoạn, <strong>MOST cost-effectively</strong>.</li><li>Ưu tiên: cost.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Workload chịu gián đoạn và không time sensitive là trường hợp lý tưởng cho Spot Instances. AWS Batch quản lý job và SPOT_CAPACITY_OPTIMIZED giảm khả năng bị interrupt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Lambda giới hạn 15 phút và provisioned capacity đắt, không hợp job dài.</li><li><strong>B</strong>: ✅ Đúng — Batch + Spot-only, rẻ nhất.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — On-Demand thêm chi phí không cần thiết.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — EKS vận hành phức tạp, có On-Demand nên đắt hơn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS Batch</li><li>Spot Instances</li><li>SPOT_CAPACITY_OPTIMIZED</li><li>Interruption tolerant</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"batch, không time sensitive, chịu gián đoạn, cost\" → nghĩ ngay đến <strong>AWS Batch + Spot</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2512,7 +2512,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: archive batch ảnh đã zip (1 GB) từ NFS on-premises lên AWS.</li><li>Requirement chính: retrieve trong 1 tuần, giới hạn bandwidth, lên lịch ngoài giờ, có compute on-prem (Hyper-V).</li><li>Ưu tiên: cost thấp nhất.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>DataSync agent chạy dạng Hyper-V VM on-premises hỗ trợ bandwidth throttling và scheduling, ghi thẳng vào S3 Glacier Deep Archive (rẻ nhất, retrieve trong 12-48 giờ, đạt yêu cầu 1 tuần).</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Agent không chạy trên EC2 GPU để đọc NFS on-prem hợp lý; Glacier Instant Retrieval đắt hơn mức cần.</li><li><strong>B</strong>: ✅ Đúng — Agent Hyper-V VM, Deep Archive rẻ nhất.</li><li><strong>C</strong>: ❌ Sai — Qua S3 Standard rồi lifecycle tốn thêm chi phí và agent trên EC2 không cần thiết.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Tape Gateway chạy được nhưng phức tạp hơn và không có bandwidth scheduling tiện như DataSync.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>DataSync agent on Hyper-V</li><li>S3 Glacier Deep Archive</li><li>Bandwidth throttling + schedule</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"archive, retrieve vài ngày, giới hạn bandwidth/lịch\" → nghĩ ngay đến <strong>DataSync + Glacier Deep Archive</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2556,7 +2556,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: đếm số unique user theo client theo ngày/tuần/tháng từ log login trong CloudWatch Logs.</li><li>Requirement chính: <strong>LEAST change to the application</strong>.</li><li>Ưu tiên: không sửa code ứng dụng.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Lambda subscribe vào CloudWatch Logs có thể parse log, trích user name/client name và đẩy custom metric với dimension tương ứng mà không đổi code ứng dụng.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Metric filter không tạo được metric với dimension động từ nội dung log (user name/client name) kiểu này.</li><li><strong>B</strong>: ❌ Sai — Phải sửa application logic, vi phạm \"least change\".</li><li><strong>C</strong>: ❌ Sai — CloudWatch agent không trích metric từ nội dung log theo kiểu này.</li><li><strong>D</strong>: ✅ Đúng — Lambda xử lý log stream, không đổi ứng dụng.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CloudWatch Logs subscription</li><li>Lambda custom metric</li><li>Dimensions</li><li>LEAST change</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"xử lý log tùy biến, không sửa app\" → nghĩ ngay đến <strong>CloudWatch Logs subscription + Lambda</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2600,7 +2600,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: thay IAM user secret key trong GitHub Actions bằng credential ngắn hạn.</li><li>Requirement chính: không dùng long-lived key.</li><li>Ưu tiên: LEAST operational overhead.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>GitHub hỗ trợ OIDC native. Tạo IAM OIDC IdP + role với trust policy `sts:AssumeRoleWithWebIdentity`, pipeline nhận temporary credentials, không cần quản lý secret.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — GitHub Actions không dùng SAML cho pipeline; cấu hình phức tạp.</li><li><strong>B</strong>: ✅ Đúng — OIDC provider cho GitHub, ít vận hành nhất.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Thêm Cognito identity pool là thành phần thừa.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — IAM Roles Anywhere cần PKI/Private CA và quản lý certificate, overhead cao.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>GitHub OIDC</li><li>AssumeRoleWithWebIdentity</li><li>Short-lived credentials</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"CI/CD (GitHub/GitLab) truy cập AWS, bỏ access key\" → nghĩ ngay đến <strong>IAM OIDC identity provider + role</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2644,7 +2644,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B, E</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: fleet EC2 t2.micro crawl URL từ SQS, thỉnh thoảng idle, ghi csv vào EFS.</li><li>Requirement chính: tối ưu chi phí; mỗi URL xử lý dưới 10 giây, tần suất thấp.</li><li>Ưu tiên: cost, pay-per-use.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Task ngắn và không đều hợp với AWS Lambda (chỉ trả khi chạy, trigger từ SQS). Lưu kết quả ở Amazon S3 rẻ hơn EFS rất nhiều.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Instance lớn hơn vẫn idle, tốn kém hơn.</li><li><strong>B</strong>: ✅ Đúng — Lambda + SQS, không trả tiền khi idle.</li><li><strong>C</strong>: ❌ Sai — Neptune là graph DB, đắt và không phù hợp lưu file csv.</li><li><strong>D</strong>: ❌ Sai — Aurora Serverless không cần thiết cho file csv, đắt hơn S3.</li><li><strong>E</strong>: ✅ Đúng — S3 là nơi lưu object rẻ nhất.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Lambda + SQS event source</li><li>Idle instances → serverless</li><li>S3 thay EFS</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"task ngắn, rời rạc, instance idle\" → nghĩ ngay đến <strong>Lambda</strong>; \"lưu file rẻ\" → <strong>S3</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2693,7 +2693,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: migrate CMS Linux cần NFS shared storage, scale 2 đến 30 EC2.</li><li>Requirement chính: không đổi website, không mất dữ liệu, scale với traffic bất định.</li><li>Ưu tiên: HA, managed, scalability.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon EFS là NFS shared giữa nhiều instance. Elastic Beanstalk + ALB + Auto Scaling quản lý scale, Aurora MySQL tách riêng để database không bị mất khi environment bị xóa.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — EFS + Beanstalk + ALB + ASG, Aurora tách riêng.</li><li><strong>B</strong>: ❌ Sai — EBS Multi-Attach không phải NFS, giới hạn số instance và cùng AZ; RDS trong Beanstalk environment dễ mất dữ liệu.</li><li><strong>C</strong>: ❌ Sai — Mount EFS bằng scale-in lifecycle hook là sai (phải là launch/user data).</li><li><strong>D</strong>: ❌ Sai — EBS Multi-Attach không phải NFS; ElastiCache không thay thế MySQL.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>NFS-compatible → EFS</li><li>Aurora tách khỏi Beanstalk</li><li>EBS Multi-Attach limits</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"shared NFS cho nhiều EC2\" → nghĩ ngay đến <strong>Amazon EFS</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2737,7 +2737,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: DR cho app trên EC2/ALB/RDS MySQL/S3 và giảm tải do query của finance team.</li><li>Requirement chính: resilient khi thảm họa, minimize data loss, giải quyết performance.</li><li>Ưu tiên: cross-Region DR hợp lý về chi phí.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Cross-Region read replica vừa phục vụ finance query vừa dùng promote khi DR; S3 CRR bảo vệ document; AMI copy cho phép dựng lại frontend (pilot light) khi cần.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Chuyển sang DynamoDB đòi hỏi viết lại app, Lambda sync S3 thay vì CRR.</li><li><strong>B</strong>: ❌ Sai — Không thể add instance Region khác vào ALB hiện có (ALB là regional).</li><li><strong>C</strong>: ✅ Đúng — Read replica + S3 CRR + AMI copy.</li><li><strong>D</strong>: ❌ Sai — Snapshot hourly gây mất dữ liệu nhiều hơn; ElastiCache không giải quyết đầy đủ query báo cáo.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Cross-Region read replica</li><li>S3 CRR</li><li>AMI copy / pilot light</li><li>ALB là regional</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"DR + giảm tải reporting trên RDS\" → nghĩ ngay đến <strong>cross-Region read replica</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2781,7 +2781,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: cung cấp dịch vụ on-premises cho các công ty khác dùng AWS.</li><li>Requirement chính: dữ liệu nhạy cảm, không đi qua internet.</li><li>Ưu tiên: private connectivity (PrivateLink).</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>VPC Endpoint Service (AWS PrivateLink) phải đặt sau Network Load Balancer để consumer kết nối riêng tư, không qua internet; traffic tới on-prem đi qua DX.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Endpoint service sau NLB, TCP, qua DX.</li><li><strong>B</strong>: ❌ Sai — Endpoint service không đặt sau ALB.</li><li><strong>C</strong>: ❌ Sai — Internet gateway làm traffic đi qua internet.</li><li><strong>D</strong>: ❌ Sai — NAT gateway chỉ cho outbound, không expose dịch vụ.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>PrivateLink</li><li>VPC Endpoint Service + NLB</li><li>Không qua internet</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"expose service cho account khác, private\" → nghĩ ngay đến <strong>PrivateLink + NLB</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2825,7 +2825,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chỉ admin role được dùng IAM actions trên toàn organization.</li><li>Requirement chính: không có quyền truy cập mọi account; LEAST operational overhead.</li><li>Ưu tiên: central governance.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>SCP áp dụng ở root OU là cách quản lý tập trung. SCP không cấp quyền mà chỉ giới hạn, nên dùng explicit Deny IAM actions với điều kiện loại trừ admin role.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — SCP Allow không cấp quyền và không chặn được ai (cần FullAWSAccess); không đạt mục tiêu.</li><li><strong>B</strong>: ❌ Sai — CloudTrail + Lambda chỉ phản ứng sau sự việc, vận hành nặng.</li><li><strong>C</strong>: ✅ Đúng — SCP Deny ngoại trừ admin, áp ở root OU.</li><li><strong>D</strong>: ❌ Sai — Permissions boundary phải gắn từng role ở từng account, không có quyền truy cập các account.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>SCP Deny with exception</li><li>Root OU</li><li>Guardrails</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giới hạn quyền toàn org mà không vào từng account\" → nghĩ ngay đến <strong>SCP (deny + condition)</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2869,7 +2869,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: dev account cần kết nối tới shared services qua transit gateway.</li><li>Requirement chính: team dev tự tạo lại connection khi cần, resource bị xóa/tạo lại thường xuyên.</li><li>Ưu tiên: self-service, ít thao tác thủ công.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Chia sẻ transit gateway bằng AWS RAM, bật auto-accept attachments để dev team tự tạo attachment mà không cần team shared services duyệt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Peering thêm TGW thứ hai tốn chi phí và cấu hình không cần thiết.</li><li><strong>B</strong>: ✅ Đúng — RAM share + auto-accept + attachment.</li><li><strong>C</strong>: ❌ Sai — VPC endpoint không liên quan đến TGW attachment.</li><li><strong>D</strong>: ❌ Sai — Network Manager không dùng để share TGW; Lambda thừa.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS RAM share Transit Gateway</li><li>Auto accept shared attachments</li><li>Self-service</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"share transit gateway cho account khác\" → nghĩ ngay đến <strong>AWS RAM + auto-accept</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2913,7 +2913,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: tạo TCO report cho migrate VM Microsoft.</li><li>Requirement chính: không thêm VM tại on-prem, không cài software lên VM, dữ liệu discovery tự import vào Migration Hub.</li><li>Ưu tiên: agentless discovery.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Migration Evaluator agentless collector cài trên EC2 (qua VPN, SNMP thu thập dữ liệu), dùng Migration Evaluator tạo business case/TCO report, dữ liệu đồng bộ sang Migration Hub.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Application Migration Service là công cụ migrate, không tạo TCO.</li><li><strong>B</strong>: ✅ Đúng — Collector + Migration Evaluator tạo TCO.</li><li><strong>C</strong>: ❌ Sai — Migration Hub không tạo TCO report.</li><li><strong>D</strong>: ❌ Sai — Migration Readiness Assessment là đánh giá mức sẵn sàng, không phải TCO.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Migration Evaluator</li><li>Agentless collector</li><li>TCO report</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"TCO / business case migrate\" → nghĩ ngay đến <strong>Migration Evaluator</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -2957,7 +2957,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: game assets ở 2 Region, mỗi Region có ALB.</li><li>Requirement chính: lấy từ Region gần nhất, nếu lỗi thì lấy từ Region còn lại.</li><li>Ưu tiên: low latency + failover.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Route 53 latency-based routing đưa user tới Region gần nhất; health check + Evaluate Target Health loại bỏ endpoint không khỏe, tự failover sang Region kia.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Origin group chỉ failover theo primary/secondary, không chọn theo Region gần nhất.</li><li><strong>B</strong>: ❌ Sai — Failover routing là active-passive, không chọn gần nhất.</li><li><strong>C</strong>: ❌ Sai — Failover routing, 2 distribution không cần thiết.</li><li><strong>D</strong>: ✅ Đúng — Latency alias + health check.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Latency routing</li><li>Evaluate Target Health</li><li>Health check</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Region gần nhất + failover sang Region khác\" → nghĩ ngay đến <strong>Route 53 latency routing + health checks</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3001,7 +3001,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Athena query VPC flow logs text gzip ngày càng chậm.</li><li>Requirement chính: tăng performance tối đa và giảm storage.</li><li>Ưu tiên: query performance, storage size.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Parquet là columnar, nén tốt và Athena chỉ đọc các cột cần; partition theo giờ giúp Athena bỏ qua dữ liệu không liên quan, giảm scan và cải thiện performance mạnh nhất.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — bzip2 không giúp query nhanh hơn đáng kể, thêm Lambda vận hành.</li><li><strong>B</strong>: ❌ Sai — Transfer Acceleration và Intelligent-Tiering không cải thiện query performance.</li><li><strong>C</strong>: ✅ Đúng — Parquet + partition.</li><li><strong>D</strong>: ❌ Sai — Workgroup/engine version không giải quyết lượng dữ liệu scan.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Apache Parquet</li><li>Partitioning</li><li>Athena scan less data</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Athena chậm + lưu trữ lớn\" → nghĩ ngay đến <strong>Parquet + partition</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3045,7 +3045,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B, C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: kết nối on-prem với VPC qua transit VIF, Direct Connect gateway và transit gateway.</li><li>Requirement chính: routing hai chiều qua BGP.</li><li>Ưu tiên: đúng các bước cấu hình route.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Qua transit VIF, on-prem quảng bá prefix của mình qua BGP và Direct Connect gateway quảng bá prefix VPC về on-prem, nhờ đó có kết nối hai chiều.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Transit VIF hỗ trợ cho 1 Gbps; không cần nâng băng thông.</li><li><strong>B</strong>: ✅ Đúng — On-prem advertise prefix qua transit VIF.</li><li><strong>C</strong>: ✅ Đúng — DX gateway advertise VPC prefix về on-prem.</li><li><strong>D</strong>: ❌ Sai — MACsec là mã hóa, không cần cho kết nối và không hỗ trợ 1 Gbps.</li><li><strong>E</strong>: ❌ Sai — CKN/CAK dành cho MACsec, không liên quan yêu cầu.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Transit VIF</li><li>Direct Connect gateway</li><li>BGP advertise prefixes</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"transit VIF\" → nghĩ ngay đến <strong>BGP advertise hai chiều qua DX gateway + TGW</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3094,7 +3094,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: giới hạn truy cập WorkSpaces chỉ từ văn phòng chi nhánh.</li><li>Requirement chính: dễ thêm chi nhánh mới sau này.</li><li>Ưu tiên: MOST operational efficiency.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>WorkSpaces IP access control groups cho phép liệt kê public IP được phép, gắn vào directory; thêm chi nhánh chỉ cần cập nhật IP list.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — IP access control group trên directory, dễ cập nhật.</li><li><strong>B</strong>: ❌ Sai — WAF/Firewall Manager web ACL không gắn vào WorkSpaces directory.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Certificate quản lý từng thiết bị, overhead cao và không giới hạn theo vị trí.</li><li><strong>D</strong>: ❌ Sai — Custom image với Windows Firewall khó quản lý và cập nhật.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>WorkSpaces IP access control group</li><li>Public IP allow list</li><li>Operational efficiency</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giới hạn WorkSpaces theo IP/office\" → nghĩ ngay đến <strong>IP access control groups</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3138,7 +3138,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, C, F</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, C, F</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: modernize firewall appliance tự quản lý trên EC2 để scale ngang, vẫn dùng appliance của vendor.</li><li>Requirement chính: scale horizontally, tự động cấu hình, route traffic từ member account.</li><li>Ưu tiên: MOST cost-effectively.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Gateway Load Balancer (GWLB) + endpoint service phân phối traffic tới nhóm firewall; Auto Scaling group + launch template với user data tự cấu hình; GWLB endpoint tạo tập trung ở networking account, các route table member trỏ tới.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — GWLB là chuẩn cho firewall/inspection appliance.</li><li><strong>B</strong>: ❌ Sai — NLB không dùng cho inspection transparent kiểu GWLB.</li><li><strong>C</strong>: ✅ Đúng — ASG + launch template + user data, target type instance.</li><li><strong>D</strong>: ❌ Sai — Launch Wizard không dùng cho trường hợp này.</li><li><strong>E</strong>: ❌ Sai — Tạo endpoint ở từng member account tốn chi phí và vận hành.</li><li><strong>F</strong>: ✅ Đúng — Endpoint tập trung ở networking account (qua TGW), cập nhật route.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Gateway Load Balancer</li><li>GWLB endpoint</li><li>Auto Scaling group + user data</li><li>Centralized inspection</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"scale third-party firewall appliance\" → nghĩ ngay đến <strong>Gateway Load Balancer</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3192,7 +3192,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: multi-Region HA cho RDS PostgreSQL.</li><li>Requirement chính: RTO 15 phút, RPO 2 giờ.</li><li>Ưu tiên: failover nhanh, tự động.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Cross-Region read replica có thể promote nhanh (đạt RTO 15 phút, replication lag nhỏ đạt RPO), Route 53 failover routing chuyển DNS sang endpoint Region phụ.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — Read replica + Lambda promote.</li><li><strong>B</strong>: ❌ Sai — Restore từ snapshot mất lâu, không đạt RTO 15 phút.</li><li><strong>C</strong>: ❌ Sai — Chỉ copy backup, không đạt RTO; restore tốn thời gian.</li><li><strong>D</strong>: ✅ Đúng — Route 53 failover routing cho DNS record.</li><li><strong>E</strong>: ❌ Sai — RDS không có \"hot standby\" kiểu này; restore backup chậm.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Cross-Region read replica</li><li>Promote replica</li><li>Route 53 failover routing</li><li>RTO 15 phút</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"RDS multi-Region RTO ngắn\" → nghĩ ngay đến <strong>cross-Region read replica + Route 53 failover</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3241,7 +3241,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: Lambda tăng đột biến kéo theo quá nhiều database connections và CPU cao trên RDS PostgreSQL.</li><li>Requirement chính: tối ưu performance trong flash sale.</li><li>Ưu tiên: connection management.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>RDS Proxy pool và chia sẻ connection, giảm số connection thực tới database và giảm CPU do mở/đóng connection, tích hợp trực tiếp với Lambda.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Tăng memory và đóng connection không giải quyết số lượng connection đồng thời.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — ElastiCache giảm đọc nhưng không giải quyết connection storm.</li><li><strong>C</strong>: ✅ Đúng — RDS Proxy connection pooling.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Reuse connection trong từng execution environment, nhưng nhiều environment đồng thời vẫn tạo nhiều connection.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>RDS Proxy</li><li>Connection pooling</li><li>Lambda + RDS</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Lambda + RDS, quá nhiều connections\" → nghĩ ngay đến <strong>RDS Proxy</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3285,7 +3285,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: chuyển sang kiến trúc event-driven, serverless, analytics near real time.</li><li>Requirement chính: serverless + event-driven + near real-time analytics.</li><li>Ưu tiên: serverless services.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>EKS/Fargate cho compute không cần quản lý server, Aurora Serverless cho OLTP, Redshift Serverless cho analytics và EventBridge để định tuyến sự kiện, tạo kiến trúc event-driven serverless.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Giữ MySQL trên EC2 không serverless; Neptune là graph DB không hợp analytics.</li><li><strong>B</strong>: ❌ Sai — EC2 Auto Scaling không serverless; Aurora MySQL không thay thế OLAP.</li><li><strong>C</strong>: ✅ Đúng — Fargate + Aurora Serverless + Redshift Serverless + EventBridge.</li><li><strong>D</strong>: ❌ Sai — AppStream 2.0 là streaming ứng dụng desktop; IoT Core không phù hợp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>EventBridge</li><li>Aurora Serverless</li><li>Redshift Serverless</li><li>Fargate</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"event-driven + serverless + analytics\" → nghĩ ngay đến <strong>EventBridge + Redshift Serverless</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3329,7 +3329,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: bật CloudTrail cho mọi account trong organization, có account mới thêm dần.</li><li>Requirement chính: tự động áp dụng cho account hiện tại và tương lai.</li><li>Ưu tiên: MOST operationally efficient.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Organization trail tạo ở management account tự động log cho tất cả account hiện có và account mới, không cần thao tác thêm.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Lambda theo lịch là giải pháp tự chế, tốn vận hành.</li><li><strong>B</strong>: ✅ Đúng — Organization trail tự áp dụng cho mọi account.</li><li><strong>C</strong>: ❌ Sai — Phải tạo trail thủ công mỗi account mới.</li><li><strong>D</strong>: ❌ Sai — Systems Manager Automation phức tạp và không tự động cho account mới.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Organization trail</li><li>Management account</li><li>Tự động cho account mới</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"CloudTrail cho toàn organization\" → nghĩ ngay đến <strong>organization trail</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3373,7 +3373,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Engineer làm remote cần truy cập dịch vụ nội bộ trong VPC qua VPN, bắt buộc có MFA.</li><li>Danh tính nằm ở AD DS chạy trên EC2.</li><li>Ưu tiên: remote-user VPN + tích hợp AD + MFA.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Client VPN</strong> là VPN dành cho từng người dùng remote. Nó xác thực qua <strong>AD Connector</strong> (proxy tới AD DS), và MFA bật được trên AD Connector (qua RADIUS MFA), nên thỏa cả hai yêu cầu.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>Site-to-Site VPN</strong> nối mạng với mạng, không dành cho từng user remote; WorkSpaces client không phải VPN client.</li><li><strong>B</strong>: ✅ Đúng — Client VPN + AD Connector + MFA.</li><li><strong>C</strong>: ❌ Sai — <strong>VPN CloudHub</strong> nối nhiều site, và AWS Copilot là công cụ cho containers, không tạo VPN.</li><li><strong>D</strong>: ❌ Sai — <strong>Amazon WorkLink</strong> là dịch vụ truy cập web nội bộ từ mobile (đã ngừng), không tích hợp kiểu này.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Remote engineers, VPN, MFA, AD DS</li><li>Client VPN endpoint, AD Connector</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"remote users + VPN + Active Directory + MFA\" → nghĩ ngay đến <strong>AWS Client VPN + AD Connector</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3417,7 +3417,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, C, E</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, C, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Ứng dụng 3 tầng quá tải khi có promotion; DB bị nghẽn vì read.</li><li>Cần chọn 3 bước migrate sang AWS.</li><li>Ưu tiên: <strong>maximize scalability</strong> và <strong>minimize operational effort</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Frontend tĩnh đưa lên <strong>S3 + CloudFront</strong> (gần như không phải vận hành), Java app lên <strong>Elastic Beanstalk</strong> có auto scaling (rehost ít công sức), DB chuyển sang <strong>Aurora PostgreSQL</strong> với <strong>Aurora Auto Scaling</strong> cho read replicas để giải quyết nghẽn đọc.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — S3 + CloudFront scale tốt, ít vận hành.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — EC2 + ASG + EFS chạy được nhưng vận hành nhiều hơn S3/CloudFront.</li><li><strong>C</strong>: ✅ Đúng — <strong>Elastic Beanstalk</strong> có auto scaling, rehost ít effort.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — refactor sang container + <strong>Fargate</strong> tốn effort phát triển hơn.</li><li><strong>E</strong>: ✅ Đúng — <strong>DMS</strong> sang <strong>Aurora</strong> + read replica auto scaling xử lý tải đọc.</li><li><strong>F</strong>: ❌ Sai — một EC2 DB không scale, vẫn nghẽn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Maximize scalability, minimize operational effort</li><li>S3 + CloudFront, Elastic Beanstalk, Aurora Auto Scaling</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"DB nghẽn đọc + PostgreSQL + ít vận hành\" → nghĩ ngay đến <strong>Aurora + read replicas auto scaling</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3471,7 +3471,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cần quét lỗ hổng liên tục cho EKS managed node group (EC2) và ECR repository.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon Inspector</strong> là dịch vụ managed, quét liên tục lỗ hổng cho EC2 và container images trong ECR chỉ bằng cách kích hoạt, không cần cài tool hay tự quản lý.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>Security Hub</strong> chỉ tổng hợp findings, bản thân nó không quét lỗ hổng.</li><li><strong>B</strong>: ✅ Đúng — Inspector quét liên tục EC2 nodes và ECR.</li><li><strong>C</strong>: ❌ Sai — tự quản lý EC2 + tool Marketplace, overhead cao; basic scan on push không liên tục.</li><li><strong>D</strong>: ❌ Sai — <strong>CloudWatch agent</strong> thu thập metrics/logs, không quét lỗ hổng.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Continuously scanned, vulnerabilities</li><li>Amazon Inspector, ECR, EC2</li><li>Least operational overhead</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"quét lỗ hổng liên tục EC2/ECR/Lambda\" → nghĩ ngay đến <strong>Amazon Inspector</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3515,7 +3515,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Waiting room bị tải cao làm sập cả ứng dụng, ảnh hưởng giao dịch mua vé.</li><li>Cần cách ly waiting room khỏi luồng ticketing.</li><li>Ưu tiên: <strong>MOST reliability</strong> cho ticket sale.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Tách waiting room thành <strong>ECS service riêng</strong> với scaling riêng, và dùng <strong>CloudFront Function</strong> đọc JWT để định tuyến ngay tại edge. Request của waiting room không bao giờ chạm vào ticketing service, nên tải cao không ảnh hưởng giao dịch.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — request vẫn đi qua ticketing service trước rồi mới forward, nên ticketing vẫn chịu tải.</li><li><strong>B</strong>: ❌ Sai — chuyển sang EKS tốn effort, StatefulSet không giải quyết bài toán, ticketing pod vẫn nhận mọi request.</li><li><strong>C</strong>: ✅ Đúng — định tuyến ở edge, cách ly hoàn toàn.</li><li><strong>D</strong>: ❌ Sai — <strong>App Mesh</strong> + mTLS phức tạp, không chặn tải trước ticketing pod.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Waiting room, JWT, CloudFront Functions</li><li>Separate service, separate scaling</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"cách ly tải + định tuyến theo header/JWT trước origin\" → nghĩ ngay đến <strong>CloudFront Function/edge routing</strong> và tách service.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3559,7 +3559,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Role tạo lại bằng CloudFormation trùng tên nhưng EC2 không assume được role ở parent account.</li><li>Nguyên nhân gốc: <strong>trust policy/ARN</strong> ở parent account.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>IAM role mới tạo lại có <strong>unique ID/ARN</strong> mới (principal ID khác) dù trùng tên. Trust policy ở parent account còn tham chiếu principal cũ (đã bị xóa) nên bị từ chối. Cần sửa lại trust policy để ARN trỏ đúng role mới.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — sửa/xác nhận lại ARN trong statement `sts:AssumeRole` của trust policy ở parent account.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — cho root của child account assume thì quá rộng, vi phạm least privilege.</li><li><strong>C</strong>: ❌ Sai — capability chỉ cho phép CloudFormation tạo IAM resource, không sửa trust ở parent.</li><li><strong>D</strong>: ❌ Sai — cũng chỉ là capability; role đã tạo được rồi, lỗi nằm ở trust.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Trust policy, sts:AssumeRole, cross-account</li><li>Role recreated, principal ID</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"role bị xóa và tạo lại cùng tên, cross-account assume lỗi\" → nghĩ ngay đến <strong>cập nhật trust policy</strong> ở account đích.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3603,7 +3603,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Một EC2 đơn lẻ là single point of failure; DB RDS MySQL bị đọc nhiều.</li><li>Cần tăng reliability.</li><li>Ưu tiên: <strong>LEAST development effort</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Auto Scaling group + ELB</strong> loại bỏ single point of failure ở tầng app và tự phục hồi, còn <strong>Aurora (MySQL-compatible) + Aurora Replicas</strong> chia tải đọc mà ít phải sửa code.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — standby của <strong>Multi-AZ</strong> RDS không phục vụ đọc; EC2 vẫn đơn lẻ.</li><li><strong>B</strong>: ✅ Đúng — ASG + ELB + Aurora Replicas, ít sửa code.</li><li><strong>C</strong>: ❌ Sai — <strong>Global Accelerator</strong> không sửa EC2 đơn lẻ; standby không đọc được.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — chuyển sang <strong>Lambda</strong> phải viết lại app, tốn effort nhất.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Single EC2, read-intensive</li><li>Auto Scaling group, ELB, Aurora Replicas</li><li>Least development effort</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"read-intensive + MySQL + reliability\" → nghĩ ngay đến <strong>Aurora Replicas</strong>; \"Multi-AZ standby\" thì không đọc được.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3647,7 +3647,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tự động giải mã file PGP nhận qua <strong>AWS Transfer Family SFTP</strong> vào S3.</li><li>Dùng managed workflow, service role đã có quyền Secrets Manager và S3.</li><li>Bước còn thiếu: key nào, step nào, gắn vào đâu.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Giải mã cần <strong>private key</strong> (public key chỉ dùng để mã hóa), lưu trong <strong>Secrets Manager</strong>. Step giải mã thuộc <strong>nominal step</strong> (luồng chính) và workflow được gắn với <strong>Transfer Family server</strong> để áp dụng cho dữ liệu nhận về.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — dùng public key thì không giải mã được.</li><li><strong>B</strong>: ❌ Sai — exception-handling step chỉ chạy khi lỗi, và là tham số \"encryption\".</li><li><strong>C</strong>: ✅ Đúng — private key + nominal step + decryption parameters + gắn vào server.</li><li><strong>D</strong>: ❌ Sai — public key và exception handler đều sai.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>PGP decryption, private key</li><li>Secrets Manager, nominal step</li><li>Transfer Family managed workflow</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giải mã PGP trong Transfer Family\" → nghĩ ngay đến <strong>private key trong Secrets Manager + decrypt step (nominal)</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3691,7 +3691,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Leaderboard real-time cần đọc microsecond, ghi single-digit ms, dữ liệu vài TB.</li><li>Failover ghi &lt; 1 phút, dữ liệu persist để phân tích.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon MemoryDB for Redis</strong> là in-memory database managed, đọc microsecond, ghi single-digit ms, có <strong>Multi-AZ</strong> failover nhanh và durability nhờ transaction log, nên dữ liệu bền vững cho pipeline phân tích.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>DynamoDB</strong> đọc single-digit ms (không có DAX thì không đạt microsecond).</li><li><strong>B</strong>: ❌ Sai — <strong>RDS</strong> có độ trễ ms, không đạt microsecond.</li><li><strong>C</strong>: ✅ Đúng — MemoryDB Multi-AZ, microsecond read, durable.</li><li><strong>D</strong>: ❌ Sai — Redis tự quản lý trên EC2, overhead cao, backup S3 không bằng durability của MemoryDB.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Microsecond reads, leaderboard</li><li>MemoryDB for Redis, Multi-AZ</li><li>Durable in-memory</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"microsecond read + persist + managed\" → nghĩ ngay đến <strong>MemoryDB</strong> (ElastiCache không bền như vậy).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3735,7 +3735,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Phân bổ và trực quan hóa chi phí theo business unit qua tag <strong>BusinessUnit</strong> trên nhiều account trong Organizations.</li><li>Cần cấu hình ở mức tổ chức.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Cost allocation tag</strong> kích hoạt ở <strong>management account</strong> áp dụng cho cả organization. <strong>CUR</strong> tập trung ở management account, query bằng <strong>Athena</strong> và trực quan hóa bằng <strong>QuickSight</strong>.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — management account làm tất cả, Athena + QuickSight.</li><li><strong>B</strong>: ❌ Sai — member account không cần kích hoạt tag riêng; <strong>CloudWatch dashboard</strong> không phù hợp để trực quan hóa CUR.</li><li><strong>C</strong>: ❌ Sai — CUR ở mỗi member account không có ý nghĩa (CUR tổng hợp ở management); dùng CloudWatch dashboard.</li><li><strong>D</strong>: ❌ Sai — tag và CUR ở từng member account phân mảnh, không đúng mô hình Organizations.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Cost allocation tag, management account</li><li>AWS CUR, Athena, QuickSight</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"cost theo tag nhiều account\" → nghĩ ngay đến <strong>cost allocation tag ở management account + CUR + Athena + QuickSight</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3779,7 +3779,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lambda chậm dần, DynamoDB <strong>ProvisionedThroughputExceededException</strong>, Lambda <strong>TooManyRequestsException</strong> (throttle).</li><li>Cần chọn 2 thay đổi để giải quyết cả quá tải DB lẫn Lambda concurrency.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Tăng <strong>WCU</strong> xử lý lỗi ghi DynamoDB. Chèn <strong>Kinesis Data Streams</strong> vào giữa để đệm và xử lý theo <strong>batch</strong>, giảm số lần gọi Lambda nên hết throttle.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — tăng WCU xử lý ProvisionedThroughputExceeded.</li><li><strong>B</strong>: ❌ Sai — thêm memory không xử lý lỗi throttle của DynamoDB/Lambda concurrency.</li><li><strong>C</strong>: ❌ Sai — payload lớn hơn làm Lambda chạy lâu hơn, tệ hơn.</li><li><strong>D</strong>: ✅ Đúng — Kinesis đệm và batch, giảm concurrency Lambda.</li><li><strong>E</strong>: ⚠️ Có thể nhưng không tối ưu — SQS FIFO xử lý từng message, throughput thấp, không batch hiệu quả bằng Kinesis cho luồng dữ liệu lớn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>ProvisionedThroughputExceededException</li><li>TooManyRequestsException</li><li>Kinesis batch, WCU</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Lambda throttle + DynamoDB throttle khi ingest nhiều\" → nghĩ ngay đến <strong>tăng WCU + stream/queue đệm có batch</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3828,7 +3828,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cấu hình HA cho <strong>Amazon WorkSpaces</strong> qua 2 Region với <strong>cross-Region redirection</strong>.</li><li>Failover Region đã có WorkSpaces, Route 53 hosted zone đã có.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Cross-Region redirection cần <strong>connection alias</strong> ở mỗi Region, mỗi alias gắn với directory ở Region tương ứng, và Route 53 <strong>failover routing</strong> với <strong>Evaluate Target Health = Yes</strong> để chuyển hướng khi primary lỗi.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — alias + directory mỗi Region, failover routing, health evaluation.</li><li><strong>B</strong>: ❌ Sai — cả hai alias gắn vào directory primary; multivalue không phải failover.</li><li><strong>C</strong>: ❌ Sai — chỉ có alias ở primary, weighted không phải failover.</li><li><strong>D</strong>: ❌ Sai — alias primary gắn vào directory của failover Region là sai cặp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>WorkSpaces cross-Region redirection</li><li>Connection alias, failover routing</li><li>Evaluate Target Health</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"WorkSpaces multi-Region HA\" → nghĩ ngay đến <strong>connection alias mỗi Region + Route 53 failover</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3872,7 +3872,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Đánh giá môi trường on-premises trước migrate: dependency giữa các ứng dụng và báo cáo assessment.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS Application Discovery Agent</strong> cài trên từng VM thu thập dữ liệu và dependency, rồi xem trong <strong>Migration Hub</strong>; báo cáo <strong>Quick Insights</strong> tải trực tiếp, ít bước trung gian nhất.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — agent + Migration Hub xem dependency + tải Quick Insights, ít bước nhất.</li><li><strong>B</strong>: ❌ Sai — Migration Evaluator Collector không cung cấp dependency visualization; thêm QuickSight không cần thiết.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Agentless Collector không đủ dữ liệu dependency, lại phải export/upload thủ công sang Migration Evaluator.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — dùng cả hai collector, dư thừa và thêm vận hành.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Application Discovery Agent, Migration Hub</li><li>Dependency visualization, Quick Insights</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"application dependency mapping khi migrate\" → nghĩ ngay đến <strong>Application Discovery Agent + Migration Hub</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3916,7 +3916,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bảo vệ 2 API (API Gateway và legacy EC2) khỏi DoS, quét lỗ hổng, chống exploit phổ biến.</li><li>Phải phân biệt chức năng đúng của WAF, Inspector, GuardDuty.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>AWS WAF</strong> gắn được vào API Gateway; <strong>Amazon Inspector</strong> quét lỗ hổng EC2 (legacy API); <strong>GuardDuty</strong> chỉ <strong>phát hiện/monitor</strong>, không chặn.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — WAF không gắn trực tiếp vào EC2 đơn lẻ (cần ALB/CloudFront).</li><li><strong>B</strong>: ❌ Sai — Inspector không phân tích API Gateway/Lambda theo cách này; GuardDuty không block.</li><li><strong>C</strong>: ✅ Đúng — WAF cho API Gateway, Inspector cho EC2, GuardDuty monitor.</li><li><strong>D</strong>: ❌ Sai — Inspector quét chứ không \"protect\", GuardDuty không block.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>AWS WAF, Amazon Inspector, GuardDuty</li><li>Monitor vs block</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"chống exploit web\" → <strong>WAF</strong>; \"quét lỗ hổng EC2\" → <strong>Inspector</strong>; \"phát hiện threat\" → <strong>GuardDuty</strong> (không block).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -3960,7 +3960,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lambda Java + RDS MySQL gặp lỗi connection khi traffic tăng đột biến và latency cao.</li><li>Ưu tiên: giảm latency, chịu burst, <strong>LEAST change to application</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>RDS Proxy</strong> gom và tái sử dụng connection nên chống cạn connection DB. <strong>Provisioned concurrency</strong> loại bỏ cold start Java, giúp latency thấp khi burst.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — mở connection ngoài handler không chống được cạn connection khi nhiều instance; phải sửa code.</li><li><strong>B</strong>: ✅ Đúng — RDS Proxy + provisioned concurrency.</li><li><strong>C</strong>: ❌ Sai — tăng `max_connections` cần reboot, không giải quyết cold start; reserved concurrency không giảm latency.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — RDS Proxy đúng nhưng <strong>reserved concurrency</strong> chỉ giới hạn/đảm bảo, không loại cold start.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>RDS Proxy, connection pooling</li><li>Provisioned concurrency vs reserved concurrency</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Lambda + RDS hết connection\" → <strong>RDS Proxy</strong>; \"giảm cold start\" → <strong>provisioned concurrency</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4004,7 +4004,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Interface endpoint đã tạo nhưng tên service vẫn resolve ra public IP.</li><li>Cần DNS resolve ra private IP của endpoint.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Bật <strong>Private DNS</strong> cho interface endpoint (cùng VPC attributes <strong>enableDnsSupport</strong> và <strong>enableDnsHostnames</strong>) để tên service mặc định resolve sang private IP của endpoint.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — interface endpoint dùng ENI, không cần route trong route table (đó là gateway endpoint).</li><li><strong>B</strong>: ✅ Đúng — bật private DNS.</li><li><strong>C</strong>: ❌ Sai — security group không ảnh hưởng chuyện resolve ra public IP.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — <strong>Route 53 private hosted zone</strong> làm được thủ công nhưng dư thừa so với private DNS option.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Interface endpoint, Private DNS</li><li>enableDnsSupport, enableDnsHostnames</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"endpoint resolve ra public IP\" → nghĩ ngay đến <strong>bật Private DNS</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4048,7 +4048,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lambda Java cần khởi động nhanh, init code nằm ngoài handler (load libs, tạo unique ID).</li><li>Ưu tiên: <strong>MOST cost-effective</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Lambda SnapStart</strong> cho Java giảm cold start rất nhiều mà không tốn phí provisioned concurrency. Unique ID tạo lúc init sẽ bị chụp trong snapshot và trùng lặp, nên cần pre-snapshot hook và chuyển phần sinh ID vào handler. SnapStart chỉ áp dụng cho <strong>published versions</strong>.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — SnapStart không hỗ trợ `$LATEST`; chuyển hết init vào handler làm mất lợi ích.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — <strong>Provisioned concurrency</strong> hiệu quả nhưng tốn chi phí liên tục.</li><li><strong>C</strong>: ❌ Sai — SnapStart và provisioned concurrency không dùng chung được.</li><li><strong>D</strong>: ✅ Đúng — SnapStart + published version + xử lý unique ID đúng cách.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Lambda SnapStart, Java</li><li>Published version, unique ID uniqueness</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Java Lambda cold start + cost-effective\" → <strong>SnapStart</strong> (published version), nhớ vấn đề tính duy nhất của dữ liệu sinh lúc init.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4092,7 +4092,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A, B</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>EC2 import từ VM, nằm ở public subnet, có public IP nhưng không xuất hiện là managed instance trong <strong>Systems Manager</strong>.</li><li>Cần chọn 2 bước troubleshoot.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Managed instance cần <strong>SSM Agent</strong> đang chạy (VM import có thể chưa cài) và <strong>instance profile</strong> có quyền Systems Manager (ví dụ AmazonSSMManagedInstanceCore). Public subnet đã có đường ra internet nên không cần VPC endpoint.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — thiếu/không chạy SSM Agent.</li><li><strong>B</strong>: ✅ Đúng — thiếu IAM role phù hợp.</li><li><strong>C</strong>: ❌ Sai — public subnet có public IP đã ra được internet, không bắt buộc VPC endpoint.</li><li><strong>D</strong>: ❌ Sai — <strong>Application Discovery Agent</strong> không liên quan tới SSM.</li><li><strong>E</strong>: ❌ Sai — service-linked role không phải nguyên nhân thường gặp cho managed instance.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Managed instance, SSM Agent</li><li>Instance profile, AmazonSSMManagedInstanceCore</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"EC2 không hiện trong Systems Manager\" → kiểm tra <strong>SSM Agent + IAM instance profile</strong> trước, rồi mới đến mạng.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4141,7 +4141,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Xây CI/CD với <strong>CodePipeline</strong> + <strong>CodeCommit</strong>: tự động unit test/security scan, cảnh báo khi test fail, bật/tắt feature động, lead developer phê duyệt.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>CodeBuild</strong> chạy test và scan; <strong>EventBridge + SNS</strong> gửi cảnh báo khi fail; <strong>CDK</strong> với manifest file bật/tắt feature; <strong>manual approval stage</strong> cho lead duyệt, đúng các dịch vụ native của pipeline.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — CodeBuild, EventBridge + SNS, CDK manifest, manual approval.</li><li><strong>B</strong>: ❌ Sai — Lambda không phù hợp chạy test, Amplify plugins và SES không phải cơ chế approval.</li><li><strong>C</strong>: ❌ Sai — dùng Jenkins ngoài yêu cầu, SES alert và Lambda approval không chuẩn.</li><li><strong>D</strong>: ❌ Sai — <strong>CodeDeploy</strong> là dịch vụ deploy, không chạy unit test/scan.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>CodeBuild, EventBridge, SNS</li><li>CDK manifest, manual approval stage</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"test + scan trong CodePipeline\" → <strong>CodeBuild</strong>; \"lead duyệt\" → <strong>manual approval action</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4185,7 +4185,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lưu trữ scale cho ứng dụng file on-premises, mount dạng <strong>iSCSI</strong>, giữ low-latency cho dữ liệu hay truy cập.</li><li>Cần point-in-time copies bằng <strong>AWS Backup</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Storage Gateway Volume Gateway</strong> cung cấp volume iSCSI; <strong>cached mode</strong> giữ dữ liệu thường dùng cục bộ (low latency) và lưu toàn bộ lên S3. Volume được <strong>AWS Backup</strong> hỗ trợ.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>Tape Gateway</strong> mô phỏng tape (VTL), không phải volume.</li><li><strong>B</strong>: ❌ Sai — <strong>FSx File Gateway</strong> và <strong>S3 File Gateway</strong> dùng SMB/NFS, không phải iSCSI.</li><li><strong>C</strong>: ✅ Đúng — Volume Gateway cached mode, iSCSI, AWS Backup.</li><li><strong>D</strong>: ❌ Sai — <strong>File Gateway</strong> dùng NFS/SMB, không có iSCSI volume.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>iSCSI, Volume Gateway</li><li>Cached mode, AWS Backup</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"iSCSI\" → nghĩ ngay đến <strong>Volume Gateway</strong> (cached = giữ hot data cục bộ).</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4229,7 +4229,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Mã hóa phía client trước khi lên S3, replicate sang nhiều Region, cần cùng một key để giải mã ở mọi Region.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>KMS multi-Region keys</strong> là các key có cùng key ID và key material ở nhiều Region. Tạo primary key rồi <strong>replica key</strong> ở Region khác, nên dữ liệu mã hóa ở Region này giải mã được ở Region khác.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — multi-Region primary + replica keys.</li><li><strong>B</strong>: ❌ Sai — key riêng mỗi Region có key material khác nhau, không giải mã chéo được.</li><li><strong>C</strong>: ❌ Sai — <strong>AWS Private CA</strong> để cấp chứng chỉ, không dùng mã hóa dữ liệu theo cách này.</li><li><strong>D</strong>: ❌ Sai — KMS key material không thể export; vi phạm bảo mật.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>KMS multi-Region key, replica key</li><li>Client-side encryption, cross-Region</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"cùng key giải mã nhiều Region\" → nghĩ ngay đến <strong>KMS multi-Region keys</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4273,7 +4273,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Instance bị terminate do ELB health check fail trong lúc user data còn đang tải nhiều nội dung từ S3.</li><li>Không được sửa user data.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Nội dung tăng nên instance cần nhiều thời gian khởi tạo hơn. Tăng <strong>health check grace period</strong> của Auto Scaling group cho instance đủ thời gian hoàn tất user data trước khi bị đánh giá health.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tăng kích thước instance không đảm bảo khởi tạo xong trước khi health check.</li><li><strong>B</strong>: ❌ Sai — health check timeout là thời gian chờ phản hồi mỗi lần, không phải thời gian khởi động.</li><li><strong>C</strong>: ❌ Sai — đổi path không giải quyết việc app chưa sẵn sàng.</li><li><strong>D</strong>: ✅ Đúng — tăng grace period.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Health check grace period</li><li>ELB health check, Auto Scaling group</li><li>User data</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"instance bị terminate vòng lặp vì ELB health check lúc khởi động\" → nghĩ ngay đến <strong>tăng health check grace period</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4317,7 +4317,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Migrate Oracle sang AWS, giữ một phần on-premises, có dữ liệu spatial và cron jobs.</li><li>Cần truy vấn trực tiếp DB on-premises như <strong>foreign table</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>RDS for PostgreSQL</strong> hỗ trợ spatial qua <strong>PostGIS</strong>, chạy cron (pg_cron) và foreign table qua <strong>foreign data wrapper</strong> (oracle_fdw). Dùng <strong>SCT + DMS</strong> để chuyển đổi và migrate, <strong>Direct Connect</strong> để kết nối riêng tới on-premises.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>DynamoDB</strong> không hỗ trợ spatial/foreign table.</li><li><strong>B</strong>: ❌ Sai — SQL Server + Redshift + Glue crawlers không cung cấp foreign table đúng nghĩa.</li><li><strong>C</strong>: ❌ Sai — chạy Oracle trên EC2 tốn vận hành; internet gateway không phải kết nối an toàn cho foreign table.</li><li><strong>D</strong>: ✅ Đúng — PostgreSQL, PostGIS, pg_cron, Direct Connect.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Foreign table, spatial data</li><li>RDS for PostgreSQL, SCT + DMS</li><li>Direct Connect</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Oracle sang AWS + spatial + foreign table\" → nghĩ ngay đến <strong>RDS PostgreSQL (PostGIS, FDW)</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4361,7 +4361,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: A</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Xóa stack CloudFormation thất bại vì S3 bucket còn chứa object.</li><li>Cần xử lý mà không đổi kiến trúc lớn.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>CloudFormation không xóa được <strong>S3 bucket không rỗng</strong>. Dùng <strong>custom resource</strong> (Lambda) để xóa object khi stack bị xóa, kèm <strong>DependsOn</strong> để custom resource bị xóa trước bucket, giúp bucket rỗng trước khi bị xóa.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — custom resource dọn bucket, DependsOn đảm bảo thứ tự.</li><li><strong>B</strong>: ❌ Sai — `Delete` là mặc định, không giải quyết bucket không rỗng.</li><li><strong>C</strong>: ❌ Sai — <strong>Snapshot</strong> không áp dụng cho S3 bucket.</li><li><strong>D</strong>: ❌ Sai — đổi sang <strong>EFS</strong> là thay đổi kiến trúc lớn, trái yêu cầu.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Stack deletion failed, non-empty bucket</li><li>Custom resource, DependsOn</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"xóa stack lỗi vì S3 không rỗng\" → nghĩ ngay đến <strong>Lambda-backed custom resource dọn bucket</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4405,7 +4405,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": true,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: C, E</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tối ưu chi phí S3: video được truy cập thường xuyên trong 180 ngày đầu, sau đó hiếm.</li><li>Upload nhiều lần thất bại, dùng multipart nên để lại phần dư.</li><li>Ưu tiên: <strong>cost optimization</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Lifecycle rule <strong>abort/expire incomplete multipart uploads</strong> dọn các part dư đang bị tính phí. Chuyển object sang <strong>S3 Standard-IA</strong> sau 180 ngày khớp với mẫu truy cập hiếm.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — <strong>Requester Pays</strong> không phù hợp với anonymous users (cần xác thực).</li><li><strong>B</strong>: ❌ Sai — <strong>Transfer Acceleration</strong> tăng chi phí, không giảm.</li><li><strong>C</strong>: ✅ Đúng — dọn incomplete multipart uploads.</li><li><strong>D</strong>: ❌ Sai — chuyển sang Glacier IR sau 1 ngày khi người dùng truy cập thường xuyên trong 180 ngày thì tốn phí retrieval.</li><li><strong>E</strong>: ✅ Đúng — Standard-IA sau 180 ngày.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Incomplete multipart uploads</li><li>S3 Lifecycle, Standard-IA</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"multipart upload hay fail\" → nghĩ ngay đến <strong>lifecycle rule xóa incomplete multipart uploads</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4454,7 +4454,7 @@ var SAP_C02_Part5 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p>Correct Answer: D</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Web app chịu tấn công SQL injection/web exploit, Lambda cold start khi peak, cần scale và độ trễ thấp.</li><li>Tối ưu chi phí DB (usage ổn định 12 tháng).</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Provisioned concurrency</strong> loại cold start; <strong>RDS Reserved Instances</strong> giảm chi phí cho tải ổn định; <strong>AWS WAF</strong> tích hợp CloudFront chặn SQL injection và web exploit.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tăng timeout không giải quyết cold start; <strong>Shield Advanced</strong> chống DDoS, không chặn SQL injection.</li><li><strong>B</strong>: ❌ Sai — <strong>Redshift</strong> không phù hợp OLTP; <strong>Inspector</strong> không bảo vệ chống exploit tại CloudFront.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — <strong>Aurora Serverless</strong> hợp tải biến thiên hơn là ổn định, và Shield Advanced không chặn SQL injection.</li><li><strong>D</strong>: ✅ Đúng — provisioned concurrency + Reserved Instances + WAF.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li>Provisioned concurrency, cold start</li><li>RDS Reserved Instances (usage ổn định)</li><li>AWS WAF, SQL injection</li></ul><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"SQL injection\" → <strong>AWS WAF</strong>; \"usage ổn định lâu dài\" → <strong>Reserved Instances</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
