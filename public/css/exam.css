@@ -109,12 +109,18 @@ body.white-mode .starMarkToReview.true {
     border-radius: 50%;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 55px;
     cursor: pointer;
     color: #fdf3ea;
     background-color: rgb(255 255 255 / 20%);
     border: 1px solid #fdf3ea;
     font-size: 18px;
+}
+
+@media only screen and (max-device-width: 500px) and (orientation: portrait) {
+    .starMarkToReview {
+        top: 110px;
+    }
 }
 
 #testBlock .starMarkToReview {
@@ -657,8 +663,8 @@ body.white-mode {
     }
 
     .ip-radio {
-        width: 28px;
-        height: 28px;
+        width: 16px;
+        height: 16px;
     }
 
     .custom_label {
@@ -707,4 +713,21 @@ body.white-mode {
         right: 5px;
         top: 5px;
     }
+}
+
+/* Copy to Ask AI Button */
+.btn-copyToAskAI {
+    font-size: 14px;
+    border-radius: 6px;
+    margin-left: 5px;
+    transition: all 0.1s ease;
+}
+
+.btn-copyToAskAI:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-copyToAskAI:disabled {
+    opacity: 0.8;
 }
