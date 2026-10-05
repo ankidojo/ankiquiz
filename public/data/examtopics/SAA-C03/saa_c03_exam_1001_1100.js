@@ -1515,6 +1515,50 @@ var SAA_C03_Exam_1001_1100 = {
           "selected_answers": "Selected Answer: B"
         }
       ]
+    },
+    {
+      "question_id": "#1019",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company is developing an application in the AWS Cloud. The application's HTTP API contains critical information that is published in Amazon API Gateway. The critical information must be accessible from only a limited set of trusted IP addresses that belong to the company's internal network.<br><br>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p>Correct Answer: B</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#1019",
+          "answers": [
+            {
+              "choice": "<p>Set up an API Gateway private integration to restrict access to a predefined set of IP addresses.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create a resource policy for the API that denies access to any IP address that is not specifically allowed.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Directly deploy the API in a private subnet. Create a network ACL. Set up rules to allow the traffic from specific IP addresses.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Modify the security group that is attached to API Gateway to allow inbound traffic from only the trusted IP addresses.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "",
+      "discusstion": []
     }
   ]
 }
