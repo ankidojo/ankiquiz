@@ -272,9 +272,12 @@ class Question {
   showCommentHtml(myComment = "", isShowAnswer = false) {
     let htmlMyComment = `<h6>My Comment <a class="btnEditComment btn btn-sm btn-warning">Edit</a></h6>`
     if(myComment != "" && isShowAnswer == true) {
+      const formattedComment = myComment
+        .replaceAll("\n", "<br>")
+        .replaceAll(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
       htmlMyComment += `
-        <div class="textComment p-3 mb-2 bg-success text-white">
-          ${myComment.replaceAll("\n", "<br>")}
+        <div class="textComment p-3 mb-2 text-white" style="border: 1px solid #9bbbf7; border-radius: 4px;">
+          ${formattedComment}
         </div>
       `;
     }

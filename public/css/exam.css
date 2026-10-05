@@ -731,3 +731,21 @@ body.white-mode {
 .btn-copyToAskAI:disabled {
     opacity: 0.8;
 }
+
+/* Comment styling with Vietnamese font support */
+.textComment {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    word-break: break-word;
+    color: #ffffff;
+}
+
+.textComment strong {
+    font-weight: 600;
+}
+
+/* White mode: black text for comment */
+body.white-mode .textComment {
+    color: #000000 !important;
+}
