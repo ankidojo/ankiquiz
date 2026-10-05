@@ -133,6 +133,29 @@
                         <!-- Show Answer -->
                         <button class="btn-showAnswer btn btn-warning px-1">Show Answer</button>
 
+                        <!-- Show Feedback -->
+                        <button class="btn-showFeedback btn btn-info px-1" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                            <i class="fa-solid fa-comment"></i> Feedback (F)
+                        </button>
+
+                        <!-- Feedback Modal -->
+                        <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="feedbackModalTitle">Feedback & Explanation</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="feedbackModalBody">
+                                        <div class="feedback-loading">Loading...</div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Copy to Ask AI -->
                         <button class="btn-copyToAskAI btn btn-primary px-2 pt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
                             <i class="fa-solid fa-brain"></i> Copy to Ask AI
@@ -507,6 +530,7 @@
     <script src="./public/js/question-search.js"></script>
     <script src="./public/js/access-gate.js"></script>
     <script src="./public/js/copy-to-ask-ai.js"></script>
+    <script src="./public/js/feedback-modal.js"></script>
 
     <!-- /SCRIPTS -->
 </body>

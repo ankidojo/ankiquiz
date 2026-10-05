@@ -315,7 +315,7 @@ $(".btnPrevQue").on("click", function () {
 
 // SHORTKEYS
 $(document).keydown(function (e) {
-  if (["textarea"].includes(e.target.nodeName.toLowerCase())) return;
+  if (["textarea", "input"].includes(e.target.nodeName.toLowerCase())) return;
   
   switch(e.keyCode) {
     case 37: //LEFT
@@ -347,6 +347,10 @@ $(document).keydown(function (e) {
     case 69: //E = Edit self comment
       e.preventDefault();
       $("#btnEditQuestionModal").click();
+      break;
+    case 70: //F = Show Feedback
+      e.preventDefault();
+      $(".btn-showFeedback").click();
       break;
     default:
       break

@@ -749,3 +749,129 @@ body.white-mode {
 body.white-mode .textComment {
     color: #000000 !important;
 }
+
+/* Show Feedback Button */
+.btn-showFeedback {
+    font-size: 14px;
+    border-radius: 6px;
+    margin-left: 5px;
+    transition: all 0.1s ease;
+}
+
+.btn-showFeedback:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Feedback Modal */
+#feedbackModal .modal-content {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border: 1px solid #46484d;
+}
+
+#feedbackModal .modal-header {
+    border-bottom: 1px solid #46484d;
+    background-color: #252526;
+}
+
+#feedbackModal .modal-title {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+#feedbackModal .btn-close {
+    filter: invert(1);
+}
+
+#feedbackModal .modal-body {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#feedbackModal .modal-footer {
+    border-top: 1px solid #46484d;
+    background-color: #252526;
+}
+
+.feedback-loading {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+}
+
+.feedback-content {
+    line-height: 1.8;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.feedback-content h4 {
+    color: #64b5f6;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.feedback-content strong {
+    color: #81c784;
+}
+
+/* White mode: feedback modal */
+body.white-mode #feedbackModal .modal-content {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ddd;
+}
+
+body.white-mode #feedbackModal .modal-header {
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+body.white-mode #feedbackModal .modal-title {
+    color: #000000;
+}
+
+body.white-mode #feedbackModal .modal-footer {
+    border-top: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+body.white-mode #feedbackModal .btn-close {
+    filter: none;
+}
+
+body.white-mode .feedback-content {
+    color: #000000;
+}
+
+body.white-mode .feedback-content h4 {
+    color: #1976d2;
+}
+
+body.white-mode .feedback-content strong {
+    color: #388e3c;
+}
+
+/* Mobile responsive */
+@media only screen and (max-device-width: 500px) and (orientation: portrait) {
+    .btn-showFeedback {
+        font-size: 12px;
+        padding: 0.375rem 0.5rem !important;
+    }
+
+    #feedbackModal .modal-dialog {
+        margin: 10px;
+    }
+
+    #feedbackModal .modal-body {
+        max-height: 60vh;
+        font-size: 14px;
+    }
+
+    .feedback-content h4 {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+}
