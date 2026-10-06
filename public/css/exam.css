@@ -12,6 +12,30 @@
     border-bottom: 1px solid #ddd;
 }
 
+.action-buttons-header {
+    display: flex;
+    justify-content: center;
+}
+
+.action-buttons-header .d-flex {
+    width: 100%;
+}
+
+.action-buttons-header .btn {
+    flex: 1;
+    min-width: auto;
+    padding: 0.5rem 0.4rem;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.action-buttons-header .btn i {
+    font-size: 16px;
+}
+
 .notification {
     padding-top: 5px;
     text-align: center;
@@ -227,12 +251,13 @@ body.white-mode .starMarkToReview.true {
     display: flex !important;
     align-items: center;
     justify-content: flex-start !important;
-    font-size: 1em !important;
-    margin-bottom: 5px;
+    font-size: 15px !important;
+    margin-bottom: 8px;
+    font-weight: 400;
+    line-height: 1.5;
 }
 
 .ExamQuestionsBlock .left .content p {
-    /* font-size: 14px; */
     overflow-x: auto;
 }
 
@@ -241,22 +266,27 @@ body.white-mode .starMarkToReview.true {
     width: 85%;
     display: flex;
     align-items: center;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
 }
 
 .que-content p {
     margin-bottom: 0 !important;
+    font-weight: 400;
 }
 
 .que-content.true {
-    border-radius: 10px !important;
-    background-color: rgb(0 190 126 / 50%) !important;
+    border-radius: 6px !important;
+    background-color: rgb(0 190 126 / 30%) !important;
 }
 
 .que-content.false {
-    border-radius: 10px;
-    background-color: rgb(255 97 94 / 50%) !important;
+    border-radius: 6px;
+    background-color: rgb(255 97 94 / 30%) !important;
 }
 
 .que-content.hiddenColor.true,
@@ -287,6 +317,45 @@ body.white-mode .starMarkToReview.true {
     padding: 12px 15px;
     margin: 0 -20px 0 -15px;
     border-top: 1px solid #ddd;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex: 1;
+}
+
+.action-buttons .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 14px;
+    white-space: nowrap;
+    flex-shrink: 1;
+    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-buttons .btn i {
+    margin-right: 0.3rem;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+    .action-buttons .btn {
+        padding: 0.6rem;
+        min-width: 44px;
+        height: 44px;
+        border-radius: 6px;
+    }
+
+    .action-buttons .btn i {
+        margin-right: 0;
+        font-size: 18px;
+    }
 }
 
 .exam-nav.top {
@@ -362,7 +431,9 @@ body.dark-mode .ExamQuestionsBlock .right .attempts-que ul li.choice,
 }
 
 .symbolAnswer {
-    margin-right: 5px;
+    margin-right: 6px;
+    font-weight: 500;
+    min-width: 20px;
 }
 
 .resultBlock .btnViewQue {
@@ -479,12 +550,209 @@ body.dark-mode .ExamQuestionsBlock .right .attempts-que ul li {
     color: #ff615e;
 }
 
+.testBlock {
+    padding: 15px;
+    background: #fff;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+}
+
+body.dark-mode .testBlock {
+    background: #1e1e1e;
+    color: #fff;
+}
+
+.testBlock h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.test-settings {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #f8f9fa;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+body.dark-mode .test-settings {
+    background: #262626;
+}
+
+.ts-row {
+    display: contents;
+}
+
+.ts-max {
+    width: 120px;
+}
+
+.ts-range {
+    width: 230px;
+}
+
+.ts-range .form-control {
+    text-align: center;
+    min-width: 0;
+}
+
+.test-settings .input-group-text {
+    background: transparent;
+    color: #6c757d;
+}
+
+body.dark-mode .test-settings .input-group-text {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #aaa;
+}
+
+.ts-chip {
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.ts-chip input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ts-chip span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    border: 1px solid #adb5bd;
+    border-radius: 999px;
+    color: #6c757d;
+    transition: background-color .15s, color .15s, border-color .15s;
+}
+
+.ts-chip input:checked + span {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.ts-chip input:focus-visible + span {
+    outline: 2px solid #86b7fe;
+    outline-offset: 2px;
+}
+
+body.dark-mode .ts-chip span {
+    border-color: #555;
+    color: #aaa;
+}
+
+body.dark-mode .ts-chip input:checked + span {
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.testBlock .row {
+    margin-bottom: 15px;
+}
+
+.testBlock .col-sm-12,
+.testBlock .col-md-3,
+.testBlock .col-md-4,
+.testBlock .col-md-9 {
+    margin-bottom: 10px;
+}
+
+.testBlock label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+.testBlock .form-select,
+.testBlock .form-control {
+    font-size: 14px;
+    font-family: inherit;
+    border-radius: 4px;
+}
+
+body.dark-mode .testBlock .form-select,
+body.dark-mode .testBlock .form-control {
+    background-color: #2d2d2d;
+    color: #fff;
+    border-color: #444;
+}
+
 .QuestionBlockItem {
-    border: 1px solid;
-    padding: 10px;
-    margin: 15px 0;
-    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 6px;
     position: relative;
+    background: #fafafa;
+    font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+body.dark-mode .QuestionBlockItem {
+    border-color: #444;
+    background: #2a2a2a;
+    color: #e0e0e0;
+}
+
+.QuestionBlockItem .que-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 15px;
+    letter-spacing: 0.3px;
+    color: #1a1a1a;
+}
+
+body.dark-mode .QuestionBlockItem .que-title {
+    color: #e8e8e8;
+}
+
+.QuestionBlockItem .que-text {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #333;
+}
+
+body.dark-mode .QuestionBlockItem .que-text {
+    color: #d0d0d0;
+}
+
+.btn-group-test {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    justify-content: flex-start;
+}
+
+.btn-group-test .btn {
+    min-width: auto;
+    font-size: 13px;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-group-test .btn i {
+    font-size: 14px;
 }
 
 .QuestionBlockItem img {
@@ -624,6 +892,46 @@ body.white-mode {
 
 /* CSS FOR IPHONES DEVICES */
 @media only screen and (max-device-width: 500px)  and (orientation: portrait)  {
+    .exam-header {
+        padding: 8px 10px;
+    }
+
+    .exam-header .col-sm-12 {
+        margin-bottom: 6px;
+    }
+
+    .action-buttons-header {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .action-buttons-header .d-flex {
+        width: 100%;
+        gap: 4px !important;
+    }
+
+    .action-buttons-header .btn {
+        flex: 1;
+        min-width: auto;
+        padding: 0.6rem 0.3rem;
+        font-size: 12px;
+        height: 44px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+    }
+
+    .action-buttons-header .btn i {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .action-buttons-header .btn span {
+        display: none !important;
+    }
+
     .ExamQuestionsBlock {
         flex-direction: column;
     }
@@ -665,10 +973,120 @@ body.white-mode {
     .ip-radio {
         width: 16px;
         height: 16px;
+        margin-top: 2px;
     }
 
     .custom_label {
-        align-items: flex-start !important;
+        align-items: center !important;
+    }
+
+    .testBlock {
+        padding: 10px;
+    }
+
+    .testBlock h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .test-settings {
+        display: block;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+    .ts-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 6px;
+    }
+
+    .ts-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .ts-type {
+        flex: 1 1 auto;
+    }
+
+    .ts-type .btn {
+        flex: 1;
+    }
+
+    .ts-max {
+        flex: 0 0 96px;
+        width: auto;
+    }
+
+    .ts-range {
+        width: 100%;
+    }
+
+    .ts-toggles .ts-chip {
+        flex: 1;
+    }
+
+    .ts-toggles .ts-chip span {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .testBlock .row {
+        flex-direction: column;
+    }
+
+    .testBlock .col-sm-12,
+    .testBlock .col-md-3,
+    .testBlock .col-md-4,
+    .testBlock .col-md-9 {
+        width: 100%;
+    }
+
+    .testBlock label {
+        font-size: 13px;
+    }
+
+    .testBlock .form-select,
+    .testBlock .form-control {
+        font-size: 13px;
+        padding: 0.4rem 0.5rem;
+    }
+
+    .QuestionBlockItem {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+
+    .QuestionBlockItem .que-title {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .QuestionBlockItem .que-text {
+        font-size: 14px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .btn-group-test {
+        gap: 6px;
+        justify-content: flex-start;
+    }
+
+    .btn-group-test .btn {
+        min-width: auto;
+        font-size: 12px;
+        padding: 0.4rem 0.6rem;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .btn-group-test .btn i {
+        font-size: 13px;
     }
 
     /* .examBlock has overflow:hidden (for border-radius), which disables
@@ -687,6 +1105,24 @@ body.white-mode {
         z-index: 1000;
         margin: 0;
         box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+        flex-wrap: nowrap;
+        padding: 8px 4px !important;
+        gap: 4px;
+        height: auto;
+    }
+
+    .ExamQuestionsBlock .left .content > .exam-nav .action-buttons {
+        gap: 4px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .ExamQuestionsBlock .left .content > .exam-nav .btnPrevQue,
+    .ExamQuestionsBlock .left .content > .exam-nav .btnNextQue {
+        flex: 0 0 auto;
+        min-width: 50px;
+        padding: 0.5rem 0.4rem !important;
+        font-size: 12px !important;
     }
 
     body.dark-mode .ExamQuestionsBlock .left .content > .exam-nav {

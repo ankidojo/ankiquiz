@@ -194,7 +194,6 @@ $("#attempts-que").on("click", "ul > li", function () {
     exam.getMarkToReview()
   );
   exam.saveToLocalCache("CURRENT_QUESTION");
-  $(".explanation-block").html("");
 });
 
 // SHOW FEEDBACK
@@ -203,11 +202,11 @@ $(".btn-showAnswer").on("click", function () {
   if ($(".btn-showAnswer").hasClass("show")) {
     isShowAnswer = false;
     $(".btn-showAnswer").removeClass("show");
-    $(".btn-showAnswer").text("Show Answer");
+    $(".btn-showAnswer").html('<i class="fa-solid fa-lightbulb"></i><span class="d-none d-md-inline"> Show Answer</span>');
   } else {
     isShowAnswer = true;
     $(".btn-showAnswer").addClass("show");
-    $(".btn-showAnswer").text("Hide Answer");
+    $(".btn-showAnswer").html('<i class="fa-solid fa-lightbulb"></i><span class="d-none d-md-inline"> Hide Answer</span>');
   }
 
   let question = exam.currentQuestion();
@@ -237,58 +236,6 @@ $("#editQuestionModal").on("click", ".btn-secondary", function() {
 
 $(".btn-editQuestion").on("click", function () {
   console.log("btn editques");
-});
-
-// SHOW DISSUSTION
-$(".btn-showDiscussion").on("click", function () {
-  let isShowDiscussion = false;
-  let discusstion = exam.currentQuestion()["discusstion"];
-  let discusstion_count = discusstion ? discusstion.length : 0;
-  if ($(".btn-showDiscussion").hasClass("show")) {
-    isShowDiscussion = false;
-    $(".btn-showDiscussion").removeClass("show");
-    $(".discussion-container").addClass("d-none");
-    $(".btn-showDiscussion").text(`Show Discussion (${discusstion_count})`);
-  } else {
-    isShowDiscussion = true;
-    $(".btn-showDiscussion").addClass("show");
-    $(".discussion-container").removeClass("d-none");
-    $(".btn-showDiscussion").text(`Hide Discussion (${discusstion_count})`);
-  }
-  
-  if(discusstion) {
-    let html_discusstion = "";
-    //Sort by voted count
-    discusstion.sort((a, b) => b.upvote_count - a.upvote_count);
-    
-    discusstion.forEach(function (comment, index) {
-      let selected_answers = comment.selected_answers;
-      let html_selected_answers = "";
-      if(selected_answers !== undefined && selected_answers != "") {
-        html_selected_answers = `<span class="comment-selected-answers">${comment.selected_answers}</span>`;
-      }
-      html_discusstion += `
-        <li id="comment-${comment.id}" class="comment-container" data-comment-id="${comment.id}">
-          <div class="pb-1">
-            <span class="fw-bold">#${index + 1}</span> 
-            ${html_selected_answers}
-            (<span class="comment-voted">${comment.upvote_count}</span> Voted)
-          </div>
-          <div class="comment-content">${comment.content}</div>
-          <div class="pt-1"><span class="comment-username">${comment.username}</span> (<span class="comment-date">${comment.date}</span>)</div>
-        </li>
-      `;
-    });
-    html_discusstion = `
-      <div class="p-1 mb-1 bg-info text-black">Discussion</div>
-      <ul class="comment-list">
-        ${html_discusstion}
-      </ul>
-    `;
-    $(".discussion-container").html(html_discusstion);
-  } else {
-    $(".discussion-container").html("Have not comments!");
-  }
 });
 
 // NEXT QUESTION
@@ -333,7 +280,6 @@ $(document).keydown(function (e) {
     case 13: //ENTER
       e.preventDefault();
       $(".btn-showAnswer")[0].click();
-      $(".btn-showDiscussion")[0].click();
       break;
     case 32: //SPACE
       e.preventDefault();
@@ -504,12 +450,12 @@ $(".btn-createTest").on("click", function () {
 });
 
 $("#testBlock").on("click", ".btnCreateTest", function () {
-  let type = $("#filterOptionType2").val();
+  let type = $("input[name='filterOptionType2']:checked").val();
   let max = $("#filterOptionMaxQuestion2").val();
   let from = $("#filterOptionFromQuestion2").val();
   let to = $("#filterOptionToQuestion2").val();
-  let random = $("#filterOptionRandom").val();
-  let show_question_title = $("#show_question_title").val() == "1";
+  let random = $("#filterOptionRandom").is(":checked") ? "RANDOM" : "NOT_RANDOM";
+  let show_question_title = $("#show_question_title").is(":checked");
   
   testQuestion = exam.createExam({
     "type": type,
@@ -563,27 +509,11 @@ $("#testBlock").on("click", ".btnShowAnswerQuestion", function (event) {
 
 });
 
-// SHOW DISCUSSTION
-$("#testBlock").on("click", ".btnShowDisscussionQuestion", function () {
+// SHOW FEEDBACK IN TEST
+$("#testBlock").on("click", ".btnShowFeedbackQuestion", function () {
   let index = $(this).data("index");
-  let hideshow = $(this).data("hideshow") == "Hide" ? false : true;
   let question = testQuestion[index];
-
-  let userChoice = "";
-  $(`#QuestionBlockItem_${index} .ip-radio:checked`).each((key, item) => {
-    userChoice += $(item).val() + " "
-  })
-
-  $(`#QuestionBlockItem_${index}`).html(question.renderQuestionHtml_v2({
-    index: index,
-    showAnswer: true,
-    showComment: hideshow,
-    isStar: false,
-    userChoice: userChoice,
-    showAnswerBtn: true,
-    showCommentBtn: true,
-  }));
-
+  window.showFeedback(question, `Question ${index + 1} (${question.question_id})`);
 });
 
 // QUICK REVIEW

@@ -80,7 +80,6 @@
     let question = exam.currentQuestion();
     question.getQuestion(exam.getChoice(), exam.getMarkToReview());
     exam.saveToLocalCache("CURRENT_QUESTION");
-    $(".explanation-block").html("");
   }
 
   function init() {

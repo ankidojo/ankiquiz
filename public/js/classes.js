@@ -71,12 +71,15 @@ class Question {
   ) {
     let html = "";
     let answerBtn = `
-      <button type="button" class="btnShowAnswerQuestion btn btn-warning btn-sm" data-index=${options.index} data-hideshow=${options.showAnswer ? "Hide" : "Show" }>${options.showAnswer ? "Hide Answer" : "Show Answer" }</button>
+      <button type="button" class="btnShowAnswerQuestion btn btn-warning btn-sm" data-index=${options.index} data-hideshow=${options.showAnswer ? "Hide" : "Show" }>
+        <i class="fa-solid fa-lightbulb"></i> ${options.showAnswer ? "Hide Answer" : "Show Answer"}
+      </button>
     `;
-    
-    let discusstion_count = this.discusstion ? this.discusstion.length : 0;
-    let commentBtn = `
-      <button type="button" class="btnShowDisscussionQuestion btn btn-info btn-sm" data-index=${options.index} data-hideshow=${options.showComment ? "Hide" : "Show" }>${options.showComment ? `Hide Disscussion (${discusstion_count})` : `Show Disscussion (${discusstion_count})` }</button>
+
+    let feedbackBtn = `
+      <button type="button" class="btnShowFeedbackQuestion btn btn-info btn-sm" data-index=${options.index}>
+        <i class="fa-solid fa-comment"></i> Feedback
+      </button>
     `;
 
     let htmlStarIcon = `
@@ -86,55 +89,16 @@ class Question {
     `;
 
     html += `
-      <div class="que-title">Question:  ${options.index + 1} (${this.options.show_title ? this.question_id : '#____'})</div>
+      <div class="que-title">Question: ${options.index + 1} (${this.options.show_title ? this.question_id : '#____'})</div>
       <div class="que-text">${this.question_text}</div>
       ${htmlStarIcon}
     `;
 
-    let html_discusstion = "";
-    if(options.showComment) {
-      let discusstion = this.discusstion;
-      if(discusstion) {
-        //Sort by voted count
-        discusstion.sort((a, b) => b.upvote_count - a.upvote_count);
-              
-        discusstion.forEach(function (comment, index) {
-          let selected_answers = comment.selected_answers;
-          let html_selected_answers = "";
-          if(selected_answers !== undefined && selected_answers != "") {
-            html_selected_answers = `<span class="comment-selected-answers">${comment.selected_answers}</span>`;
-          }
-          html_discusstion += `
-            <li id="comment-${comment.id}" class="comment-container" data-comment-id="${comment.id}">
-              <div class="pb-1">
-                <span class="fw-bold">#${index + 1}</span> 
-                ${html_selected_answers}
-                (<span class="comment-voted">${comment.upvote_count}</span> Voted)
-              </div>
-              <div class="comment-content">${comment.content}</div>
-              <div class="pt-1"><span class="comment-username">${comment.username}</span> (<span class="comment-date">${comment.date}</span>)</div>
-            </li>
-          `;
-        });
-        html_discusstion = `
-          <ul class="comment-list">
-            ${html_discusstion}
-          </ul>
-        `;
-      } else {
-        html_discusstion = "Have not comments!"
-      }
-      
-    }
-
     html += `
       ${this.loadQueAnswerHtml(options.showAnswer, options.userChoice)}
-      <div class="text-center">
+      <div class="text-center btn-group-test">
         ${options.showAnswerBtn ? answerBtn : ''}
-        ${options.showCommentBtn ? commentBtn : ''}
-      </div>
-      <div class="discussions-block">
-        ${html_discusstion}
+        ${options.showCommentBtn ? feedbackBtn : ''}
       </div>
     `;
 
@@ -161,17 +125,9 @@ class Question {
     this.showMarkToReview(isMarked);
 
     // Clean
-    $(".explanation-block").html("");
     $(".comment-block").html("");
     $(".btn-showAnswer").removeClass("show");
-    $(".btn-showAnswer").text("Show Answer");
-    $(".btn-showDiscussion").removeClass("show");
-    $(".discussion-container").text("");
-    if(this.discusstion !== undefined) {
-      $(".btn-showDiscussion").text(`Show Discussion (${this.discusstion.length})`);
-    } else {
-      $(".btn-showDiscussion").text(`Show Discussion (0)`);
-    }
+    $(".btn-showAnswer").html('<i class="fa-solid fa-lightbulb"></i><span class="d-none d-md-inline"> Show Answer</span>');
 
     return "Load Question Successfully!";
   }
@@ -257,15 +213,6 @@ class Question {
   }
 
   showQueAnswerHtml(choiceAnswer, isShowAnswer = false) {
-    if (isShowAnswer) {
-      $(".explanation-block").html(`
-        <h6>Explanation: </h6>
-        ${this.general_feedback}
-      `);
-    } else {
-      $(".explanation-block").html("");
-    }
-
     $("fieldset.que-list").html(this.loadQueAnswerHtml(isShowAnswer, choiceAnswer));
   }
 

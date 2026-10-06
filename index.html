@@ -73,7 +73,6 @@
                           <option value="3">Three</option>
                         </select>
                     </div>
-                    
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-3">
                     <div class="input-group mb-1">
@@ -86,12 +85,21 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-3 item2">
-                    <a href="javascript:void(0)" class="btn btn-common btn-createTest btn-warning">Test</a>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-3 item3">
-                    <a href="javascript:void(0)" class="btn btn-common btn-saveQuiz">Save</a>
-                    <a href="javascript:void(0)" class="btn btn-common btn-clearQuiz">Clear Cache</a>
+                <div class="col-12 col-md-12 col-lg-6 action-buttons-header">
+                    <div class="d-flex gap-2 justify-content-center flex-wrap">
+                        <a href="javascript:void(0)" class="btn btn-common btn-createTest btn-warning d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-flask-vial"></i>
+                            <span class="d-none d-md-inline ms-1">Test</span>
+                        </a>
+                        <a href="javascript:void(0)" class="btn btn-common btn-saveQuiz d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span class="d-none d-md-inline ms-1">Save</span>
+                        </a>
+                        <a href="javascript:void(0)" class="btn btn-common btn-clearQuiz d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-trash"></i>
+                            <span class="d-none d-md-inline ms-1">Clear Cache</span>
+                        </a>
+                    </div>
                 </div>
                 <!-- <div class="col-sm-12 col-md-6 col-lg-2 item4">
                     <a href="javascript:void(0)" class="btn btn-common btn-clearQuiz">Clear Cache</a>
@@ -106,10 +114,6 @@
                     <div class="block-head">
                         <div class="top-head">
                             <span class="que-category"><strong>Exam No:</strong> <span id="queDomain"></span></span>
-                        </div>
-                        <div class="exam-nav top">
-                            <a class="btnPrevQue btn btn-success" href="javascript:void(0)">Prev</a>
-                            <a class="btnNextQue btn btn-success" href="javascript:void(0)">Next</a>
                         </div>
                         <div id="starMarkToReview" class="starMarkToReview true">
                             <i class="fa-solid fa-star"></i>
@@ -127,42 +131,29 @@
                         
                         <div class="exam-nav">
                             <a class="btnPrevQue btn btn-success btn-saveQuiz" href="javascript:void(0)">Prev</a>
+
+                            <div class="action-buttons d-flex gap-2 justify-content-center flex-wrap">
+                                <!-- Show Answer -->
+                                <button class="btn-showAnswer btn btn-warning px-1" title="Show Answer">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <span class="d-none d-md-inline"> Show Answer</span>
+                                </button>
+
+                                <!-- Show Feedback -->
+                                <button class="btn-showFeedback btn btn-info px-1" title="Feedback (F)">
+                                    <i class="fa-solid fa-comment"></i>
+                                    <span class="d-none d-md-inline"> Feedback (F)</span>
+                                </button>
+
+                                <!-- Copy to Ask AI -->
+                                <button class="btn-copyToAskAI btn btn-primary px-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to Ask AI">
+                                    <i class="fa-solid fa-brain"></i>
+                                    <span class="d-none d-md-inline"> Copy to Ask AI</span>
+                                </button>
+                            </div>
+
                             <a class="btnNextQue btn btn-success btn-saveQuiz" href="javascript:void(0)">Next</a>
                         </div>
-                        
-                        <!-- Show Answer -->
-                        <button class="btn-showAnswer btn btn-warning px-1">Show Answer</button>
-
-                        <!-- Show Feedback -->
-                        <button class="btn-showFeedback btn btn-info px-1" data-bs-toggle="modal" data-bs-target="#feedbackModal">
-                            <i class="fa-solid fa-comment"></i> Feedback (F)
-                        </button>
-
-                        <!-- Feedback Modal -->
-                        <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="feedbackModalTitle">Feedback & Explanation</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body" id="feedbackModalBody">
-                                        <div class="feedback-loading">Loading...</div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Copy to Ask AI -->
-                        <button class="btn-copyToAskAI btn btn-primary px-2 pt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
-                            <i class="fa-solid fa-brain"></i> Copy to Ask AI
-                        </button>
-
-                        <!-- Discussion -->
-                        <button class="btn-showDiscussion btn btn-info px-1">Show Discussion</button>
 
                         <!-- System Prompt (for Gemini sidebar) -->
                         <div class="system-prompt-block">
@@ -204,8 +195,6 @@
                             </div>
                         </div>
                         <div class="my-3 comment-block"></div>
-                        <div class="my-3 explanation-block"></div>
-                        <div class="discussion-container"></div>
                     </div>
                 </div>
                 <!-- ./LEFT BLOCK -->
@@ -284,60 +273,43 @@
         </div>
 
         <div id="testBlock" class="mt-2 testBlock d-none">
-            <h3 class="text-center">=== TEST ===</h6>
-            <div class="row mb-3">
-                <div class="col-sm-9 col-md-3 col-lg-3">
-                    Options:
-                    <select id="filterOptionType2" class="form-select" aria-label="Default select example">
-                        <option selected value="RETEST">RETEST</option>
-                        <option value="STAR">STAR</option>
-                        <!-- <option value="MOST_WRONG_ANSWERS">MOST_WRONG_ANSWERS</option>
-                        <option value="NEVER_ANSWERS">NEVER_ANSWERS</option> -->
-                    </select>
-                </div>
-                <div class="col-sm-12 col-md-9">
-                    <div class="row">
-                        <div class="col">
-                            From:
-                            <input id="filterOptionFromQuestion2" type="number" class="form-control" placeholder="From question" aria-label="From question" value="1">
-                        </div>
-                        <div class="col">
-                            To:
-                            <input id="filterOptionToQuestion2" type="number" class="form-control" placeholder="To question" aria-label="To question" value="20">
-                        </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4">
-                            Random:
-                            <select id="filterOptionRandom" class="form-select" aria-label="Default select example">
-                                <option value="RANDOM" selected>YES</option>
-                                <option value="NOT_RANDOM">NO</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4">
-                            Max Question:
-                            <select id="filterOptionMaxQuestion2" class="form-select" aria-label="Default select example">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="65">65</option>
-                                <option value="75">75</option>
-                                <option value="15">100</option>
-                                <option value="ALL" selected>All</option>
-                            </select>
-                        </div>
+            <h3 class="text-center">TEST MODE</h3>
+            <div class="test-settings">
+                <div class="ts-row">
+                    <div class="btn-group btn-group-sm ts-type" role="group" aria-label="Test type">
+                        <input type="radio" class="btn-check" name="filterOptionType2" id="typeRetest" value="RETEST" checked>
+                        <label class="btn btn-outline-primary" for="typeRetest"><i class="fa-solid fa-rotate-right"></i> Retest</label>
+                        <input type="radio" class="btn-check" name="filterOptionType2" id="typeStar" value="STAR">
+                        <label class="btn btn-outline-primary" for="typeStar"><i class="fa-solid fa-star"></i> Star</label>
                     </div>
-                </div>
-                <div class="row pt-1">
-                    <div class="col-3">
-                        Show Question ID:
-                        <select id="show_question_title" class="form-select" aria-label="Default select example">
-                            <option value="1" selected>Show</option>
-                            <option value="0">Hide</option>
+                    <div class="input-group input-group-sm ts-max" title="Max questions">
+                        <span class="input-group-text"><i class="fa-solid fa-list-ol"></i></span>
+                        <select id="filterOptionMaxQuestion2" class="form-select" aria-label="Max questions">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="ALL" selected>All</option>
                         </select>
                     </div>
-                    <!-- <div class="col"></div>
-                    <div class="col"></div>
-                    <div class="col"></div> -->
+                </div>
+                <div class="ts-row">
+                    <div class="input-group input-group-sm ts-range" title="Question range">
+                        <span class="input-group-text"><i class="fa-solid fa-arrows-left-right"></i></span>
+                        <input id="filterOptionFromQuestion2" type="number" inputmode="numeric" min="1" class="form-control" placeholder="From" aria-label="From question" value="1">
+                        <span class="input-group-text">&ndash;</span>
+                        <input id="filterOptionToQuestion2" type="number" inputmode="numeric" min="1" class="form-control" placeholder="To" aria-label="To question" value="20">
+                    </div>
+                </div>
+                <div class="ts-row ts-toggles">
+                    <label class="ts-chip">
+                        <input type="checkbox" id="filterOptionRandom" checked>
+                        <span><i class="fa-solid fa-shuffle"></i> Random</span>
+                    </label>
+                    <label class="ts-chip">
+                        <input type="checkbox" id="show_question_title" checked>
+                        <span><i class="fa-solid fa-hashtag"></i> Show ID</span>
+                    </label>
                 </div>
             </div>
             <div class="row">
@@ -347,8 +319,7 @@
                 </div>
             </div>
             <form id="test_form">
-                <div class="testContent pt-3">
-                    This is test content
+                <div class="testContent">
                 </div>
             </form>
             <div class="row pb-3">
@@ -393,6 +364,24 @@
 
     <!-- MODALS -->
     <div id="modals"></div>
+
+    <!-- Feedback Modal (single shared instance, body-level so it works in both exam and test modes) -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedbackModalTitle">Feedback & Explanation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="feedbackModalBody">
+                    <div class="feedback-loading">Loading...</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
