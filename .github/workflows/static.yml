@@ -7,6 +7,8 @@ on:
     branches: ["master"]
     paths:
       - 'index.html'
+      - 'sw.js'
+      - 'manifest.webmanifest'
       - 'public/**'
       - '.github/workflows/static.yml'
 

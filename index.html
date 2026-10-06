@@ -8,6 +8,14 @@
     <title>Anki Quiz - Master Certification Exams</title>
     <link rel="icon" type="image/svg+xml" href="./public/favicon.svg">
 
+    <!-- PWA -->
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./public/icons/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Anki Quiz">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
     <!-- DNS Prefetch & Preconnect -->
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -520,6 +528,15 @@
     <script src="./public/js/access-gate.js"></script>
     <script src="./public/js/copy-to-ask-ai.js"></script>
     <script src="./public/js/feedback-modal.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("./sw.js").catch(function (err) {
+                    console.warn("Service worker registration failed:", err);
+                });
+            });
+        }
+    </script>
 
     <!-- /SCRIPTS -->
 </body>
