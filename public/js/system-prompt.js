@@ -1,7 +1,7 @@
 // SYSTEM PROMPT PANEL - lets each exam group keep its own instructions
 // for Chrome's "Ask Gemini" sidebar, which reads the page's visible
-// content. The panel stays in the DOM (collapsed by default) so Gemini
-// can still read it even when it's visually hidden.
+// content. The panel lives inside a modal (hidden until opened) so Gemini
+// can still read it once the modal is shown.
 (function () {
   function currentGroupId() {
     return getUserStorage("group_id") || groupId || "";
@@ -23,18 +23,10 @@
   }
 
   function init() {
-    var toggleBtn = document.getElementById("btnToggleSystemPrompt");
-    var panel = document.getElementById("systemPromptPanel");
     var saveBtn = document.getElementById("btnSaveSystemPrompt");
     var resetBtn = document.getElementById("btnResetSystemPrompt");
     var textarea = document.getElementById("systemPromptText");
     var groupSelect = document.getElementById("groupList");
-
-    if (toggleBtn && panel) {
-      toggleBtn.addEventListener("click", function () {
-        panel.classList.toggle("d-none");
-      });
-    }
 
     if (saveBtn && textarea) {
       saveBtn.addEventListener("click", function () {

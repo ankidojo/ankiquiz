@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#7C3AED">
     <title>Anki Quiz - Master Certification Exams</title>
     <link rel="icon" type="image/svg+xml" href="./public/favicon.svg">
@@ -28,7 +28,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Inter:wght@400;500;600&family=Noto+Sans:wght@400;600&family=Lexend:wght@400;600&family=Atkinson+Hyperlegible:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -58,6 +58,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="javascript:void(0)" class="dropdown-item btnToogleDarkMode btn btn-common btn-info btn-sm">Toogle DarkMode</a></li>
+                    <li><a href="javascript:void(0)" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#fontSettingsModal"><i class="fa-solid fa-font"></i> Font chữ câu hỏi</a></li>
                     <li><a href="javascript:void(0)" class="dropdown-item" onclick="window.AccessGate && window.AccessGate.logout()">Logout</a></li>
                     <li><hr class="dropdown-divider"></li>
                 </ul>
@@ -158,24 +159,15 @@
                                     <i class="fa-solid fa-brain"></i>
                                     <span class="d-none d-md-inline"> Copy to Ask AI</span>
                                 </button>
+
+                                <!-- System Prompt (for Gemini sidebar) -->
+                                <button type="button" class="btn-systemPrompt btn btn-dark px-1" data-bs-toggle="modal" data-bs-target="#systemPromptModal" title="System Prompt (Gemini)">
+                                    <i class="fa-solid fa-robot"></i>
+                                    <span class="d-none d-md-inline"> System Prompt</span>
+                                </button>
                             </div>
 
                             <a class="btnNextQue btn btn-success btn-saveQuiz" href="javascript:void(0)">Next</a>
-                        </div>
-
-                        <!-- System Prompt (for Gemini sidebar) -->
-                        <div class="system-prompt-block">
-                            <button type="button" class="btn btn-link btn-sm system-prompt-toggle" id="btnToggleSystemPrompt">
-                                <i class="fa-solid fa-robot"></i> System Prompt (Gemini)
-                            </button>
-                            <div id="systemPromptPanel" class="d-none mt-2">
-                                <textarea id="systemPromptText" class="form-control" rows="8"></textarea>
-                                <div class="mt-2">
-                                    <button type="button" class="btn btn-success btn-sm" id="btnSaveSystemPrompt">Save</button>
-                                    <button type="button" class="btn btn-secondary btn-sm" id="btnResetSystemPrompt">Reset mặc định</button>
-                                    <span id="systemPromptSavedMsg" class="text-success ms-2 d-none">Đã lưu!</span>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Edit -->
@@ -210,9 +202,13 @@
                 <!-- RIGHT BLOCK -->
                 <div class="right">
                     <a class="btn rounded-pill btn-review">Review</a>
-                    <a class="btn btn-sm btn-primary rounded-pill w-100 mb-2" data-bs-toggle="collapse" href="#attempts-que" role="button" aria-expanded="false" aria-controls="attempts-que">
-                        Hide/Show List Question
+                    <a id="btnToggleQuestionList" class="btn btn-sm btn-primary rounded-pill w-100 mb-2 btn-questionList" href="javascript:void(0)" role="button"
+                        data-bs-toggle="collapse" data-bs-target="#attempts-que" aria-expanded="false" aria-controls="attempts-que">
+                        <i class="fa-solid fa-list-ol"></i> Hide/Show List Question
                     </a>
+                    <!-- On desktop this list stays inline here (collapse, as before).
+                         On mobile, question-list-responsive.js moves it into
+                         #questionListModal and switches the trigger to a modal. -->
                     <div id="attempts-que" class="attempts-que collapse hide">
                         <div class="questionSearchBlock mb-2">
                             <input type="text" id="questionSearchInput" class="form-control form-control-sm" placeholder="Tìm câu hỏi theo từ khóa...">
@@ -391,6 +387,88 @@
         </div>
     </div>
 
+    <!-- System Prompt Modal (for Gemini sidebar) -->
+    <div class="modal fade" id="systemPromptModal" tabindex="-1" role="dialog" aria-labelledby="systemPromptModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="systemPromptModalTitle"><i class="fa-solid fa-robot"></i> System Prompt (Gemini)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="systemPromptText" class="form-control" rows="10"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <span id="systemPromptSavedMsg" class="text-success me-auto d-none">Đã lưu!</span>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnResetSystemPrompt">Reset mặc định</button>
+                    <button type="button" class="btn btn-success btn-sm" id="btnSaveSystemPrompt">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question List Modal (mobile only - question-list-responsive.js moves
+         #attempts-que in here; on desktop it stays inline in the sidebar) -->
+    <div class="modal fade question-list-modal" id="questionListModal" tabindex="-1" role="dialog" aria-labelledby="questionListModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="questionListModalTitle">Danh sách câu hỏi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="questionListModalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Settings Modal (question/answer font family & size, saved to localStorage) -->
+    <div class="modal fade" id="fontSettingsModal" tabindex="-1" role="dialog" aria-labelledby="fontSettingsModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fontSettingsModalTitle"><i class="fa-solid fa-font"></i> Font chữ câu hỏi &amp; đáp án</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="fontFamilySelect">Kiểu chữ</label>
+                        <select id="fontFamilySelect" class="form-select">
+                            <optgroup label="Mặc định & hệ thống">
+                                <option value="default">Poppins (mặc định) — nét tròn, mềm mại, hiện đại</option>
+                                <option value="sans-serif">Arial — nét đều, gọn, phổ thông dễ đọc</option>
+                                <option value="serif">Times New Roman — có chân chữ, quen mắt khi đọc văn bản dài</option>
+                                <option value="rounded">Verdana — nét đậm, chữ rộng, hợp đọc chữ cỡ nhỏ</option>
+                                <option value="monospace">Courier New — chữ cách đều (monospace), hợp xem code</option>
+                            </optgroup>
+                            <optgroup label="Tối ưu đọc tiếng Anh/Việt">
+                                <option value="noto-sans">Noto Sans — chuẩn Unicode, nét mảnh, hỗ trợ dấu tiếng Việt rất tốt</option>
+                                <option value="lexend">Lexend — thiết kế tối ưu tốc độ đọc, đọc lâu đỡ mỏi mắt</option>
+                                <option value="atkinson">Atkinson Hyperlegible — tách biệt rõ các ký tự dễ nhầm (I, l, 1, O, 0)</option>
+                                <option value="merriweather">Merriweather — nét có chân mềm mại, hợp đọc đoạn văn dài</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="fontSizeRange">
+                            Cỡ chữ: <span id="fontSizeValue">15</span>px
+                        </label>
+                        <input type="range" class="form-range" id="fontSizeRange" min="12" max="24" step="1">
+                    </div>
+                    <div class="fontSettingsPreview">
+                        <div class="que-text">Đây là câu hỏi mẫu để xem trước font chữ.</div>
+                        <label class="my-2 custom_label">
+                            <input type="radio" class="ip-radio" disabled>
+                            <span class="que-content">Đây là đáp án mẫu để xem trước font chữ.</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnResetFontSettings">Reset mặc định</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
@@ -525,6 +603,8 @@
     <script src="./public/js/exam.js"></script>
     <script src="./public/js/system-prompt.js"></script>
     <script src="./public/js/question-search.js"></script>
+    <script src="./public/js/question-list-responsive.js"></script>
+    <script src="./public/js/font-settings.js"></script>
     <script src="./public/js/access-gate.js"></script>
     <script src="./public/js/copy-to-ask-ai.js"></script>
     <script src="./public/js/feedback-modal.js"></script>

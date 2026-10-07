@@ -5,6 +5,8 @@ var USER_STORAGE = {
   group_id: "",
   exam_id: "",
   system_prompts: {},
+  font_family: "default",
+  font_size: 15,
 };
 
 // Default "system prompt" shown per group, meant to be read by Chrome's
@@ -127,6 +129,12 @@ function getUserStorage(id) {
     case "exam_id":
       output = USER_STORAGE.exam_id;
       break;
+    case "font_family":
+      output = USER_STORAGE.font_family || "default";
+      break;
+    case "font_size":
+      output = USER_STORAGE.font_size || 15;
+      break;
     case "all":
       output = USER_STORAGE;
       break;
@@ -147,6 +155,12 @@ function setUserStorage(id, value) {
       break;
     case "exam_id":
       USER_STORAGE["exam_id"] = value;
+      break;
+    case "font_family":
+      USER_STORAGE["font_family"] = value;
+      break;
+    case "font_size":
+      USER_STORAGE["font_size"] = value;
       break;
   }
   localStorage.setItem("USER_STORAGE", JSON.stringify(USER_STORAGE));

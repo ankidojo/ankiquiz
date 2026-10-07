@@ -251,13 +251,39 @@ body.white-mode .starMarkToReview.true {
     display: flex !important;
     align-items: center;
     justify-content: flex-start !important;
-    font-size: 15px !important;
+    font-size: var(--exam-font-size, 15px) !important;
+    font-family: var(--exam-font-family, inherit);
     margin-bottom: 8px;
     font-weight: 400;
     line-height: 1.5;
 }
 
+/* Match the question text to the answer choices' font-size (.custom_label)
+   so the question doesn't read smaller than its own answers. It had no
+   explicit size before and was just inheriting body's font-size. Both are
+   driven by the --exam-font-size/--exam-font-family variables so they can
+   be customized together (see font-settings.js). */
+.ExamQuestionsBlock .left .content .que-text {
+    font-size: var(--exam-font-size, 15px);
+    font-family: var(--exam-font-family, inherit);
+    line-height: 1.5;
+}
+
 .ExamQuestionsBlock .left .content p {
+    overflow-x: auto;
+}
+
+/* Prevent any oversized question content (images, tables, code blocks)
+   from forcing horizontal scroll on the whole page, especially on mobile. */
+.ExamQuestionsBlock .left .content img,
+.ExamQuestionsBlock .left .content table,
+.ExamQuestionsBlock .left .content pre,
+.ExamQuestionsBlock .left .content code {
+    max-width: 100%;
+}
+
+.ExamQuestionsBlock .left .content table {
+    display: block;
     overflow-x: auto;
 }
 
@@ -377,7 +403,8 @@ body.white-mode .starMarkToReview.true {
     margin-bottom: 10px;
 }
 
-.ExamQuestionsBlock .right .attempts-que ul {
+/* Question list (now lives inside #questionListModal) */
+.attempts-que ul {
     display: grid;
     grid-gap: 8px;
     grid-template-columns: repeat(8,1fr);
@@ -385,7 +412,7 @@ body.white-mode .starMarkToReview.true {
     padding-left: 0 !important;
 }
 
-.ExamQuestionsBlock .right .attempts-que ul li {
+.attempts-que ul li {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -402,32 +429,157 @@ body.white-mode .starMarkToReview.true {
     transition: .2s ease-in-out;
 }
 
-.ExamQuestionsBlock .right .attempts-que ul li:hover {
+.attempts-que ul li:hover {
     background: #e8e9ec;
 }
 
-.ExamQuestionsBlock .right .attempts-que ul li.attempted.true {
+.attempts-que ul li.attempted.true {
     color: #00be7e;
     background: #e5f9f2;
 }
 
-body.dark-mode .ExamQuestionsBlock .right .attempts-que ul li.current,
-.ExamQuestionsBlock .right .attempts-que ul li.current {
+body.dark-mode .attempts-que ul li.current,
+.attempts-que ul li.current {
     color: #007cff;
     background: #cce5ff;
     border: 2px solid #007cff;
 }
 
-body.dark-mode .ExamQuestionsBlock .right .attempts-que ul li.review,
-.ExamQuestionsBlock .right .attempts-que ul li.review {
+body.dark-mode .attempts-que ul li.review,
+.attempts-que ul li.review {
     color: #fab005 !important;
     background: rgb(235 235 235 / 20%) !important;
 }
 
-body.dark-mode .ExamQuestionsBlock .right .attempts-que ul li.choice,
-.ExamQuestionsBlock .right .attempts-que ul li.choice {
+body.dark-mode .attempts-que ul li.choice,
+.attempts-que ul li.choice {
     color: #00be7e;
     background: #e5f9f2;
+}
+
+/* Question List Modal (mobile bottom-sheet, centered dialog on larger screens) */
+.question-list-modal .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .question-list-modal .modal-dialog {
+        margin: 0;
+        max-width: 100%;
+        min-height: 100%;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .question-list-modal .modal-content {
+        width: 100%;
+        max-height: 85vh;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .question-list-modal .modal-body {
+        max-height: calc(85vh - 120px);
+    }
+}
+
+/* Theme System Prompt / Question List modals (same convention as
+   #feedbackModal: dark by default, lightened under body.white-mode) so
+   the dark-mode question circles and text stay readable against the
+   modal's own background instead of Bootstrap's default white. */
+#systemPromptModal .modal-content,
+#questionListModal .modal-content,
+#fontSettingsModal .modal-content {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border: 1px solid #46484d;
+}
+
+#systemPromptModal .modal-header,
+#systemPromptModal .modal-footer,
+#questionListModal .modal-header,
+#questionListModal .modal-footer,
+#fontSettingsModal .modal-header,
+#fontSettingsModal .modal-footer {
+    border-color: #46484d;
+    background-color: #252526;
+}
+
+#systemPromptModal .modal-title,
+#questionListModal .modal-title,
+#fontSettingsModal .modal-title {
+    color: #ffffff;
+}
+
+#systemPromptModal .btn-close,
+#questionListModal .btn-close,
+#fontSettingsModal .btn-close {
+    filter: invert(1);
+}
+
+#systemPromptModal textarea.form-control,
+#questionListModal #questionSearchInput.form-control,
+#fontSettingsModal .form-select {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border-color: #46484d;
+}
+
+body.white-mode #systemPromptModal .modal-content,
+body.white-mode #questionListModal .modal-content,
+body.white-mode #fontSettingsModal .modal-content {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ddd;
+}
+
+body.white-mode #systemPromptModal .modal-header,
+body.white-mode #systemPromptModal .modal-footer,
+body.white-mode #questionListModal .modal-header,
+body.white-mode #questionListModal .modal-footer,
+body.white-mode #fontSettingsModal .modal-header,
+body.white-mode #fontSettingsModal .modal-footer {
+    border-color: #ddd;
+    background-color: #f5f5f5;
+}
+
+body.white-mode #systemPromptModal .modal-title,
+body.white-mode #questionListModal .modal-title,
+body.white-mode #fontSettingsModal .modal-title {
+    color: #000000;
+}
+
+body.white-mode #systemPromptModal .btn-close,
+body.white-mode #questionListModal .btn-close,
+body.white-mode #fontSettingsModal .btn-close {
+    filter: none;
+}
+
+body.white-mode #systemPromptModal textarea.form-control,
+body.white-mode #questionListModal #questionSearchInput.form-control,
+body.white-mode #fontSettingsModal .form-select {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #ced4da;
+}
+
+/* Font settings preview box */
+.fontSettingsPreview {
+    margin-top: 16px;
+    padding: 12px;
+    border: 1px dashed #46484d;
+    border-radius: 6px;
+}
+
+body.white-mode .fontSettingsPreview {
+    border-color: #ced4da;
+}
+
+.fontSettingsPreview .que-text {
+    font-size: var(--exam-font-size, 15px);
+    font-family: var(--exam-font-family, inherit);
+    line-height: 1.5;
+    margin-bottom: 8px;
 }
 
 .symbolAnswer {
@@ -534,7 +686,7 @@ body.dark-mode .exam-header {
     border-bottom:  1px solid #46484d;
 }
 
-body.dark-mode .ExamQuestionsBlock .right .attempts-que ul li {
+body.dark-mode .attempts-que ul li {
     border: 1px solid #ffffff4a;
     background: hsl(216deg 33% 97% / 20%);
     color: #fff;
@@ -722,7 +874,8 @@ body.dark-mode .QuestionBlockItem .que-title {
 .QuestionBlockItem .que-text {
     margin-bottom: 12px;
     line-height: 1.6;
-    font-size: 15px;
+    font-size: var(--exam-font-size, 15px);
+    font-family: var(--exam-font-family, inherit);
     color: #333;
 }
 
@@ -844,21 +997,20 @@ body.white-mode {
         overflow-y: scroll;
     }
 
-    .ExamQuestionsBlock .right .attempts-que ul {
+    .attempts-que ul {
         grid-template-columns: repeat(2,1fr);
     }
 
     .ExamQuestionsBlock .right .btn-review,
-    .ExamQuestionsBlock .right a[href="#attempts-que"] {
+    .ExamQuestionsBlock .right .btn-questionList {
         font-size: 12px;
         white-space: normal;
         line-height: 1.3;
     }
 
-    .ExamQuestionsBlock .right .attempts-que ul li {
+    .attempts-que ul li {
         width: 30px;
         height: 30px;
-        /* font-size: 12px; */
     }
 
     body {
@@ -881,7 +1033,7 @@ body.white-mode {
         overflow-y: scroll;
     }
 
-    .ExamQuestionsBlock .right .attempts-que ul {
+    .attempts-que ul {
         grid-template-columns: repeat(4,1fr);
     }
 
@@ -950,20 +1102,14 @@ body.white-mode {
         width: 100%;
         padding: 0 15px;
         max-width: unset;
-    } 
-
-    .ExamQuestionsBlock .right .attempts-que ul {
-        grid-template-columns: repeat(8,1fr);
+        /* keep clear of the fixed bottom exam-nav so Review/List buttons
+           are never covered and stay tappable */
+        padding-bottom: calc(76px + env(safe-area-inset-bottom));
     }
 
-    .ExamQuestionsBlock .right .btn-review {
-        font-size: 12px;
-    }
-
-    .ExamQuestionsBlock .right .attempts-que ul li {
+    .attempts-que ul li {
         width: 30px;
         height: 30px;
-        /* font-size: 12px; */
     }
 
     .ExamQuestionsBlock img {
@@ -1065,7 +1211,6 @@ body.white-mode {
     }
 
     .QuestionBlockItem .que-text {
-        font-size: 14px;
         margin-bottom: 10px;
         line-height: 1.5;
     }
@@ -1093,28 +1238,39 @@ body.white-mode {
        position:sticky on any descendant, so we anchor to the viewport
        with fixed instead and pad the content so it isn't covered. */
     .ExamQuestionsBlock .left .content {
-        padding-bottom: 70px;
+        padding-bottom: calc(0px + env(safe-area-inset-bottom));
     }
 
     .ExamQuestionsBlock .left .content > .exam-nav {
         position: fixed;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: 10px;
+        border: 1px solid #46484d;
+        border-radius: 25px;
         background: var(--bg-primary-color);
         z-index: 1000;
         margin: 0;
         box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
         flex-wrap: nowrap;
-        padding: 8px 4px !important;
+        /* lift the whole bar clear of iPhone's rounded corners / home
+           indicator so the outer buttons stay easy to tap */
+        padding: 8px 4px calc(8px + env(safe-area-inset-bottom)) !important;
         gap: 4px;
         height: auto;
+        max-width: 100vw;
+        overflow-x: auto;
     }
 
     .ExamQuestionsBlock .left .content > .exam-nav .action-buttons {
         gap: 4px;
         flex: 1;
         min-width: 0;
+    }
+
+    .ExamQuestionsBlock .left .content > .exam-nav .action-buttons .btn {
+        min-width: 40px;
+        min-height: 44px;
     }
 
     .ExamQuestionsBlock .left .content > .exam-nav .btnPrevQue,
