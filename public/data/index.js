@@ -272,6 +272,26 @@ var listExamGroup = [
         data: SAP_C02_Part6.data,
       },
       {
+        id: "SAP_C02_VJP_Training_Test_1",
+        name: "[SAP-C02] VJP Training Test 1",
+        data: SAP_C02_VJP_Training_Test_1.data,
+      },
+      {
+        id: "SAP_C02_VJP_Training_Test_2",
+        name: "[SAP-C02] VJP Training Test 2",
+        data: SAP_C02_VJP_Training_Test_2.data,
+      },
+      {
+        id: "SAP_C02_VJP_Training_Test_3",
+        name: "[SAP-C02] VJP Training Test 3",
+        data: SAP_C02_VJP_Training_Test_3.data,
+      },
+      {
+        id: "SAP_C02_VJP_Training_Test_4",
+        name: "[SAP-C02] VJP Training Test 4",
+        data: SAP_C02_VJP_Training_Test_4.data,
+      },
+      {
         id: "SAP_C02_Whiz_PracticeTest1",
         name: "[SAP-C02] Whizlabs PracticeTest 1",
         data: SAP_C02_Whiz_PracticeTest1.data,
