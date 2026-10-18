@@ -73,6 +73,16 @@ var listExamGroup = [
         name: "[AIP-C01] AIP_C01_001_100",
         data: AIP_C01_001_100.data,
       },
+      {
+        id: "AIP_C01_UDEMY_TEST1",
+        name: "[AIP-C01] Udemy Practice Test 1",
+        data: AIP_C01_UDEMY_TEST1.data,
+      },
+      {
+        id: "AIP_C01_UDEMY_TEST2",
+        name: "[AIP-C01] Udemy Practice Test 2",
+        data: AIP_C01_UDEMY_TEST2.data,
+      },
     ]
   },
 
