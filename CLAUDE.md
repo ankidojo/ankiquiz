@@ -25,8 +25,8 @@ anki-quiz/
 │       ├── whizlabs/              # Dữ liệu từ nguồn Whizlabs
 │       ├── freecams/              # Dữ liệu từ nguồn miễn phí
 │       └── index.js               # Index dữ liệu chính
-├── tools/
-│   └── QuizDataParser.py          # Script để phân tích/nhập dữ liệu câu hỏi
+├── .claude/skills/examtopics-sync/ # Skill đồng bộ câu hỏi ExamTopics (crawl, parse, feedback, merge)
+│   └── scripts/QuizDataParser.py  # Script để phân tích/nhập dữ liệu câu hỏi (HTML → JSON)
 ├── .claude/                       # Cấu hình Claude Code
 └── .git/                          # Repository Git
 ```
@@ -45,7 +45,7 @@ anki-quiz/
 - **Icon**: Font Awesome 6
 - **Font**: Google Fonts (Poppins)
 - **Lưu trữ**: LocalStorage (USER_STORAGE)
-- **Parser**: Python (QuizDataParser.py)
+- **Parser**: Python (.claude/skills/examtopics-sync/scripts/QuizDataParser.py)
 
 ## 📊 Kiến trúc dữ liệu
 
