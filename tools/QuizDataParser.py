@@ -58,11 +58,17 @@ class QuizDataParser:
         if not element:
             return
         for img in element.find_all('img'):
-            old_src = img.get('src', '')
-            if old_src:
+            old_src = (img.get('src') or '').strip()
+            if not old_src:
+                continue
+            if old_src.startswith('data:image/'):
+                # Ảnh nhúng base64 (data:image/png;base64,...): giữ nguyên, không nối prefix.
+                # Bỏ ký tự xuống dòng/khoảng trắng trong chuỗi base64 để không bị clean_html_string đổi thành <br>.
+                img['src'] = re.sub(r'\s+', '', old_src)
+            else:
                 file_name = os.path.basename(old_src)
                 img['src'] = f"{self.img_prefix}/{file_name}"
-                img['class'] = "w-100"
+            img['class'] = "w-100"
 
     def clean_html_string(self, element, is_choice=False):
         """Làm sạch HTML, xử lý ảnh và trả về string."""
@@ -119,7 +125,8 @@ class QuizDataParser:
             blocks = soup.find_all('div', class_='question-body')
 
             for block in blocks:
-                container = block.find_parent('div', class_='sec-spacer') or \
+                container = block.find_parent('div', class_='exam-question-card') or \
+                            block.find_parent('div', class_='sec-spacer') or \
                             block.find_parent('div', class_='discussion-header-container') or block
 
                 # 1. Question ID
@@ -127,6 +134,11 @@ class QuizDataParser:
                 header = container.find('div', class_='question-discussion-header')
                 if header:
                     match = re.search(r'Question #:\s*(\d+)', header.get_text())
+                    if match:
+                        q_id = f"#{match.group(1)}"
+                if q_id == "#0":
+                    # Layout khác: trang thảo luận ("Question #: 30") hoặc trang danh sách ("Question #1")
+                    match = re.search(r'Question #:?\s*(\d+)', container.get_text(' ', strip=True))
                     if match:
                         q_id = f"#{match.group(1)}"
 
@@ -139,6 +151,7 @@ class QuizDataParser:
 
                 # 4. Lựa chọn (Choices) — chưa điền correct, làm sau khi có discussion
                 raw_choices = []
+                marked_letters = ""
                 choice_items = block.select('.question-choices-container ul li')
                 for li in choice_items:
                     letter_span = li.find('span', class_='multi-choice-letter')
@@ -153,6 +166,33 @@ class QuizDataParser:
                         "choice": f"<p>{choice_body}</p>",
                         "feedback": ""
                     })
+                    # Trang danh sách đánh dấu đáp án đúng bằng thuộc tính data-correct<id>
+                    if this_letter and any(k.startswith('data-correct') for k in li.attrs):
+                        marked_letters += this_letter
+
+                # Trang thảo luận không có danh sách lựa chọn: tách "A. ...", "B. ..." từ đoạn câu hỏi
+                if not raw_choices:
+                    kept = []
+                    # Ghép chữ cái đứng một mình ("D.") với dòng nội dung liền sau
+                    q_lines = re.split(r'<br\s*/?>', question_html)
+                    merged = []
+                    for line in q_lines:
+                        if merged and re.fullmatch(r'\s*[A-H]\.\s*', merged[-1]) and line.strip():
+                            merged[-1] = f"{merged[-1].strip()} {line.strip()}"
+                        else:
+                            merged.append(line)
+                    for line in merged:
+                        m = re.match(r'^\s*([A-H])\.\s+(.*)$', line)
+                        if m:
+                            raw_choices.append({
+                                "letter": m.group(1),
+                                "choice": f"<p>{m.group(2).strip()}</p>",
+                                "feedback": ""
+                            })
+                        elif line.strip() or not raw_choices:
+                            kept.append(line)
+                    if raw_choices:
+                        question_html = '<br>'.join(kept).strip()
 
                 # 5. Thảo luận (discusstion)
                 discussion_data = []
@@ -166,13 +206,16 @@ class QuizDataParser:
                         replies = "".join([f"<li>{self.clean_html_string(div)}</li>" for div in content_divs[1:]])
                         main_txt += f"<br><div>Replies:</div><ul>{replies}</ul>"
 
+                    # Layout mới không có class comment-selected-answers, dùng badge-warning
+                    sel = cb.find('div', class_='comment-selected-answers') or cb.find('div', class_='badge-warning')
+
                     discussion_data.append({
                         "id": int(c_id) if str(c_id).isdigit() else 0,
                         "date": cb.find('span', class_='comment-date').get('title', '') if cb.find('span', class_='comment-date') else "",
                         "username": cb.find('h5', class_='comment-username').get_text(strip=True) if cb.find('h5', class_='comment-username') else "user",
                         "content": main_txt,
                         "upvote_count": cb.find('span', class_='upvote-count').get_text(strip=True) if cb.find('span', class_='upvote-count') else "0",
-                        "selected_answers": cb.find('div', class_='comment-selected-answers').get_text(strip=True) if cb.find('div', class_='comment-selected-answers') else ""
+                        "selected_answers": sel.get_text(strip=True) if sel else ""
                     })
 
                 # 6. Xác định đáp án cuối cùng theo thứ tự ưu tiên:
@@ -191,6 +234,9 @@ class QuizDataParser:
                     if majority_answer:
                         final_answer = majority_answer
                         print(f"    {q_id}: đáp án từ majority discussion = {final_answer}")
+                    elif marked_letters:
+                        final_answer = marked_letters
+                        print(f"    {q_id}: đáp án từ data-correct = {final_answer}")
                     elif correct_letter:
                         final_answer = correct_letter
                         print(f"    {q_id}: đáp án từ correct_letter trang = {final_answer}")
