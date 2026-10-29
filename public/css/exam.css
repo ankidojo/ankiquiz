@@ -973,6 +973,91 @@ body.dark-mode #quickReviewModal .btnQuickReviewDetails {
     color: #8ab4ff;
 }
 
+/* Result (Review) modal: follow dark mode, same palette as #quickReviewModal */
+body.dark-mode #resultModal .modal-content {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border: 1px solid #46484d;
+}
+
+body.dark-mode #resultModal .modal-header,
+body.dark-mode #resultModal .modal-footer {
+    border-color: #46484d;
+    background-color: #252526;
+}
+
+body.dark-mode #resultModal .modal-title {
+    color: #ffffff;
+}
+
+body.dark-mode #resultModal .btn-close {
+    filter: invert(1);
+}
+
+body.dark-mode #resultModal .table {
+    --bs-table-border-color: #46484d;
+}
+
+/* Review button, Review result screen and Quick Review popup: mobile */
+@media only screen and (max-width: 768px) {
+    .ExamQuestionsBlock .right .btn-review {
+        width: 100%;
+        min-height: 44px;
+        font-size: 15px;
+    }
+
+    .resultBlock .pointBlock {
+        font-size: 1.4rem;
+    }
+
+    #resultBlock {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #resultBlock .table {
+        min-width: 520px;
+        font-size: 13px;
+    }
+
+    #resultBlock .table td:nth-child(2),
+    #resultBlock .table td:nth-child(3) {
+        white-space: normal;
+        min-width: 120px;
+    }
+
+    .resultBlock .btnViewQue {
+        min-height: 36px;
+        padding: 6px 12px;
+    }
+
+    #quickReviewModal .modal-dialog,
+    #resultModal .modal-dialog {
+        margin: 0.5rem;
+    }
+
+    #resultModal .modal-body,
+    #quickReviewModal .modal-body {
+        padding: 12px;
+        overflow-x: auto;
+    }
+
+    #quickReviewModal .table {
+        min-width: 480px;
+        font-size: 13px;
+    }
+
+    #quickReviewModal .btnQuickReviewDetails {
+        display: inline-block;
+        padding: 8px 12px;
+    }
+
+    #quickReviewModal .modal-footer .btn {
+        width: 100%;
+        min-height: 44px;
+    }
+}
+
 #testBlock .badge {
     display: inline-block;
     padding: 0.25em 0.4em;

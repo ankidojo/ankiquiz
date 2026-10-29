@@ -347,12 +347,11 @@ $("#starMarkToReview").on("click", function () {
 
 // REVIEW RESULT
 $(".btn-review").on("click", function () {
-  $(".ExamQuestionsBlock").addClass("d-none");
-  $(".resultBlock").removeClass("d-none");
   exam.showResult();
+  $("#resultModal").modal("show");
 });
 
-// GO TO QUESTION IN REVIEW RESULT SCREEN
+// GO TO QUESTION FROM REVIEW RESULT MODAL
 $("#resultBlock").on("click", ".btnViewQue", function () {
   exam.current = $(this).data("queno");
   let question = exam.currentQuestion();
@@ -360,7 +359,7 @@ $("#resultBlock").on("click", ".btnViewQue", function () {
     exam.getChoice(),
     exam.getMarkToReview()
   );
-  $(".btn-return").click();
+  $("#resultModal").modal("hide");
 });
 
 $(".btn-return").on("click", function () {
@@ -368,7 +367,6 @@ $(".btn-return").on("click", function () {
   $(".settingBlock").removeClass("d-none");
   $(".examBlock").removeClass("d-none");
   $(".examBlock").removeClass("d-none");
-  $(".resultBlock").addClass("d-none");
   $(".starBlock").addClass("d-none");
   $(".testBlock").addClass("d-none");
   $(".testContent ").html("No Contents");
