@@ -332,6 +332,11 @@ $("#ques-list").on("click", ".ip-radio", function () {
   }
 });
 
+// Bỏ focus khỏi radio/checkbox sau khi chọn để phím tắt (←, →, F, R, E...) vẫn hoạt động
+$(document).on("click", ".ip-radio", function () {
+  this.blur();
+});
+
 // MARK TO REVIEW
 $("#starMarkToReview").on("click", function () {
   let isMarked = $("#starMarkToReview").hasClass("true");
