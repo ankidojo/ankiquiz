@@ -827,6 +827,8 @@ class Exam {
     switch(EXAM_TYPE){
       case "STAR":
         self.markedQuestion.forEach(item => {
+          // Chỉ lấy câu đã đánh dấu nằm trong khoảng from–to (queNo là index 0-based)
+          if (item.queNo + 1 < from || item.queNo + 1 > to) return;
           que = self.listQuestions[item.queNo];
           que.options = QUESTION_OPTIONS;
           // if(star_ques.includes(item.queNo)) {
