@@ -86,6 +86,11 @@
 
     btn.addEventListener('click', function (e) {
       e.preventDefault();
+      const el = document.getElementById('feedbackModal');
+      if (el && el.classList.contains('show')) {
+        getModal().hide();
+        return;
+      }
       const question = typeof exam !== 'undefined' ? exam.currentQuestion() : null;
       const label = question ? `Question ${exam.current + 1}` : '';
       window.showFeedback(question, label);
