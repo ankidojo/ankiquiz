@@ -942,6 +942,37 @@ body.white-mode {
     color: #000;
 }
 
+/* Quick Review modal: follow dark mode (body.dark-mode), same palette as #feedbackModal */
+body.dark-mode #quickReviewModal .modal-content {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border: 1px solid #46484d;
+}
+
+body.dark-mode #quickReviewModal .modal-header,
+body.dark-mode #quickReviewModal .modal-footer {
+    border-color: #46484d;
+    background-color: #252526;
+}
+
+body.dark-mode #quickReviewModal .modal-title {
+    color: #ffffff;
+}
+
+body.dark-mode #quickReviewModal .btn-close {
+    filter: invert(1);
+}
+
+body.dark-mode #quickReviewModal .table {
+    --bs-table-color: #ffffff;
+    --bs-table-border-color: #46484d;
+    color: #ffffff;
+}
+
+body.dark-mode #quickReviewModal .btnQuickReviewDetails {
+    color: #8ab4ff;
+}
+
 #testBlock .badge {
     display: inline-block;
     padding: 0.25em 0.4em;
