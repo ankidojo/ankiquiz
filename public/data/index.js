@@ -85,6 +85,17 @@ var listExamGroup = [
       },
     ]
   },
+  {
+    id: "CCDV_F",
+    name: "[CCDV-F] Claude Certified Developer - Foundations (CCDV-F)",
+    list: [
+      {
+        id: "CCDV_F",
+        name: "[CCDV-F] CCDV_F",
+        data: CCDV_F.data,
+      },
+    ]
+  },
 
   //GROUP 3
   {
