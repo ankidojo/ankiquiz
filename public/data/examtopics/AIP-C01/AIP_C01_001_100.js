@@ -8651,6 +8651,231 @@ var AIP_C01_001_100 =
           "selected_answers": "Selected Answer:A"
         }
       ]
+    },
+    {
+      "question_id": "#137",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company has a customer service application that uses Amazon Bedrock to generate personalized responses to customer inquiries. The company needs to establish a quality assurance process to evaluate prompt effectiveness and model configurations across updates. The process must automatically compare outputs from multiple prompt templates, detect response quality issues, provide quantitative metrics, and allow human reviewers to give feedback on responses. The process must prevent configurations that do not meet a predefined quality threshold from being deployed.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Quy trình QA tự động để so sánh nhiều prompt template và cấu hình model, có metric định lượng, cho human review feedback.</li><li>Ràng buộc quan trọng nhất: <strong>chặn deploy</strong> cấu hình chưa đạt ngưỡng chất lượng đã định trước.</li><li>Ưu tiên: đánh giá <strong>chất lượng response</strong> (không chỉ sức khỏe hệ thống) và <strong>tự động hóa</strong> cổng deploy.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Amazon Bedrock evaluation jobs</strong> được thiết kế để đánh giá chất lượng prompt và model theo cách lặp lại được, trên cùng một custom prompt dataset. Khi tích hợp với <strong>AWS CodePipeline</strong>, job chạy tự động mỗi khi prompt thay đổi và chỉ cho phép deploy các cấu hình đạt ngưỡng.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — review thủ công hàng ngày, QuickSight chỉ trực quan hóa, không có cổng chặn deploy tự động; phải tự xây phần đánh giá.</li><li><strong>B</strong>: ✅ Đúng — evaluation jobs cho metric định lượng, custom dataset giúp so sánh nhất quán, CodePipeline gate đảm bảo chỉ deploy cấu hình đạt ngưỡng.</li><li><strong>C</strong>: ❌ Sai — latency và error rate đo sức khỏe vận hành, không đo chất lượng response; manual approval không đánh giá nội dung.</li><li><strong>D</strong>: ❌ Sai — sentiment không phản ánh đầy đủ chất lượng câu trả lời; shadow traffic và framework tự xây làm tăng độ phức tạp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Bedrock evaluation jobs, custom prompt dataset, quality threshold, CodePipeline gate.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"đánh giá chất lượng prompt/model trước khi deploy\" → nghĩ ngay đến <strong>Bedrock evaluation jobs + CodePipeline</strong>.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#137",
+          "answers": [
+            {
+              "choice": "<p>Create an AWS Lambda function that sends sample customer inquiries to multiple Amazon Bedrock model configurations and stores responses in Amazon S3. Use Amazon QuickSight to visualize response patterns. Manually review outputs daily. Use AWS CodePipeline to deploy configurations that meet the quality threshold.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock evaluation jobs to compare model outputs by using custom prompt datasets. Configure AWS CodePipeline to run the evaluation jobs when prompt templates change. Configure CodePipeline to deploy only configurations that exceed the predefined quality threshold.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Set up Amazon CloudWatch alarms to monitor response latency and error rates from Amazon Bedrock. Use Amazon EventBridge rules to notify teams when thresholds are exceeded. Configure a manual approval workflow in AWS Systems Manager.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use AWS Lambda functions to create an automated testing framework that samples production traffic and routes duplicate requests to the updated model version. Use Amazon Comprehend sentiment analysis to compare results. Block deployment if sentiment scores decrease.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AWS Certified Generative AI Developer - Professional AIP-C01 topic 1 question 2 discussion - ExamTopics",
+      "discusstion": []
+    },
+    {
+      "question_id": "#138",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A transportation company is building a trip planning AI assistant that users access through a mobile app or a web portal. The AI assistant must interpret natural-language user requests that include departure times, accessibility needs, and transfer preferences. The AI assistant must query appropriate backend APIs to route requests, calculate fares, and retrieve information about travel disruptions. The company must ensure that the AI assistant generates all fare prices in a deterministic way. The AI assistant must never generate routes or fares on its own. The company must be able to audit all interactions for regulatory review. The company must be able to add new backend services in the future without re-training or modifying the model.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Trợ lý lập kế hoạch chuyến đi: giá vé phải <strong>deterministic</strong>, model <strong>không tự tạo</strong> tuyến đường hay giá vé.</li><li>Ràng buộc quan trọng: <strong>audit</strong> mọi tương tác và <strong>thêm service mới mà không retrain</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Tính toán tuyến đường và giá vé phải nằm <strong>ngoài</strong> LLM. <strong>AgentCore Gateway</strong> cho phép expose API/Lambda như các <strong>tool</strong> có schema nghiêm ngặt; model chỉ hiểu ý định người dùng và giải thích kết quả tool trả về. Trace của AgentCore phục vụ audit, và service mới chỉ cần thêm làm Gateway target.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — giá vé nằm trong prompt, model vẫn có thể tự sinh giá; không đảm bảo deterministic và không có audit trace có cấu trúc.</li><li><strong>B</strong>: ✅ Đúng — tool là ranh giới xác định, schema JSON giới hạn input/output, model chỉ giải thích, trace phục vụ audit, service mới thêm như target.</li><li><strong>C</strong>: ❌ Sai — model tổng hợp route và giá từ tài liệu, đúng điều đề cấm; giá có thể bị sinh sai.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Step Functions cải thiện orchestration nhưng vẫn để model tạo route/giá; không có ranh giới tool xác định.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>AgentCore Gateway, tools, strict JSON schema, deterministic, audit trace.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"model không được tự tính giá/tuyến, cần audit, thêm service không retrain\" → nghĩ ngay đến <strong>AgentCore tools + schema</strong>.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#138",
+          "answers": [
+            {
+              "choice": "<p>Use an AWS Lambda function to directly invoke an Amazon Bedrock FM. Embed structured route planning and pricing rules in the prompts so the model will generate consistent outputs.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy Amazon Bedrock AgentCore with explicitly defined tools to enforce deterministic constraints. Enforce strict JSON I/O schemas. Ensure that the model can only explain tool outputs.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use RAG with Amazon OpenSearch Serverless to retrieve schedule and fare documents. Allow the model to synthesize route and cost options for users from the retrieved content.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use AWS Step Functions to coordinate multiple Amazon Bedrock model calls to improve output consistency without limiting the model's flexibility.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AWS Certified Generative AI Developer - Professional AIP-C01 topic 1 question 6 discussion - ExamTopics",
+      "discusstion": []
+    },
+    {
+      "question_id": "#139",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A global research company is building a RAG-enabled AI system that uses Amazon Bedrock Knowledge Bases. The company stores documents in Amazon S3 and indexes the documents into an Amazon OpenSearch Serverless vector collection. When the company evaluates the system, the company identifies three issues. Queries return outdated documents when users request only recent research. Medical research queries return both medical research documents and engineering domain documents. Users can retrieve documents that were authored by researchers who the users should not have access to based on company policies. The company wants to improve the system so that retrieval becomes more precise and contextually appropriate.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Ba lỗi: tài liệu cũ được trả về, lẫn tài liệu sai lĩnh vực (y tế và kỹ thuật), và lộ tài liệu của tác giả không được phép truy cập.</li><li>Ưu tiên: <strong>lọc theo metadata trước</strong> khi tìm kiếm vector, không chỉ hiển thị metadata sau khi đã truy xuất.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Timestamp, author và domain phải được đưa vào vector store dưới dạng <strong>filterable attribute</strong>, để Knowledge Base áp dụng bộ lọc <strong>trước</strong> vector similarity search. Cách này loại tài liệu cũ, sai domain và sai tác giả ngay từ đầu, không để chúng vào context của model.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — metadata chỉ được trả về cùng kết quả đã chọn; tài liệu sai vẫn được truy xuất và đưa vào context.</li><li><strong>B</strong>: ✅ Đúng — metadata là filterable attribute trong OpenSearch Serverless, Knowledge Base lọc theo timestamp, author, domain trước khi tìm vector.</li><li><strong>C</strong>: ❌ Sai — thêm DynamoDB và quy trình hai tầng tự xây; khó bảo trì và không tận dụng filter của Knowledge Base.</li><li><strong>D</strong>: ❌ Sai — Comprehend và Aurora thêm dịch vụ và độ phức tạp; phân loại domain không xử lý được yêu cầu lọc theo timestamp và quyền tác giả.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Filterable attributes, pre-filter, metadata, Knowledge Bases, OpenSearch Serverless.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"RAG trả về tài liệu cũ/sai domain/không có quyền\" → nghĩ ngay đến <strong>metadata filter trước vector search</strong>.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#139",
+          "answers": [
+            {
+              "choice": "<p>Add custom metadata fields to the documents in Amazon S3 to record timestamp, authorship, and research domain. Index the document embeddings and the custom metadata fields into the OpenSearch Serverless vector collection. At query time, use the knowledge base to run vector similarity search and return the stored metadata with the results to help the model interpret document relevance.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use S3 object metadata to store each document's timestamp. Use a custom metadata field to record authorship. Use S3 object tags to record the research domain. Propagate the metadata fields into the OpenSearch Serverless vector collection as filterable attributes. Use Knowledge Bases to apply timestamp, author, and domain filters before running vector similarity search.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Store documents in Amazon S3. Extract timestamp, author metadata, and research-domain tags, and store the data in an Amazon DynamoDB table. During retrieval, apply author, domain, and timestamp filters in DynamoDB to identify candidate document IDs. Use the filtered document IDs to narrow the vector similarity search in the OpenSearch Serverless collection.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Store documents in Amazon S3 with custom metadata to record authorship. Use Amazon Comprehend to classify each document into a research domain. Store the classification results in Amazon Aurora. Query Aurora during retrieval to identify relevant domains before performing vector similarity search in the OpenSearch Serverless collection.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AWS Certified Generative AI Developer - Professional AIP-C01 topic 1 question 10 discussion - ExamTopics",
+      "discusstion": []
+    },
+    {
+      "question_id": "#140",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A financial services company is developing an AI-powered search assistant application to help investment advisors quickly retrieve investment data. The application runs as an AWS Lambda function. The company is using Amazon Bedrock to develop the application by using an Amazon Bedrock knowledge base that uses Amazon OpenSearch Serverless as its data source. The application agent must manage collections at scale by automatically assigning access permissions to collections and indexes that match a specific pattern. The company uses Amazon Bedrock tools to test the knowledge base. The knowledge base sync process finishes successfully. However, the test reveals a 400 Bad Authorization error from the BedrockAgentRuntime API and a 403 Forbidden error when the test attempts to access OpenSearch Serverless. The company must resolve the permissions issues.<br/>Which combination of solutions will meet this requirement? (Select TWO.)</p>",
+      "mark": 1,
+      "is_partially_correct": true,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Hai lỗi khác nhau: <strong>400 Bad Authorization</strong> từ BedrockAgentRuntime (lớp orchestration) và <strong>403 Forbidden</strong> khi truy cập OpenSearch Serverless (lớp data).</li><li>Ưu tiên: cấp quyền <strong>tự động theo pattern</strong> cho collection và index mới.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Lambda role thiếu quyền <strong>bedrock:InvokeAgent</strong> nên gặp 400 khi gọi agent runtime; <strong>aoss:APIAccessAll</strong> cho phép gọi API của OpenSearch Serverless. Lỗi 403 ở data plane cần <strong>data access policy</strong> của OpenSearch Serverless, và dùng <strong>pattern-based resource rules</strong> để tự áp dụng cho collection mới khớp mẫu.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — bổ sung quyền gọi agent và quyền API OpenSearch Serverless cho execution role.</li><li><strong>B</strong>: ✅ Đúng — data access policy là cơ chế phân quyền data plane của OpenSearch Serverless, rule theo pattern áp dụng tự động cho resource mới.</li><li><strong>C</strong>: ❌ Sai — VPC endpoint policy kiểm soát đường mạng, không cấp quyền truy cập dữ liệu; không sửa lỗi 400 hay 403 theo mô tả.</li><li><strong>D</strong>: ❌ Sai — OpenSearch Serverless xác thực bằng IAM/SigV4, không dùng credential lưu trong Secrets Manager; không cần thiết và không khớp yêu cầu tự động hóa.</li><li><strong>E</strong>: ❌ Sai — <strong>es:ESHttp*</strong> là action của OpenSearch domain được quản lý, không áp dụng cho serverless (dùng <strong>aoss:*</strong>).</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Data access policy, pattern-based rules, aoss:APIAccessAll, bedrock:InvokeAgent, 403 vs 400.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"OpenSearch Serverless trả 403\" → nghĩ ngay đến <strong>data access policy</strong>, không phải IAM đơn thuần hay VPC.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#140",
+          "answers": [
+            {
+              "choice": "<p>Update the Lambda function execution role to include the bedrock:InvokeAgent permission. Add the aoss:APIAccessAll permission to the Lambda execution role.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create an OpenSearch Serverless data access policy that includes pattern-based resource rules.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure a VPC endpoint policy for OpenSearch Serverless. Add the endpoint to the Lambda function's VPC configuration.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure AWS Secrets Manager to store OpenSearch Serverless credentials. Grant the Lambda function access to retrieve the credentials.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Enable IAM authentication for the OpenSearch Serverless domain. Add the es:ESHttp* permission to the Lambda function execution role.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AWS Certified Generative AI Developer - Professional AIP-C01 topic 1 question 16 discussion - ExamTopics",
+      "discusstion": []
+    },
+    {
+      "question_id": "#141",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A healthcare company is developing an application to process medical queries. The application must answer complex queries with high accuracy by reducing semantic dilution. The application must refer to domain-specific terminology in medical documents to reduce ambiguity in medical terminology. The application must be able to respond to 1,000 queries each minute with response times less than 2 seconds.<br/>Which solution will meet these requirements with the LEAST operational overhead?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Cần: độ chính xác cao cho câu hỏi phức tạp (giảm <strong>semantic dilution</strong>), bám thuật ngữ y khoa trong tài liệu, 1.000 query/phút với độ trễ dưới 2 giây.</li><li>Ưu tiên quyết định: <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Knowledge Base</strong> đảm bảo câu trả lời bám tài liệu y khoa, còn <strong>query decomposition</strong> là tính năng có sẵn của Knowledge Base giúp giảm semantic dilution. Bedrock flow kết hợp FM và KB thành một luồng được quản lý hoàn toàn, không cần viết code orchestration hay quản lý hạ tầng model.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — agent gọi nhiều model (Claude để tách query, Titan để mở rộng query) làm tăng số lần gọi và độ trễ, đồng thời tăng overhead cấu hình.</li><li><strong>B</strong>: ✅ Đúng — KB có query decomposition built-in, flow được quản lý, không cần code tùy chỉnh.</li><li><strong>C</strong>: ❌ Sai — phải tự host và vận hành model trên SageMaker AI, overhead cao nhất; mã hóa tài liệu không giải quyết yêu cầu về độ chính xác.</li><li><strong>D</strong>: ❌ Sai — \"deep research and reasoning\" không phải tính năng built-in của agent; phải tự viết Lambda để tách query, overhead cao.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Knowledge Base, query decomposition, Bedrock flow, managed, least operational overhead.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giảm semantic dilution + LEAST overhead\" → nghĩ ngay đến <strong>KB query decomposition + Bedrock Flow</strong> thay vì tự xây agent/model.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#141",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon API Gateway to route incoming queries to an Amazon Bedrock agent. Configure the agent to use an Anthropic Claude model to decompose queries and an Amazon Titan model to expand queries. Create an Amazon Bedrock knowledge base to store the reference medical documents.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure an Amazon Bedrock knowledge base to store the reference medical documents. Enable query decomposition in the knowledge base. Configure an Amazon Bedrock flow that uses a foundation model (FM) and the knowledge base to support the application.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon SageMaker AI to host custom ML models for both query decomposition and query expansion. Configure Amazon Bedrock knowledge bases to store the reference medical documents. Encrypt the documents in the knowledge base.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create an Amazon Bedrock agent to orchestrate multiple AWS Lambda functions to decompose queries. Create an Amazon Bedrock knowledge base to store the reference medical documents. Use the agent's built-in knowledge base capabilities. Add deep research and reasoning capabilities to the agent to reduce ambiguity in the medical terminology.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AWS Certified Generative AI Developer - Professional AIP-C01 topic 1 question 97 discussion - ExamTopics",
+      "discusstion": []
     }
   ]
 }
