@@ -8859,6 +8859,1429 @@ var AIP_C01_001_100 =
       ],
       "topic_name": "Exam AWS Certified Generative AI Developer - Professional AIP-C01 topic 1 question 97 discussion - ExamTopics",
       "discusstion": []
+    },
+    {
+      "question_id": "#142",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company purchases Amazon Q Developer Pro subscriptions for 500 developers to improve code quality and productivity. The company needs to create an observability system that tracks adoption metrics across the company. The observability system must be able to identify active subscription users compared to underused subscriptions. The system must give the company the ability to recognize power users every quarter and to identify teams that require additional training. The system must provide visibility into usage patterns such as the number of lines of Amazon Q generated code that each user has accepted. Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Theo dõi adoption của 500 license Amazon Q Developer Pro: phân biệt user active và underused, nhận diện power user theo quý, tìm team cần đào tạo.</li><li>Yêu cầu then chốt: thấy được số dòng code Q sinh ra mà <strong>từng user</strong> đã accept, tức là dữ liệu mức user.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Cần dữ liệu user-level để xếp hạng user và gom theo team. Thu thập user-level metrics của Amazon Q Developer vào S3, rồi dùng Amazon QuickSight dựng dashboard cho user và team đáp ứng đúng nhu cầu này.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — usage dashboard chỉ cho số liệu tổng hợp, không có chi tiết từng user.</li><li><strong>B</strong>: ❌ Sai — dashboard quản trị built-in thiên về tổng quan toàn tổ chức, không đủ chi tiết từng user và team.</li><li><strong>C</strong>: ✅ Đúng — user-level metrics trong S3 + QuickSight cho phân tích theo user, team, quý.</li><li><strong>D</strong>: ❌ Sai — CloudTrail không chứa số dòng code được accept; Lambda + DynamoDB + Grafana là custom nặng.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>user-level metrics, Amazon Q Developer, S3, QuickSight, power user.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"chi tiết theo từng user/team\" → cần dữ liệu user-level + QuickSight, không phải dashboard tổng hợp.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#142",
+          "answers": [
+            {
+              "choice": "<p>Create a usage dashboard for Amazon Q Developer. Use the usage dashboard to track aggregated usage adoption metrics.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use the Amazon Q Developer built-in administrator dashboard to track user adoption metrics across the company's organization in AWS Organizations.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Collect user-level metrics in Amazon Q Developer. Store the metrics in an Amazon S3 bucket. Use Amazon QuickSight to visualize the usage data. Create dashboards to show adoption metrics for users and teams.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure AWS CloudTrail to track all Amazon Q Developer API calls in the company's organization in AWS Organizations. Use an AWS Lambda function to process the logs. Store the processed logs in Amazon DynamoDB. Create custom dashboards in Amazon Managed Grafana to visualize the data.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 1 question 21 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#143",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A healthcare company is building a generative AI (GenAI) application to answer patient questions based on patient medical records and published treatment guidelines. To comply with healthcare regulations, the application must provide transparent citations for all information sources. The application must also maintain an audit trail for all data access and ensure that responses reference only authorized medical information.<br/>Which solution will meet these requirements with the LEAST operational overhead?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>RAG trả lời câu hỏi bệnh nhân, bắt buộc có citation cho mọi nguồn, có audit trail truy cập dữ liệu, chỉ tham chiếu thông tin được phép.</li><li>Ưu tiên: <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Amazon Bedrock Knowledge Bases là managed RAG, API RetrieveAndGenerate trả về citation tới đúng source chunk. Quyền truy cập kiểm soát bằng IAM, còn CloudWatch/invocation logging ghi lại truy vấn và phản hồi làm audit trail.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — AgentCore và Prompt Management không tự cung cấp retrieval có citation.</li><li><strong>B</strong>: ✅ Đúng — Knowledge Bases cho citation + CloudWatch logs cho audit, hoàn toàn managed.</li><li><strong>C</strong>: ❌ Sai — vector database ngoài AWS và Lambda tự theo dõi citation là overhead lớn, rủi ro tuân thủ.</li><li><strong>D</strong>: ❌ Sai — fine-tune và cơ chế attribution tự xây không cần thiết cho RAG có nguồn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Knowledge Bases, RetrieveAndGenerate, citations, audit trail, CloudWatch logs.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"citation + managed + ít overhead\" → nghĩ ngay đến Bedrock Knowledge Bases.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#143",
+          "answers": [
+            {
+              "choice": "<p>Deploy an Amazon Bedrock AgentCore agent and Amazon Bedrock Prompt Management to generate patient responses.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Knowledge Bases to connect the application to authorized data sources. Use Amazon CloudWatch to collect comprehensive logs for all queries and response activities.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure Amazon Bedrock Guardrails to filter patient information. Create a custom vector database outside of AWS to store medical records. Use AWS Lambda functions to track citations.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon SageMaker AI to fine-tune Amazon Bedrock models by using medical data. Use a custom attribution mechanism in an Amazon API Gateway layer to cite data sources. Store data lineage records in Amazon DynamoDB.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 1 question 103 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#144",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A healthcare company wants to develop a proof-of-concept application that uses Amazon Bedrock to automatically summarize medical documents. The company has 3 weeks to validate the application ' s accuracy. The application must comply with the company's data privacy policies. The application must include metrics to evaluate summarization accuracy and processing time. Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Proof-of-concept tóm tắt tài liệu y tế trong 3 tuần, tuân thủ chính sách riêng tư, có metric đánh giá độ chính xác và thời gian xử lý.</li><li>Ưu tiên: nhanh, an toàn dữ liệu, đo lường được.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Dùng 50-100 bản ghi đã ẩn danh (anonymized) giữ đúng chính sách privacy, bộ dữ liệu nhỏ vừa kịp 3 tuần, và judge model cho phép đo accuracy tự động khi so sánh 3 FM.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — dữ liệu ẩn danh, quy mô nhỏ, có metric tự động và so sánh nhiều FM.</li><li><strong>B</strong>: ❌ Sai — fine-tune trên dữ liệu bệnh nhân và test với 500 nhân viên không thể xong trong 3 tuần, rủi ro privacy.</li><li><strong>C</strong>: ❌ Sai — dùng bệnh nhân thật, chỉ phản hồi định tính, không có metric accuracy.</li><li><strong>D</strong>: ❌ Sai — multi-agent đa knowledge base quá phức tạp, không đo accuracy summarization.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>anonymized data, judge model, Bedrock model evaluation, proof-of-concept.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"PoC + privacy + đo accuracy\" → dữ liệu ẩn danh nhỏ + LLM-as-a-judge.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#144",
+          "answers": [
+            {
+              "choice": "<p>Create a dataset that includes 50-100 anonymized patient records. Implement Retrieval Augmented Generation (RAG) with a secure knowledge base. Use a judge model to evaluate accuracy metrics across three foundation models (FMs).</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Fine-tune a single foundation model (FM) on patient records. Deploy the FM on Amazon Bedrock. Use Amazon Bedrock AgentCore to configure the FM as an agent. Conduct user testing on 500 company staff members.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Select the most powerful available AWS foundation model (FM). Create a chat interface by using Converse APIs. Test the application on 50-100 actual patient records by using only qualitative feedback from stakeholders. Use a custom web interface to gather real-world performance metrics.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use the Strands SDK to deploy multiple agents that connect to multiple knowledge bases that contain specialized medical documents. Compare the responses of the agents. Evaluate the integration of the agents with the company ' s existing systems.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 1 question 105 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#145",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A GenAI developer is evaluating Amazon Bedrock foundation models (FMs) to enhance a Europe-based company's internal business application. The company has a multi-account landing zone in AWS Control Tower. The company uses Service Control Policies (SCPs) to allow its accounts to use only the eu-north-1 and eu-west-1 Regions. All customer data must remain in private networks within the approved AWS Regions.<br/>The GenAI developer selects an FM based on analysis and testing and hosts the model in the eu-central-1 Region and the eu-west-3 Region. The GenAI developer must enable access to the FM for the company's employees. The GenAI developer must ensure that requests to the FM are private and remain within the same Regions as the FM.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Công ty châu Âu có SCP chỉ cho phép eu-north-1 và eu-west-1; FM chạy ở các Region khác; yêu cầu truy cập riêng tư và dữ liệu không rời các Region châu Âu.</li><li>Ưu tiên: private network + data residency.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Cross-Region inference với endpoint phạm vi Europe (inference profile) giữ request trong các Region châu Âu. Bedrock VPC endpoint (PrivateLink) giữ lưu lượng riêng tư; SCP được mở rộng cho phép dùng inference profile ở các Region thuộc châu Âu.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — không tạo \"VPC endpoint cho từng FM\" theo Region như vậy; kiến trúc không đúng với cách Bedrock hoạt động.</li><li><strong>B</strong>: ❌ Sai — tự host FM trên EC2 mâu thuẫn với việc dùng Bedrock FM đã chọn.</li><li><strong>C</strong>: ✅ Đúng — Europe-scoped inference profile + VPC endpoint + SCP mở rộng.</li><li><strong>D</strong>: ❌ Sai — chuyển sang SageMaker ở eu-north-1 bỏ FM đã chọn trên Bedrock.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>cross-Region inference, inference profile, Bedrock VPC endpoint, SCP, data residency.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giữ dữ liệu trong khu vực + nhiều Region\" → geography-scoped inference profile + SCP.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#145",
+          "answers": [
+            {
+              "choice": "<p>Deploy an AWS Lambda function that is exposed by a private Amazon API Gateway REST API to a VPC in eu-north-1. Create a VPC endpoint for the selected FM in eu-central-1 and eu-west-3. Extend existing SCPs to allow employees to use the FM. Integrate the REST API with the business application.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy the FM on Amazon EC2 instances in eu-north-1. Deploy a private Amazon API Gateway REST API in front of the EC2 instances. Configure an Amazon Bedrock VPC endpoint. Integrate the REST API with the business application.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure the FM to use cross-Region inference through a Europe-scoped endpoint. Configure an Amazon Bedrock VPC endpoint. Extend existing SCPs to allow employees to use the FM through inference profiles in Europe-based Regions where the FM is available. Use an inference profile to integrate Amazon Bedrock with the business application.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy the FM in Amazon SageMaker in eu-north-1. Configure a SageMaker VPC endpoint. Extend existing SCPs to allow employees to use the SageMaker endpoint. Integrate the FM in SageMaker with the business application.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 1 question 110 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#146",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>An ecommerce company is using an Anthropic Claude Sonnet model in Amazon Bedrock to generate product recommendations. An AWS Lambda function retrieves customer purchase data from Amazon DynamoDB, product reviews from Amazon S3, and customer profile information from Amazon RDS. Then the function sends the data directly to the Amazon Bedrock model through API calls. Recently, customers who have extensive purchase histories have begun to receive incomplete recommendations.<br/>Amazon CloudWatch logs for the Lambda function show execution timeouts. CloudWatch logs for Amazon Bedrock API calls show intermittent errors. The company reviews the logs and finds that some requests are failing with context-length-exceeded errors. Other requests finish but appear to ignore portions of the input data.<br/>The company wants the recommendation system to consider all customer data when the system generates recommendations. The company wants to use Amazon Bedrock Knowledge Bases to improve data organization and retrieval.<br/>Which combination of solutions will meet these requirements? (Select TWO.)</p>",
+      "mark": 1,
+      "is_partially_correct": true,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Khách có lịch sử mua lớn làm vượt context length; model bỏ sót dữ liệu. Cần xét toàn bộ dữ liệu khách hàng và dùng Bedrock Knowledge Bases cải thiện tổ chức/truy xuất.</li><li>Chọn 2 đáp án.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>E dùng RAG: index dữ liệu bằng embeddings, mỗi lần chỉ lấy phần liên quan, tránh nhồi hết vào prompt. A chia dữ liệu thành các đoạn nhỏ xử lý riêng rồi tổng hợp, nên toàn bộ dữ liệu đều được xét.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — chunking + tổng hợp cuối giúp phủ hết dữ liệu.</li><li><strong>B</strong>: ❌ Sai — cắt bớt dữ liệu (truncate) trái yêu cầu \"xét toàn bộ dữ liệu\".</li><li><strong>C</strong>: ❌ Sai — đổi model/tăng timeout chỉ trì hoãn vấn đề, không dùng Knowledge Bases.</li><li><strong>D</strong>: ❌ Sai — không thể tăng context window vượt giới hạn model bằng additionalModelRequestFields.</li><li><strong>E</strong>: ✅ Đúng — RAG với knowledge base lấy đúng ngữ cảnh cần.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>context-length-exceeded, RAG, Knowledge Bases, chunking, embeddings.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"vượt context window mà phải dùng hết dữ liệu\" → RAG + chunk rồi tổng hợp.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#146",
+          "answers": [
+            {
+              "choice": "<p>Implement a chunking strategy that divides the customer data into smaller segments. Configure the model to process each segment separately. Invoke the model a final time to synthesize the individual responses into comprehensive recommendations.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Modify the prompt structure to place the most critical information at the beginning and end of the context window. Implement token-counting logic to truncate less important data when the interaction approaches the model's maximum context length.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Replace Claude Sonnet with a model that has a larger context-window capacity. Increase the Lambda function timeout to accommodate longer processing times for larger inputs.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure the recommendation system to use the Converse API. Modify the additionalModelRequestFields parameter to increase the maximum token limit beyond the model's default context-window size.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Implement RAG by using a knowledge base to index the customer data with vector embeddings.Retrieve only the most semantically relevant information for each recommendation request based on the current customer context.</p>",
+              "correct": true,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 2 question 21 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#147",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A pharmaceutical company is developing a Retrieval Augmented Generation (RAG) application that uses an Amazon Bedrock knowledge base. The knowledge base uses Amazon OpenSearch Service as a data source for more than 25 million scientific papers. Users report that the application produces inconsistent answers that cite irrelevant sections of papers when queries span methodology, results, and discussion sections of the papers.<br/>The company needs to improve the knowledge base to preserve semantic context across related paragraphs on the scale of the entire corpus of data.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Knowledge base 25 triệu bài báo khoa học; truy vấn trải qua methodology/results/discussion nhưng câu trả lời không nhất quán và trích sai đoạn.</li><li>Cần giữ ngữ cảnh ngữ nghĩa giữa các đoạn liên quan ở quy mô toàn corpus.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Hierarchical chunking: child chunk nhỏ (200 token) để match chính xác, nhưng trả về parent chunk lớn (1.000 token) giữ ngữ cảnh rộng. Vừa chính xác vừa giữ quan hệ giữa các đoạn, và scale tốt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — fixed-size 300 token cắt ngang ngữ cảnh.</li><li><strong>B</strong>: ✅ Đúng — parent-child giữ ngữ cảnh rộng, tìm chính xác bằng child.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — semantic chunking tốn tính toán ở quy mô 25 triệu tài liệu và chỉ tách theo ý nghĩa, không trả ngữ cảnh cha.</li><li><strong>D</strong>: ❌ Sai — tách file thủ công không scale.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>hierarchical chunking, parent chunk, child chunk, semantic context.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giữ ngữ cảnh giữa các đoạn\" → hierarchical chunking.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#147",
+          "answers": [
+            {
+              "choice": "<p>Configure the knowledge base to use fixed-size chunking. Set a 300-token maximum chunk size and a 10% overlap between chunks. Use an appropriate Amazon Bedrock embedding model.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure the knowledge base to use hierarchical chunking. Use parent chunks that contain 1,000 tokens and child chunks that contain 200 tokens. Set a 50-token overlap between chunks.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure the knowledge base to use semantic chunking. Use a buffer size of 1 and a breakpoint percentile threshold of 85% to determine chunk boundaries based on content meaning.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure the knowledge base not to use chunking. Manually split each document into separate files before ingestion. Apply post-processing reranking during retrieval.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 2 question 64 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#148",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company wants to implement an Amazon Bedrock application that helps lawyers search thousands of legal documents. The solution must give lawyers the ability to query based on the type of legal case, jurisdiction, and case outcome. Queries must return information about document authors and versions. The solution must integrate with the company ' s existing tools and support future growth in volume and query complexity.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tìm kiếm tài liệu pháp lý theo loại vụ án, jurisdiction, kết quả; trả về tác giả và phiên bản; tích hợp công cụ có sẵn, mở rộng được.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Knowledge Bases với vector store hỗ trợ metadata filtering cho phép lọc có cấu trúc theo case type, jurisdiction, outcome; tác giả và version nằm ở metadata fields nên trả về trực tiếp.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — flat embedding store không lọc có cấu trúc.</li><li><strong>B</strong>: ✅ Đúng — metadata filtering + metadata attributes.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — Comprehend thêm bước, và flat store vẫn không lọc theo metadata.</li><li><strong>D</strong>: ❌ Sai — metadata nhúng trong text, không phải structured field nên lọc kém.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>metadata filtering, structured retrieval, Knowledge Bases, metadata attributes.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"lọc theo thuộc tính (loại, vùng, kết quả)\" → metadata filtering.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#148",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon Bedrock Knowledge Bases with a flat text embedding store. Include search context in user queries.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Knowledge Bases with a vector store that supports metadata filtering. Configure metadata attributes for case type, jurisdiction, and case outcome to enable structured retrieval. Store authorship and version information in metadata fields.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Comprehend to extract metadata attributes such as case type, jurisdiction, and case outcome from legal documents. Use Amazon Bedrock Knowledge Bases with a flat embedding store.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Knowledge Bases with documents that include metadata attributes such as case type, jurisdiction, and case outcome embedded inside the text rather than defined as structured fields.Use Amazon Bedrock AgentCore with the RetrieveAndGenerate API to extract metadata from embedded documents during queries.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 2 question 86 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#149",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company needs a system to automatically generate study materials from multiple content sources. The content sources include document files (PDF files, PowerPoint presentations, and Word documents) and multimedia files (recorded videos). The system must process more than 10,000 content sources daily with peak loads of 500 concurrent uploads. The system must also extract key concepts from document files and multimedia files and create contextually accurate summaries. The generated study materials must support real- time collaboration with version control.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Pipeline tạo tài liệu học từ PDF/PPT/Word và video, &gt;10.000 nguồn mỗi ngày, peak 500 upload đồng thời, tóm tắt chính xác, cộng tác real-time có version control.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>BDA xử lý document, Textract/Transcribe hỗ trợ PDF và multimedia. S3 versioning cho version control, DynamoDB cho metadata, AppSync GraphQL subscriptions cho cộng tác real-time. Toàn bộ là dịch vụ managed, scale tốt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Knowledge Bases không xử lý multimedia; SNS và Agents không phải cơ chế cộng tác/version control.</li><li><strong>B</strong>: ✅ Đúng — đủ extraction, versioning, real-time collaboration.</li><li><strong>C</strong>: ❌ Sai — Guardrails không trích xuất nội dung; Neptune cho time series là sai mục đích.</li><li><strong>D</strong>: ❌ Sai — ElastiCache không phù hợp lưu trữ lâu dài, Prompt management không phải version control tài liệu.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Bedrock Data Automation, Textract, Transcribe, S3 versioning, AppSync subscriptions.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"real-time collaboration\" → AppSync subscriptions; \"version control\" → S3 versioning.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#149",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon Bedrock Data Automation (BDA) with AWS Lambda functions to orchestrate document file processing. Use Amazon Bedrock Knowledge Bases to process all multimedia. Store the content in Amazon DocumentDB with replication. Collaborate by using Amazon SNS topic subscriptions. Track changes by using Amazon Bedrock Agents.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Data Automation (BDA) with foundation models (FMs) to process document files. Integrate BDA with Amazon Textract for PDF extraction and with Amazon Transcribe for multimedia files. Store the processed content in Amazon S3 with versioning enabled. Store the metadata in Amazon DynamoDB. Collaborate in real time by using AWS AppSync GraphQL subscriptions and DynamoDB.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Data Automation (BDA) with Amazon SageMaker AI endpoints to host content extraction and summarization models. Use Amazon Bedrock Guardrails to extract content from all file types. Store document files in Amazon Neptune for time series analysis. Collaborate by using Amazon Bedrock Chat for real-time messaging.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Data Automation (BDA) with AWS Lambda functions to process batches of content files. Fine-tune foundation models (FMs) in Amazon Bedrock to classify documents across all content types. Store the processed data in Amazon ElastiCache (Redis OSS) by using Cluster Mode with sharding. Use Prompt management in Amazon Bedrock for version control.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 2 question 114 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#150",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A healthcare company is deploying an AI system that uses a foundation model (FM) to help clinicians make diagnostic decisions. The company's ethics board requires the AI system to demonstrate fairness across patient demographic groups and comply with medical AI governance policies. During initial testing, the AI system provides recommendations without clear explanations or decision tracing. Clinicians are unable to review how the AI system produces diagnostic conclusions.<br/>The company needs to implement a solution that provides transparent reasoning for AI outputs, enables systematic fairness testing, and ensures policy compliance for responsible AI use in healthcare settings. The solution must balance comprehensive explainability with real-time performance requirements. The solution must support rapid iteration for bias testing across multiple demographic variables. The solution must integrate seamlessly with existing clinical workflows while maintaining strict data privacy controls. The solution must handle complex medical and regulatory terminology.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>AI chẩn đoán cần lý giải được (explainability), kiểm thử fairness theo nhân khẩu học, tuân thủ chính sách, hiệu năng gần real-time, tích hợp workflow lâm sàng, bảo mật dữ liệu.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Bedrock agent tracing cho reasoning trace minh bạch; Prompt Management với A/B testing cho phép lặp nhanh kiểm thử bias; Guardrails đảm bảo policy compliance. Tất cả nằm trong hệ Bedrock nên tích hợp liền mạch.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Clarify cho model SageMaker, không giải thích reasoning của FM trên Bedrock.</li><li><strong>B</strong>: ❌ Sai — Comprehend Medical/Textract không giải quyết explainability hay fairness.</li><li><strong>C</strong>: ✅ Đúng — tracing + A/B prompt testing + Guardrails.</li><li><strong>D</strong>: ❌ Sai — CloudWatch/EventBridge/Lambda là tự build, không có reasoning trace.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>agent tracing, Prompt Management A/B testing, Guardrails, explainability, fairness.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giải thích reasoning của agent\" → Bedrock agent trace.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#150",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon SageMaker Clarify to generate model explanations. Use Amazon Augmented AI (Amazon A2I) to implement human review workflows. Use AWS Config to enforce compliance policies across the AI system.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Comprehend Medical to analyze medical terminology. Use Amazon Textract to process documents. Use AWS CloudFormation to standardize deployment configurations.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock agent tracing to provide reasoning traces. Use Amazon Bedrock Prompt Management with A/B testing to perform fairness evaluations. Use Amazon Bedrock Guardrails to ensure policy compliance.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon CloudWatch to collect performance metrics. Use Amazon EventBridge to trigger compliance checks. Use AWS Lambda functions to generate custom explanation reports.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 2 question 116 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#151",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company uses Amazon Bedrock to deploy an application that generates technical documentation for users across multiple AWS Regions and in multiple languages. Users frequently submit semantically similar questions in different languages, which results in increased inference costs and response latency.<br/>The company needs a caching solution that significantly reduces inference costs, provides low-latency responses globally, maintains cache freshness with a 5-minute TTL, and minimizes custom cache key generation and application-managed caching logic.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Câu hỏi giống nghĩa bằng nhiều ngôn ngữ làm tăng chi phí inference và latency.</li><li>Cần cache giảm chi phí, latency thấp toàn cầu, TTL 5 phút, và <strong>tối thiểu hóa custom cache key và logic cache tự quản lý</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Prompt caching của Amazon Bedrock là tính năng managed, có sẵn TTL 5 phút, tái sử dụng ngữ cảnh prompt trùng lặp để giảm chi phí và độ trễ mà không phải tự code logic lưu trữ. CloudFront + Lambda@Edge phân phối phản hồi ở biên với độ trễ thấp toàn cầu và đồng bộ TTL 5 phút.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Lambda + DynamoDB là cache tự build, nhiều logic tự quản lý.</li><li><strong>B</strong>: ✅ Đúng — prompt caching managed, TTL 5 phút, CloudFront và Lambda@Edge cho edge toàn cầu.</li><li><strong>C</strong>: ❌ Sai — ElastiCache từng Region cần custom fingerprinting đa ngôn ngữ, trái yêu cầu giảm custom cache key.</li><li><strong>D</strong>: ❌ Sai — DAX chỉ dành cho DynamoDB, không cache kết quả inference.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>prompt caching, TTL 5 phút, CloudFront, Lambda@Edge, managed.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giảm chi phí và latency, ít logic cache tự quản lý\" → Bedrock prompt caching + CloudFront.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#151",
+          "answers": [
+            {
+              "choice": "<p>Create a custom caching system that uses AWS Lambda functions to store inference results in an Amazon DynamoDB table. Use Amazon CloudFront to distribute cached responses to global users with a 5-minute TTL.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure prompt caching in Amazon Bedrock for semantically similar queries across languages. Use Amazon CloudFront and Lambda@Edge functions to handle Regional cache distribution. Set a TTL of 5 minutes for both caching layers.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create Amazon ElastiCache (Redis OSS) clusters in each Region where the application runs to store inference results with custom fingerprinting for multilingual queries. Configure automatic replication between Regional clusters with a 5-minute TTL.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon DynamoDB Accelerator (DAX) to cache inference results and to automatically manage TTL. Use Amazon CloudFront to distribute API responses globally. Use edge functions to handle language-specific transformations.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 2 question 122 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#152",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A global financial services company hosts a fraud-alert system that uses an Amazon Bedrock foundation model (FM) to generate explanations for suspicious transactions. The company processes regulated financial data across three geographic areas. The system must maintain consistent responsiveness globally, support multi-Region failover, and provide full observability for audit and compliance teams.<br/>Load testing shows that the FM's total inference time cannot be reduced. The company cannot increase its inference costs, change the FM, modify token counts, or provision additional compute capacity. Users report that the UI performs slowly because it waits for the complete model response before it shows any content.<br/>The company must improve perceived responsiveness during peak periods, when the system can receive<br/>10,000-15,000 concurrent requests. The solution must maintain multi-Region resiliency and full monitoring visibility.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Không giảm được thời gian inference tổng, không tăng chi phí, không đổi FM/token/compute. UI chậm vì chờ toàn bộ response. Cần cải thiện cảm nhận phản hồi, giữ multi-Region và monitoring.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Response streaming (InvokeModelWithResponseStream) hiển thị token ngay khi có, giảm time-to-first-token mà không đổi tổng thời gian. CloudWatch và distributed tracing giữ visibility.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — streaming cải thiện perceived latency, không thêm chi phí.</li><li><strong>B</strong>: ❌ Sai — cache explanation riêng lẻ và thêm hạ tầng, không giải quyết việc chờ trọn response.</li><li><strong>C</strong>: ❌ Sai — rút gọn input là đổi token; placeholder làm UX tệ.</li><li><strong>D</strong>: ❌ Sai — tăng Lambda concurrency và giảm log retention làm mất observability, không giải quyết gốc.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>InvokeModelWithResponseStream, perceived latency, time-to-first-token.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"UI chờ cả response\" → streaming.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#152",
+          "answers": [
+            {
+              "choice": "<p>Enable response streaming by using the InvokeModelWithResponseStream API so the frontend can display generated tokens as the tokens arrive. Collect metrics in Amazon CloudWatch and enable distributed tracing to monitor streaming latency and Regional performance.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy Regional Amazon Bedrock inference endpoints. Set up latency-based Amazon Route 53 routing. Cache partially processed explanations in a global Amazon DynamoDB table to serve responses more quickly during peak periods.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use a Lambda@Edge preprocessing layer to condense inputs during peak periods. Asynchronously call Amazon Bedrock while the system returns interim placeholder responses to customers.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy AWS Lambda functions to handle inference requests across multiple AWS Regions. Increase Lambda concurrency limits. Scale down Amazon CloudWatch Logs retention to reduce backend load during peak periods.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 2 question 128 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#153",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A financial services company wants to develop an Amazon Bedrock application that gives analysts the ability to query quarterly earnings reports and financial statements. The financial documents are typically 5-100 pages long and contain both tabular data and text. The application must provide contextually accurate responses that preserve the relationship between financial metrics and their explanatory text. To support accurate and scalable retrieval, the application must incorporate document segmentation and context management strategies.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tài liệu tài chính 5-100 trang có bảng và văn bản; cần giữ quan hệ giữa chỉ số và phần giải thích; retrieval chính xác, scale được.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Knowledge Bases (managed RAG) với chunking theo cấu trúc layout giữ bảng và text liên quan chung ngữ cảnh, kèm citation. Giải pháp scale và ít vận hành.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — nhồi cả tài liệu vào một lần không scale, dễ vượt context.</li><li><strong>B</strong>: ✅ Đúng — RAG, chunk theo cấu trúc, có citation.</li><li><strong>C</strong>: ❌ Sai — fixed-size chunking cắt bảng khỏi phần giải thích.</li><li><strong>D</strong>: ❌ Sai — tách structured/unstructured làm mất quan hệ giữa metric và text.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>structure-aware chunking, Knowledge Bases, citations, tables and text.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"giữ quan hệ bảng và text\" → chunk theo cấu trúc, không fixed-size.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#153",
+          "answers": [
+            {
+              "choice": "<p>Use a direct model invocation approach that uses Anthropic Claude to process each financial document as a single input. Use fine-tuned prompts that instruct the model to parse tables and text separately.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Knowledge Bases to create a Retrieval Augmented Generation (RAG) application that retrieves relevant information from contextually chunked sections of financial documents. Segment documents based on their structural layout. Include citations that reference the original source materials.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy an Amazon Bedrock agent that has an action group that calls custom AWS Lambda functions to analyze financial documents. Configure the Lambda functions to perform fixed-size chunking when a user submits a query about financial metrics.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create one specialized Amazon Bedrock application that is optimized for structured data. Create a second application that is optimized for unstructured data. Configure each application to use a tailored chunking strategy that is suited to the application's content type. Implement logic to link queries to the appropriate sources.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 3 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#154",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company uses an application to process customer support tickets. The company wants to integrate AI- powered sentiment analysis and auto-response generation into the application by using Amazon Bedrock. The company wants to prioritize urgent issues and reduce initial response times by 40% compared to manual responses. The solution must process 100 concurrent webhook requests with response times under 500 ms.<br/>The solution must maintain 99.9% availability across multiple AWS Regions and authenticate all incoming requests. The company must avoid any authentication failures. The company does not want to modify the existing application infrastructure, which includes several ticketing systems that use multiple webhook authentication methods. The solution must support scaling to handle occasional spikes up to 250,000 daily tickets during peak periods. Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Webhook từ nhiều ticketing system với nhiều cách xác thực khác nhau; 100 request đồng thời, &lt;500 ms, 99.9% multi-Region, 250.000 ticket/ngày, không sửa hạ tầng hiện có.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>API Gateway REST API + Lambda authorizer xử lý được nhiều kiểu xác thực tùy biến, Lambda gọi Bedrock, kết quả lưu DynamoDB global tables cho multi-Region.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — authorizer linh hoạt, serverless, global tables cho HA.</li><li><strong>B</strong>: ❌ Sai — Function URL với auth NONE rồi tự verify HMAC là rủi ro xác thực.</li><li><strong>C</strong>: ❌ Sai — Comprehend + Lex không dùng Bedrock theo yêu cầu, SQS thêm độ trễ.</li><li><strong>D</strong>: ❌ Sai — AppSync/API token không hỗ trợ nhiều phương thức webhook hiện có.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>API Gateway, Lambda authorizer, webhook, DynamoDB global tables.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"nhiều cách xác thực webhook\" → Lambda authorizer.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#154",
+          "answers": [
+            {
+              "choice": "<p>Use an Amazon API Gateway REST API with a Regional endpoint to receive webhook requests and invoke AWS Lambda functions. Configure Lambda authorizers to validate all the webhook authentication methods. Configure the Lambda functions to call Amazon Bedrock to perform sentiment analysis and generate responses. Store results in Amazon DynamoDB global tables to provide multi- Region availability.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create AWS Lambda function URLs for each ticketing system. Configure the function URLs with the NONE authentication type. Configure separate Lambda functions to verify webhook signatures by using Hash-based Message Authentication Code (HMAC) validation in the function code. Deploy the functions to multiple Regions and use AWS Global Accelerator to route traffic. Use Amazon Bedrock to perform sentiment analysis and generate responses. Return responses through webhook callbacks.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Set up an Amazon SQS queue in each Region to receive webhook messages. Use the SQS queue to invoke AWS Lambda functions that call Amazon Comprehend to perform sentiment analysis and Amazon Lex to generate responses. Use Amazon EventBridge to retry message delivery to the application API.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy an AWS AppSync GraphQL API to multiple Regions. Configure API tokens to authenticate incoming requests. Create GraphQL mutation resolvers that publish events to Amazon EventBridge.Configure EventBridge rules to invoke AWS Lambda functions that use Amazon Bedrock to perform sentiment analysis and generate responses. Use Amazon CloudFront to reduce latency.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 6 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#155",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A book publishing company wants to build a book recommendation system that uses an AI assistant. The AI assistant will use ML to generate a list of recommended books from the company's book catalog. The system must suggest books based on conversations with customers.<br/>The company stores the text of the books, customers' and editors' reviews of the books, and extracted book metadata in Amazon S3. The system must support low-latency responses and scale efficiently to handle more than 10,000 concurrent users.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Trợ lý gợi ý sách dựa trên hội thoại; dữ liệu trong S3; cần latency thấp, scale &gt;10.000 người dùng đồng thời.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Knowledge Bases tạo embedding từ S3; OpenSearch Service là vector store hiệu năng cao, tìm kiếm nhanh và scale tốt. Lambda + API Gateway serverless.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — OpenSearch vector store tối ưu cho tìm kiếm ngữ nghĩa quy mô lớn.</li><li><strong>B</strong>: ❌ Sai — DynamoDB không phải vector store được Knowledge Bases hỗ trợ.</li><li><strong>C</strong>: ❌ Sai — recommendation engine pre-trained không hiểu hội thoại tự nhiên.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — Kendra GenAI Enterprise tốn kém và là tìm kiếm doanh nghiệp, không tối ưu cho recommendation theo hội thoại.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Knowledge Bases, OpenSearch vector store, low latency, semantic search.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"Knowledge Bases + scale + low latency\" → OpenSearch vector store.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#155",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon Bedrock Knowledge Bases to generate embeddings. Store the embeddings as a vector store in Amazon OpenSearch Service. Create an AWS Lambda function that queries the knowledge base. Configure Amazon API Gateway to invoke the Lambda function when handling user requests.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Knowledge Bases to generate embeddings. Store the embeddings as a vector store in Amazon DynamoDB. Create an AWS Lambda function that queries the knowledge base. Configure Amazon API Gateway to invoke the Lambda function when handling user requests.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon SageMaker AI to deploy a pre-trained model to build a personalized recommendation engine for books. Deploy the model as a SageMaker AI endpoint. Invoke the model endpoint by using Amazon API Gateway.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create an Amazon Kendra GenAI Enterprise Edition index that uses the S3 connector to index the book catalog data stored in Amazon S3. Configure built-in FAQ in the Kendra index. Develop an AWS Lambda function that queries the Kendra index based on user conversations. Deploy Amazon API Gateway to expose this functionality and invoke the Lambda function.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 19 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#156",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A healthcare company uses a multi-agent system on Amazon Bedrock AgentCore. The system uses multiple FMs to process 2,000 medical report documents daily. The documents range from 5 to 50 pages each.<br/>The company discovers that the system is not performing complete analysis on documents that exceed 30 pages. Documents over 30 pages miss critical information from later sections. The results are truncated, but there are no explicit errors.<br/>The company must resolve this issue while maintaining response times under 10 seconds. The company must keep processing costs low.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tài liệu &gt;30 trang bị cắt cụt âm thầm (không lỗi), bỏ sót thông tin ở phần sau. Cần giữ &lt;10 giây và chi phí thấp.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Nguyên nhân là vượt context window. Chunking có semantic overlap bảo toàn ngữ cảnh giữa các đoạn; giám sát InputTokenCount và dashboard context utilization phát hiện điểm bị cắt.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — tăng timeout không giải quyết truncation; xử lý tuần tự làm chậm.</li><li><strong>B</strong>: ✅ Đúng — chunk + overlap + giám sát token.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — tuần tự qua Step Functions làm tăng độ trễ vượt 10 giây.</li><li><strong>D</strong>: ❌ Sai — tăng bộ nhớ không đổi context window của model.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>context window, truncation, chunking với overlap, InputTokenCount.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"kết quả bị cắt không lỗi\" → context window, chunking + overlap.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#156",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon CloudWatch Logs Insights queries to analyze Amazon Bedrock agent processing times. Increase the timeout settings for the Lambda functions that host the agents. Implement pagination for larger documents to process in sequential batches.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Implement document chunking with semantic overlap between chunks where content from the end of one chunk appears at the beginning of the next chunk. Configure Amazon CloudWatch metrics to monitor InputTokenCount. Set up a CloudWatch dashboard for context utilization percentage. Configure diagnostic logging that identifies truncation points in the processing flow.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure agent action groups to process documents sequentially by automatically creating separate tasks for each document section. Set up an AWS Step Functions workflow to coordinate processing. Combine the results from individual sections.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy the system in a higher memory configuration with a larger compute instance size to accommodate complete documents in memory. Add Amazon Comprehend Medical to identify and prioritize critical medical entities for improved context management.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 19-2 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#157",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company is using Amazon Bedrock to build an AI assistant to help internal teams analyze unstructured customer feedback data. The company stores the customer feedback in an Amazon S3 bucket. The S3 bucket contains more than 25 TB of historical data from mobile app reviews, chat conversations, and call center transcripts. The company expects the data source to grow by 3 GB every day. The data entries often contain multiple unrelated topics within the same input.<br/>The company needs a solution that reliably delivers accurate answers to questions based on the data source.<br/>The solution must not export any personally identifiable information (PII) to the Amazon Bedrock model during processing or response generation.<br/>Which solution will meet these requirements with the LEAST operational overhead?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>&gt;25 TB feedback không cấu trúc, tăng 3 GB/ngày, nhiều chủ đề không liên quan trong cùng một mục.</li><li>Trả lời chính xác, không đưa PII vào model, <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Knowledge Bases tích hợp sẵn luồng RAG nên ít vận hành nhất. Semantic chunking tách các chủ đề khác nhau theo ngữ nghĩa. OpenSearch Serverless là vector store không cần quản lý hạ tầng, tự scale cho &gt;25 TB. Guardrails chặn PII ở cả input và output mà không cần tự dựng pipeline Comprehend.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — hai Lambda, Comprehend, chunking tự xây là overhead cao nhất.</li><li><strong>B</strong>: ❌ Sai — fixed-size chunking không tách được nhiều chủ đề; Aurora khó scale ở quy mô này.</li><li><strong>C</strong>: ✅ Đúng — managed RAG, semantic chunking, OpenSearch Serverless, Guardrails chặn PII.</li><li><strong>D</strong>: ❌ Sai — Aurora PostgreSQL phải quản lý capacity ở hàng chục TB, vận hành nhiều hơn OpenSearch Serverless.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Knowledge Bases, semantic chunking, OpenSearch Serverless, Guardrails PII.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"least overhead + PII + RAG\" → Knowledge Bases + Guardrails, vector store serverless.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#157",
+          "answers": [
+            {
+              "choice": "<p>Configure an AWS Lambda function that processes each new file in the S3 bucket to detect and remove PII by using Amazon Comprehend. Configure the function to generate fixed-size chunk embeddings and store them in an Amazon OpenSearch Serverless vector store. Configure a second Lambda function to process questions, retrieve context, and invoke an Amazon Bedrock foundation model directly to generate answers.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure an Amazon Bedrock knowledge base that synchronizes with the S3 bucket by using fixed- size chunking. Configure the knowledge base to use an Amazon Aurora PostgreSQL vector store. Configure an Amazon Bedrock guardrail to block all types of PII during input and output processing. Configure Amazon Bedrock AgentCore to use the knowledge base and the guardrail to process and answer queries.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure an Amazon Bedrock knowledge base that synchronizes with the S3 bucket by using semantic chunking. Configure the knowledge base to use an Amazon OpenSearch Serverless vector store. Configure an Amazon Bedrock guardrail to block all types of PII during input and output processing. Configure Amazon Bedrock AgentCore to use the knowledge base and the guardrail to process and answer queries.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure an Amazon Bedrock knowledge base that synchronizes with the S3 bucket by using semantic chunking. Configure the knowledge base to use an Amazon Aurora PostgreSQL vector store. Configure an Amazon Bedrock guardrail to block all types of PII during input and output processing. Configure Amazon Bedrock AgentCore to use the knowledge base and the guardrail to process and answer queries.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 25 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#158",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A research company is developing a GenAI system to produce summaries of technical documents. The company must catalog all data sources in a central location. The company needs a solution that can automatically discover and update data sources. The solution must tag each generated summary with citations as metadata that users can query. The solution must retain tamper-evident, immutable audit logs for every model invocation and store input/output records.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Catalog nguồn dữ liệu tự động; gắn citation làm metadata truy vấn được; audit log bất biến, tamper-evident cho mọi lần gọi model, có lưu input/output.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Glue Data Catalog + crawlers tự khám phá và cập nhật nguồn. S3 object tag chứa source ID làm metadata. Bedrock invocation logs lưu vào S3 với Object Lock (bất biến), CloudTrail log file integrity validation cho tamper-evident.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Comprehend không catalog nguồn; không có log từng invocation.</li><li><strong>B</strong>: ✅ Đúng — Glue catalog + tag + Object Lock + CloudTrail integrity.</li><li><strong>C</strong>: ❌ Sai — DynamoDB và IAM không bất biến, không tamper-evident.</li><li><strong>D</strong>: ❌ Sai — AppConfig không phải cơ chế audit, thiếu log bất biến.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Glue Data Catalog, crawlers, S3 Object Lock, invocation logging, CloudTrail integrity validation.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"bất biến + tamper-evident\" → S3 Object Lock + CloudTrail log validation.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#158",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon Comprehend to identify data sources in the documents. Store generated summaries in Amazon S3 and enable S3 Object Lock. Use Amazon CloudWatch metrics to generate reports about application throughput. Do not include logs for each invocation.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use AWS Glue Data Catalog with crawlers to maintain data sources. Store generated summaries in Amazon S3. Write object tags that include a source ID. Store Amazon Bedrock model invocation logs in Amazon S3. Enable S3 Object Lock on the S3 bucket that stores invocation logs. Use AWS CloudTrail log file integrity validation to provide tamper-evident immutability.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Store application outputs in Amazon DynamoDB. Apply item-level tags that include source attribution. Write application events to Amazon CloudWatch Logs. Use IAM roles to provide audit traceability.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use AWS AppConfig feature flags to implement data versioning. Restrict access to the model by using IAM condition keys. Maintain a versioned mapping file of source-to-output relationships in Amazon S3.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 37 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#159",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company is building an AI-powered customer support application that uses Amazon Bedrock FMs. The application must provide users with recommendations based on an internal Amazon Bedrock knowledge base.<br/>Users will query documents that the company stores in Amazon S3 and structured data that is in Amazon RDS. The application must provide citations for the sources it uses to generate recommendations. The application must also provide secure access to sensitive data.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Trợ lý hỗ trợ khách hàng truy vấn tài liệu trong S3 và dữ liệu có cấu trúc trong RDS; cần citation và truy cập an toàn dữ liệu nhạy cảm.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Một AgentCore agent gắn với hai knowledge base (S3 cho tài liệu, RDS cho structured data) giữ nguyên attribution metadata để có citation, IAM role kiểm soát quyền truy cập. Không cần code kết hợp tùy biến.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — một agent, hai knowledge base, citation và IAM.</li><li><strong>B</strong>: ❌ Sai — hai agent và Lambda tổng hợp là phức tạp, khó giữ citation.</li><li><strong>C</strong>: ❌ Sai — Lambda truy vấn trực tiếp bỏ qua knowledge base, mất attribution tự động.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — RDS qua Lambda tự code, citation không nhất quán.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>multiple knowledge bases, attribution metadata, IAM roles, structured data.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"nhiều nguồn + citation\" → một agent nhiều knowledge base.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#159",
+          "answers": [
+            {
+              "choice": "<p>Associate one Amazon Bedrock AgentCore agent with two knowledge bases. Configure one knowledge base to access documents from Amazon S3 and the other to access structured data from Amazon RDS. Configure the agent to preserve attribution metadata in responses. Use IAM roles to control access to sensitive data.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create two Amazon Bedrock AgentCore agents. Associate one agent with a knowledge base that is connected to the documents in Amazon S3 and the other agent with a knowledge base that is connected to Amazon RDS. Develop a custom AWS Lambda function to query both agents simultaneously and combine the results.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create one Amazon Bedrock AgentCore agent that uses AWS Lambda functions to directly query Amazon S3 for documents and Amazon RDS for structured data. Process the responses and merge the results into a single response.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure one Amazon Bedrock AgentCore agent to use a knowledge base that contains the documents from Amazon S3. Configure AWS Lambda functions to query Amazon RDS directly for structured data and to combine the results before returning responses.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 61 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#160",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A retail company runs an application that makes product recommendations to customers on the company's website. The application uses Amazon Bedrock to generate recommendations by dynamically constructing prompts and sending them to foundation models (FMs).<br/>A GenAI developer has deployed an update to the application that instructs the FM to include a specific promotional message when the FM generates a response to prompts. When the developer tests the application, the promotional message does not always appear in the responses. When the promotional message does appear, it does not always flow with the rest of the text.<br/>The GenAI developer must ensure that the promotional message always appears in the FM responses.<br/>Which solution will meet this requirement?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Model không phải lúc nào cũng chèn thông điệp khuyến mãi và đôi khi không mạch lạc. Cần đảm bảo thông điệp luôn xuất hiện.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Đây là vấn đề prompt engineering: dùng output indicator (chỉ rõ cấu trúc/định dạng đầu ra, vị trí chèn thông điệp) để buộc model tuân thủ ổn định hơn.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — Guardrails lọc nội dung có hại, không ép chèn thông điệp.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — sinh nhiều biến thể rồi rerank tốn kém, không đảm bảo luôn có.</li><li><strong>C</strong>: ❌ Sai — AgentCore và rerank phức tạp, không đảm bảo thông điệp.</li><li><strong>D</strong>: ✅ Đúng — output indicator trong prompt củng cố yêu cầu.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>prompt engineering, output indicator, deterministic output.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"FM không tuân thủ định dạng/nội dung\" → chỉnh prompt (output indicator) trước khi thêm hạ tầng.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#160",
+          "answers": [
+            {
+              "choice": "<p>Use an Amazon Bedrock Guardrails filter on the prompt. Set the input filter strength to HIGH.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Generate multiple response variants that include the promotional message in different ways. Use a reranker model to select the most coherent version based on relevance to the original prompt.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Run the prompt through Amazon Bedrock. Process the response through Amazon Bedrock AgentCore to add the promotional message. Rerank the results by using the original prompt and the desired message as context.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Reinforce the requirement to include the new promotional message within product recommendations by using an output indicator in prompts to the FM.</p>",
+              "correct": true,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 67 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#161",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company developed a multimodal content analysis application by using Amazon Bedrock. The application routes different content types (text, images, and code) to specialized foundation models (FMs).<br/>The application needs to handle multiple types of routing decisions. Simple routing based on file extension must have minimal latency. Complex routing based on content semantics requires analysis before FM selection. The application must provide detailed history and support fallback options when primary FMs fail.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Hai loại routing: đơn giản (theo đuôi file, độ trễ tối thiểu) và phức tạp (phân tích ngữ nghĩa). Cần lịch sử chi tiết và fallback khi FM chính lỗi.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Hybrid: routing đơn giản trong application code nên nhanh nhất; routing phức tạp dùng Step Functions với JSONata + InvokeModel, cho execution history chi tiết và retry/fallback tích hợp.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — gọi FM cho cả routing đơn giản làm tăng latency và chi phí.</li><li><strong>B</strong>: ✅ Đúng — đúng công cụ cho từng loại routing.</li><li><strong>C</strong>: ❌ Sai — nhiều workflow và EventBridge phức tạp.</li><li><strong>D</strong>: ❌ Sai — SQS không cho lịch sử/fallback có tổ chức.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Step Functions, JSONata, execution history, fallback, hybrid routing.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"routing phức tạp + history + fallback\" → Step Functions.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#161",
+          "answers": [
+            {
+              "choice": "<p>Configure AWS Lambda functions that call Amazon Bedrock FMs for all routing logic. Use conditional statements to determine the appropriate FM based on content type and semantics.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Create a hybrid solution. Handle simple routing based on file extensions in application code. Handle complex content-based routing by using an AWS Step Functions state machine with JSONata for content analysis and the InvokeModel API for specialized FMs.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy separate AWS Step Functions workflows for each content type with routing logic in AWS Lambda functions. Use Amazon EventBridge to coordinate between workflows when fallback to alternate FMs is required.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon SQS with different SQS queues for each content type. Configure AWS Lambda consumers that analyze content and invoke appropriate FMs based on message attributes by using Amazon Bedrock with an AWS SDK.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 79 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#162",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company wants to select a new FM for its AI assistant. A GenAI developer needs to generate evaluation reports to help a data scientist assess the quality and safety of various foundation models FMs. The data scientist provides the GenAI developer with sample prompts for evaluation. The GenAI developer wants to use Amazon Bedrock to automate report generation and evaluation.<br/>Which solution will meet this requirement?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Tự động hóa đánh giá chất lượng và an toàn nhiều FM bằng Amazon Bedrock với tập prompt mẫu.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Bedrock model evaluation job nhận dataset JSONL trong S3, dùng judge model, ghi kết quả ra S3. Mỗi FM được chọn làm generator (model được đánh giá).</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — knowledge base và RetrieveAndGenerate không phải công cụ đánh giá FM.</li><li><strong>B</strong>: ✅ Đúng — JSONL + judge model + FM là generator, output S3.</li><li><strong>C</strong>: ❌ Sai — output không thể là QuickSight; FM được đánh giá phải là generator, không phải evaluator.</li><li><strong>D</strong>: ❌ Sai — đây là đánh giá RAG, không phù hợp dataset prompt thuần.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>evaluation job, judge model, JSONL, generator model.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"so sánh FM tự động\" → Bedrock model evaluation với judge model.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#162",
+          "answers": [
+            {
+              "choice": "<p>Combine the sample prompts into a single JSON document. Create an Amazon Bedrock knowledge base with the document. Write a prompt that asks the FM to generate a response to each sample prompt. Use the RetrieveAndGenerate API to generate a report for each model.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Combine the sample prompts into a single JSONL document. Store the document in an Amazon S3 bucket. Create an Amazon Bedrock evaluation job that uses a judge model. Specify the S3 location as input and a different S3 location as output. Run an evaluation job for each FM and select the FM as the generator.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Combine the sample prompts into a single JSONL document. Store the document in an Amazon S3 bucket. Create an Amazon Bedrock evaluation job that uses a judge model. Specify the S3 location as input and Amazon QuickSight as output. Run an evaluation job for each FM and select the FM as the evaluator.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Combine the sample prompts into a single JSON document. Create an Amazon Bedrock knowledge base from the document. Create an Amazon Bedrock evaluation job that uses the retrieval and response generation evaluation type. Specify an Amazon S3 bucket as the output. Run an evaluation job for each FM.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 3 question 99 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#163",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A publishing company is developing a chat assistant that uses a containerized large language model (LLM) that runs on Amazon SageMaker AI. The architecture consists of an Amazon API Gateway REST API that routes user requests to an AWS Lambda function. The Lambda function invokes a SageMaker AI real-time endpoint that hosts the LLM.<br/>Users report uneven response times. Analytics show that a high number of chats are abandoned after 2 seconds of waiting for the first token. The company wants a solution to ensure that p95 latency is under 800 ms for interactive requests to the chat assistant.<br/>Which combination of solutions will meet this requirement? (Select TWO.)</p>",
+      "mark": 1,
+      "is_partially_correct": true,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B, E</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>LLM container trên SageMaker real-time endpoint: người dùng bỏ chat sau 2 giây chờ token đầu tiên. Cần p95 &lt;800 ms.</li><li>Chọn 2 đáp án.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>B: preload model giảm cold start, dynamic batching tăng throughput. E: min instances &gt;0 loại bỏ cold start, streaming trả token đầu sớm.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — asynchronous inference không dành cho tương tác real-time và min 0 gây cold start.</li><li><strong>B</strong>: ✅ Đúng — preload và dynamic batching.</li><li><strong>C</strong>: ❌ Sai — min 0 và lazy load làm cold start tệ hơn.</li><li><strong>D</strong>: ❌ Sai — multi-model endpoint lazy loading làm tăng độ trễ.</li><li><strong>E</strong>: ✅ Đúng — luôn có instance ấm và streaming.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>cold start, response streaming, dynamic batching, minimum instances.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"độ trễ token đầu\" → streaming + instance luôn ấm.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#163",
+          "answers": [
+            {
+              "choice": "<p>Switch to Amazon SageMaker Asynchronous Inference for all requests. Store requests in an Amazon S3 bucket. Set the minimum number of instances to 0.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Enable model preload upon container startup. Implement dynamic batching to process multiple user requests together in a single inference pass.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Select a larger GPU instance type for the SageMaker AI endpoint. Set the minimum number of instances to 0. Continue to perform per-request processing. Lazily load model weights on the first request.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Switch to a multi-model endpoint. Use lazy loading without request batching.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Set the minimum number of instances to greater than 0. Enable response streaming.</p>",
+              "correct": true,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 5 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#164",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company has a recommendation system running on Amazon EC2 instances. The applications make API calls to Amazon Bedrock foundation models (FMs) to analyze customer behavior and generate personalized product recommendations.<br/>The system experiences intermittent issues where some recommendations do not match customer preferences.<br/>The company needs an observability solution to monitor operational metrics and detect patterns of performance degradation compared to established baselines. The solution must generate alerts with correlation data within 10 minutes when FM behavior deviates from expected patterns.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Theo dõi hành vi FM lệch so với baseline, cảnh báo kèm dữ liệu tương quan trong 10 phút.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>CloudWatch Application Insights + custom metrics (EMF) về quality, token usage, latency, kèm anomaly detection và Logs Insights phát hiện lệch baseline và phân tích pattern.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — chỉ có ngưỡng latency, không có anomaly detection.</li><li><strong>B</strong>: ❌ Sai — X-Ray/CloudTrail/QuickSight không cảnh báo hành vi lệch trong 10 phút.</li><li><strong>C</strong>: ✅ Đúng — custom metrics + anomaly detection + Logs Insights.</li><li><strong>D</strong>: ❌ Sai — OpenSearch + Kinesis là tự dựng, tốn công.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>CloudWatch anomaly detection, embedded metric format, Application Insights.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"lệch baseline\" → CloudWatch anomaly detection.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#164",
+          "answers": [
+            {
+              "choice": "<p>Configure Amazon CloudWatch Container Insights. Set up alarms for latency thresholds. Add custom token metrics using the CloudWatch embedded metric format.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Implement AWS X-Ray. Enable CloudWatch Logs Insights. Set up AWS CloudTrail and create dashboards in Amazon QuickSight.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Enable Amazon CloudWatch Application Insights. Create custom metrics for recommendation quality, token usage, and response latency using the CloudWatch embedded metric format with dimensions for request types and user segments. Configure CloudWatch anomaly detection on model metrics. Use CloudWatch Logs Insights for pattern analysis.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon OpenSearch Service with the Observability plugin. Ingest metrics and logs through Amazon Kinesis and analyze behavior with custom queries.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 23 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#165",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A healthcare company runs a multi-step workflow that uses Amazon Bedrock foundation models (FMs) to assist clinicians with making patient clinical decisions. Recent data shows that 25% of decision processes fail to finish. However, the company cannot identify which specific workflow step is causing the failures.<br/>The company needs to implement a monitoring solution to identify the exact failure points in the workflow.<br/>The solution must provide detailed analytics for the completion rates of each workflow step.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>25% quyết định không hoàn thành nhưng không biết bước nào lỗi. Cần điểm lỗi chính xác và completion rate từng bước.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Bật tracing cho InvokeAgent cho OrchestrationTrace và FailureTrace, dữ liệu có cấu trúc theo từng bước, đủ để tính completion rate.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — lỗi API tổng hợp, không chỉ ra bước nào.</li><li><strong>B</strong>: ❌ Sai — CloudTrail chỉ ghi API call, không chi tiết bước workflow.</li><li><strong>C</strong>: ✅ Đúng — trace theo bước và failure trace.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — EventBridge cần tự phát event, nhiều công sức hơn.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>agent trace, OrchestrationTrace, FailureTrace, step completion rate.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"bước nào của agent lỗi\" → bật trace của agent.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#165",
+          "answers": [
+            {
+              "choice": "<p>Configure Amazon CloudWatch alarms to monitor the workflow ' s InvocationServerErrors API and InvocationClientErrors API error rates. Set up notifications for when errors exceed 25%. Configure custom metrics to track each workflow step separately.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Enable AWS CloudTrail logging for the Amazon Bedrock FM workflow. Create scheduled Amazon Athena queries that analyze log patterns to identify which steps of the workflow fail most frequently.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Enable tracing for InvokeAgent API requests to capture OrchestrationTrace and FailureTrace objects. Develop analytics on the structured trace data to calculate completion rates for each workflow step.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon EventBridge to capture workflow events for state transitions. Store the event data in Amazon S3. Use Amazon QuickSight to create dashboards that display completion rates for each workflow step.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 34 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#166",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company is building a meeting analysis solution for its executive team. The solution uses AWS generative AI services. The solution must extract speaker-attributed content from recorded meetings, analyze visual elements from presentation slides, and create searchable summaries that link speaker comments to relevant visual context.<br/>The solution must process 200 hours of meeting recordings each week. The solution must maintain data privacy by processing all meeting data within the AWS Cloud. The solution must store the source data for future retrieval and must be able to perform full-text searches.<br/>Which solution will meet these requirements with the LEAST operational overhead?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Phân tích họp: speaker-attributed content, phân tích slide, summary tìm kiếm được, 200 giờ/tuần, dữ liệu trong AWS, full-text search. <strong>LEAST operational overhead</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Claude trên Bedrock xử lý đa phương thức (audio transcript + video frame), Transcribe nhận diện speaker, OpenSearch cho full-text search. Ít thành phần nhất.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — Rekognition chỉ phân tích hình ảnh, không hiểu slide ngữ cảnh; tự viết Lambda liên kết.</li><li><strong>B</strong>: ✅ Đúng — multimodal FM, Transcribe speaker, OpenSearch.</li><li><strong>C</strong>: ❌ Sai — quá nhiều thành phần, DynamoDB không full-text search.</li><li><strong>D</strong>: ❌ Sai — DynamoDB và custom indexing thay vì OpenSearch.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>multimodal Claude, Transcribe speaker diarization, OpenSearch full-text search.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"full-text search\" → OpenSearch, không phải DynamoDB.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#166",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon Transcribe speaker diarization to process audio from the meeting recordings and to create speaker-attributed transcripts. Send video frames to Amazon Rekognition to perform image analysis. Use an AWS Lambda function to process outputs from Amazon Transcribe and Amazon Rekognition to generate searchable summaries that are stored in Amazon OpenSearch Service.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Anthropic Claude Sonnet in Amazon Bedrock to process the meeting recordings by using multimodal capabilities to analyze both audio transcripts and video frames. Use Amazon Transcribe to identify speakers in meeting recordings. Store the linked data in Amazon OpenSearch Service.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock to process meeting recordings. Use the Bedrock Data Automation (BDA) feature to extract audio streams. Define a custom output for the audio stream. Use Amazon Transcribe speaker diarization to transcribe recordings and identify speakers. Use Amazon Rekognition to analyze video frames. Store the output in Amazon DynamoDB. Use Amazon Bedrock to generate summaries that link speakers to visual elements.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Transcribe to extract speaker-attributed content from meeting recordings. Use Anthropic Claude Sonnet in Amazon Bedrock to process the transcripts and video frames. Store the synchronized results in Amazon DynamoDB. Use a custom indexing scheme to enable rapid retrieval.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 55 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#167",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A GenAI developer is building a RAG system that uses Amazon Bedrock Knowledge Bases. The system needs to process 50 textbooks that are stored in an Amazon S3 bucket. The textbooks are all an average of<br/>500 pages long. The system needs to generate a knowledge base to answer domain-specific customer questions.<br/>During initial testing on a subset of documents, the GenAI developer notices that query responses contain irrelevant information and sometimes miss critical context from the source materials. The GenAI developer must ensure that the solution provides accurate responses with low latency and no hallucinations.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>50 sách ~500 trang; kết quả chứa thông tin không liên quan và thiếu ngữ cảnh. Cần chính xác, latency thấp.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Hierarchical chunking giữ ngữ cảnh lớn nhưng match chính xác; hybrid search kết hợp vector và keyword; ngưỡng relevance lọc kết quả độ tin cậy thấp.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — fixed 256 token làm mất ngữ cảnh.</li><li><strong>B</strong>: ❌ Sai — cache và feedback loop không sửa nguyên nhân retrieval.</li><li><strong>C</strong>: ✅ Đúng — hierarchical + hybrid + relevance threshold.</li><li><strong>D</strong>: ⚠️ Có thể nhưng không tối ưu — semantic chunking và query expansion giúp một phần, thiếu hybrid search và lọc.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>hierarchical chunking, hybrid search, relevance threshold.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"kết quả không liên quan và thiếu ngữ cảnh\" → hierarchical chunking + hybrid search.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#167",
+          "answers": [
+            {
+              "choice": "<p>Configure fixed-size chunking with a 256-token chunk size. Implement metadata filtering based on document sections. Use an Amazon Titan Embeddings model to create vector representations that are optimized for semantic search.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon ElastiCache to implement semantic caching for common queries. Use Anthropic Claude Sonnet to reformulate user queries. Configure real-time model feedback loops to continuously improve response quality based on user interactions.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Apply hierarchical chunking with both 200-token chunks and 1,000-token chunks. Implement hybrid search that combines vector and keyword search. Adjust the relevance score threshold to filter out low- confidence retrieval results.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use semantic chunking to automatically segment documents based on topic boundaries. Configure the knowledge base to use a single embedding model for all content types. Implement query expansion to reformulate user questions before retrieval.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 59 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#168",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A university is building an AI-powered application that includes several sub-applications. The sub- applications include AI assistants, assignment graders, and internal analytics applications. The university is defining and testing multiple prompts by using various foundation models (FMs). The university wants to compare variants of each prompt and choose the variant that yield outputs that are best-suited for specified use cases. The university requires a version control solution for the prompts. The university must be able to test prompt variations and collect audit trails for prompt changes and usage. The solution must also maintain consistency while allowing the prompts to integrate into the main application. Which combination of solutions will meet these requirements with the LEAST operational overhead? (Select TWO.)</p>",
+      "mark": 1,
+      "is_partially_correct": true,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A, C</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Quản lý và so sánh biến thể prompt, version control, thử nghiệm, audit, nhất quán và tích hợp ứng dụng. <strong>LEAST operational overhead</strong>, chọn 2.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>A: Prompt Management tạo prompt có version, biến tham số hóa. C: Bedrock Flows kết hợp FM và dịch vụ AWS để thử nghiệm và tích hợp.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — versioned prompts, parameterized variables.</li><li><strong>B</strong>: ❌ Sai — S3 + Step Functions tự quản lý, nhiều công sức.</li><li><strong>C</strong>: ✅ Đúng — Flows tích hợp prompt vào ứng dụng.</li><li><strong>D</strong>: ❌ Sai — AWS Config và CloudTrail không phải version control prompt.</li><li><strong>E</strong>: ❌ Sai — intelligent prompt routing chọn model, không phải quản lý prompt.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Prompt Management, Bedrock Flows, prompt versioning.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"version control prompt\" → Bedrock Prompt Management.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#168",
+          "answers": [
+            {
+              "choice": "<p>Use Amazon Bedrock Prompt Management to create versioned prompts. Include parameterized variables for each use case.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Store prompts in Amazon S3. Use AWS Step Functions to orchestrate the model interactions and service integrations.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Bedrock Flows to create workflows that combine FMs and AWS services.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure AWS Config to record prompt changes. Use AWS CloudTrail to track prompt usage.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Configure Amazon Bedrock intelligent prompt routing.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 66 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#169",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A healthcare company is developing a generative AI (GenAI) application that recommends patient treatment plans to physicians. The company wants to use Amazon Bedrock to build the application.<br/>The application must document model limitations, prevent unauthorized clinical recommendations, and maintain detailed audit trails of all AI-generated outputs. The company must store outputs in compliance with healthcare regulations. The solution must prevent output tampering.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Ghi chép giới hạn model, chặn khuyến nghị lâm sàng trái phép, audit trail mọi output, lưu trữ tuân thủ và chống sửa đổi.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Model cards ghi nhận giới hạn; Guardrails thực thi chính sách; S3 Object Lock (WORM) chống sửa/xóa output.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — model cards + Guardrails + Object Lock.</li><li><strong>B</strong>: ❌ Sai — thiếu tài liệu giới hạn model; quét sau bằng Lambda không ngăn trước.</li><li><strong>C</strong>: ❌ Sai — không chống tampering.</li><li><strong>D</strong>: ❌ Sai — DynamoDB và CloudWatch alarm không chống tampering.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>model cards, Guardrails, S3 Object Lock, tamper-proof.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"chống sửa đổi output\" → S3 Object Lock.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#169",
+          "answers": [
+            {
+              "choice": "<p>Use model cards to document FM limitations. Implement Amazon Bedrock Guardrails with healthcare compliance policies. Store all AI-generated outputs in Amazon S3. Enable S3 Object Lock.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon CloudWatch to monitor and log AI-generated outputs. Configure a postprocessing AWS Lambda function to scan outputs for compliance violations. Store the outputs in Amazon S3. Enable S3 Object Lock.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use model cards to document FM limitations. Implement Amazon Bedrock Guardrails to filter all AI- generated outputs against healthcare regulations. Store the outputs in Amazon S3. Use Amazon QuickSight dashboards to analyze compliance metrics.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Implement Amazon Bedrock with custom prompt templates that include compliance instructions. Use Amazon DynamoDB to store all AI-generated outputs. Create Amazon CloudWatch alarms that trigger when potential noncompliant outputs are detected.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 71 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#170",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company is building a real-time voice assistant system to assist customer service representatives during customer calls. The system must convert audio calls to text with end-to-end latency of less than 500 ms. The system must use generative AI (GenAI) to produce response suggestions. Human supervisors must be able to rate the system ' s suggestions during a live customer call. The company must store all customer interactions to comply with auditing policies. Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Voice assistant real-time &lt;500 ms, gợi ý bằng GenAI, supervisor đánh giá trong cuộc gọi, lưu mọi tương tác.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Transcribe streaming với chunk 100 ms giảm độ trễ; InvokeModelWithResponseStream trả gợi ý real-time; DynamoDB lưu rating nhanh.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — batch inference không real-time.</li><li><strong>B</strong>: ✅ Đúng — streaming end-to-end.</li><li><strong>C</strong>: ❌ Sai — batch và post-call không đáp ứng real-time.</li><li><strong>D</strong>: ❌ Sai — SQS và InvokeModel không streaming tăng độ trễ.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Transcribe streaming, InvokeModelWithResponseStream, real-time.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"real-time voice\" → streaming ở mọi bước.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#170",
+          "answers": [
+            {
+              "choice": "<p>Use the Amazon Transcribe streaming API with standard settings to convert speech to text. Use Amazon Bedrock batch processing to perform inference. Store call recordings and metadata in Amazon S3. Use S3 Lifecycle policies to manage the storage.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use the Amazon Transcribe streaming API with 100-ms audio chunks to optimize latency for the voice assistant. Call the Amazon Bedrock InvokeModelWithResponseStream operation to process client inquiries in real time. Store supervisor ratings in an Amazon DynamoDB table.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Transcribe batch processing to perform post-call analysis. Configure AWS Lambda functions to generate responses by using the Amazon Bedrock InvokeModel operation. Use Amazon CloudWatch to log supervisor feedback.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Amazon Transcribe to convert speech to text and to perform real-time analytics. Use Amazon Comprehend to perform sentiment analysis. Use Amazon SQS to queue processing tasks. Run the Amazon Bedrock InvokeModel operation to generate responses.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 95 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#171",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A company is developing three specialized NLP models that support a customer service application. One model categorizes each customer's specific issue. Another model extracts key information from the customer interactions. The third model generates responses. The company must ensure that the application achieves at least 95% accuracy for all tasks. The application must handle up to 500 concurrent requests and respond in less than 500 ms during daily 2-hour peak usage periods. The company must ensure that the application optimizes resource usage during periods of low demand between usage spikes. Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>3 mô hình NLP, 500 concurrent, &lt;500 ms trong 2 giờ peak, tối ưu tài nguyên ngoài giờ peak.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>SageMaker Serverless Inference mỗi model: scale về 0 ngoài peak (tiết kiệm), provisioned concurrency giữ độ trễ thấp lúc peak, cấu hình riêng theo từng model.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ⚠️ Có thể nhưng không tối ưu — multi-model endpoint luôn chạy instance, kém tối ưu tài nguyên.</li><li><strong>B</strong>: ✅ Đúng — scale-to-zero + provisioned concurrency.</li><li><strong>C</strong>: ❌ Sai — Provisioned Throughput tốn kém liên tục, không dành cho model tự huấn luyện.</li><li><strong>D</strong>: ❌ Sai — async inference không đạt &lt;500 ms.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>SageMaker Serverless Inference, provisioned concurrency, scale-to-zero.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"peak ngắn + tiết kiệm lúc rảnh\" → Serverless Inference.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#171",
+          "answers": [
+            {
+              "choice": "<p>Deploy all three models to a single Amazon SageMaker AI multi-model endpoint. Enable dynamic scaling on the endpoint. Use a compute optimized instance type. Configure auto scaling policies that are based on invocation metrics to handle peak loads.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy each model to a separate Amazon SageMaker Serverless Inference endpoint. Set provisioned concurrency to handle peak loads. Configure maximum concurrency limits and memory sizing based on each model ' s specific requirements.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy the models by using Amazon Bedrock with provisioned throughput to handle peak loads. Configure the number of model units (MUs) based on expected token throughput needs. Implement request batching for each model.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Deploy each model to a separate Amazon SageMaker AI endpoint. Use an asynchronous inference configuration. Store model requests and responses in Amazon S3. Use Amazon SNS to send alerts to users when the application finishes processing requests.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 120 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#172",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A multinational bank wants to implement a RAG solution on AWS to run queries on internal policy and compliance documents. To comply with data residency regulations, the company must ensure that critical customer data remains within a specific AWS Region. The bank wants to use foundation models (FMs) on AWS to reduce infrastructure costs and minimize model maintenance.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>RAG ngân hàng, dữ liệu khách hàng phải nằm trong Region quy định, dùng FM trên AWS, giảm chi phí hạ tầng và bảo trì model.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>S3 bucket trong Region quy định giữ dữ liệu đúng nơi; Bedrock truy cập qua VPC endpoint; RAG thực hiện trên AWS, managed, ít vận hành.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — managed, đúng Region, private.</li><li><strong>B</strong>: ❌ Sai — Outposts tốn chi phí hạ tầng, trái mục tiêu giảm chi phí.</li><li><strong>C</strong>: ❌ Sai — cluster ở Region \"gần\" không đáp ứng data residency chính xác.</li><li><strong>D</strong>: ❌ Sai — tự host FM trong container tăng bảo trì.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>data residency, S3 trong Region, VPC endpoint, Bedrock.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"data residency + managed\" → lưu trong Region + Bedrock qua VPC endpoint.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#172",
+          "answers": [
+            {
+              "choice": "<p>Store critical customer data in a dedicated Amazon S3 bucket in the regulated Region. Configure Amazon Bedrock to directly access the documents through a VPC endpoint. Perform all RAG retrieval on AWS.</p>",
+              "correct": true,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Store critical customer data locally by using AWS Outposts in the regulated Region. Create embeddings locally in a secure vector store. Use Amazon Bedrock to orchestrate LLMs on AWS by using only retrieved context.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Store critical customer data in a private Amazon OpenSearch Service cluster in a Region that is close to the regulated Region. Configure end-to-end encryption. Use an LLM on AWS to retrieve and summarize the data dynamically without storing embeddings locally.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Containerize FMs on Amazon ECS in the regulated Region. Ingest critical customer data into the containerized FMs. Perform RAG queries entirely inside the container.</p>",
+              "correct": false,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 141 (FreeCram)",
+      "discusstion": []
+    },
+    {
+      "question_id": "#173",
+      "topic_id": 1,
+      "course_id": 1,
+      "case_study_id": null,
+      "lab_id": 0,
+      "question_text": "<p>A GenAI developer is using Amazon Bedrock AgentCore to build an agentic AI application. The application orchestrates multiple foundation models (FMs) across development and production environments. The application experiences intermittent failures during tool invocation phases. Each incident requires an average of 3 hours to diagnose because of complex error patterns in the FM chains.<br/>The GenAI developer needs a solution that can identify AI-specific error patterns in tool invocation chains in less time than the existing manual process. The solution must support collaboration between development and security teams. The solution must provide capabilities to protect sensitive customer data.<br/>Which solution will meet these requirements?</p>",
+      "mark": 1,
+      "is_partially_correct": false,
+      "question_type": "1",
+      "difficulty_level": "0",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Lỗi tool invocation ngắt quãng trong agent đa FM, mất ~3 giờ để chẩn đoán. Cần phát hiện pattern lỗi AI nhanh hơn, hỗ trợ cộng tác dev và security, bảo vệ dữ liệu nhạy cảm.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>AgentCore Observability với ADOT (OpenTelemetry) kết hợp CloudWatch Generative AI Observability cho trace analysis và theo dõi tool invocation ở mức agent.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — dashboard API metrics và GuardDuty không có trace tool invocation.</li><li><strong>B</strong>: ❌ Sai — IDE không phải giải pháp observability, không hỗ trợ cộng tác dev/security.</li><li><strong>C</strong>: ⚠️ Có thể nhưng không tối ưu — X-Ray Lambda và OpenSearch tự dựng, không hiểu AI-specific.</li><li><strong>D</strong>: ✅ Đúng — observability chuyên cho agent.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>AgentCore Observability, ADOT, CloudWatch Generative AI Observability, trace.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"debug agent tool invocation\" → AgentCore Observability + OpenTelemetry.</p>",
+      "is_active": true,
+      "answer_list": [
+        {
+          "question_answer_id": 1,
+          "question_id": "#173",
+          "answers": [
+            {
+              "choice": "<p>Create an Amazon CloudWatch dashboard that displays detailed Amazon Bedrock API metrics. Integrate the dashboard with Amazon GuardDuty. Use CloudWatch Logs Insights to perform error analysis.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Use Kiro as the integrated development environment (IDE) to directly access both application codebases and trace logs. Enable real-time analysis of error patterns directly in the IDE by analyzing both application code and trace logs together to understand how the agents orchestrate tool invocations.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Set up AWS X-Ray tracing for all AWS Lambda functions that handle model invocations. Use Amazon OpenSearch Service to create a custom monitoring solution with OpenSearch dashboard visualizations.</p>",
+              "correct": false,
+              "feedback": ""
+            },
+            {
+              "choice": "<p>Enable Amazon Bedrock AgentCore Observability with AWS Distro for OpenTelemetry instrumentation. Use Amazon CloudWatch Generative AI Observability to perform trace analysis and to monitor tool invocations.</p>",
+              "correct": true,
+              "feedback": ""
+            }
+          ]
+        }
+      ],
+      "topic_name": "Exam AIP-C01 topic 4 question 155 (FreeCram)",
+      "discusstion": []
     }
   ]
 }
