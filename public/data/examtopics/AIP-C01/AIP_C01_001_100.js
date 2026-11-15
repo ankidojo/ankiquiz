@@ -8524,7 +8524,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: A</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Fraud detection 1.000 TPS, sub-500 ms, HA khi mất kết nối; dữ liệu khách châu Âu chỉ được xử lý trong Region châu Âu.</li><li>Ưu tiên: <strong>throughput/availability</strong> và <strong>data residency</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Cross-Region inference profile</strong> phân phối tải để tăng throughput và resilience; app châu Âu dùng <strong>inference profile riêng cho EU (geographic)</strong> để dữ liệu chỉ xử lý trong Region châu Âu; Route 53 health check hỗ trợ failover.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — global profile cho US, geographic profile cho EU, failover bằng Route 53.</li><li><strong>B</strong>: ❌ Sai — provisioned throughput từng Region và tự xây ALB/failover, vận hành nặng.</li><li><strong>C</strong>: ❌ Sai — on-demand throughput không đảm bảo 1.000 TPS; API Gateway chỉ định tuyến thủ công.</li><li><strong>D</strong>: ❌ Sai — provisioned throughput cho US không linh hoạt khi spike; failover tự xây phức tạp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Cross-Region inference profile, geographic profile, data residency, Route 53 health check.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"data chỉ xử lý trong EU + throughput cao\" → nghĩ ngay đến <strong>geographic (EU) inference profile</strong>.</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: D</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Fraud detection 1.000 TPS, sub-500 ms, HA khi mất kết nối; dữ liệu khách châu Âu chỉ được xử lý trong Region châu Âu.</li><li>Ưu tiên: <strong>throughput/availability</strong> và <strong>data residency</strong>.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>Cross-Region inference profile</strong> phân phối tải để tăng throughput và resilience; app châu Âu dùng <strong>inference profile riêng cho EU (geographic)</strong> để dữ liệu chỉ xử lý trong Region châu Âu; Route 53 health check hỗ trợ failover.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ✅ Đúng — global profile cho US, geographic profile cho EU, failover bằng Route 53.</li><li><strong>B</strong>: ❌ Sai — provisioned throughput từng Region và tự xây ALB/failover, vận hành nặng.</li><li><strong>C</strong>: ❌ Sai — on-demand throughput không đảm bảo 1.000 TPS; API Gateway chỉ định tuyến thủ công.</li><li><strong>D</strong>: ❌ Sai — provisioned throughput cho US không linh hoạt khi spike; failover tự xây phức tạp.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><p>Cross-Region inference profile, geographic profile, data residency, Route 53 health check.</p><p><strong>🧠 MẸO THI</strong></p><p>Gặp \"data chỉ xử lý trong EU + throughput cao\" → nghĩ ngay đến <strong>geographic (EU) inference profile</strong>.</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -8533,7 +8533,7 @@ var AIP_C01_001_100 =
           "answers": [
             {
               "choice": "<p>Configure AWS Lambda functions and Amazon EKS applications to use the InvokeModel API with a global inference profile. Deploy an automated failover system that uses Amazon Route 53 health checks. Create a dedicated European inference profile and enable Geographic cross-Region inference for European applications. Use Amazon CloudWatch alarms to monitor utilization metrics.</p>",
-              "correct": true,
+              "correct": false,
               "feedback": ""
             },
             {
@@ -8548,7 +8548,7 @@ var AIP_C01_001_100 =
             },
             {
               "choice": "<p>Configure applications that run in the United States to use provisioned throughput with the InvokeModel API. Configure European applications to use a Europe-specific geographic inference profile to ensure data sovereignty. Configure automatic scaling for provisioned capacity based on utilization metrics. Use Amazon EventBridge and AWS Lambda functions to implement cross-Region failover mechanisms.</p>",
-              "correct": false,
+              "correct": true,
               "feedback": ""
             }
           ]
