@@ -4076,7 +4076,7 @@ var AIP_C01_001_100 =
       "is_partially_correct": false,
       "question_type": "1",
       "difficulty_level": "0",
-      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: C (theo file; xem lưu ý)</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: 40% câu hỏi cùng ý nghĩa nhưng diễn đạt khác nhau, cần giảm model call dư thừa.</li><li>Cần trả lời nhất quán cho câu hỏi tương đương ngữ nghĩa, latency thấp.</li><li>Ưu tiên: <strong>semantic cache</strong> bằng vector similarity.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p>Semantic caching cần embeddings và <strong>k-NN similarity search</strong> thay vì khớp chính xác chuỗi. OpenSearch Service với k-NN và approximate k-NN tìm query tương tự và trả response đã lưu.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — DAX chỉ cache key-value chính xác, không có toán tử LIKE hay tìm kiếm ngữ nghĩa.</li><li><strong>B</strong>: ⚠️ Có thể nhưng không tối ưu — MemoryDB vector search là hướng hợp lý về latency, nhưng đáp án dùng \"RANGE query\" kém rõ ràng so với k-NN.</li><li><strong>C</strong>: ✅ Đúng — vector k-NN tìm câu hỏi tương đương ngữ nghĩa.</li><li><strong>D</strong>: ❌ Sai — stemming chỉ xử lý biến thể từ, không bắt được paraphrase.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>Semantic cache</strong></li><li>Embeddings + <strong>k-NN</strong></li><li>Semantically equivalent</li><li>Giảm redundant model calls</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cùng ý nghĩa nhưng khác cách diễn đạt → nghĩ ngay đến <strong>vector embeddings + k-NN</strong>, không phải key-value cache.\"</p>",
+      "general_feedback": "<p><strong>✅ ĐÁP ÁN ĐÚNG</strong>: B</p><p><strong>🎯 ĐỀ ĐANG HỎI GÌ?</strong></p><ul><li>Bài toán: 40% câu hỏi cùng ý nghĩa nhưng diễn đạt khác nhau, cần giảm model call dư thừa.</li><li>Cần trả lời nhất quán cho câu hỏi tương đương ngữ nghĩa, latency thấp.</li><li>Ưu tiên: <strong>semantic cache</strong> bằng vector embeddings và tìm kiếm tương đồng trong bộ nhớ.</li></ul><p><strong>💡 LÝ DO CHỌN ĐÁP ÁN</strong></p><p><strong>MemoryDB</strong> hỗ trợ <strong>Embeddings, Vector Search, KNN và Range Search</strong>. Bedrock tạo embedding cho câu hỏi của khách, MemoryDB lưu vector và response. Khi câu hỏi mới có embedding gần với câu đã lưu, hệ thống trả lại response cũ → câu hỏi tương đương ngữ nghĩa nhận câu trả lời nhất quán và giảm model call dư thừa. Dữ liệu nằm <strong>in-memory</strong> nên latency thấp.</p><p><strong>⚡ PHÂN TÍCH NHANH</strong></p><ul><li><strong>A</strong>: ❌ Sai — DAX chỉ cache theo key chính xác, không hỗ trợ tìm kiếm ngữ nghĩa.</li><li><strong>B</strong>: ✅ Đúng — embeddings + vector search/KNN/range search trên MemoryDB, in-memory giúp giảm latency.</li><li><strong>C</strong>: ⚠️ Có thể dùng nhưng không tối ưu — OpenSearch cũng hỗ trợ approximate k-NN, nhưng đề nhấn mạnh low latency và B đáp ứng trực tiếp bằng in-memory vector search.</li><li><strong>D</strong>: ❌ Sai — stemming chỉ xử lý biến thể từ, không hiểu đầy đủ ngữ nghĩa.</li></ul><p><strong>🔑 KEYWORDS CẦN NHỚ</strong></p><ul><li><strong>Semantic cache</strong></li><li>Embeddings + <strong>Vector search / KNN</strong></li><li><strong>MemoryDB</strong> (in-memory, low latency)</li><li>Semantically equivalent → giảm redundant model calls</li></ul><p><strong>🧠 MẸO THI</strong></p><p>\"Cùng ý nghĩa nhưng khác cách diễn đạt → nghĩ ngay đến <strong>vector embeddings + cache in-memory (MemoryDB)</strong>, không phải key-value cache.\"</p>",
       "is_active": true,
       "answer_list": [
         {
@@ -4090,12 +4090,12 @@ var AIP_C01_001_100 =
             },
             {
               "choice": "<p>Use Amazon Bedrock to generate embeddings from customer queries. Use Amazon MemoryDB for Valkey to store hash sets of vector embeddings and model responses. Use a RANGE query to find similar queries and their responses.</p>",
-              "correct": false,
+              "correct": true,
               "feedback": ""
             },
             {
               "choice": "<p>Deploy Amazon OpenSearch Service that has k-nearest neighbor (k-NN) capabilities to store query-response text pairs. Use an approximate k-NN technique to find similar queries and their responses.</p>",
-              "correct": true,
+              "correct": false,
               "feedback": ""
             },
             {
@@ -4107,24 +4107,7 @@ var AIP_C01_001_100 =
         }
       ],
       "topic_name": "Exam AWS Certified Generative AI Developer - Professional AIP-C01 topic 1 question 51 discussion - ExamTopics",
-      "discusstion": [
-        {
-          "id": 1746937,
-          "date": "Tue 14 Apr 2026 00:15",
-          "username": "de1612d",
-          "content": "Answer is C",
-          "upvote_count": "1",
-          "selected_answers": "Selected Answer:C"
-        },
-        {
-          "id": 1744902,
-          "date": "Thu 09 Apr 2026 11:58",
-          "username": "Aninina",
-          "content": "The problem is about semantically equivalent questions with different wording. Vector similarity search is built for that.<br>You can generate embeddings for incoming queries and retrieve the most similar cached past query/response, which helps return consistent answers for equivalent questions.<br>Approximate k-NN is designed for low-latency nearest-neighbor retrieval at scale",
-          "upvote_count": "1",
-          "selected_answers": "Selected Answer:C"
-        }
-      ]
+      "discusstion": []
     },
     {
       "question_id": "#52",
